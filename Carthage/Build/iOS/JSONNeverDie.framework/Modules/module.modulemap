@@ -1,0 +1,10 @@
+framework module JSONNeverDie {
+  umbrella header "JSONNeverDie.h"
+
+  export *
+  module * { export * }
+}
+
+module JSONNeverDie.Swift {
+    header "JSONNeverDie-Swift.h"
+}

@@ -6,7 +6,8 @@ use_frameworks!
 target 'macOS' do
   
   pod 'Alamofire', '~> 3.4'
-
+  pod 'SwiftyJSON'
+  pod 'SWXMLHash', '~> 2.3.0'
 
 end
 

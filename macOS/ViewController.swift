@@ -10,7 +10,9 @@ import Cocoa
 import MediaLibrary
 import ScriptingBridge
 import WebKit
-
+import Alamofire
+import SWXMLHash
+import SwiftyJSON
 
 @objc protocol iTunesApplication {
     optional func currentTrack()-> AnyObject
@@ -22,6 +24,7 @@ class WindowController: NSWindowController {
     
     
     override func windowDidLoad() {
+        
         
         
     }
@@ -55,14 +58,43 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /*
         let request = NSURLRequest(URL: url!)
         webView.mainFrame.loadRequest(request)
+        
+        NSURLSession.sharedSession().dataTaskWithURL(url!) {
+            (data, response, error) in
+            // deal with error etc accordingly
+            print(data)
+            
+        }
+        */
+        /*
+        LyricsQueryApi.queryLyrics("", track: "") { (response) in
+            
+            if response.result.isSuccess {
+                
+                //textView.textStorage?.mutableString.setString(lyrics as! String)
+                
+                let json = JSON(data: response.data!)
+                print("JSON:\(json)")
+            }
+        }*/
+        
+        LyricsQueryApi.getLyrics("adele", track: "hello") { (response) in
+            
+            
+            
+        }
 
-
+        
         if let textView = self.textView.contentView.documentView as? NSTextView {
             
             let iTunesApp: AnyObject = SBApplication(bundleIdentifier: MLMediaSourceiTunesIdentifier)!
             let trackDict = iTunesApp.currentTrack!().properties as Dictionary
+            
+            
+            
             if (trackDict["name"] != nil) {// if nil then no current track
                 print(trackDict["name"]!) // print the title
                 print(trackDict["artist"]!)
@@ -70,7 +102,8 @@ class ViewController: NSViewController {
                 print(trackDict["playedCount"]!)
                 // print(trackDict) // print the dictionary
                 
-                textView.textStorage?.mutableString.setString(trackDict["name"] as! String)
+                //textView.textStorage?.mutableString.setString(trackDict["name"] as! String)
+                
             }
         }
     }
@@ -89,9 +122,11 @@ extension ViewController: WebPolicyDelegate {
         
         if WebNavigationType.LinkClicked.rawValue == actionInformation[WebActionNavigationTypeKey] as! Int {
             listener.ignore()
-            NSWorkspace.sharedWorkspace().openURL(request.URL!)
-            
+            //NSWorkspace.sharedWorkspace().openURL(request.URL!)
+            webView.mainFrame.loadRequest(request)
         }
+        
+        print("request url:\(request.URL!)")
         listener.use()
         
     }
@@ -100,5 +135,7 @@ extension ViewController: WebPolicyDelegate {
         
         
     }
+    
+    
 }
 
