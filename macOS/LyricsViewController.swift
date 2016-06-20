@@ -12,6 +12,11 @@ import ScriptingBridge
 
 class LyricsViewController: NSViewController {
     
+    @IBOutlet weak var timeLabel: NSTextField!
+    
+    var timer: NSTimer!
+    var trackTime: Int64!
+    
     @IBOutlet weak var imageView: NSImageView!  {
         
         didSet {
@@ -55,9 +60,11 @@ class LyricsViewController: NSViewController {
         
         let trackDict = MacUtilities.getCurrentMusicInfo()
         guard let artist = trackDict?.artist,
-            track = trackDict?.track else {
+            track = trackDict?.track, time = trackDict?.time else {
                 return
         }
+        
+        setTrackTimer(time)
         
         MusiXMatchApi.getLyrics(artist, track: track) { (response) in
             
@@ -69,19 +76,60 @@ class LyricsViewController: NSViewController {
                 dispatch_async(dispatch_get_main_queue(), {
                     
                     
-                    
                     if let textView = self.scrollTextView.contentView.documentView as? NSTextView {
-                        textView.textStorage?.mutableString.setString(lyrics)
+                        textView.textStorage?.mutableString.setString(self.applyLyricsFormat(lyrics))
                         
                         let track = Track.sharedTrack
                         
-                        if let imageURL = NSURL(string: track.album_coverart_100x100), let image = NSImage(contentsOfURL: imageURL) {
+                        if let imageURL = NSURL(string: track.album_coverart_350x350), let image = NSImage(contentsOfURL: imageURL) {
                             self.imageView.image = image
+                            let appDelegate: AppDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
+                            appDelegate.popover.contentSize = NSSize(width: 200, height: 220)
                         }
                     }
                 })
             }
         }
+    }
+    
+    func setTrackTimer(timeString: String) {
+        
+        let seconds = String(timeString.characters.dropFirst(3))
+        let minutes = String(timeString.characters.dropLast(3)).stringByReplacingOccurrencesOfString("-", withString: "")
+        
+        trackTime = Int64(NSString(string: minutes).integerValue * 60 + NSString(string: seconds).integerValue)
+        
+        
+        timer = NSTimer(timeInterval: 1.0, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        NSRunLoop.mainRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
+        
+    }
+    
+    func updateTime() {
+        
+        if trackTime == 0 {
+            timer.invalidate()
+        }
+        trackTime = trackTime - 1
+        
+        let minutes = trackTime / 60
+        let seconds = trackTime % 60
+        
+        var timeString: String = ""
+        if minutes < 10 {
+            timeString = "0\(minutes)"
+        } else {
+            timeString = "\(minutes)"
+        }
+        if seconds < 10 {
+            timeString = ("\(timeString):0\(seconds)")
+        } else {
+            timeString = ("\(timeString):\(seconds)")
+        }
+        dispatch_async(dispatch_get_main_queue()) { 
+            self.timeLabel.stringValue = timeString
+        }
+        print("track time :\(timeString)")
     }
     
     func terminateApp() {
@@ -92,6 +140,15 @@ class LyricsViewController: NSViewController {
 
 extension LyricsViewController {
     
+    func applyLyricsFormat(lyric: String) -> String {
+        
+        return lyric.stringByReplacingOccurrencesOfString(".", withString: ". \n")
+    }
+    
+}
+
+extension LyricsViewController {
+    /*
     override func mouseDragged(theEvent: NSEvent) {
         let currentLocation = NSEvent.mouseLocation()
         print("dragged at:\(currentLocation)")
@@ -118,7 +175,5 @@ extension LyricsViewController {
             let appDelegate: AppDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.popover.contentSize = NSSize(width: newOrigin.x, height: newOrigin.y)
         }
-        
-        
-    }
+    }*/
 }

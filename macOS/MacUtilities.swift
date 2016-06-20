@@ -22,6 +22,7 @@ struct PlayingTrack {
     var track = ""
     var artist = ""
     var album = ""
+    var time = ""
 }
 
 class MacUtilities: NSObject {
@@ -38,9 +39,10 @@ class MacUtilities: NSObject {
             // print(trackDict) // print the dictionary
             if let track = trackDict["name"] as? String,
                 artist = trackDict["artist"]as? String,
-                album = trackDict["album"]as? String {
+                album = trackDict["album"] as? String,
+                time = trackDict["time"] as? String {
                 
-                let playingTrack = PlayingTrack(track: track, artist: artist, album: album)
+                let playingTrack = PlayingTrack(track: track, artist: artist, album: album, time: time)
                 
                 return playingTrack
             } else {
