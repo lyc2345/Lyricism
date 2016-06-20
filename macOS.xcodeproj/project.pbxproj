@@ -8,12 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		F5FE51D18DC9CC397709DC01 /* Pods_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B45D50AF0F3C9169CFB332A9 /* Pods_macOS.framework */; };
-		F60BF8B51D13A68900F7C6DA /* LyricsQueryApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8B41D13A68900F7C6DA /* LyricsQueryApi.swift */; };
+		F60BF8B51D13A68900F7C6DA /* MusiXMatchApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */; };
 		F60BF8B71D13EDCA00F7C6DA /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8B61D13EDCA00F7C6DA /* Track.swift */; };
-		F60BF8BC1D13F1B700F7C6DA /* JSONND.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8B81D13F1B700F7C6DA /* JSONND.swift */; };
-		F60BF8BD1D13F1B700F7C6DA /* JSONND+ArrayLiteralConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8B91D13F1B700F7C6DA /* JSONND+ArrayLiteralConvertible.swift */; };
-		F60BF8BE1D13F1B700F7C6DA /* JSONND+DictionaryLiteralConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8BA1D13F1B700F7C6DA /* JSONND+DictionaryLiteralConvertible.swift */; };
-		F60BF8BF1D13F1B700F7C6DA /* JSONNDModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8BB1D13F1B700F7C6DA /* JSONNDModel.swift */; };
+		F60BF8D21D1424D800F7C6DA /* LyricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */; };
+		F60BF8D61D1430D300F7C6DA /* MacUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */; };
+		F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F616EBB51D15221800D1A40C /* NSObject+Extension.swift */; };
 		F68BC71B1D128ACE00A36247 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BC71A1D128ACE00A36247 /* AppDelegate.swift */; };
 		F68BC71D1D128ACE00A36247 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BC71C1D128ACE00A36247 /* ViewController.swift */; };
 		F68BC71F1D128ACE00A36247 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BC71E1D128ACE00A36247 /* Document.swift */; };
@@ -26,12 +25,11 @@
 		B45D50AF0F3C9169CFB332A9 /* Pods_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E602F080E5CEF11336D7EA40 /* Pods-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-macOS/Pods-macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		F60BF8A31D139B3E00F7C6DA /* macOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "macOS-Bridging-Header.h"; sourceTree = "<group>"; };
-		F60BF8B41D13A68900F7C6DA /* LyricsQueryApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsQueryApi.swift; sourceTree = "<group>"; };
+		F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusiXMatchApi.swift; sourceTree = "<group>"; };
 		F60BF8B61D13EDCA00F7C6DA /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
-		F60BF8B81D13F1B700F7C6DA /* JSONND.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONND.swift; sourceTree = "<group>"; };
-		F60BF8B91D13F1B700F7C6DA /* JSONND+ArrayLiteralConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSONND+ArrayLiteralConvertible.swift"; sourceTree = "<group>"; };
-		F60BF8BA1D13F1B700F7C6DA /* JSONND+DictionaryLiteralConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSONND+DictionaryLiteralConvertible.swift"; sourceTree = "<group>"; };
-		F60BF8BB1D13F1B700F7C6DA /* JSONNDModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONNDModel.swift; sourceTree = "<group>"; };
+		F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsViewController.swift; sourceTree = "<group>"; };
+		F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacUtilities.swift; sourceTree = "<group>"; };
+		F616EBB51D15221800D1A40C /* NSObject+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		F68BC7171D128ACE00A36247 /* macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F68BC71A1D128ACE00A36247 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F68BC71C1D128ACE00A36247 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,7 +54,6 @@
 		34A8663DB978A591BF253E9A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F60BF8C01D13F1BC00F7C6DA /* JSONND */,
 				B45D50AF0F3C9169CFB332A9 /* Pods_macOS.framework */,
 				F60BF8A31D139B3E00F7C6DA /* macOS-Bridging-Header.h */,
 			);
@@ -70,17 +67,6 @@
 				4D759BFDEB9F5E3130617B83 /* Pods-macOS.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		F60BF8C01D13F1BC00F7C6DA /* JSONND */ = {
-			isa = PBXGroup;
-			children = (
-				F60BF8B81D13F1B700F7C6DA /* JSONND.swift */,
-				F60BF8B91D13F1B700F7C6DA /* JSONND+ArrayLiteralConvertible.swift */,
-				F60BF8BA1D13F1B700F7C6DA /* JSONND+DictionaryLiteralConvertible.swift */,
-				F60BF8BB1D13F1B700F7C6DA /* JSONNDModel.swift */,
-			);
-			name = JSONND;
 			sourceTree = "<group>";
 		};
 		F68BC70E1D128ACD00A36247 = {
@@ -106,8 +92,11 @@
 			children = (
 				F68BC71A1D128ACE00A36247 /* AppDelegate.swift */,
 				F68BC71C1D128ACE00A36247 /* ViewController.swift */,
-				F60BF8B41D13A68900F7C6DA /* LyricsQueryApi.swift */,
+				F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */,
+				F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */,
+				F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */,
 				F60BF8B61D13EDCA00F7C6DA /* Track.swift */,
+				F616EBB51D15221800D1A40C /* NSObject+Extension.swift */,
 				F68BC71E1D128ACE00A36247 /* Document.swift */,
 				F68BC7201D128ACE00A36247 /* Assets.xcassets */,
 				F68BC7221D128ACE00A36247 /* Main.storyboard */,
@@ -237,15 +226,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F60BF8D61D1430D300F7C6DA /* MacUtilities.swift in Sources */,
+				F60BF8D21D1424D800F7C6DA /* LyricsViewController.swift in Sources */,
+				F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */,
 				F68BC71D1D128ACE00A36247 /* ViewController.swift in Sources */,
-				F60BF8BF1D13F1B700F7C6DA /* JSONNDModel.swift in Sources */,
-				F60BF8BC1D13F1B700F7C6DA /* JSONND.swift in Sources */,
 				F60BF8B71D13EDCA00F7C6DA /* Track.swift in Sources */,
-				F60BF8BE1D13F1B700F7C6DA /* JSONND+DictionaryLiteralConvertible.swift in Sources */,
-				F60BF8B51D13A68900F7C6DA /* LyricsQueryApi.swift in Sources */,
+				F60BF8B51D13A68900F7C6DA /* MusiXMatchApi.swift in Sources */,
 				F68BC71B1D128ACE00A36247 /* AppDelegate.swift in Sources */,
 				F68BC71F1D128ACE00A36247 /* Document.swift in Sources */,
-				F60BF8BD1D13F1B700F7C6DA /* JSONND+ArrayLiteralConvertible.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

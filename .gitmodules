@@ -1,0 +1,6 @@
+[submodule "JSONNeverDie"]
+	path = JSONNeverDie
+	url = https://github.com/johnlui/JSONNeverDie.git
+[submodule "macOS/JSONNeverDie"]
+	path = macOS/JSONNeverDie
+	url = https://github.com/johnlui/JSONNeverDie.git

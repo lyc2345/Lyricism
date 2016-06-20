@@ -3,7 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
-        <plugIn identifier="com.apple.WebKitIBPlugin" version="10116"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -651,16 +651,13 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController storyboardIdentifier="Document Window Controller" id="jGA-0Y-lOj" customClass="WindowController" customModule="macOS" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="Document Window Controller" id="jGA-0Y-lOj" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="Ckk-yw-fiv">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                     </window>
-                    <connections>
-                        <segue destination="5gI-5U-AMq" kind="relationship" relationship="window.shadowedContentViewController" id="nsd-lR-9xd"/>
-                    </connections>
                 </windowController>
                 <customObject id="6f7-a7-6o1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -702,32 +699,91 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <webView translatesAutoresizingMaskIntoConstraints="NO" id="BWg-EN-8m9">
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nGR-Sr-UNA">
                                 <rect key="frame" x="241" y="11" width="219" height="239"/>
-                                <webPreferences key="preferences" defaultFontSize="16" defaultFixedFontSize="13" minimumFontSize="0">
-                                    <nil key="identifier"/>
-                                </webPreferences>
-                            </webView>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="KpA-c7-go9"/>
+                            </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="BWg-EN-8m9" secondAttribute="trailing" constant="20" id="6fG-rz-mgU"/>
-                            <constraint firstItem="BWg-EN-8m9" firstAttribute="top" secondItem="ERx-hH-rdd" secondAttribute="top" constant="20" id="7QV-tg-k3b"/>
-                            <constraint firstItem="BWg-EN-8m9" firstAttribute="width" secondItem="2jn-Da-Bj3" secondAttribute="width" multiplier="1:1" id="DYs-Ru-Jct"/>
+                            <constraint firstItem="nGR-Sr-UNA" firstAttribute="top" secondItem="ERx-hH-rdd" secondAttribute="top" constant="20" id="55N-hC-pWB"/>
+                            <constraint firstItem="nGR-Sr-UNA" firstAttribute="width" secondItem="2jn-Da-Bj3" secondAttribute="width" multiplier="1:1" id="5Wv-kP-Edl"/>
                             <constraint firstItem="TJR-Bw-ZmB" firstAttribute="leading" secondItem="ERx-hH-rdd" secondAttribute="leading" constant="20" id="Ix3-Cy-q8I"/>
+                            <constraint firstItem="nGR-Sr-UNA" firstAttribute="leading" secondItem="2jn-Da-Bj3" secondAttribute="trailing" id="MK4-Bo-aGF"/>
                             <constraint firstAttribute="bottom" secondItem="TJR-Bw-ZmB" secondAttribute="bottom" constant="10" id="PSw-mM-dLD"/>
                             <constraint firstItem="TJR-Bw-ZmB" firstAttribute="top" secondItem="ERx-hH-rdd" secondAttribute="top" constant="20" id="QsQ-uK-mse"/>
-                            <constraint firstItem="BWg-EN-8m9" firstAttribute="leading" secondItem="2jn-Da-Bj3" secondAttribute="trailing" id="WGd-8f-Res"/>
-                            <constraint firstItem="BWg-EN-8m9" firstAttribute="bottom" secondItem="2jn-Da-Bj3" secondAttribute="bottom" id="rHg-Z7-Lx0"/>
+                            <constraint firstItem="nGR-Sr-UNA" firstAttribute="bottom" secondItem="2jn-Da-Bj3" secondAttribute="bottom" id="V5T-tf-XhM"/>
+                            <constraint firstAttribute="trailing" secondItem="nGR-Sr-UNA" secondAttribute="trailing" constant="20" id="f84-de-tYS"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="textView" destination="TJR-Bw-ZmB" id="Xvm-1v-3KN"/>
-                        <outlet property="webView" destination="BWg-EN-8m9" id="S66-V9-J0B"/>
+                        <outlet property="imageView" destination="nGR-Sr-UNA" id="BXq-xZ-6sS"/>
+                        <outlet property="scrollTextView" destination="TJR-Bw-ZmB" id="83m-SH-qjo"/>
                     </connections>
                 </viewController>
                 <customObject id="2Tp-Fl-jBw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="655"/>
+        </scene>
+        <!--Lyrics View Controller-->
+        <scene sceneID="YfF-Qn-2fd">
+            <objects>
+                <viewController storyboardIdentifier="lyrics_view_controller" id="hcA-47-AYn" customClass="LyricsViewController" customModule="macOS" sceneMemberID="viewController">
+                    <view key="view" id="Fy6-Fe-DG3">
+                        <rect key="frame" x="0.0" y="0.0" width="250" height="240"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bi9-ja-2dh">
+                                <rect key="frame" x="0.0" y="0.0" width="250" height="120"/>
+                                <clipView key="contentView" id="UKF-j9-9S6">
+                                    <rect key="frame" x="1" y="1" width="248" height="118"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="zlN-bT-muU">
+                                            <rect key="frame" x="0.0" y="0.0" width="248" height="118"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <size key="minSize" width="248" height="118"/>
+                                            <size key="maxSize" width="463" height="10000000"/>
+                                            <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <size key="minSize" width="248" height="118"/>
+                                            <size key="maxSize" width="463" height="10000000"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="H7m-yn-mIS">
+                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="ka3-fG-qhM">
+                                    <rect key="frame" x="233" y="1" width="16" height="118"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="897-1E-ERB">
+                                <rect key="frame" x="0.0" y="0.0" width="250" height="240"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="UDU-Xx-RIK"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="bi9-ja-2dh" firstAttribute="leading" secondItem="Fy6-Fe-DG3" secondAttribute="leading" id="1FP-Im-kbJ"/>
+                            <constraint firstAttribute="trailing" secondItem="897-1E-ERB" secondAttribute="trailing" id="6aj-dt-F0S"/>
+                            <constraint firstItem="897-1E-ERB" firstAttribute="top" secondItem="Fy6-Fe-DG3" secondAttribute="top" id="L5S-0R-LTM"/>
+                            <constraint firstItem="bi9-ja-2dh" firstAttribute="height" secondItem="897-1E-ERB" secondAttribute="height" multiplier="1:2" id="PQB-zb-R0z"/>
+                            <constraint firstAttribute="bottom" secondItem="897-1E-ERB" secondAttribute="bottom" id="XGb-IV-jq3"/>
+                            <constraint firstItem="897-1E-ERB" firstAttribute="leading" secondItem="Fy6-Fe-DG3" secondAttribute="leading" id="ooh-8q-l0A"/>
+                            <constraint firstAttribute="bottom" secondItem="bi9-ja-2dh" secondAttribute="bottom" id="qeJ-jG-Pr7"/>
+                            <constraint firstAttribute="trailing" secondItem="bi9-ja-2dh" secondAttribute="trailing" id="vc6-id-ZF1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="897-1E-ERB" id="C70-6T-e4I"/>
+                        <outlet property="scrollTextView" destination="bi9-ja-2dh" id="K8l-jd-IQw"/>
+                    </connections>
+                </viewController>
+                <customObject id="igd-KZ-G8E" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="516" y="721"/>
         </scene>
     </scenes>
 </document>

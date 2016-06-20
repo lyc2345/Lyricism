@@ -14,35 +14,19 @@ import Alamofire
 import SWXMLHash
 import SwiftyJSON
 
-@objc protocol iTunesApplication {
-    optional func currentTrack()-> AnyObject
-    optional var properties: NSDictionary {get}
-    //if you need another object or method from the iTunes.h, you must add it here
-}
-
-class WindowController: NSWindowController {
-    
-    
-    override func windowDidLoad() {
-        
-        
-        
-    }
-}
-
-
 class ViewController: NSViewController {
-
-    @IBOutlet weak var textView: NSScrollView! {
+    
+    @IBOutlet weak var scrollTextView: NSScrollView! {
         
         didSet {
-            if let textView = self.textView.contentView.documentView as? NSTextView {
+            if let textView = self.scrollTextView.contentView.documentView as? NSTextView {
                 
                 textView.editable = false
                 textView.textStorage?.mutableString.setString("default")
             }
         }
     }
+    @IBOutlet weak var imageView: NSImageView!
     
     var url = NSURL(string: "https://www.google.com/#q=james+blunt+postcards+lyrics")
     
@@ -59,60 +43,83 @@ class ViewController: NSViewController {
         super.viewDidLoad()
         
         /*
-        let request = NSURLRequest(URL: url!)
-        webView.mainFrame.loadRequest(request)
+         let request = NSURLRequest(URL: url!)
+         webView.mainFrame.loadRequest(request)
+         
+         NSURLSession.sharedSession().dataTaskWithURL(url!) {
+         (data, response, error) in
+         // deal with error etc accordingly
+         print(data)
+         
+         }*/
         
-        NSURLSession.sharedSession().dataTaskWithURL(url!) {
-            (data, response, error) in
-            // deal with error etc accordingly
-            print(data)
+        MusiXMatchApi.getLyrics("adele", track: "hello") { (response) in
             
-        }
-        */
-        /*
-        LyricsQueryApi.queryLyrics("", track: "") { (response) in
+            let trackJSON = JSON(data: response.data!)
+            print("track json: \(trackJSON)")
             
-            if response.result.isSuccess {
+            if let lyrics = trackJSON["message"]["body"]["lyrics"]["lyrics_body"].string {
                 
-                //textView.textStorage?.mutableString.setString(lyrics as! String)
-                
-                let json = JSON(data: response.data!)
-                print("JSON:\(json)")
-            }
-        }*/
-        
-        LyricsQueryApi.getLyrics("adele", track: "hello") { (response) in
-            
-            
-            
-        }
-
-        
-        if let textView = self.textView.contentView.documentView as? NSTextView {
-            
-            let iTunesApp: AnyObject = SBApplication(bundleIdentifier: MLMediaSourceiTunesIdentifier)!
-            let trackDict = iTunesApp.currentTrack!().properties as Dictionary
-            
-            
-            
-            if (trackDict["name"] != nil) {// if nil then no current track
-                print(trackDict["name"]!) // print the title
-                print(trackDict["artist"]!)
-                print(trackDict["album"]!)
-                print(trackDict["playedCount"]!)
-                // print(trackDict) // print the dictionary
-                
-                //textView.textStorage?.mutableString.setString(trackDict["name"] as! String)
-                
+                if let textView = self.scrollTextView.contentView.documentView as? NSTextView {
+                    
+                    textView.textStorage?.mutableString.setString(lyrics)
+                }
             }
         }
+        
+        NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: #selector(songSwitch), name: "com.apple.iTunes.playerInfo", object: nil)
     }
-
+    
     override var representedObject: AnyObject? {
         didSet {
-        // Update the view, if already loaded.
-        
+            // Update the view, if already loaded.
+            
         }
+    }
+    
+    deinit {
+        
+        NSDistributedNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func songSwitch(notification: NSNotification) {
+        
+        print("song switched!")
+        
+        let trackDict = MacUtilities.getCurrentMusicInfo()
+        
+        guard let artist = trackDict?.artist, track = trackDict?.track else {
+            
+            return
+        }
+        
+        MusiXMatchApi.getLyrics(artist, track: track) { (response) in
+            
+            let trackJSON = JSON(data: response.data!)
+            print("track json: \(trackJSON)")
+            
+            if let lyrics = trackJSON["message"]["body"]["lyrics"]["lyrics_body"].string {
+                
+                if let textView = self.scrollTextView.contentView.documentView as? NSTextView {
+                    
+                    textView.textStorage?.mutableString.setString(lyrics)
+                }
+            }
+
+        }
+        getCurrentIconImage()
+    }
+    
+    func printAllTheLibraryName() {
+        
+        
+    }
+    
+    func getCurrentIconImage() {
+        
+        
+        iOSXFoundation.propertyValues(Track)
+        
     }
 }
 
@@ -133,9 +140,6 @@ extension ViewController: WebPolicyDelegate {
     
     func webView(webView: WebView!, decidePolicyForNewWindowAction actionInformation: [NSObject : AnyObject]!, request: NSURLRequest!, newFrameName frameName: String!, decisionListener listener: WebPolicyDecisionListener!) {
         
-        
     }
-    
-    
 }
 
