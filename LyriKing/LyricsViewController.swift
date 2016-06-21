@@ -17,6 +17,7 @@ class PopoverContentView: NSView {
     override func viewDidMoveToWindow() {
         
         super.viewDidMoveToWindow()
+        
         if let frameView = self.window?.contentView?.superview {
             if backgroundView == nil {
                 backgroundView = PopoverBackgroundView(frame: frameView.bounds)

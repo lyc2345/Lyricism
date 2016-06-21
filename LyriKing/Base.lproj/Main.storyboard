@@ -748,18 +748,18 @@
             <objects>
                 <viewController storyboardIdentifier="lyrics_view_controller" showSeguePresentationStyle="single" id="hcA-47-AYn" customClass="LyricsViewController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Fy6-Fe-DG3">
-                        <rect key="frame" x="0.0" y="0.0" width="250" height="240"/>
+                        <rect key="frame" x="0.0" y="0.0" width="228" height="228"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="897-1E-ERB">
-                                <rect key="frame" x="0.0" y="0.0" width="250" height="240"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" id="UDU-Xx-RIK"/>
+                                <rect key="frame" x="0.0" y="0.0" width="228" height="228"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" image="avatar" id="UDU-Xx-RIK"/>
                             </imageView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="tuY-vm-MWf" customClass="BlurBackground" customModule="LyriKing" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="250" height="240"/>
+                                <rect key="frame" x="0.0" y="0.0" width="228" height="228"/>
                             </customView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FFI-ia-lvV">
-                                <rect key="frame" x="8" y="200" width="84" height="30"/>
+                                <rect key="frame" x="8" y="188" width="84" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="QOO-Qe-vll"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="qEU-LK-O71"/>
@@ -773,7 +773,7 @@
                                 </textFieldCell>
                             </textField>
                             <button wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fgq-f8-ve4">
-                                <rect key="frame" x="222" y="210" width="20" height="20"/>
+                                <rect key="frame" x="200" y="198" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="3ZX-Ya-IrQ"/>
                                     <constraint firstAttribute="height" constant="20" id="okW-If-OBe"/>
@@ -790,17 +790,17 @@
                                 </connections>
                             </button>
                             <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="bi9-ja-2dh">
-                                <rect key="frame" x="0.0" y="0.0" width="250" height="160"/>
+                                <rect key="frame" x="0.0" y="0.0" width="228" height="152"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="UKF-j9-9S6">
-                                    <rect key="frame" x="0.0" y="0.0" width="250" height="160"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="228" height="152"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView editable="NO" selectable="NO" drawsBackground="NO" importsGraphics="NO" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="zlN-bT-muU">
-                                            <rect key="frame" x="0.0" y="0.0" width="250" height="160"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="228" height="152"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                            <size key="minSize" width="250" height="160"/>
+                                            <size key="minSize" width="228" height="152"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                             <attributedString key="textStorage">
                                                 <fragment content=" ">
@@ -812,7 +812,7 @@
                                                 </fragment>
                                             </attributedString>
                                             <color key="insertionPointColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="250" height="160"/>
+                                            <size key="minSize" width="228" height="152"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                         </textView>
                                     </subviews>
@@ -823,7 +823,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="ka3-fG-qhM">
-                                    <rect key="frame" x="234" y="0.0" width="16" height="160"/>
+                                    <rect key="frame" x="212" y="0.0" width="16" height="152"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -859,4 +859,7 @@
             <point key="canvasLocation" x="516" y="721"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="avatar" width="228" height="228"/>
+    </resources>
 </document>
