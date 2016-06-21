@@ -140,9 +140,17 @@ class LyricsViewController: NSViewController {
         dispatch_async(dispatch_get_main_queue()) { 
             self.timeLabel.stringValue = timeString
         }
-        print("track time :\(timeString)")
+        //print("track time :\(timeString)")
         
         trackTime = trackTime - 1
+    }
+    
+    func stopTimer() {
+        
+        if timer != nil {
+            timer!.invalidate()
+            timer = nil
+        }
     }
     
     func terminateApp() {

@@ -15,6 +15,16 @@
 		F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F616EBB51D15221800D1A40C /* NSObject+Extension.swift */; };
 		F668464D1D18D20E007DB6CF /* BlurBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668464C1D18D20E007DB6CF /* BlurBackground.swift */; };
 		F668464F1D18D26E007DB6CF /* BlurBackground.xib in Resources */ = {isa = PBXBuildFile; fileRef = F668464E1D18D26E007DB6CF /* BlurBackground.xib */; };
+		F668465B1D19110F007DB6CF /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66846531D19110F007DB6CF /* Attribute.swift */; };
+		F668465C1D19110F007DB6CF /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66846541D19110F007DB6CF /* Entity.swift */; };
+		F668465D1D19110F007DB6CF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F66846551D19110F007DB6CF /* Info.plist */; };
+		F668465E1D19110F007DB6CF /* ITunesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66846561D19110F007DB6CF /* ITunesApi.swift */; };
+		F668465F1D19110F007DB6CF /* ITunesLookupApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66846571D19110F007DB6CF /* ITunesLookupApi.swift */; };
+		F66846601D19110F007DB6CF /* ITunesSearchApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66846581D19110F007DB6CF /* ITunesSearchApi.swift */; };
+		F66846611D19110F007DB6CF /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668465A1D19110F007DB6CF /* Media.swift */; };
+		F668466B1D19191A007DB6CF /* iTunesBridgeX.m in Sources */ = {isa = PBXBuildFile; fileRef = F668466A1D19191A007DB6CF /* iTunesBridgeX.m */; };
+		F668466D1D191960007DB6CF /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F668466C1D191960007DB6CF /* ScriptingBridge.framework */; };
+		F668466F1D191BC5007DB6CF /* iTunes.h in Frameworks */ = {isa = PBXBuildFile; fileRef = F668466E1D191BC5007DB6CF /* iTunes.h */; };
 		F68BC71B1D128ACE00A36247 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BC71A1D128ACE00A36247 /* AppDelegate.swift */; };
 		F68BC71D1D128ACE00A36247 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BC71C1D128ACE00A36247 /* ViewController.swift */; };
 		F68BC71F1D128ACE00A36247 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BC71E1D128ACE00A36247 /* Document.swift */; };
@@ -26,7 +36,7 @@
 		4D759BFDEB9F5E3130617B83 /* Pods-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-macOS/Pods-macOS.release.xcconfig"; sourceTree = "<group>"; };
 		B45D50AF0F3C9169CFB332A9 /* Pods_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E602F080E5CEF11336D7EA40 /* Pods-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-macOS/Pods-macOS.debug.xcconfig"; sourceTree = "<group>"; };
-		F60BF8A31D139B3E00F7C6DA /* macOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "macOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		F60BF8A31D139B3E00F7C6DA /* macOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "macOS-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusiXMatchApi.swift; sourceTree = "<group>"; };
 		F60BF8B61D13EDCA00F7C6DA /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsViewController.swift; sourceTree = "<group>"; };
@@ -34,6 +44,18 @@
 		F616EBB51D15221800D1A40C /* NSObject+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		F668464C1D18D20E007DB6CF /* BlurBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurBackground.swift; sourceTree = "<group>"; };
 		F668464E1D18D26E007DB6CF /* BlurBackground.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlurBackground.xib; sourceTree = "<group>"; };
+		F66846531D19110F007DB6CF /* Attribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
+		F66846541D19110F007DB6CF /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		F66846551D19110F007DB6CF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F66846561D19110F007DB6CF /* ITunesApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITunesApi.swift; sourceTree = "<group>"; };
+		F66846571D19110F007DB6CF /* ITunesLookupApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITunesLookupApi.swift; sourceTree = "<group>"; };
+		F66846581D19110F007DB6CF /* ITunesSearchApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITunesSearchApi.swift; sourceTree = "<group>"; };
+		F66846591D19110F007DB6CF /* ITunesSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITunesSwift.h; sourceTree = "<group>"; };
+		F668465A1D19110F007DB6CF /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
+		F66846691D19191A007DB6CF /* iTunesBridgeX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesBridgeX.h; sourceTree = "<group>"; };
+		F668466A1D19191A007DB6CF /* iTunesBridgeX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesBridgeX.m; sourceTree = "<group>"; };
+		F668466C1D191960007DB6CF /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
+		F668466E1D191BC5007DB6CF /* iTunes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
 		F68BC7171D128ACE00A36247 /* macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F68BC71A1D128ACE00A36247 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F68BC71C1D128ACE00A36247 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -48,6 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F668466F1D191BC5007DB6CF /* iTunes.h in Frameworks */,
+				F668466D1D191960007DB6CF /* ScriptingBridge.framework in Frameworks */,
 				F5FE51D18DC9CC397709DC01 /* Pods_macOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -58,8 +82,9 @@
 		34A8663DB978A591BF253E9A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F668466E1D191BC5007DB6CF /* iTunes.h */,
+				F668466C1D191960007DB6CF /* ScriptingBridge.framework */,
 				B45D50AF0F3C9169CFB332A9 /* Pods_macOS.framework */,
-				F60BF8A31D139B3E00F7C6DA /* macOS-Bridging-Header.h */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -73,9 +98,25 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		F66846521D19110F007DB6CF /* ITunesSwift */ = {
+			isa = PBXGroup;
+			children = (
+				F66846531D19110F007DB6CF /* Attribute.swift */,
+				F66846541D19110F007DB6CF /* Entity.swift */,
+				F66846551D19110F007DB6CF /* Info.plist */,
+				F66846561D19110F007DB6CF /* ITunesApi.swift */,
+				F66846571D19110F007DB6CF /* ITunesLookupApi.swift */,
+				F66846581D19110F007DB6CF /* ITunesSearchApi.swift */,
+				F66846591D19110F007DB6CF /* ITunesSwift.h */,
+				F668465A1D19110F007DB6CF /* Media.swift */,
+			);
+			path = ITunesSwift;
+			sourceTree = "<group>";
+		};
 		F68BC70E1D128ACD00A36247 = {
 			isa = PBXGroup;
 			children = (
+				F66846521D19110F007DB6CF /* ITunesSwift */,
 				F68BC7191D128ACE00A36247 /* macOS */,
 				F68BC7181D128ACE00A36247 /* Products */,
 				EB3E0201C3E3C41B81CAC41A /* Pods */,
@@ -97,6 +138,8 @@
 				F68BC71A1D128ACE00A36247 /* AppDelegate.swift */,
 				F68BC71C1D128ACE00A36247 /* ViewController.swift */,
 				F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */,
+				F66846691D19191A007DB6CF /* iTunesBridgeX.h */,
+				F668466A1D19191A007DB6CF /* iTunesBridgeX.m */,
 				F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */,
 				F668464C1D18D20E007DB6CF /* BlurBackground.swift */,
 				F668464E1D18D26E007DB6CF /* BlurBackground.xib */,
@@ -107,6 +150,7 @@
 				F68BC7201D128ACE00A36247 /* Assets.xcassets */,
 				F68BC7221D128ACE00A36247 /* Main.storyboard */,
 				F68BC7251D128ACE00A36247 /* Info.plist */,
+				F60BF8A31D139B3E00F7C6DA /* macOS-Bridging-Header.h */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -172,6 +216,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F668465D1D19110F007DB6CF /* Info.plist in Resources */,
 				F668464F1D18D26E007DB6CF /* BlurBackground.xib in Resources */,
 				F68BC7211D128ACE00A36247 /* Assets.xcassets in Resources */,
 				F68BC7241D128ACE00A36247 /* Main.storyboard in Resources */,
@@ -233,15 +278,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F668465E1D19110F007DB6CF /* ITunesApi.swift in Sources */,
+				F668465B1D19110F007DB6CF /* Attribute.swift in Sources */,
 				F60BF8D61D1430D300F7C6DA /* MacUtilities.swift in Sources */,
 				F60BF8D21D1424D800F7C6DA /* LyricsViewController.swift in Sources */,
 				F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */,
 				F68BC71D1D128ACE00A36247 /* ViewController.swift in Sources */,
 				F60BF8B71D13EDCA00F7C6DA /* Track.swift in Sources */,
+				F668466B1D19191A007DB6CF /* iTunesBridgeX.m in Sources */,
+				F668465F1D19110F007DB6CF /* ITunesLookupApi.swift in Sources */,
 				F60BF8B51D13A68900F7C6DA /* MusiXMatchApi.swift in Sources */,
+				F668465C1D19110F007DB6CF /* Entity.swift in Sources */,
 				F68BC71B1D128ACE00A36247 /* AppDelegate.swift in Sources */,
 				F68BC71F1D128ACE00A36247 /* Document.swift in Sources */,
+				F66846601D19110F007DB6CF /* ITunesSearchApi.swift in Sources */,
 				F668464D1D18D20E007DB6CF /* BlurBackground.swift in Sources */,
+				F66846611D19110F007DB6CF /* Media.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

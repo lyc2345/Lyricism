@@ -22,9 +22,11 @@ class Document: NSDocument {
 
     override func makeWindowControllers() {
         // Returns the Storyboard that contains your Document window.
+        /*
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         let windowController = storyboard.instantiateControllerWithIdentifier("Document Window Controller") as! NSWindowController
         self.addWindowController(windowController)
+         */
     }
 
     override func dataOfType(typeName: String) throws -> NSData {

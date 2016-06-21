@@ -11,7 +11,6 @@ import SwiftyJSON
 import ScriptingBridge
 import MediaLibrary
 
-
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
@@ -19,12 +18,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let popover: NSPopover = NSPopover()
     
     
-    
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         
         // button image on status bar
         if let button = statusItem.button {
-            button.image = NSImage(named: "StatusBarButtonImage")
+            button.image = NSImage(named: "light_lyrics")
             button.action = #selector(togglePopover)
         }
         
@@ -35,6 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         
         NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: #selector(iTunesVaryStatus), name: "com.apple.iTunes.playerInfo", object: nil)
+        
     }
     
     func applicationWillTerminate(aNotification: NSNotification) {
@@ -43,14 +42,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func iTunesVaryStatus(notification: NSNotification) {
-        
-        let iTunesApp: AnyObject = SBApplication(bundleIdentifier: MLMediaSourceiTunesIdentifier)!
-        
-        
-        
         popover.contentSize = NSMakeSize(200, 220)
         showPopover(popover)
         let destinationViewController = popover.contentViewController as! LyricsViewController
+        
+        let info = notification.userInfo
+        print("user info:\(info)")
+        
+        let iTunes = SBApplication(bundleIdentifier: "com.apple.iTunes")
+        
+        print("iTunes:\(iTunes!.running)")
         
         let trackDict = MacUtilities.getCurrentMusicInfo()
         guard let currentArtist = trackDict?.artist, currentTrack = trackDict?.track, currentTime = trackDict?.time else {
@@ -97,6 +98,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } else {
             showPopover(popover)
         }
+    }
+    
+    @IBAction func dockShow(sender: AnyObject) {
+        NSApp.setActivationPolicy(.Regular)
+    }
+    @IBAction func dockHide(sender: AnyObject) {
+        NSApp.setActivationPolicy(.Accessory)
     }
 }
 
