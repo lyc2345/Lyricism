@@ -736,6 +736,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="250" height="240"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" id="UDU-Xx-RIK"/>
                             </imageView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="tuY-vm-MWf" customClass="BlurBackground" customModule="macOS" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="250" height="240"/>
+                            </customView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FFI-ia-lvV">
                                 <rect key="frame" x="8" y="200" width="84" height="30"/>
                                 <constraints>
@@ -751,7 +754,7 @@
                                 </textFieldCell>
                             </textField>
                             <button wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fgq-f8-ve4">
-                                <rect key="frame" x="225" y="215" width="20" height="20"/>
+                                <rect key="frame" x="222" y="210" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="3ZX-Ya-IrQ"/>
                                     <constraint firstAttribute="height" constant="20" id="okW-If-OBe"/>
@@ -759,35 +762,38 @@
                                 <shadow key="shadow">
                                     <color key="color" name="selectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </shadow>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="setting" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="GaL-uy-lim">
-                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" alignment="center" state="on" allowsMixedState="YES" inset="2" id="GaL-uy-lim">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="cellTitle"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="toggleAlwaysOnTop:" target="hcA-47-AYn" id="ea2-F1-2Ri"/>
+                                </connections>
                             </button>
                             <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="bi9-ja-2dh">
-                                <rect key="frame" x="0.0" y="0.0" width="250" height="120"/>
+                                <rect key="frame" x="0.0" y="0.0" width="250" height="160"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="UKF-j9-9S6">
-                                    <rect key="frame" x="0.0" y="0.0" width="250" height="120"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="250" height="160"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView editable="NO" selectable="NO" drawsBackground="NO" importsGraphics="NO" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="zlN-bT-muU">
-                                            <rect key="frame" x="0.0" y="0.0" width="250" height="120"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="250" height="160"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                            <size key="minSize" width="250" height="120"/>
+                                            <size key="minSize" width="250" height="160"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                             <attributedString key="textStorage">
                                                 <fragment content=" ">
                                                     <attributes>
                                                         <color key="NSColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
-                                                        <font key="NSFont" size="20" name="Menlo-Bold"/>
+                                                        <font key="NSFont" size="17" name="Menlo-Bold"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacingBefore="1" tighteningFactorForTruncation="0.0" headerLevel="3"/>
                                                     </attributes>
                                                 </fragment>
                                             </attributedString>
                                             <color key="insertionPointColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="250" height="120"/>
+                                            <size key="minSize" width="250" height="160"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                         </textView>
                                     </subviews>
@@ -798,7 +804,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="ka3-fG-qhM">
-                                    <rect key="frame" x="234" y="0.0" width="16" height="120"/>
+                                    <rect key="frame" x="234" y="0.0" width="16" height="160"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -807,12 +813,16 @@
                             <constraint firstItem="bi9-ja-2dh" firstAttribute="leading" secondItem="Fy6-Fe-DG3" secondAttribute="leading" id="1FP-Im-kbJ"/>
                             <constraint firstAttribute="trailing" secondItem="897-1E-ERB" secondAttribute="trailing" id="6aj-dt-F0S"/>
                             <constraint firstItem="FFI-ia-lvV" firstAttribute="leading" secondItem="Fy6-Fe-DG3" secondAttribute="leading" constant="10" id="ACM-5T-aCG"/>
-                            <constraint firstItem="fgq-f8-ve4" firstAttribute="top" secondItem="Fy6-Fe-DG3" secondAttribute="top" constant="5" id="AHc-kG-e7g"/>
+                            <constraint firstItem="fgq-f8-ve4" firstAttribute="top" secondItem="Fy6-Fe-DG3" secondAttribute="top" constant="10" id="AHc-kG-e7g"/>
                             <constraint firstItem="897-1E-ERB" firstAttribute="top" secondItem="Fy6-Fe-DG3" secondAttribute="top" id="L5S-0R-LTM"/>
-                            <constraint firstItem="bi9-ja-2dh" firstAttribute="height" secondItem="897-1E-ERB" secondAttribute="height" multiplier="1:2" id="PQB-zb-R0z"/>
+                            <constraint firstItem="bi9-ja-2dh" firstAttribute="height" secondItem="897-1E-ERB" secondAttribute="height" multiplier="1:1.5" id="PQB-zb-R0z"/>
                             <constraint firstItem="FFI-ia-lvV" firstAttribute="top" secondItem="Fy6-Fe-DG3" secondAttribute="top" constant="10" id="Trr-dk-CUU"/>
-                            <constraint firstAttribute="trailing" secondItem="fgq-f8-ve4" secondAttribute="trailing" constant="5" id="Uek-Mf-TaC"/>
+                            <constraint firstAttribute="trailing" secondItem="fgq-f8-ve4" secondAttribute="trailing" constant="8" id="Uek-Mf-TaC"/>
                             <constraint firstAttribute="bottom" secondItem="897-1E-ERB" secondAttribute="bottom" id="XGb-IV-jq3"/>
+                            <constraint firstItem="tuY-vm-MWf" firstAttribute="top" secondItem="Fy6-Fe-DG3" secondAttribute="top" id="ebQ-se-nnk"/>
+                            <constraint firstItem="tuY-vm-MWf" firstAttribute="leading" secondItem="Fy6-Fe-DG3" secondAttribute="leading" id="lfI-uv-67o"/>
+                            <constraint firstAttribute="trailing" secondItem="tuY-vm-MWf" secondAttribute="trailing" id="lh0-Xr-c5W"/>
+                            <constraint firstAttribute="bottom" secondItem="tuY-vm-MWf" secondAttribute="bottom" id="mwZ-69-uS9"/>
                             <constraint firstItem="897-1E-ERB" firstAttribute="leading" secondItem="Fy6-Fe-DG3" secondAttribute="leading" id="ooh-8q-l0A"/>
                             <constraint firstAttribute="bottom" secondItem="bi9-ja-2dh" secondAttribute="bottom" id="qeJ-jG-Pr7"/>
                             <constraint firstAttribute="trailing" secondItem="bi9-ja-2dh" secondAttribute="trailing" id="vc6-id-ZF1"/>
@@ -822,6 +832,7 @@
                         <outlet property="imageView" destination="897-1E-ERB" id="C70-6T-e4I"/>
                         <outlet property="scrollTextView" destination="bi9-ja-2dh" id="K8l-jd-IQw"/>
                         <outlet property="timeLabel" destination="FFI-ia-lvV" id="kDX-33-036"/>
+                        <outlet property="topToggleBtn" destination="fgq-f8-ve4" id="bg1-gL-Zht"/>
                     </connections>
                 </viewController>
                 <customObject id="igd-KZ-G8E" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -829,7 +840,4 @@
             <point key="canvasLocation" x="516" y="721"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="setting" width="30" height="30"/>
-    </resources>
 </document>

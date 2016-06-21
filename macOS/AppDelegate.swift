@@ -7,6 +7,10 @@
 //
 
 import Cocoa
+import SwiftyJSON
+import ScriptingBridge
+import MediaLibrary
+
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -15,42 +19,70 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let popover: NSPopover = NSPopover()
     
     
+    
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         
         // button image on status bar
         if let button = statusItem.button {
             button.image = NSImage(named: "StatusBarButtonImage")
-            button.action = #selector(printQuote)
+            button.action = #selector(togglePopover)
         }
         
-        
-
         let lyricsViewController = NSStoryboard(name: "Main", bundle: nil).instantiateControllerWithIdentifier("lyrics_view_controller") as! LyricsViewController
         
         popover.contentViewController = lyricsViewController
         popover.contentSize = NSMakeSize(200, 220)
         
         
+        NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: #selector(iTunesVaryStatus), name: "com.apple.iTunes.playerInfo", object: nil)
     }
-
+    
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
+        NSDistributedNotificationCenter.defaultCenter().removeObserver(self, forKeyPath: "com.apple.iTunes.playerInfo")
     }
-
-    func printQuote(sender: AnyObject) {
-        let quoteText = "Never put off until tomorrow what you can do the day after tomorrow."
-        let quoteAuthor = "Mark Twain"
+    
+    func iTunesVaryStatus(notification: NSNotification) {
         
-        togglePopover(popover)
+        let iTunesApp: AnyObject = SBApplication(bundleIdentifier: MLMediaSourceiTunesIdentifier)!
+        
+        
+        
+        popover.contentSize = NSMakeSize(200, 220)
+        showPopover(popover)
+        let destinationViewController = popover.contentViewController as! LyricsViewController
+        
+        let trackDict = MacUtilities.getCurrentMusicInfo()
+        guard let currentArtist = trackDict?.artist, currentTrack = trackDict?.track, currentTime = trackDict?.time else {
+                return
+        }
+        destinationViewController.timeString = currentTime
+        
+        MusiXMatchApi.getLyrics(currentArtist, track: currentTrack) { (response) in
+            
+            if response.result.isSuccess {
+                
+                let trackJSON = JSON(data: response.data!)
+                let track = Track.sharedTrack
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    if let imageURLString = track.album_coverart_350x350 {
+                        
+                        destinationViewController.coverImageURL = NSURL(string: imageURLString)
+                    }
+                    if let lyrics = trackJSON["message"]["body"]["lyrics"]["lyrics_body"].string {
+                        destinationViewController.lyrics = lyrics
+                    }
+                })
+            }
+        }
     }
-
+    
     func showPopover(sender: AnyObject?) {
-        
         
         if let button = statusItem.button {
             (sender as! NSPopover).showRelativeToRect(button.bounds, ofView: button, preferredEdge: .MinY)
-            
-            
         }
     }
     
@@ -60,10 +92,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func togglePopover(sender: AnyObject?) {
         
-        if (sender as! NSPopover).shown {
-            closePopover(sender)
+        if popover.shown {
+            closePopover(popover)
         } else {
-            showPopover(sender)
+            showPopover(popover)
         }
     }
 }

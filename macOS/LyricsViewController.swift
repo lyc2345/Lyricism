@@ -9,108 +9,119 @@
 import Cocoa
 import SwiftyJSON
 import ScriptingBridge
+import AVFoundation
+
+class PopoverContentView: NSView {
+    
+    var backgroundView:PopoverBackgroundView?
+    override func viewDidMoveToWindow() {
+        
+        super.viewDidMoveToWindow()
+        if let frameView = self.window?.contentView?.superview {
+            if backgroundView == nil {
+                backgroundView = PopoverBackgroundView(frame: frameView.bounds)
+                backgroundView!.autoresizingMask = NSAutoresizingMaskOptions([.ViewWidthSizable, .ViewHeightSizable]);
+                frameView.addSubview(backgroundView!, positioned: NSWindowOrderingMode.Below, relativeTo: frameView)
+            }
+        }
+    }
+}
+
+class PopoverBackgroundView: NSView {
+    
+    override func drawRect(dirtyRect: NSRect) {
+        NSColor(colorLiteralRed: 41.0/255.0, green: 48.0/255.0, blue: 66.0/255.0, alpha: 0.4).set()
+        NSRectFill(bounds)
+    }
+}
 
 class LyricsViewController: NSViewController {
     
-    @IBOutlet weak var timeLabel: NSTextField!
-    
-    var timer: NSTimer!
-    var trackTime: Int64!
-    
-    @IBOutlet weak var imageView: NSImageView!  {
+    var lyrics: String? {
         
         didSet {
-            //imageView.imageScaling = .ScaleNone
-            //imageView.imageAlignment = .AlignCenter
+            if let textView = self.scrollTextView.contentView.documentView as? NSTextView {
+                textView.string = lyrics?.applyLyricsFormat()
+            }
         }
     }
-    @IBOutlet weak var scrollTextView: NSScrollView! {
+    var coverImageURL: NSURL? {
         
         didSet {
             
-            if let textView = scrollTextView.contentView.documentView as? NSTextView {
+            if let imageURL = coverImageURL, let imageView = self.imageView {
                 
-                //
+                imageView.image = NSImage(contentsOfURL: imageURL)
             }
+        }
+    }
+    var timeString: String = "00:00" {
+        
+        didSet {
+            let seconds = String(timeString.characters.dropFirst(3))
+            let minutes = String(timeString.characters.dropLast(3)).stringByReplacingOccurrencesOfString("-", withString: "")
+            
+            trackTime = Int64(NSString(string: minutes).integerValue * 60 + NSString(string: seconds).integerValue)
+            
+            if timer != nil {
+                
+                timer!.invalidate()
+                timer = nil
+            }
+            
+            timer = NSTimer(timeInterval: 1.0, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+            NSRunLoop.mainRunLoop().addTimer(timer!, forMode: NSDefaultRunLoopMode)
+        }
+    }
+    
+    @IBOutlet weak var timeLabel: NSTextField!
+    
+    var timer: NSTimer?
+    var trackTime: Int64!
+    
+    @IBOutlet weak var imageView: NSImageView!
+    
+    @IBOutlet weak var scrollTextView: NSScrollView!
+    
+    var traigleView: NSView?
+    
+    var topToggleState: Bool = true {
+        
+        didSet {
+            topToggleBtn.image = (topToggleState ? NSImage(named: "pin") : NSImage(named: "unpin"))
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: #selector(songSwitch), name: "com.apple.iTunes.playerInfo", object: nil)
-        
-        let track = Track.sharedTrack
-        
-        guard let imageURLString = track.album_coverart_350x350 else {
-            
-            return
-        }
-        
-        if let imageURL = NSURL(string: imageURLString), let image = NSImage(contentsOfURL: imageURL) {
-            self.imageView.image = image
-        }
+        traigleView = PopoverContentView(frame: view.frame)
+        view.addSubview(traigleView!)
     }
     
     deinit {
-        NSDistributedNotificationCenter.defaultCenter().removeObserver(self)
+        
     }
     
-    @objc private func songSwitch(notification: NSNotification) {
+    
+    @IBOutlet weak var topToggleBtn: NSButton! {
         
-        let trackDict = MacUtilities.getCurrentMusicInfo()
-        guard let artist = trackDict?.artist,
-            track = trackDict?.track, time = trackDict?.time else {
-                return
-        }
-        
-        setTrackTimer(time)
-        
-        MusiXMatchApi.getLyrics(artist, track: track) { (response) in
-            
-            let trackJSON = JSON(data: response.data!)
-            //print("track json: \(trackJSON)")
-            
-            if let lyrics = trackJSON["message"]["body"]["lyrics"]["lyrics_body"].string {
-                
-                dispatch_async(dispatch_get_main_queue(), {
-                    
-                    
-                    if let textView = self.scrollTextView.contentView.documentView as? NSTextView {
-                        textView.textStorage?.mutableString.setString(self.applyLyricsFormat(lyrics))
-                        
-                        let track = Track.sharedTrack
-                        
-                        if let imageURL = NSURL(string: track.album_coverart_350x350), let image = NSImage(contentsOfURL: imageURL) {
-                            self.imageView.image = image
-                            let appDelegate: AppDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
-                            appDelegate.popover.contentSize = NSSize(width: 200, height: 220)
-                        }
-                    }
-                })
-            }
+        didSet {
+            topToggleBtn.image = (topToggleState ? NSImage(named: "pin") : NSImage(named: "unpin"))
         }
     }
     
-    func setTrackTimer(timeString: String) {
+    @IBAction func toggleAlwaysOnTop(sender: AnyObject) {
         
-        let seconds = String(timeString.characters.dropFirst(3))
-        let minutes = String(timeString.characters.dropLast(3)).stringByReplacingOccurrencesOfString("-", withString: "")
-        
-        trackTime = Int64(NSString(string: minutes).integerValue * 60 + NSString(string: seconds).integerValue)
-        
-        
-        timer = NSTimer(timeInterval: 1.0, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-        NSRunLoop.mainRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
-        
+        topToggleState = !topToggleState
     }
     
     func updateTime() {
         
         if trackTime == 0 {
-            timer.invalidate()
+            timer!.invalidate()
+            timer = nil
         }
-        trackTime = trackTime - 1
         
         let minutes = trackTime / 60
         let seconds = trackTime % 60
@@ -130,6 +141,8 @@ class LyricsViewController: NSViewController {
             self.timeLabel.stringValue = timeString
         }
         print("track time :\(timeString)")
+        
+        trackTime = trackTime - 1
     }
     
     func terminateApp() {
@@ -138,11 +151,11 @@ class LyricsViewController: NSViewController {
     }
 }
 
-extension LyricsViewController {
+extension String {
     
-    func applyLyricsFormat(lyric: String) -> String {
+    func applyLyricsFormat() -> String {
         
-        return lyric.stringByReplacingOccurrencesOfString(".", withString: ". \n")
+        return self.stringByReplacingOccurrencesOfString(".", withString: ". \n").stringByReplacingOccurrencesOfString("\n", withString: "\n\n").stringByReplacingOccurrencesOfString("\n\n\n", withString: "\n\n")
     }
     
 }
