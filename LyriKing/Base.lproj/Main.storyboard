@@ -41,15 +41,6 @@
                                                             <action selector="dockShow:" target="Voe-Tx-rLC" id="CiU-Po-x9L"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="Item 1" id="tbV-ps-a6K">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                                    </menuItem>
-                                                    <menuItem title="Item 2" id="MFR-bR-cWF">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                                    </menuItem>
-                                                    <menuItem title="Item 3" id="7e8-8G-xQ9">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                                    </menuItem>
                                                 </items>
                                             </menu>
                                         </menuItem>
@@ -58,7 +49,7 @@
                                             <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
-                                        <menuItem title="Hide macOS" hidden="YES" keyEquivalent="h" id="Olw-nP-bQN">
+                                        <menuItem title="Hide LyriKing" hidden="YES" keyEquivalent="h" id="Olw-nP-bQN">
                                             <connections>
                                                 <action selector="hide:" target="Ady-hI-5gd" id="PnN-Uc-m68"/>
                                             </connections>
@@ -76,7 +67,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
-                                        <menuItem title="Quit macOS" keyEquivalent="q" id="4sb-4s-VLi">
+                                        <menuItem title="Quit LyriKing" keyEquivalent="q" id="4sb-4s-VLi">
                                             <connections>
                                                 <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
                                             </connections>
@@ -657,7 +648,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                                     <items>
-                                        <menuItem title="macOS Help" keyEquivalent="?" id="FKE-Sm-Kum">
+                                        <menuItem title="LyriKing Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                             <connections>
                                                 <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
                                             </connections>
@@ -671,7 +662,7 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="macOS" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="LyriKing" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
@@ -694,7 +685,7 @@
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="5gI-5U-AMq" customClass="ViewController" customModule="macOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5gI-5U-AMq" customClass="ViewController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="ERx-hH-rdd">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -755,7 +746,7 @@
         <!--Lyrics View Controller-->
         <scene sceneID="YfF-Qn-2fd">
             <objects>
-                <viewController storyboardIdentifier="lyrics_view_controller" showSeguePresentationStyle="single" id="hcA-47-AYn" customClass="LyricsViewController" customModule="macOS" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="lyrics_view_controller" showSeguePresentationStyle="single" id="hcA-47-AYn" customClass="LyricsViewController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Fy6-Fe-DG3">
                         <rect key="frame" x="0.0" y="0.0" width="250" height="240"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -764,7 +755,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="250" height="240"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" id="UDU-Xx-RIK"/>
                             </imageView>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="tuY-vm-MWf" customClass="BlurBackground" customModule="macOS" customModuleProvider="target">
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="tuY-vm-MWf" customClass="BlurBackground" customModule="LyriKing" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="250" height="240"/>
                             </customView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FFI-ia-lvV">
