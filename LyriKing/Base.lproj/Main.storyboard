@@ -767,6 +767,28 @@
                                 <rect key="frame" x="0.0" y="0.0" width="350" height="350"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" image="avatar" id="UDU-Xx-RIK"/>
                             </imageView>
+                            <customView autoresizesSubviews="NO" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="tuY-vm-MWf" customClass="BlurBackground" customModule="LyriKing" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="350" height="350"/>
+                                <subviews>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="1qW-9e-nzZ" customClass="MarqueeView" customModule="LyriKing" customModuleProvider="target">
+                                        <rect key="frame" x="95" y="305" width="245" height="35"/>
+                                    </customView>
+                                </subviews>
+                            </customView>
+                            <textField horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="FFI-ia-lvV">
+                                <rect key="frame" x="8" y="305" width="84" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="QOO-Qe-vll"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="qEU-LK-O71"/>
+                                    <constraint firstAttribute="width" constant="80" id="rvj-5J-lq2"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="yDq-Bk-ufm"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="00:00" id="Jj4-BK-137">
+                                    <font key="font" size="25" name="Menlo-Regular"/>
+                                    <color key="textColor" name="controlLightHighlightColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <scrollView misplaced="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="bi9-ja-2dh">
                                 <rect key="frame" x="0.0" y="0.0" width="350" height="298"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="UKF-j9-9S6">
@@ -805,28 +827,6 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <customView autoresizesSubviews="NO" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="tuY-vm-MWf" customClass="BlurBackground" customModule="LyriKing" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="350" height="350"/>
-                                <subviews>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="1qW-9e-nzZ" customClass="MarqueeView" customModule="LyriKing" customModuleProvider="target">
-                                        <rect key="frame" x="95" y="305" width="245" height="35"/>
-                                    </customView>
-                                </subviews>
-                            </customView>
-                            <textField horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="FFI-ia-lvV">
-                                <rect key="frame" x="8" y="305" width="84" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="QOO-Qe-vll"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="qEU-LK-O71"/>
-                                    <constraint firstAttribute="width" constant="80" id="rvj-5J-lq2"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="yDq-Bk-ufm"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="00:00" id="Jj4-BK-137">
-                                    <font key="font" size="25" name="Menlo-Regular"/>
-                                    <color key="textColor" name="controlLightHighlightColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="1qW-9e-nzZ" firstAttribute="height" secondItem="FFI-ia-lvV" secondAttribute="height" id="509-RC-UXE"/>

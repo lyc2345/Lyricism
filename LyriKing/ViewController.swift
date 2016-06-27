@@ -74,7 +74,7 @@ class ViewController: NSViewController {
         
         let trackDict = MacUtilities.getCurrentMusicInfo()
         
-        guard let artist = trackDict?.artist, track = trackDict?.track else {
+        guard let _ = trackDict?.artist, _ = trackDict?.track else {
             
             return
         }

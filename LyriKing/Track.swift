@@ -81,8 +81,8 @@ class Track: NSObject {
                 track.setValue(numberValue, forKey: key)
             } else {
                 
-                
-                if let primary_genre = json["message"]["body"]["track_list"][0]["track"]["primary_genres"].dictionary {
+                //primary_genre
+                if let _ = json["message"]["body"]["track_list"][0]["track"]["primary_genres"].dictionary {
                     //print("property: \(key), value: \(primary_genres)")
                     
                 }
