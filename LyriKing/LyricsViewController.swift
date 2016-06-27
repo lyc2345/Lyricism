@@ -39,25 +39,29 @@ class PopoverBackgroundView: NSView {
 class LyricsViewController: NSViewController {
     
     var lyrics: String? {
-        
         didSet {
-            if let textView = self.scrollTextView.contentView.documentView as? NSTextView {
-                if lyrics != nil {
-                    textView.string = lyrics?.applyLyricsFormat()
-                } else {
-                    textView.string = ""
+            //printLog("lyrics: \(lyrics)")
+            dispatch_async(dispatch_get_main_queue(), {
+                if let textView = self.scrollTextView.contentView.documentView as? NSTextView {
+                    if self.lyrics != nil {
+                        textView.string = self.lyrics?.applyLyricsFormat()
+                    } else {
+                        textView.string = ""
+                    }
                 }
-            }
+            })
         }
     }
     var coverImageURL: NSURL? {
         
         didSet {
-            if let imageURL = coverImageURL, let imageView = self.imageView {
-                imageView.image = NSImage(contentsOfURL: imageURL)
-            } else {
-                imageView.image = NSImage(named: "avatar")
-            }
+            dispatch_async(dispatch_get_main_queue(), {
+                if let imageURL = self.coverImageURL {
+                    self.imageView.image = NSImage(contentsOfURL: imageURL)
+                } else {
+                    self.imageView.image = NSImage(named: "avatar")
+                }
+            })
         }
     }
     var timeString: String = "00:00" {
@@ -79,17 +83,18 @@ class LyricsViewController: NSViewController {
         }
     }
     
-    var trackNameAndArtist: String? {
+    var marqueeText: String? {
         
         didSet {
-            if let trackNameAndArtistString = trackNameAndArtist {
-                self.trackNameArtistLabel.stringValue = trackNameAndArtistString
+            if let marqueeText = marqueeText {
+                self.trackNameArtistLabel.text = marqueeText
             }
         }
     }
     
     @IBOutlet weak var timeLabel: NSTextField!
-    @IBOutlet weak var trackNameArtistLabel: NSTextField!
+    @IBOutlet weak var trackNameArtistLabel: MarqueeView!
+    
     
     var timer: NSTimer?
     var trackTime: Int64!
@@ -117,42 +122,41 @@ class LyricsViewController: NSViewController {
         traigleView = PopoverContentView(frame: view.frame)
         view.addSubview(traigleView!)
 
+
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
         
-        let trackDict = MacUtilities.getCurrentMusicInfo()
-        guard let currentArtist = trackDict?.artist, currentTrack = trackDict?.track, currentTime = trackDict?.time else {
+        let playingTrack = MacUtilities.getCurrentMusicInfo()
+        guard let currentArtist = playingTrack?.artist, currentTrack = playingTrack?.track, currentTime = playingTrack?.time else {
             return
         }
+        print("currentArtist:\(currentArtist), currentTrack:\(currentTrack), currentTime:\(currentTime)")
         
-        if Track.sharedTrack.artist_name != nil && currentArtist == Track.sharedTrack.artist_name {} else {
-            
+        if currentArtist != Track.sharedTrack.artist_name {
+        
+            // new song playing
+            //print("Track.sharedTrack.artist_name:\(Track.sharedTrack.artist_name), Track.sharedTrack.artist_name:\(Track.sharedTrack.artist_name)")
             timeString = currentTime
-            trackNameAndArtist = "\(currentArtist) - \(currentTrack)"
+            marqueeText = "\(currentArtist) - \(currentTrack)"
             
-            MusiXMatchApi.getLyrics(currentArtist, track: currentTrack) { (response) in
+            MusiXMatchApi.getLyricsNCoverURL(currentArtist, track: currentTrack) { (success, lyrics, coverURL) in
                 
-                if response.result.isSuccess {
-                    
-                    let trackJSON = JSON(data: response.data!)
-                    let track = Track.sharedTrack
-                    
-                    dispatch_async(dispatch_get_main_queue(), {
-                        
-                        if let imageURLString = track.album_coverart_350x350 {
-                            self.coverImageURL = NSURL(string: imageURLString)
-                        }
-                        
-                        if let lyrics = trackJSON["message"]["body"]["lyrics"]["lyrics_body"].string {
-                            self.lyrics = lyrics
-                        }
-                    })
+                if success {
+                    if let coverURL = coverURL, lyrics = lyrics {
+                        self.coverImageURL = coverURL
+                        self.lyrics = lyrics
+                    }
                 } else {
                     // no connection warning
                 }
             }
+
+        
+        } else {
+            // no new song playing
+            print("no new song playing")
         }
     }
     
@@ -172,12 +176,12 @@ class LyricsViewController: NSViewController {
         
         topToggleState = !topToggleState
     }
+
     
     func updateTime() {
         
         if trackTime == 0 {
-            timer!.invalidate()
-            timer = nil
+            stopTimer()
         }
         
         let minutes = trackTime / 60
@@ -202,6 +206,15 @@ class LyricsViewController: NSViewController {
         trackTime = trackTime - 1
     }
     
+    func resumeTimer() {
+        trackTime - 1
+        if timer != nil {
+            timer = nil
+        }
+        timer = NSTimer(timeInterval: 1.0, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        NSRunLoop.mainRunLoop().addTimer(timer!, forMode: NSDefaultRunLoopMode)
+    }
+    
     func stopTimer() {
         
         if timer != nil {
@@ -220,7 +233,7 @@ extension String {
     
     func applyLyricsFormat() -> String {
         
-        return self.stringByReplacingOccurrencesOfString(".", withString: ". \n").stringByReplacingOccurrencesOfString("\n ", withString: "\n").stringByReplacingOccurrencesOfString(" \n", withString: "\n").stringByReplacingOccurrencesOfString("\n", withString: "\n\n").stringByReplacingOccurrencesOfString("\n\n\n", withString: "\n\n")
+        return self.stringByReplacingOccurrencesOfString(".", withString: ". \n").stringByReplacingOccurrencesOfString("\n", withString: "\n\n").stringByReplacingOccurrencesOfString("\n ", withString: "\n\n").stringByReplacingOccurrencesOfString(" \n", withString: "\n\n")
     }
     
 }

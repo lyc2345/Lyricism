@@ -56,6 +56,19 @@ class MacUtilities: NSObject {
     }
 }
 
+extension NSObject {
+    
+    func printLog<T>(message: T,
+                  file: String = #file,
+                  method: String = #function,
+                  line: Int = #line)
+    {
+        //#if DEBUG
+            print("\((file as NSString).lastPathComponent)[\(line)], \(method): \(message)")
+        //#endif
+    }
+}
+
 /*
  
  let iTunesApp = SBApplication(bundleIdentifier: MLMediaSourceiTunesIdentifier) as? iTunesApplication

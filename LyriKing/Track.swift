@@ -53,18 +53,12 @@ class Track: NSObject {
     func getCurrentTrackID() {
         
         if let playingTrack = MacUtilities.getCurrentMusicInfo() {
-            MusiXMatchApi.getLyrics(playingTrack.artist, track: playingTrack.track, completion: { (response) in
-                
-                if response.result.isSuccess {
+            
+            MusiXMatchApi.getTrackInfo(playingTrack.artist, track: playingTrack.track, completion: { (success) in
+            
+                if success {
                     
-                    let json = JSON(data: response.data!)
-                    if json["message"]["header"]["status_code"] == 200 {
-                        if let track = self.getTrackPropertyAndValue(json) {
-                            print("track id: \(track.track_id)")
-                        }
-                    }
-                } else {
-                    // handler error when query current track
+                    
                 }
             })
         }
@@ -79,7 +73,7 @@ class Track: NSObject {
             
             if let stringValue = json["message"]["body"]["track_list"][0]["track"][key].string {
                 
-                //print("property: \(key), value: \(value)")
+                //print("property: \(key), value: \(stringValue)")
                 track.setValue(stringValue, forKey: key)
             } else if let numberValue = json["message"]["body"]["track_list"][0]["track"][key].int {
                 

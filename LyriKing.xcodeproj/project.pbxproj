@@ -16,6 +16,7 @@
 		F6434ECD1D1A4040006FDFE2 /* PreferencesWindownController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6434ECC1D1A4040006FDFE2 /* PreferencesWindownController.swift */; };
 		F6434ECF1D1A444D006FDFE2 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6434ECE1D1A444D006FDFE2 /* GeneralViewController.swift */; };
 		F6434ED21D1A4472006FDFE2 /* LyricsSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6434ED01D1A4472006FDFE2 /* LyricsSettingViewController.swift */; };
+		F64E2D8C1D2115CD002F2513 /* MResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64E2D8B1D2115CD002F2513 /* MResponse.swift */; };
 		F668464D1D18D20E007DB6CF /* BlurBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668464C1D18D20E007DB6CF /* BlurBackground.swift */; };
 		F668464F1D18D26E007DB6CF /* BlurBackground.xib in Resources */ = {isa = PBXBuildFile; fileRef = F668464E1D18D26E007DB6CF /* BlurBackground.xib */; };
 		F668465B1D19110F007DB6CF /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66846531D19110F007DB6CF /* Attribute.swift */; };
@@ -33,6 +34,7 @@
 		F68BC71F1D128ACE00A36247 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BC71E1D128ACE00A36247 /* Document.swift */; };
 		F68BC7211D128ACE00A36247 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F68BC7201D128ACE00A36247 /* Assets.xcassets */; };
 		F68BC7241D128ACE00A36247 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F68BC7221D128ACE00A36247 /* Main.storyboard */; };
+		F6A7DE431D20CACF001D5AD7 /* MarqueeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A7DE421D20CACF001D5AD7 /* MarqueeView.swift */; };
 		F6E639E11D1A3E9E0065D082 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6E639E01D1A3E9E0065D082 /* Preferences.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +51,7 @@
 		F6434ECC1D1A4040006FDFE2 /* PreferencesWindownController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindownController.swift; sourceTree = "<group>"; };
 		F6434ECE1D1A444D006FDFE2 /* GeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
 		F6434ED01D1A4472006FDFE2 /* LyricsSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsSettingViewController.swift; sourceTree = "<group>"; };
+		F64E2D8B1D2115CD002F2513 /* MResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MResponse.swift; sourceTree = "<group>"; };
 		F668464C1D18D20E007DB6CF /* BlurBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurBackground.swift; sourceTree = "<group>"; };
 		F668464E1D18D26E007DB6CF /* BlurBackground.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlurBackground.xib; sourceTree = "<group>"; };
 		F66846531D19110F007DB6CF /* Attribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
@@ -69,6 +72,7 @@
 		F68BC7201D128ACE00A36247 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F68BC7231D128ACE00A36247 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F68BC7251D128ACE00A36247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F6A7DE421D20CACF001D5AD7 /* MarqueeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarqueeView.swift; sourceTree = "<group>"; };
 		F6E639E01D1A3E9E0065D082 /* Preferences.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +107,14 @@
 				E335D29E9F196A8F0400DD3F /* Pods-LyriKing.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		F64E2D8D1D2118DD002F2513 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */,
+			);
+			name = API;
 			sourceTree = "<group>";
 		};
 		F66846521D19110F007DB6CF /* ITunesSwift */ = {
@@ -149,7 +161,9 @@
 				F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */,
 				F668464C1D18D20E007DB6CF /* BlurBackground.swift */,
 				F668464E1D18D26E007DB6CF /* BlurBackground.xib */,
-				F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */,
+				F6A7DE421D20CACF001D5AD7 /* MarqueeView.swift */,
+				F64E2D8D1D2118DD002F2513 /* API */,
+				F64E2D8B1D2115CD002F2513 /* MResponse.swift */,
 				F60BF8B61D13EDCA00F7C6DA /* Track.swift */,
 				F616EBB51D15221800D1A40C /* NSObject+Extension.swift */,
 				F68BC71E1D128ACE00A36247 /* Document.swift */,
@@ -295,12 +309,14 @@
 				F60BF8D61D1430D300F7C6DA /* MacUtilities.swift in Sources */,
 				F60BF8D21D1424D800F7C6DA /* LyricsViewController.swift in Sources */,
 				F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */,
+				F6A7DE431D20CACF001D5AD7 /* MarqueeView.swift in Sources */,
 				F68BC71D1D128ACE00A36247 /* ViewController.swift in Sources */,
 				F6434ECD1D1A4040006FDFE2 /* PreferencesWindownController.swift in Sources */,
 				F60BF8B71D13EDCA00F7C6DA /* Track.swift in Sources */,
 				F672A8311D1949BC00FD518D /* EventMonitor.swift in Sources */,
 				F668465F1D19110F007DB6CF /* ITunesLookupApi.swift in Sources */,
 				F60BF8B51D13A68900F7C6DA /* MusiXMatchApi.swift in Sources */,
+				F64E2D8C1D2115CD002F2513 /* MResponse.swift in Sources */,
 				F668465C1D19110F007DB6CF /* Entity.swift in Sources */,
 				F68BC71B1D128ACE00A36247 /* AppDelegate.swift in Sources */,
 				F68BC71F1D128ACE00A36247 /* Document.swift in Sources */,

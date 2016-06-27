@@ -53,20 +53,6 @@ class ViewController: NSViewController {
          
          }*/
         
-        MusiXMatchApi.getLyrics("adele", track: "hello") { (response) in
-            
-            let trackJSON = JSON(data: response.data!)
-            print("track json: \(trackJSON)")
-            
-            if let lyrics = trackJSON["message"]["body"]["lyrics"]["lyrics_body"].string {
-                
-                if let textView = self.scrollTextView.contentView.documentView as? NSTextView {
-                    
-                    textView.textStorage?.mutableString.setString(lyrics)
-                }
-            }
-        }
-        
         NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: #selector(songSwitch), name: "com.apple.iTunes.playerInfo", object: nil)
     }
     
@@ -92,21 +78,7 @@ class ViewController: NSViewController {
             
             return
         }
-        
-        MusiXMatchApi.getLyrics(artist, track: track) { (response) in
-            
-            let trackJSON = JSON(data: response.data!)
-            print("track json: \(trackJSON)")
-            
-            if let lyrics = trackJSON["message"]["body"]["lyrics"]["lyrics_body"].string {
-                
-                if let textView = self.scrollTextView.contentView.documentView as? NSTextView {
-                    
-                    textView.textStorage?.mutableString.setString(lyrics)
-                }
-            }
 
-        }
         getCurrentIconImage()
     }
     

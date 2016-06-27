@@ -131,50 +131,48 @@ extension AppDelegate {
     }
     
     func iTunesPlaying() {
-        
-        showPopover(popover)
+        if popover.shown == false {
+            showPopover(popover)
+        }
         let destinationViewController = popover.contentViewController as! LyricsViewController
         if isiTunesPaused {
             
-            destinationViewController.timer?.fire()
+            destinationViewController.resumeTimer()
             isiTunesPaused = false
+            print("song keep playing")
         } else {
-            
-            let trackDict = MacUtilities.getCurrentMusicInfo()
-            guard let currentArtist = trackDict?.artist, currentTrack = trackDict?.track, currentTime = trackDict?.time else {
+            print("new song playing")
+            let playingTrack = MacUtilities.getCurrentMusicInfo()
+            guard let currentArtist = playingTrack?.artist, currentTrack = playingTrack?.track, currentTime = playingTrack?.time else {
                 return
             }
-            
-            destinationViewController.timeString = currentTime
-            destinationViewController.trackNameAndArtist = "\(currentArtist) - \(currentTrack)"
-            
-            MusiXMatchApi.getLyrics(currentArtist, track: currentTrack) { (response) in
+            if currentArtist != Track.sharedTrack.artist_name {
+                // new song playing
+                destinationViewController.timeString = currentTime
+                destinationViewController.marqueeText = "\(currentArtist) - \(currentTrack)"
                 
-                if response.result.isSuccess {
+                
+                MusiXMatchApi.getLyricsNCoverURL(currentArtist, track: currentTrack, completion: { (success, lyrics, coverURL) in
                     
-                    let trackJSON = JSON(data: response.data!)
-                    let track = Track.sharedTrack
-                    
-                    dispatch_async(dispatch_get_main_queue(), {
-                        
-                        if let imageURLString = track.album_coverart_350x350 {
-                            destinationViewController.coverImageURL = NSURL(string: imageURLString)
-                        }
-                        
-                        if let lyrics = trackJSON["message"]["body"]["lyrics"]["lyrics_body"].string {
+                    if success {
+                            
+                        if let coverURL = coverURL, let lyrics = lyrics {
+                            destinationViewController.coverImageURL = coverURL
                             destinationViewController.lyrics = lyrics
                         }
-                    })
-                } else {
-                    // no connection warning
-                }
+
+                    }
+                })
+            }  else {
+                // no new song playing
+                print("no new song playing")
             }
         }
     }
     
     func iTunesPaused() {
         let destinationViewController = popover.contentViewController as! LyricsViewController
-        destinationViewController.timer?.invalidate()
+        destinationViewController.stopTimer()
         isiTunesPaused = true
     }
     
