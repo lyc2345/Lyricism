@@ -42,17 +42,21 @@ class LyricsViewController: NSViewController {
         
         didSet {
             if let textView = self.scrollTextView.contentView.documentView as? NSTextView {
-                textView.string = lyrics?.applyLyricsFormat()
+                if lyrics != nil {
+                    textView.string = lyrics?.applyLyricsFormat()
+                } else {
+                    textView.string = ""
+                }
             }
         }
     }
     var coverImageURL: NSURL? {
         
         didSet {
-            
             if let imageURL = coverImageURL, let imageView = self.imageView {
-                
                 imageView.image = NSImage(contentsOfURL: imageURL)
+            } else {
+                imageView.image = NSImage(named: "avatar")
             }
         }
     }
@@ -75,12 +79,26 @@ class LyricsViewController: NSViewController {
         }
     }
     
+    var trackNameAndArtist: String? {
+        
+        didSet {
+            if let trackNameAndArtistString = trackNameAndArtist {
+                self.trackNameArtistLabel.stringValue = trackNameAndArtistString
+            }
+        }
+    }
+    
     @IBOutlet weak var timeLabel: NSTextField!
+    @IBOutlet weak var trackNameArtistLabel: NSTextField!
     
     var timer: NSTimer?
     var trackTime: Int64!
     
-    @IBOutlet weak var imageView: NSImageView!
+    @IBOutlet weak var imageView: NSImageView! {
+        didSet {
+            
+        }
+    }
     
     @IBOutlet weak var scrollTextView: NSScrollView!
     
@@ -98,6 +116,44 @@ class LyricsViewController: NSViewController {
         
         traigleView = PopoverContentView(frame: view.frame)
         view.addSubview(traigleView!)
+
+    }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        
+        let trackDict = MacUtilities.getCurrentMusicInfo()
+        guard let currentArtist = trackDict?.artist, currentTrack = trackDict?.track, currentTime = trackDict?.time else {
+            return
+        }
+        
+        if Track.sharedTrack.artist_name != nil && currentArtist == Track.sharedTrack.artist_name {} else {
+            
+            timeString = currentTime
+            trackNameAndArtist = "\(currentArtist) - \(currentTrack)"
+            
+            MusiXMatchApi.getLyrics(currentArtist, track: currentTrack) { (response) in
+                
+                if response.result.isSuccess {
+                    
+                    let trackJSON = JSON(data: response.data!)
+                    let track = Track.sharedTrack
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        
+                        if let imageURLString = track.album_coverart_350x350 {
+                            self.coverImageURL = NSURL(string: imageURLString)
+                        }
+                        
+                        if let lyrics = trackJSON["message"]["body"]["lyrics"]["lyrics_body"].string {
+                            self.lyrics = lyrics
+                        }
+                    })
+                } else {
+                    // no connection warning
+                }
+            }
+        }
     }
     
     deinit {
@@ -164,7 +220,7 @@ extension String {
     
     func applyLyricsFormat() -> String {
         
-        return self.stringByReplacingOccurrencesOfString(".", withString: ". \n").stringByReplacingOccurrencesOfString("\n", withString: "\n\n").stringByReplacingOccurrencesOfString("\n\n\n", withString: "\n\n")
+        return self.stringByReplacingOccurrencesOfString(".", withString: ". \n").stringByReplacingOccurrencesOfString("\n ", withString: "\n").stringByReplacingOccurrencesOfString(" \n", withString: "\n").stringByReplacingOccurrencesOfString("\n", withString: "\n\n").stringByReplacingOccurrencesOfString("\n\n\n", withString: "\n\n")
     }
     
 }

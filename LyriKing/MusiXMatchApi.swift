@@ -35,10 +35,10 @@ class MusiXMatchApi: NSObject {
                     
                     let track = Track.sharedTrack
                     
-                    if let trackDetail = track.getTrackPropertyAndValue(json) {
-                        print("track id: \(track.track_id)")
+                    if let trackDetail = track.getTrackPropertyAndValue(json), trackID = track.track_id {
+                        print("track id: \(trackID)")
                         
-                        let parameter = ["apikey": MusiXMatchURL.apikey,"track_id": trackDetail.track_id]
+                        let parameter = ["apikey": MusiXMatchURL.apikey,"track_id": trackID]
                         
                         Alamofire.request(.GET, MusiXMatchURL.track.lyrics, parameters: parameter, encoding: .URL).responseJSON(completionHandler: { (response) in
                             
