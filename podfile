@@ -8,6 +8,15 @@ target 'LyriKing' do
   pod 'Alamofire', '~> 3.4'
   pod 'SwiftyJSON'
   pod 'SWXMLHash', '~> 2.3.0'
+  
+  # Fabric
+  pod 'Fabric'
+  pod 'Crashlytics'
+  pod 'Answers'
+  #pod 'Optimizely-iOS-SDK'
+  #pod 'Appsee'
+  
+
 
 end
 

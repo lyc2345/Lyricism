@@ -67,10 +67,13 @@ class LyricsViewController: NSViewController {
     var timeString: String = "00:00" {
         
         didSet {
-            let seconds = String(timeString.characters.dropFirst(3))
-            let minutes = String(timeString.characters.dropLast(3)).stringByReplacingOccurrencesOfString("-", withString: "")
+            trackTime = nil
+            let seconds = String(timeString.characters.dropFirst(2)).copy()
+            let minutes = String(timeString.characters.dropLast(3)).stringByReplacingOccurrencesOfString("-", withString: "").copy()
+            printLog("timestring:\(timeString)")
+            printLog("second:\(String(timeString.characters.dropFirst(3))), minutes:\(String(timeString.characters.dropLast(3)).stringByReplacingOccurrencesOfString("-", withString: ""))")
             
-            trackTime = Int64(NSString(string: minutes).integerValue * 60 + NSString(string: seconds).integerValue)
+            trackTime = Int(minutes!.intValue * 60 + seconds!.intValue)
             
             if timer != nil {
                 
@@ -97,7 +100,7 @@ class LyricsViewController: NSViewController {
     
     
     var timer: NSTimer?
-    var trackTime: Int64!
+    var trackTime: Int!
     
     @IBOutlet weak var imageView: NSImageView! {
         didSet {
