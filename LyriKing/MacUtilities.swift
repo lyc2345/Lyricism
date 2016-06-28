@@ -11,12 +11,12 @@ import ScriptingBridge
 import MediaLibrary
 import SwiftyJSON
 
-
+/*
 @objc protocol iTunesApplicationn {
     optional func currentTrack()-> AnyObject
     optional var properties: NSDictionary {get}
     //if you need another object or method from the iTunes.h, you must add it here
-}
+}*/
 
 struct PlayingTrack {
     
@@ -27,7 +27,7 @@ struct PlayingTrack {
 }
 
 class MacUtilities: NSObject {
-    
+    /*
     class func getCurrentMusicInfo() -> PlayingTrack? {
         
         let iTunesApp: AnyObject = SBApplication(bundleIdentifier: MLMediaSourceiTunesIdentifier)!
@@ -53,7 +53,7 @@ class MacUtilities: NSObject {
         } else {
             return nil
         }
-    }
+    }*/
 }
 
 extension NSObject {

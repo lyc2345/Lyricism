@@ -130,7 +130,8 @@ class LyricsViewController: NSViewController {
     
     override func viewDidAppear() {
         super.viewDidAppear()
-        
+        //TODO: Clean up this code after testing
+        /*
         let playingTrack = MacUtilities.getCurrentMusicInfo()
         guard let currentArtist = playingTrack?.artist, currentTrack = playingTrack?.track, currentTime = playingTrack?.time else {
             return
@@ -160,7 +161,7 @@ class LyricsViewController: NSViewController {
         } else {
             // no new song playing
             print("no new song playing")
-        }
+        }*/
     }
     
     deinit {

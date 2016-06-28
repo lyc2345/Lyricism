@@ -71,7 +71,8 @@ class ViewController: NSViewController {
     func songSwitch(notification: NSNotification) {
         
         print("song switched!")
-        
+        //TODO: Clean up this code after testing
+        /*
         let trackDict = MacUtilities.getCurrentMusicInfo()
         
         guard let _ = trackDict?.artist, _ = trackDict?.track else {
@@ -80,6 +81,7 @@ class ViewController: NSViewController {
         }
 
         getCurrentIconImage()
+         */
     }
     
     func printAllTheLibraryName() {

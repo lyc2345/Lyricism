@@ -51,7 +51,8 @@ class Track: NSObject {
     
     
     func getCurrentTrackID() {
-        
+        //TODO: Clean up this code after testing
+        /*
         if let playingTrack = MacUtilities.getCurrentMusicInfo() {
             
             MusiXMatchApi.getTrackInfo(playingTrack.artist, track: playingTrack.track, completion: { (success) in
@@ -61,7 +62,7 @@ class Track: NSObject {
                     
                 }
             })
-        }
+        }*/
     }
     
     func getTrackPropertyAndValue(json: JSON) -> Track? {

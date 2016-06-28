@@ -142,6 +142,7 @@ extension AppDelegate {
             print("song keep playing")
         } else {
             print("new song playing")
+            /*
             let playingTrack = MacUtilities.getCurrentMusicInfo()
             guard let currentArtist = playingTrack?.artist, currentTrack = playingTrack?.track, currentTime = playingTrack?.time else {
                 return
@@ -166,7 +167,7 @@ extension AppDelegate {
             }  else {
                 // no new song playing
                 print("no new song playing")
-            }
+            }*/
         }
     }
     
