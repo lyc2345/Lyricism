@@ -12,7 +12,6 @@ target 'LyriKing' do
   # Fabric
   pod 'Fabric'
   pod 'Crashlytics'
-  pod 'Answers'
   #pod 'Optimizely-iOS-SDK'
   #pod 'Appsee'
   

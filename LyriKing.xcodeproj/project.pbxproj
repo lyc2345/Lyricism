@@ -19,15 +19,6 @@
 		F64E2D8C1D2115CD002F2513 /* MResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64E2D8B1D2115CD002F2513 /* MResponse.swift */; };
 		F668464D1D18D20E007DB6CF /* BlurBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668464C1D18D20E007DB6CF /* BlurBackground.swift */; };
 		F668464F1D18D26E007DB6CF /* BlurBackground.xib in Resources */ = {isa = PBXBuildFile; fileRef = F668464E1D18D26E007DB6CF /* BlurBackground.xib */; };
-		F668465B1D19110F007DB6CF /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66846531D19110F007DB6CF /* Attribute.swift */; };
-		F668465C1D19110F007DB6CF /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66846541D19110F007DB6CF /* Entity.swift */; };
-		F668465D1D19110F007DB6CF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F66846551D19110F007DB6CF /* Info.plist */; };
-		F668465E1D19110F007DB6CF /* ITunesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66846561D19110F007DB6CF /* ITunesApi.swift */; };
-		F668465F1D19110F007DB6CF /* ITunesLookupApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66846571D19110F007DB6CF /* ITunesLookupApi.swift */; };
-		F66846601D19110F007DB6CF /* ITunesSearchApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66846581D19110F007DB6CF /* ITunesSearchApi.swift */; };
-		F66846611D19110F007DB6CF /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668465A1D19110F007DB6CF /* Media.swift */; };
-		F668466D1D191960007DB6CF /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F668466C1D191960007DB6CF /* ScriptingBridge.framework */; };
-		F668466F1D191BC5007DB6CF /* iTunes.h in Frameworks */ = {isa = PBXBuildFile; fileRef = F668466E1D191BC5007DB6CF /* iTunes.h */; };
 		F672A8311D1949BC00FD518D /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F672A8301D1949BC00FD518D /* EventMonitor.swift */; };
 		F68BC71B1D128ACE00A36247 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BC71A1D128ACE00A36247 /* AppDelegate.swift */; };
 		F68BC71D1D128ACE00A36247 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BC71C1D128ACE00A36247 /* ViewController.swift */; };
@@ -54,16 +45,6 @@
 		F64E2D8B1D2115CD002F2513 /* MResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MResponse.swift; sourceTree = "<group>"; };
 		F668464C1D18D20E007DB6CF /* BlurBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurBackground.swift; sourceTree = "<group>"; };
 		F668464E1D18D26E007DB6CF /* BlurBackground.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlurBackground.xib; sourceTree = "<group>"; };
-		F66846531D19110F007DB6CF /* Attribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
-		F66846541D19110F007DB6CF /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
-		F66846551D19110F007DB6CF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F66846561D19110F007DB6CF /* ITunesApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITunesApi.swift; sourceTree = "<group>"; };
-		F66846571D19110F007DB6CF /* ITunesLookupApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITunesLookupApi.swift; sourceTree = "<group>"; };
-		F66846581D19110F007DB6CF /* ITunesSearchApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITunesSearchApi.swift; sourceTree = "<group>"; };
-		F66846591D19110F007DB6CF /* ITunesSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITunesSwift.h; sourceTree = "<group>"; };
-		F668465A1D19110F007DB6CF /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
-		F668466C1D191960007DB6CF /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
-		F668466E1D191BC5007DB6CF /* iTunes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
 		F672A8301D1949BC00FD518D /* EventMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
 		F68BC7171D128ACE00A36247 /* LyriKing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LyriKing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F68BC71A1D128ACE00A36247 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,8 +62,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F668466F1D191BC5007DB6CF /* iTunes.h in Frameworks */,
-				F668466D1D191960007DB6CF /* ScriptingBridge.framework in Frameworks */,
 				1851CB459819F56A50C2C747 /* Pods_LyriKing.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,8 +72,6 @@
 		34A8663DB978A591BF253E9A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F668466E1D191BC5007DB6CF /* iTunes.h */,
-				F668466C1D191960007DB6CF /* ScriptingBridge.framework */,
 				89CE8D50737B17B73218C8BD /* Pods_LyriKing.framework */,
 			);
 			name = Frameworks;
@@ -117,25 +94,9 @@
 			name = API;
 			sourceTree = "<group>";
 		};
-		F66846521D19110F007DB6CF /* ITunesSwift */ = {
-			isa = PBXGroup;
-			children = (
-				F66846531D19110F007DB6CF /* Attribute.swift */,
-				F66846541D19110F007DB6CF /* Entity.swift */,
-				F66846551D19110F007DB6CF /* Info.plist */,
-				F66846561D19110F007DB6CF /* ITunesApi.swift */,
-				F66846571D19110F007DB6CF /* ITunesLookupApi.swift */,
-				F66846581D19110F007DB6CF /* ITunesSearchApi.swift */,
-				F66846591D19110F007DB6CF /* ITunesSwift.h */,
-				F668465A1D19110F007DB6CF /* Media.swift */,
-			);
-			path = ITunesSwift;
-			sourceTree = "<group>";
-		};
 		F68BC70E1D128ACD00A36247 = {
 			isa = PBXGroup;
 			children = (
-				F66846521D19110F007DB6CF /* ITunesSwift */,
 				F68BC7191D128ACE00A36247 /* LyriKing */,
 				F68BC7181D128ACE00A36247 /* Products */,
 				EB3E0201C3E3C41B81CAC41A /* Pods */,
@@ -240,7 +201,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F668465D1D19110F007DB6CF /* Info.plist in Resources */,
 				F668464F1D18D26E007DB6CF /* BlurBackground.xib in Resources */,
 				F68BC7211D128ACE00A36247 /* Assets.xcassets in Resources */,
 				F6E639E11D1A3E9E0065D082 /* Preferences.storyboard in Resources */,
@@ -303,9 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F668465E1D19110F007DB6CF /* ITunesApi.swift in Sources */,
 				F6434ED21D1A4472006FDFE2 /* LyricsSettingViewController.swift in Sources */,
-				F668465B1D19110F007DB6CF /* Attribute.swift in Sources */,
 				F60BF8D61D1430D300F7C6DA /* MacUtilities.swift in Sources */,
 				F60BF8D21D1424D800F7C6DA /* LyricsViewController.swift in Sources */,
 				F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */,
@@ -314,16 +272,12 @@
 				F6434ECD1D1A4040006FDFE2 /* PreferencesWindownController.swift in Sources */,
 				F60BF8B71D13EDCA00F7C6DA /* Track.swift in Sources */,
 				F672A8311D1949BC00FD518D /* EventMonitor.swift in Sources */,
-				F668465F1D19110F007DB6CF /* ITunesLookupApi.swift in Sources */,
 				F60BF8B51D13A68900F7C6DA /* MusiXMatchApi.swift in Sources */,
 				F64E2D8C1D2115CD002F2513 /* MResponse.swift in Sources */,
-				F668465C1D19110F007DB6CF /* Entity.swift in Sources */,
 				F68BC71B1D128ACE00A36247 /* AppDelegate.swift in Sources */,
 				F68BC71F1D128ACE00A36247 /* Document.swift in Sources */,
-				F66846601D19110F007DB6CF /* ITunesSearchApi.swift in Sources */,
 				F6434ECF1D1A444D006FDFE2 /* GeneralViewController.swift in Sources */,
 				F668464D1D18D20E007DB6CF /* BlurBackground.swift in Sources */,
-				F66846611D19110F007DB6CF /* Media.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
