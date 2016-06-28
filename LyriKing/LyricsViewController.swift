@@ -100,7 +100,7 @@ class LyricsViewController: NSViewController {
     
     
     var timer: NSTimer?
-    var trackTime: Int!
+    var trackTime: Int! = 0
     
     @IBOutlet weak var imageView: NSImageView! {
         didSet {

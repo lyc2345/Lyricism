@@ -142,6 +142,14 @@ extension AppDelegate {
             print("song keep playing")
         } else {
             print("new song playing")
+            
+            let iTunes = SBApplication(bundleIdentifier: "com.apple.iTunes") as! iTunesApplication
+            print("itunes track:\(iTunes.currentTrack?.name!)")
+            
+            
+            //iTunes.pause!()
+            
+            
             /*
             let playingTrack = MacUtilities.getCurrentMusicInfo()
             guard let currentArtist = playingTrack?.artist, currentTrack = playingTrack?.track, currentTime = playingTrack?.time else {

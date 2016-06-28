@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LyriKing/AppDelegate.swift"
-            timestampString = "488800546.302307"
+            timestampString = "488802023.038065"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "iTunesPlaying()"
             landmarkType = "5">
          </BreakpointContent>

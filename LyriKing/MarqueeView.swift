@@ -13,7 +13,7 @@ class MarqueeView: NSView {
     var timer: NSTimer? = nil
     
     var fullString: String? = ""
-    var point: CGPoint!
+    var point: CGPoint! = CGPointZero
     var stringWidth: CGFloat!
     
     var textAttributes: [String: AnyObject] = [NSFontAttributeName: NSFont(name: "Menlo", size: 20.0)!, NSForegroundColorAttributeName: NSColor.whiteColor()]
