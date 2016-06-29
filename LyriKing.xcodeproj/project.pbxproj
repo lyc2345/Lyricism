@@ -14,18 +14,17 @@
 		F60BF8D61D1430D300F7C6DA /* MacUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */; };
 		F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F616EBB51D15221800D1A40C /* NSObject+Extension.swift */; };
 		F6434ECD1D1A4040006FDFE2 /* PreferencesWindownController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6434ECC1D1A4040006FDFE2 /* PreferencesWindownController.swift */; };
-		F6434ECF1D1A444D006FDFE2 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6434ECE1D1A444D006FDFE2 /* GeneralViewController.swift */; };
 		F6434ED21D1A4472006FDFE2 /* LyricsSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6434ED01D1A4472006FDFE2 /* LyricsSettingViewController.swift */; };
 		F64E2D8C1D2115CD002F2513 /* MResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64E2D8B1D2115CD002F2513 /* MResponse.swift */; };
 		F668464D1D18D20E007DB6CF /* BlurBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668464C1D18D20E007DB6CF /* BlurBackground.swift */; };
 		F668464F1D18D26E007DB6CF /* BlurBackground.xib in Resources */ = {isa = PBXBuildFile; fileRef = F668464E1D18D26E007DB6CF /* BlurBackground.xib */; };
 		F672A8311D1949BC00FD518D /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F672A8301D1949BC00FD518D /* EventMonitor.swift */; };
-		F67B7F911D238022001E7ED3 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F67B7F8D1D238022001E7ED3 /* Lato-Black.ttf */; };
-		F67B7F921D238022001E7ED3 /* Lato-Bol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F67B7F8E1D238022001E7ED3 /* Lato-Bol.ttf */; };
-		F67B7F931D238022001E7ED3 /* Lato-Lig.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F67B7F8F1D238022001E7ED3 /* Lato-Lig.ttf */; };
-		F67B7F941D238022001E7ED3 /* Lato-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F67B7F901D238022001E7ED3 /* Lato-Reg.ttf */; };
 		F67B7F961D23A832001E7ED3 /* PlayerControllerPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = F67B7F951D23A832001E7ED3 /* PlayerControllerPanel.xib */; };
 		F67B7F981D23A845001E7ED3 /* PlayerControllerPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B7F971D23A845001E7ED3 /* PlayerControllerPanel.swift */; };
+		F67B7FA11D23D75E001E7ED3 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F67B7F9D1D23D75E001E7ED3 /* Lato-Black.ttf */; };
+		F67B7FA21D23D75E001E7ED3 /* Lato-Bol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F67B7F9E1D23D75E001E7ED3 /* Lato-Bol.ttf */; };
+		F67B7FA31D23D75E001E7ED3 /* Lato-Lig.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F67B7F9F1D23D75E001E7ED3 /* Lato-Lig.ttf */; };
+		F67B7FA41D23D75E001E7ED3 /* Lato-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F67B7FA01D23D75E001E7ED3 /* Lato-Reg.ttf */; };
 		F68BC71B1D128ACE00A36247 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BC71A1D128ACE00A36247 /* AppDelegate.swift */; };
 		F68BC71D1D128ACE00A36247 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BC71C1D128ACE00A36247 /* ViewController.swift */; };
 		F68BC71F1D128ACE00A36247 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BC71E1D128ACE00A36247 /* Document.swift */; };
@@ -79,18 +78,17 @@
 		F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacUtilities.swift; sourceTree = "<group>"; };
 		F616EBB51D15221800D1A40C /* NSObject+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		F6434ECC1D1A4040006FDFE2 /* PreferencesWindownController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindownController.swift; sourceTree = "<group>"; };
-		F6434ECE1D1A444D006FDFE2 /* GeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
 		F6434ED01D1A4472006FDFE2 /* LyricsSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsSettingViewController.swift; sourceTree = "<group>"; };
 		F64E2D8B1D2115CD002F2513 /* MResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MResponse.swift; sourceTree = "<group>"; };
 		F668464C1D18D20E007DB6CF /* BlurBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurBackground.swift; sourceTree = "<group>"; };
 		F668464E1D18D26E007DB6CF /* BlurBackground.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlurBackground.xib; sourceTree = "<group>"; };
 		F672A8301D1949BC00FD518D /* EventMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
-		F67B7F8D1D238022001E7ED3 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
-		F67B7F8E1D238022001E7ED3 /* Lato-Bol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bol.ttf"; sourceTree = "<group>"; };
-		F67B7F8F1D238022001E7ED3 /* Lato-Lig.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Lig.ttf"; sourceTree = "<group>"; };
-		F67B7F901D238022001E7ED3 /* Lato-Reg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Reg.ttf"; sourceTree = "<group>"; };
 		F67B7F951D23A832001E7ED3 /* PlayerControllerPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerControllerPanel.xib; sourceTree = "<group>"; };
 		F67B7F971D23A845001E7ED3 /* PlayerControllerPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerControllerPanel.swift; sourceTree = "<group>"; };
+		F67B7F9D1D23D75E001E7ED3 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
+		F67B7F9E1D23D75E001E7ED3 /* Lato-Bol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bol.ttf"; sourceTree = "<group>"; };
+		F67B7F9F1D23D75E001E7ED3 /* Lato-Lig.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Lig.ttf"; sourceTree = "<group>"; };
+		F67B7FA01D23D75E001E7ED3 /* Lato-Reg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Reg.ttf"; sourceTree = "<group>"; };
 		F68BC7171D128ACE00A36247 /* LyriKing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LyriKing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F68BC71A1D128ACE00A36247 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F68BC71C1D128ACE00A36247 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -155,19 +153,58 @@
 			name = API;
 			sourceTree = "<group>";
 		};
+		F67B7F991D23D6A3001E7ED3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F6A7DE421D20CACF001D5AD7 /* MarqueeView.swift */,
+				F67B7F951D23A832001E7ED3 /* PlayerControllerPanel.xib */,
+				F67B7F971D23A845001E7ED3 /* PlayerControllerPanel.swift */,
+				F668464C1D18D20E007DB6CF /* BlurBackground.swift */,
+				F668464E1D18D26E007DB6CF /* BlurBackground.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		F67B7F9A1D23D6B6001E7ED3 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				F6D339CC1D22A8020066F03F /* SwiftyiTunes.swift */,
+				F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */,
+				F672A8301D1949BC00FD518D /* EventMonitor.swift */,
+				F616EBB51D15221800D1A40C /* NSObject+Extension.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		F67B7F9B1D23D6CE001E7ED3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F60BF8B61D13EDCA00F7C6DA /* Track.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		F67B7F9C1D23D714001E7ED3 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F67B7F9D1D23D75E001E7ED3 /* Lato-Black.ttf */,
+				F67B7F9E1D23D75E001E7ED3 /* Lato-Bol.ttf */,
+				F67B7F9F1D23D75E001E7ED3 /* Lato-Lig.ttf */,
+				F67B7FA01D23D75E001E7ED3 /* Lato-Reg.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		F68BC70E1D128ACD00A36247 = {
 			isa = PBXGroup;
 			children = (
-				F67B7F8D1D238022001E7ED3 /* Lato-Black.ttf */,
-				F67B7F8E1D238022001E7ED3 /* Lato-Bol.ttf */,
-				F67B7F8F1D238022001E7ED3 /* Lato-Lig.ttf */,
-				F67B7F901D238022001E7ED3 /* Lato-Reg.ttf */,
-				F6D339B01D22865C0066F03F /* iTunes */,
 				F68BC7191D128ACE00A36247 /* LyriKing */,
+				F6D339B01D22865C0066F03F /* iTunes */,
 				F6D339BE1D22867A0066F03F /* iTunesScripting */,
 				F68BC7181D128ACE00A36247 /* Products */,
 				EB3E0201C3E3C41B81CAC41A /* Pods */,
 				34A8663DB978A591BF253E9A /* Frameworks */,
+				F67B7F9C1D23D714001E7ED3 /* Fonts */,
 			);
 			sourceTree = "<group>";
 		};
@@ -183,30 +220,22 @@
 		F68BC7191D128ACE00A36247 /* LyriKing */ = {
 			isa = PBXGroup;
 			children = (
-				F6D339CC1D22A8020066F03F /* SwiftyiTunes.swift */,
+				F60BF8A31D139B3E00F7C6DA /* LyriKing-Bridging-Header.h */,
 				F68BC71A1D128ACE00A36247 /* AppDelegate.swift */,
 				F68BC71C1D128ACE00A36247 /* ViewController.swift */,
-				F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */,
-				F672A8301D1949BC00FD518D /* EventMonitor.swift */,
 				F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */,
-				F668464C1D18D20E007DB6CF /* BlurBackground.swift */,
-				F668464E1D18D26E007DB6CF /* BlurBackground.xib */,
-				F6A7DE421D20CACF001D5AD7 /* MarqueeView.swift */,
-				F67B7F951D23A832001E7ED3 /* PlayerControllerPanel.xib */,
-				F67B7F971D23A845001E7ED3 /* PlayerControllerPanel.swift */,
-				F64E2D8D1D2118DD002F2513 /* API */,
-				F64E2D8B1D2115CD002F2513 /* MResponse.swift */,
-				F60BF8B61D13EDCA00F7C6DA /* Track.swift */,
-				F616EBB51D15221800D1A40C /* NSObject+Extension.swift */,
 				F68BC71E1D128ACE00A36247 /* Document.swift */,
+				F6434ED01D1A4472006FDFE2 /* LyricsSettingViewController.swift */,
 				F6434ECC1D1A4040006FDFE2 /* PreferencesWindownController.swift */,
-				F68BC7201D128ACE00A36247 /* Assets.xcassets */,
 				F68BC7221D128ACE00A36247 /* Main.storyboard */,
 				F6E639E01D1A3E9E0065D082 /* Preferences.storyboard */,
-				F6434ECE1D1A444D006FDFE2 /* GeneralViewController.swift */,
-				F6434ED01D1A4472006FDFE2 /* LyricsSettingViewController.swift */,
+				F68BC7201D128ACE00A36247 /* Assets.xcassets */,
+				F67B7F9A1D23D6B6001E7ED3 /* Utilities */,
+				F67B7F991D23D6A3001E7ED3 /* View */,
+				F64E2D8D1D2118DD002F2513 /* API */,
+				F64E2D8B1D2115CD002F2513 /* MResponse.swift */,
+				F67B7F9B1D23D6CE001E7ED3 /* Model */,
 				F68BC7251D128ACE00A36247 /* Info.plist */,
-				F60BF8A31D139B3E00F7C6DA /* LyriKing-Bridging-Header.h */,
 			);
 			path = LyriKing;
 			sourceTree = "<group>";
@@ -327,15 +356,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F67B7FA31D23D75E001E7ED3 /* Lato-Lig.ttf in Resources */,
 				F668464F1D18D26E007DB6CF /* BlurBackground.xib in Resources */,
 				F67B7F961D23A832001E7ED3 /* PlayerControllerPanel.xib in Resources */,
-				F67B7F931D238022001E7ED3 /* Lato-Lig.ttf in Resources */,
-				F67B7F941D238022001E7ED3 /* Lato-Reg.ttf in Resources */,
+				F67B7FA21D23D75E001E7ED3 /* Lato-Bol.ttf in Resources */,
 				F68BC7211D128ACE00A36247 /* Assets.xcassets in Resources */,
 				F6E639E11D1A3E9E0065D082 /* Preferences.storyboard in Resources */,
+				F67B7FA11D23D75E001E7ED3 /* Lato-Black.ttf in Resources */,
 				F68BC7241D128ACE00A36247 /* Main.storyboard in Resources */,
-				F67B7F911D238022001E7ED3 /* Lato-Black.ttf in Resources */,
-				F67B7F921D238022001E7ED3 /* Lato-Bol.ttf in Resources */,
+				F67B7FA41D23D75E001E7ED3 /* Lato-Reg.ttf in Resources */,
 				F6D339B51D22865C0066F03F /* iTunes.sdef in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,7 +445,6 @@
 				F64E2D8C1D2115CD002F2513 /* MResponse.swift in Sources */,
 				F68BC71B1D128ACE00A36247 /* AppDelegate.swift in Sources */,
 				F68BC71F1D128ACE00A36247 /* Document.swift in Sources */,
-				F6434ECF1D1A444D006FDFE2 /* GeneralViewController.swift in Sources */,
 				F668464D1D18D20E007DB6CF /* BlurBackground.swift in Sources */,
 				F6D339B61D22865C0066F03F /* iTunes.swift in Sources */,
 				F67B7F981D23A845001E7ED3 /* PlayerControllerPanel.swift in Sources */,

@@ -194,16 +194,10 @@ extension AppDelegate {
         
         MusiXMatchApi.getLyricsNCoverURL(artist, track: track, completion: { (success, lyrics, coverURL) in
             
-            if success {
-                
-                self.printLog("get lyric success")
-                if let coverURL = coverURL, let lyrics = lyrics {
-                    lyricsViewController.artworkURL = coverURL
-                    lyricsViewController.lyrics = lyrics
-                }
-            } else {
-                
-            }
+            self.printLog("cover URL:\(coverURL), lyrics:\(lyrics)")
+            
+            lyricsViewController.artworkURL = success ? coverURL : nil
+            lyricsViewController.lyrics = success ? lyrics : nil
         })
     }
 }

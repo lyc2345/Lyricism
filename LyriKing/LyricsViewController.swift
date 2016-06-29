@@ -47,14 +47,15 @@ class LyricsViewController: NSViewController {
     
     var lyrics: String? {
         didSet {
-            //printLog("lyrics: \(lyrics)")
+            
             dispatch_async(dispatch_get_main_queue(), {
+                
+                if let textView = self.scrollTextView.contentView.documentView as? NSTextView where self.lyrics != nil {
+                    textView.string = self.lyrics?.applyLyricsFormat()
+                    return
+                }
                 if let textView = self.scrollTextView.contentView.documentView as? NSTextView {
-                    if self.lyrics != nil {
-                        textView.string = self.lyrics?.applyLyricsFormat()
-                    } else {
-                        textView.string = ""
-                    }
+                    textView.string = ""
                 }
             })
         }
@@ -63,11 +64,8 @@ class LyricsViewController: NSViewController {
         
         didSet {
             dispatch_async(dispatch_get_main_queue(), {
-                if let imageURL = self.artworkURL {
-                    self.imageView.image = NSImage(contentsOfURL: imageURL)
-                } else {
-                    self.imageView.image = NSImage(named: "avatar")
-                }
+                
+                self.imageView.image = self.artworkURL != nil ? NSImage(contentsOfURL: self.artworkURL!) : NSImage(named: "avatar")
             })
         }
     }
@@ -114,13 +112,16 @@ class LyricsViewController: NSViewController {
     
     var timer: NSTimer?
     
-    @IBOutlet weak var imageView: NSImageView! {
+    @IBOutlet weak var imageView: NSImageView!
+    @IBOutlet weak var scrollTextView: NSScrollView! {
         didSet {
-            
+            if let textView = self.scrollTextView.contentView.documentView as? NSTextView {
+                textView.font = NSFont(name: "Lato Regular", size: 17)
+                textView.alignment = .Center
+                textView.textColor = NSColor.whiteColor()
+            }
         }
     }
-    
-    @IBOutlet weak var scrollTextView: NSScrollView!
     
     var traigleView: NSView?
     
@@ -192,6 +193,11 @@ class LyricsViewController: NSViewController {
         super.viewDidAppear()
         
         createTrackingArea()
+        let iTunes = SwiftyiTunes.sharedInstance.iTunes
+        guard let artist = iTunes.currentTrack?.artist, track = iTunes.currentTrack?.name else {
+            return
+        }
+        marqueeText = "\(artist) - \(track)"
     }
     
     deinit {
