@@ -34,6 +34,7 @@
 		F6D339C51D22867A0066F03F /* iTunesScripting.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F6D339BD1D22867A0066F03F /* iTunesScripting.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F6D339CA1D22869B0066F03F /* iTunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D339B31D22865C0066F03F /* iTunes.swift */; };
 		F6D339CB1D22869B0066F03F /* iTunesScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D339B41D22865C0066F03F /* iTunesScripting.swift */; };
+		F6D339CD1D22A8020066F03F /* SwiftyiTunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D339CC1D22A8020066F03F /* SwiftyiTunes.swift */; };
 		F6E639E11D1A3E9E0065D082 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6E639E01D1A3E9E0065D082 /* Preferences.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +94,7 @@
 		F6D339BD1D22867A0066F03F /* iTunesScripting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iTunesScripting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6D339BF1D22867A0066F03F /* iTunesScripting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iTunesScripting.h; sourceTree = "<group>"; };
 		F6D339C11D22867A0066F03F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F6D339CC1D22A8020066F03F /* SwiftyiTunes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyiTunes.swift; sourceTree = "<group>"; };
 		F6E639E01D1A3E9E0065D082 /* Preferences.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -165,6 +167,7 @@
 		F68BC7191D128ACE00A36247 /* LyriKing */ = {
 			isa = PBXGroup;
 			children = (
+				F6D339CC1D22A8020066F03F /* SwiftyiTunes.swift */,
 				F68BC71A1D128ACE00A36247 /* AppDelegate.swift */,
 				F68BC71C1D128ACE00A36247 /* ViewController.swift */,
 				F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */,
@@ -393,6 +396,7 @@
 				F6434ECF1D1A444D006FDFE2 /* GeneralViewController.swift in Sources */,
 				F668464D1D18D20E007DB6CF /* BlurBackground.swift in Sources */,
 				F6D339B61D22865C0066F03F /* iTunes.swift in Sources */,
+				F6D339CD1D22A8020066F03F /* SwiftyiTunes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

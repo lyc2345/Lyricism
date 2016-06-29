@@ -15,7 +15,8 @@ import MediaLibrary
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-2)
-    let popover: NSPopover = NSPopover()
+    let popover = NSPopover()
+    
     var eventMonitor: EventMonitor?
     var isiTunesPaused = false
     
@@ -110,31 +111,38 @@ extension AppDelegate {
     
     func iTunesVaryStatus(notification: NSNotification) {
         
-        let info = notification.userInfo
-        //print("user info:\(info)")
+        let iTunes = SwiftyiTunes.sharedInstance.iTunes
         
-        if info!["Player State"] as! String == "Playing" {
-            //print("playing")
+        if iTunes.playerState == iTunesEPlS.Playing {
+            print("iTunes playing")
             iTunesPlaying()
             
-        } else if info!["Player State"] as! String == "Paused" {
-            //print("Paused")
+        } else if iTunes.playerState == iTunesEPlS.Paused {
+            print("iTunes Paused")
             iTunesPaused()
-        } else if info!["Player State"] as! String == "Stopped" {
-            //print("Stopped")
+            
+        } else if iTunes.playerState == iTunesEPlS.Stopped {
+            print("iTunes Stopped")
             iTunesStop()
             
+        } else if iTunes.playerState == iTunesEPlS.FastForwarding {
+            print("iTunes FastForwarding")
+            
+        } else if iTunes.playerState == iTunesEPlS.Rewinding {
+            print("iTunes Rewinding")
+            
         } else {
-            print("else playing status")
+            print("iTunes default")
         }
-        let _ = SBApplication(bundleIdentifier: "com.apple.iTunes")
     }
     
     func iTunesPlaying() {
-        if popover.shown == false {
-            showPopover(popover)
-        }
+        
+        let iTunes = SwiftyiTunes.sharedInstance.iTunes
+        print("itunes track playing:\(iTunes.currentTrack?.name!)")
+        
         let destinationViewController = popover.contentViewController as! LyricsViewController
+        
         if isiTunesPaused {
             
             destinationViewController.resumeTimer()
@@ -142,40 +150,10 @@ extension AppDelegate {
             print("song keep playing")
         } else {
             print("new song playing")
-            
-            let iTunes = SBApplication(bundleIdentifier: "com.apple.iTunes") as! iTunesApplication
-            print("itunes track:\(iTunes.currentTrack?.name!)")
-            
-            
-            //iTunes.pause!()
-            
-            
-            /*
-            let playingTrack = MacUtilities.getCurrentMusicInfo()
-            guard let currentArtist = playingTrack?.artist, currentTrack = playingTrack?.track, currentTime = playingTrack?.time else {
-                return
-            }
-            if currentArtist != Track.sharedTrack.artist_name {
-                // new song playing
-                destinationViewController.timeString = currentTime
-                destinationViewController.marqueeText = "\(currentArtist) - \(currentTrack)"
-                
-                
-                MusiXMatchApi.getLyricsNCoverURL(currentArtist, track: currentTrack, completion: { (success, lyrics, coverURL) in
-                    
-                    if success {
-                            
-                        if let coverURL = coverURL, let lyrics = lyrics {
-                            destinationViewController.coverImageURL = coverURL
-                            destinationViewController.lyrics = lyrics
-                        }
-
-                    }
-                })
-            }  else {
-                // no new song playing
-                print("no new song playing")
-            }*/
+            queryMusicInfo()
+        }
+        if popover.shown == false {
+            showPopover(popover)
         }
     }
     
@@ -193,12 +171,46 @@ extension AppDelegate {
         
         closePopover(eventMonitor)
     }
+    
+    func queryMusicInfo() {
+        
+        let iTunes = SwiftyiTunes.sharedInstance.iTunes
+        let lyricsViewController = popover.contentViewController as! LyricsViewController
+        
+        
+        guard let artist = iTunes.currentTrack?.artist, track = iTunes.currentTrack?.name, time = iTunes.currentTrack?.time else {
+            return
+        }
+        // new song playing
+        lyricsViewController.timeString = time
+        lyricsViewController.marqueeText = "\(artist) - \(track)"
+        
+        MusiXMatchApi.getLyricsNCoverURL(artist, track: track, completion: { (success, lyrics, coverURL) in
+            
+            if success {
+                
+                self.printLog("get lyric success")
+                if let coverURL = coverURL, let lyrics = lyrics {
+                    lyricsViewController.coverImageURL = coverURL
+                    lyricsViewController.lyrics = lyrics
+                }
+            } else {
+                
+            }
+        })
+    }
 }
 
 extension AppDelegate: NSPopoverDelegate {
     
     func popoverDidShow(notification: NSNotification) {
-        
+        print("Popover did show")
+        let iTunes = SwiftyiTunes.sharedInstance.iTunes
+        // new song
+        if iTunes.currentTrack?.name != Track.sharedTrack.track_name {
+            print("Popover did show and new song")
+            queryMusicInfo()
+        }
     }
     
     func popoverWillShow(notification: NSNotification) {

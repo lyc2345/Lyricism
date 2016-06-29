@@ -98,7 +98,7 @@ class MusiXMatchApi: NSObject {
                             let trackJSON = JSON(data: response.data!)
                             Track.sharedTrack.getTrackPropertyAndValue(trackJSON)
                             
-                            //print("apilyrics: \(trackJSON["message"]["body"]["lyrics"]["lyrics_body"].string)")
+                            print("apilyrics: \(trackJSON["message"]["body"]["lyrics"]["lyrics_body"].string)")
                             
                             if let imageURLString = Track.sharedTrack.album_coverart_350x350, lyrics = trackJSON["message"]["body"]["lyrics"]["lyrics_body"].string {
                                 completion(success: true, lyrics: lyrics, coverURL: NSURL(string: imageURLString)!)

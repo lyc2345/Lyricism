@@ -76,7 +76,6 @@ class LyricsViewController: NSViewController {
             trackTime = Int(minutes!.intValue * 60 + seconds!.intValue)
             
             if timer != nil {
-                
                 timer!.invalidate()
                 timer = nil
             }
@@ -118,50 +117,42 @@ class LyricsViewController: NSViewController {
             topToggleBtn.image = (topToggleState ? NSImage(named: "pin") : NSImage(named: "unpin"))
         }
     }
+    
+    private var trackingArea: NSTrackingArea!
+    func createTrackingArea() {
+        if trackingArea != nil {
+            
+            view.removeTrackingArea(trackingArea)
+        }
+        let circleRect = view.bounds
+        let flag = NSTrackingAreaOptions.MouseEnteredAndExited.rawValue + NSTrackingAreaOptions.ActiveInActiveApp.rawValue
+        trackingArea = NSTrackingArea(rect: circleRect, options: NSTrackingAreaOptions(rawValue: flag), owner: self, userInfo: nil)
+        view.addTrackingArea(trackingArea)
+    }
+    
+    override func mouseEntered(theEvent: NSEvent) {
+        NSCursor.pointingHandCursor().set()
+        view.needsLayout = true
+        print("mouse go innnnnnnn")
+    }
+    
+    override func mouseExited(theEvent: NSEvent) {
+        NSCursor.arrowCursor().set()
+        view.needsLayout = false
+        print("mouse go outtttttt")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         traigleView = PopoverContentView(frame: view.frame)
         view.addSubview(traigleView!)
-
-
     }
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
-        //TODO: Clean up this code after testing
-        /*
-        let playingTrack = MacUtilities.getCurrentMusicInfo()
-        guard let currentArtist = playingTrack?.artist, currentTrack = playingTrack?.track, currentTime = playingTrack?.time else {
-            return
-        }
-        print("currentArtist:\(currentArtist), currentTrack:\(currentTrack), currentTime:\(currentTime)")
         
-        if currentArtist != Track.sharedTrack.artist_name {
-        
-            // new song playing
-            //print("Track.sharedTrack.artist_name:\(Track.sharedTrack.artist_name), Track.sharedTrack.artist_name:\(Track.sharedTrack.artist_name)")
-            timeString = currentTime
-            marqueeText = "\(currentArtist) - \(currentTrack)"
-            
-            MusiXMatchApi.getLyricsNCoverURL(currentArtist, track: currentTrack) { (success, lyrics, coverURL) in
-                
-                if success {
-                    if let coverURL = coverURL, lyrics = lyrics {
-                        self.coverImageURL = coverURL
-                        self.lyrics = lyrics
-                    }
-                } else {
-                    // no connection warning
-                }
-            }
-
-        
-        } else {
-            // no new song playing
-            print("no new song playing")
-        }*/
+        createTrackingArea()
     }
     
     deinit {

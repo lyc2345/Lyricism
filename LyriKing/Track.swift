@@ -9,6 +9,14 @@
 import Foundation
 import SwiftyJSON
 
+struct PlayingTrack {
+    
+    var track = ""
+    var artist = ""
+    var album = ""
+    var time = ""
+}
+
 class Track: NSObject {
     
     override init() {
@@ -52,17 +60,16 @@ class Track: NSObject {
     
     func getCurrentTrackID() {
         //TODO: Clean up this code after testing
-        /*
-        if let playingTrack = MacUtilities.getCurrentMusicInfo() {
+        let iTunes = SwiftyiTunes.sharedInstance.iTunes
+        
+        guard let artist = iTunes.currentTrack?.artist, track = iTunes.currentTrack?.name else {
             
-            MusiXMatchApi.getTrackInfo(playingTrack.artist, track: playingTrack.track, completion: { (success) in
-            
-                if success {
-                    
-                    
-                }
-            })
-        }*/
+            return
+        }
+        
+        MusiXMatchApi.getTrackInfo(artist, track: track) { (success) in
+            if success {} else {}
+        }
     }
     
     func getTrackPropertyAndValue(json: JSON) -> Track? {

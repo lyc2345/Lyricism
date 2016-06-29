@@ -9,7 +9,6 @@
 import Cocoa
 import ScriptingBridge
 import MediaLibrary
-import SwiftyJSON
 
 /*
 @objc protocol iTunesApplicationn {
@@ -17,14 +16,6 @@ import SwiftyJSON
     optional var properties: NSDictionary {get}
     //if you need another object or method from the iTunes.h, you must add it here
 }*/
-
-struct PlayingTrack {
-    
-    var track = ""
-    var artist = ""
-    var album = ""
-    var time = ""
-}
 
 class MacUtilities: NSObject {
     /*
@@ -68,16 +59,3 @@ extension NSObject {
         //#endif
     }
 }
-
-/*
- 
- let iTunesApp = SBApplication(bundleIdentifier: MLMediaSourceiTunesIdentifier) as? iTunesApplication
- 
- if let track = iTunesApp?.currentTrack.name, artist = iTunesApp?.currentTrack.artist, album = iTunesApp?.currentTrack.album, time = iTunesApp?.currentTrack.time {
- 
- return PlayingTrack(track: track, artist: artist, album: album, time: time)
- } else {
- return nil
- }
- 
- */

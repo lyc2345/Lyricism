@@ -14,102 +14,6 @@
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LyriKing/AppDelegate.swift"
-            timestampString = "488802023.038065"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
-            landmarkName = "iTunesPlaying()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LyriKing/MusiXMatchApi.swift"
-            timestampString = "488712479.005145"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "getLyricsNCoverURL(_:track:completion:)"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static LyriKing.MusiXMatchApi.getLyricsNCoverURL (Swift.String, track : Swift.String, completion : (success : Swift.Bool, lyrics : Swift.Optional&lt;Swift.String&gt;, coverURL : Swift.Optional&lt;__ObjC.NSURL&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "LyriKing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Stan/Desktop/iOS/GitHub/LyriKing/LyriKing/MusiXMatchApi.swift"
-                  timestampString = "488715952.73092"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "84"
-                  endingLineNumber = "84"
-                  offsetFromSymbolStart = "60">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static LyriKing.MusiXMatchApi.(getLyricsNCoverURL (Swift.String, track : Swift.String, completion : (success : Swift.Bool, lyrics : Swift.Optional&lt;Swift.String&gt;, coverURL : Swift.Optional&lt;__ObjC.NSURL&gt;) -&gt; ()) -&gt; ()).(closure #1)"
-                  moduleName = "LyriKing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Stan/Desktop/iOS/GitHub/LyriKing/LyriKing/MusiXMatchApi.swift"
-                  timestampString = "488715952.731142"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "86"
-                  endingLineNumber = "86"
-                  offsetFromSymbolStart = "40">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LyriKing/MusiXMatchApi.swift"
-            timestampString = "488712481.787466"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "getLyricsNCoverURL(_:track:completion:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LyriKing/MusiXMatchApi.swift"
-            timestampString = "488712494.389666"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "getLyricsNCoverURL(_:track:completion:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
@@ -117,6 +21,14 @@
             continueAfterRunningActions = "No"
             symbolName = "CFURLCopyResourcePropertyForKey"
             moduleName = "">
+            <Actions>
+               <BreakpointActionProxy
+                  ActionExtensionID = "Xcode.BreakpointAction.DebuggerCommand">
+                  <ActionContent
+                     consoleCommand = "po $arg1">
+                  </ActionContent>
+               </BreakpointActionProxy>
+            </Actions>
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"

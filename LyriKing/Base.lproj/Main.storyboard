@@ -789,18 +789,18 @@
                                     <color key="backgroundColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <scrollView misplaced="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="bi9-ja-2dh">
-                                <rect key="frame" x="0.0" y="0.0" width="350" height="298"/>
+                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="bi9-ja-2dh">
+                                <rect key="frame" x="0.0" y="0.0" width="350" height="294"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="UKF-j9-9S6">
-                                    <rect key="frame" x="0.0" y="0.0" width="350" height="298"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="350" height="294"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView editable="NO" selectable="NO" drawsBackground="NO" importsGraphics="NO" horizontallyResizable="YES" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="zlN-bT-muU">
-                                            <rect key="frame" x="0.0" y="0.0" width="350" height="298"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="350" height="294"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                            <size key="minSize" width="350" height="298"/>
+                                            <size key="minSize" width="350" height="294"/>
                                             <size key="maxSize" width="513" height="10000000"/>
                                             <attributedString key="textStorage">
                                                 <fragment content=" ">
@@ -812,7 +812,7 @@
                                                 </fragment>
                                             </attributedString>
                                             <color key="insertionPointColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="350" height="298"/>
+                                            <size key="minSize" width="350" height="294"/>
                                             <size key="maxSize" width="513" height="10000000"/>
                                         </textView>
                                     </subviews>
@@ -823,7 +823,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="ka3-fG-qhM">
-                                    <rect key="frame" x="334" y="0.0" width="16" height="298"/>
+                                    <rect key="frame" x="334" y="0.0" width="16" height="294"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
