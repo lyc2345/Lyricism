@@ -25,7 +25,7 @@
 		F68BC71F1D128ACE00A36247 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BC71E1D128ACE00A36247 /* Document.swift */; };
 		F68BC7211D128ACE00A36247 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F68BC7201D128ACE00A36247 /* Assets.xcassets */; };
 		F68BC7241D128ACE00A36247 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F68BC7221D128ACE00A36247 /* Main.storyboard */; };
-		F6A7DE431D20CACF001D5AD7 /* MarqueeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A7DE421D20CACF001D5AD7 /* MarqueeView.swift */; };
+		F6A7DE431D20CACF001D5AD7 /* MarqueeNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A7DE421D20CACF001D5AD7 /* MarqueeNSView.swift */; };
 		F6D339B51D22865C0066F03F /* iTunes.sdef in Resources */ = {isa = PBXBuildFile; fileRef = F6D339B21D22865C0066F03F /* iTunes.sdef */; };
 		F6D339B61D22865C0066F03F /* iTunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D339B31D22865C0066F03F /* iTunes.swift */; };
 		F6D339B71D22865C0066F03F /* iTunesScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D339B41D22865C0066F03F /* iTunesScripting.swift */; };
@@ -86,7 +86,7 @@
 		F68BC7201D128ACE00A36247 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F68BC7231D128ACE00A36247 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F68BC7251D128ACE00A36247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F6A7DE421D20CACF001D5AD7 /* MarqueeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarqueeView.swift; sourceTree = "<group>"; };
+		F6A7DE421D20CACF001D5AD7 /* MarqueeNSView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarqueeNSView.swift; sourceTree = "<group>"; };
 		F6D339B11D22865C0066F03F /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
 		F6D339B21D22865C0066F03F /* iTunes.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = iTunes.sdef; sourceTree = "<group>"; };
 		F6D339B31D22865C0066F03F /* iTunes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iTunes.swift; sourceTree = "<group>"; };
@@ -175,7 +175,7 @@
 				F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */,
 				F668464C1D18D20E007DB6CF /* BlurBackground.swift */,
 				F668464E1D18D26E007DB6CF /* BlurBackground.xib */,
-				F6A7DE421D20CACF001D5AD7 /* MarqueeView.swift */,
+				F6A7DE421D20CACF001D5AD7 /* MarqueeNSView.swift */,
 				F64E2D8D1D2118DD002F2513 /* API */,
 				F64E2D8B1D2115CD002F2513 /* MResponse.swift */,
 				F60BF8B61D13EDCA00F7C6DA /* Track.swift */,
@@ -383,7 +383,7 @@
 				F60BF8D61D1430D300F7C6DA /* MacUtilities.swift in Sources */,
 				F60BF8D21D1424D800F7C6DA /* LyricsViewController.swift in Sources */,
 				F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */,
-				F6A7DE431D20CACF001D5AD7 /* MarqueeView.swift in Sources */,
+				F6A7DE431D20CACF001D5AD7 /* MarqueeNSView.swift in Sources */,
 				F68BC71D1D128ACE00A36247 /* ViewController.swift in Sources */,
 				F6434ECD1D1A4040006FDFE2 /* PreferencesWindownController.swift in Sources */,
 				F60BF8B71D13EDCA00F7C6DA /* Track.swift in Sources */,
@@ -616,6 +616,7 @@
 				F6D339C81D22867A0066F03F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

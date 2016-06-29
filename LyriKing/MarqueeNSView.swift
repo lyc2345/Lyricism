@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class MarqueeView: NSView {
+class MarqueeNSView: NSView {
 
     var timer: NSTimer? = nil
     
