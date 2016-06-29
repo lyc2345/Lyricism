@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class MarqueeNSView: NSView {
+class MarqueeView: NSView {
 
     var timer: NSTimer? = nil
     
@@ -16,9 +16,9 @@ class MarqueeNSView: NSView {
     var point: CGPoint! = CGPointZero
     var stringWidth: CGFloat!
     
-    var textAttributes: [String: AnyObject] = [NSFontAttributeName: NSFont(name: "Menlo", size: 20.0)!, NSForegroundColorAttributeName: NSColor.whiteColor()]
+    var textAttributes: [String: AnyObject] = [NSFontAttributeName: NSFont(name: "SF UI TEXT", size: 20.0)!, NSForegroundColorAttributeName: NSColor.whiteColor()]
     // yellow color for test marquee label
-    var otherTextAttributes: [String: AnyObject] = [NSFontAttributeName: NSFont(name: "Menlo", size: 20.0)!, NSForegroundColorAttributeName: NSColor.yellowColor()]
+    var otherTextAttributes: [String: AnyObject] = [NSFontAttributeName: NSFont(name: "SF UI TEXT", size: 20.0)!, NSForegroundColorAttributeName: NSColor.yellowColor()]
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)

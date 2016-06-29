@@ -801,7 +801,7 @@
                                             <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <size key="minSize" width="350" height="294"/>
-                                            <size key="maxSize" width="513" height="10000000"/>
+                                            <size key="maxSize" width="555" height="10000000"/>
                                             <attributedString key="textStorage">
                                                 <fragment content=" ">
                                                     <attributes>
@@ -813,7 +813,7 @@
                                             </attributedString>
                                             <color key="insertionPointColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <size key="minSize" width="350" height="294"/>
-                                            <size key="maxSize" width="513" height="10000000"/>
+                                            <size key="maxSize" width="555" height="10000000"/>
                                         </textView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -827,6 +827,15 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="dGe-Sm-Vif">
+                                <rect key="frame" x="0.0" y="0.0" width="350" height="0.0"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="EOm-Dt-0T2"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="PUE-f6-9Fc" kind="embed" id="Kkh-vC-i2k"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="1qW-9e-nzZ" firstAttribute="height" secondItem="FFI-ia-lvV" secondAttribute="height" id="509-RC-UXE"/>
@@ -837,20 +846,26 @@
                             <constraint firstItem="897-1E-ERB" firstAttribute="top" secondItem="Fy6-Fe-DG3" secondAttribute="top" id="L5S-0R-LTM"/>
                             <constraint firstItem="1qW-9e-nzZ" firstAttribute="centerY" secondItem="FFI-ia-lvV" secondAttribute="centerY" id="S2h-NL-yu4"/>
                             <constraint firstItem="FFI-ia-lvV" firstAttribute="top" secondItem="Fy6-Fe-DG3" secondAttribute="top" constant="10" id="Trr-dk-CUU"/>
+                            <constraint firstAttribute="bottom" secondItem="dGe-Sm-Vif" secondAttribute="bottom" id="WHX-Rq-er5"/>
                             <constraint firstAttribute="bottom" secondItem="897-1E-ERB" secondAttribute="bottom" id="XGb-IV-jq3"/>
                             <constraint firstAttribute="trailing" secondItem="bi9-ja-2dh" secondAttribute="trailing" id="ZH3-Ez-PcY"/>
                             <constraint firstItem="1qW-9e-nzZ" firstAttribute="leading" secondItem="FFI-ia-lvV" secondAttribute="trailing" constant="5" id="ceu-nq-U7V"/>
                             <constraint firstItem="tuY-vm-MWf" firstAttribute="top" secondItem="Fy6-Fe-DG3" secondAttribute="top" id="ebQ-se-nnk"/>
+                            <constraint firstItem="dGe-Sm-Vif" firstAttribute="leading" secondItem="Fy6-Fe-DG3" secondAttribute="leading" id="glQ-xu-BGQ"/>
+                            <constraint firstItem="dGe-Sm-Vif" firstAttribute="top" secondItem="bi9-ja-2dh" secondAttribute="bottom" id="kB5-oe-Dhh"/>
                             <constraint firstItem="tuY-vm-MWf" firstAttribute="leading" secondItem="Fy6-Fe-DG3" secondAttribute="leading" id="lfI-uv-67o"/>
                             <constraint firstAttribute="trailing" secondItem="tuY-vm-MWf" secondAttribute="trailing" id="lh0-Xr-c5W"/>
                             <constraint firstItem="bi9-ja-2dh" firstAttribute="leading" secondItem="Fy6-Fe-DG3" secondAttribute="leading" id="m3I-Pt-mex"/>
                             <constraint firstAttribute="bottom" secondItem="tuY-vm-MWf" secondAttribute="bottom" id="mwZ-69-uS9"/>
+                            <constraint firstAttribute="trailing" secondItem="dGe-Sm-Vif" secondAttribute="trailing" id="nW4-JK-HWg"/>
                             <constraint firstItem="897-1E-ERB" firstAttribute="leading" secondItem="Fy6-Fe-DG3" secondAttribute="leading" id="ooh-8q-l0A"/>
                             <constraint firstAttribute="trailing" secondItem="1qW-9e-nzZ" secondAttribute="trailing" constant="10" id="pSR-d0-glB"/>
                             <constraint firstItem="1qW-9e-nzZ" firstAttribute="bottom" secondItem="FFI-ia-lvV" secondAttribute="bottom" id="qqs-Lu-c3H"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomPanel" destination="dGe-Sm-Vif" id="F79-7Q-gBd"/>
+                        <outlet property="bottomPanelHeight" destination="EOm-Dt-0T2" id="OJH-Wb-sVn"/>
                         <outlet property="imageView" destination="897-1E-ERB" id="C70-6T-e4I"/>
                         <outlet property="scrollTextView" destination="bi9-ja-2dh" id="K8l-jd-IQw"/>
                         <outlet property="timeLabel" destination="FFI-ia-lvV" id="kDX-33-036"/>
@@ -859,7 +874,19 @@
                 </viewController>
                 <customObject id="igd-KZ-G8E" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="577" y="782"/>
+            <point key="canvasLocation" x="599.5" y="782"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="cIf-5e-Ez0">
+            <objects>
+                <viewController id="PUE-f6-9Fc" sceneMemberID="viewController">
+                    <view key="view" id="8Bc-YO-fH0">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="rSS-Sf-WVs" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
     <resources>

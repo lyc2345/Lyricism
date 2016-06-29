@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe" customClass="PlayerControllerPanel" customModule="LyriKing" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2GA-p0-UeO">
+                    <rect key="frame" x="59" y="0.0" width="59" height="44"/>
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="fast-forward" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="Jze-vM-IQn">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mNF-au-9Co">
+                    <rect key="frame" x="118" y="0.0" width="59" height="44"/>
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="fast-forward" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="lmR-Og-2uF">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+                <progressIndicator wantsLayer="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="wz9-kT-ywc">
+                    <rect key="frame" x="177" y="12" width="298" height="20"/>
+                </progressIndicator>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eh3-Qr-LsX">
+                    <rect key="frame" x="0.0" y="0.0" width="59" height="44"/>
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="fast-forward" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="0Ue-Hg-MRY">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="mNF-au-9Co" secondAttribute="bottom" id="3TO-Jz-VhX"/>
+                <constraint firstItem="mNF-au-9Co" firstAttribute="leading" secondItem="2GA-p0-UeO" secondAttribute="trailing" id="LTK-48-nae"/>
+                <constraint firstItem="mNF-au-9Co" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="LXw-cJ-ylj"/>
+                <constraint firstAttribute="bottom" secondItem="eh3-Qr-LsX" secondAttribute="bottom" id="Wmq-Ge-nkP"/>
+                <constraint firstAttribute="trailing" secondItem="wz9-kT-ywc" secondAttribute="trailing" constant="5" id="XGa-Yz-sUH"/>
+                <constraint firstItem="eh3-Qr-LsX" firstAttribute="width" secondItem="2GA-p0-UeO" secondAttribute="width" id="XHP-Mc-Ro0"/>
+                <constraint firstAttribute="bottom" secondItem="2GA-p0-UeO" secondAttribute="bottom" id="YOw-dL-mBD"/>
+                <constraint firstItem="mNF-au-9Co" firstAttribute="width" secondItem="wz9-kT-ywc" secondAttribute="width" multiplier="1:5" id="bAH-Cg-Xbd"/>
+                <constraint firstItem="2GA-p0-UeO" firstAttribute="width" secondItem="mNF-au-9Co" secondAttribute="width" id="e2n-5e-Hp1"/>
+                <constraint firstItem="wz9-kT-ywc" firstAttribute="leading" secondItem="mNF-au-9Co" secondAttribute="trailing" id="eMO-PF-bHM"/>
+                <constraint firstItem="eh3-Qr-LsX" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="hpf-ui-PvV"/>
+                <constraint firstItem="2GA-p0-UeO" firstAttribute="leading" secondItem="eh3-Qr-LsX" secondAttribute="trailing" id="ktI-f4-qb7"/>
+                <constraint firstItem="2GA-p0-UeO" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="lGP-gb-9QJ"/>
+                <constraint firstItem="wz9-kT-ywc" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="rmZ-lk-XZq"/>
+                <constraint firstItem="eh3-Qr-LsX" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="yGc-sF-PEr"/>
+            </constraints>
+            <point key="canvasLocation" x="543" y="588"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="fast-forward" width="44" height="44"/>
+    </resources>
+</document>

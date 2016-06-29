@@ -281,7 +281,7 @@
 				<access-group identifier="com.apple.iTunes.user-interface" access="rw"/>
 			</property>
 			<property name="visual size" code="pVSz" type="eVSz" description="the size of the displayed visual">
-				<access-group identifier="com.apple.iTunes.user-interface" access="rw"/>
+				<access-group identifier="com.apple.i Tunes.user-interface" access="rw"/>
 			</property>
 		</class>
 		<value-type name="picture" code="PICT" hidden="yes"/>

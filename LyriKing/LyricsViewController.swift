@@ -7,19 +7,20 @@
 //
 
 import Cocoa
-import SwiftyJSON
 import ScriptingBridge
 import AVFoundation
 
+// Change Triagle Background Color
 class PopoverContentView: NSView {
     
-    var backgroundView:PopoverBackgroundView?
+    var backgroundView: PopoverBackgroundView?
     override func viewDidMoveToWindow() {
         
         super.viewDidMoveToWindow()
         
         if let frameView = self.window?.contentView?.superview {
             if backgroundView == nil {
+                
                 backgroundView = PopoverBackgroundView(frame: frameView.bounds)
                 backgroundView!.autoresizingMask = NSAutoresizingMaskOptions([.ViewWidthSizable, .ViewHeightSizable]);
                 frameView.addSubview(backgroundView!, positioned: NSWindowOrderingMode.Below, relativeTo: frameView)
@@ -27,7 +28,7 @@ class PopoverContentView: NSView {
         }
     }
 }
-
+// Change Triagle Background Color
 class PopoverBackgroundView: NSView {
     
     override func drawRect(dirtyRect: NSRect) {
@@ -37,6 +38,12 @@ class PopoverBackgroundView: NSView {
 }
 
 class LyricsViewController: NSViewController {
+    
+    @IBOutlet weak var bottomPanel: NSView!
+    @IBOutlet weak var bottomPanelHeight: NSLayoutConstraint!
+    
+    
+    @IBOutlet weak var controlPanel: NSView!
     
     var lyrics: String? {
         didSet {
@@ -52,11 +59,11 @@ class LyricsViewController: NSViewController {
             })
         }
     }
-    var coverImageURL: NSURL? {
+    var artworkURL: NSURL? {
         
         didSet {
             dispatch_async(dispatch_get_main_queue(), {
-                if let imageURL = self.coverImageURL {
+                if let imageURL = self.artworkURL {
                     self.imageView.image = NSImage(contentsOfURL: imageURL)
                 } else {
                     self.imageView.image = NSImage(named: "avatar")
@@ -64,32 +71,39 @@ class LyricsViewController: NSViewController {
             })
         }
     }
+    var trackTime: Int! = 0
     var timeString: String = "00:00" {
         
-        didSet {
+        willSet {
             trackTime = nil
+            print("time string will set")
+        }
+        
+        didSet {
+            print("time string did set")
             let seconds = String(timeString.characters.dropFirst(2)).copy()
             let minutes = String(timeString.characters.dropLast(3)).stringByReplacingOccurrencesOfString("-", withString: "").copy()
             printLog("timestring:\(timeString)")
             printLog("second:\(String(timeString.characters.dropFirst(3))), minutes:\(String(timeString.characters.dropLast(3)).stringByReplacingOccurrencesOfString("-", withString: ""))")
             
-            trackTime = Int(minutes!.intValue * 60 + seconds!.intValue)
+            let iTunes = SwiftyiTunes.sharedInstance.iTunes
+            trackTime = Int(minutes!.intValue * 60 + seconds!.intValue) - Int(iTunes.playerPosition!)
             
             if timer != nil {
                 timer!.invalidate()
                 timer = nil
             }
-            
-            timer = NSTimer(timeInterval: 1.0, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-            NSRunLoop.mainRunLoop().addTimer(timer!, forMode: NSDefaultRunLoopMode)
+            setupTimer(1.0)
         }
     }
     
     var marqueeText: String? {
         
         didSet {
-            if let marqueeText = marqueeText {
+            if let marqueeText = marqueeText where marqueeText != " - " {
                 self.trackNameArtistLabel.text = marqueeText
+            } else {
+                trackNameArtistLabel.text = ""
             }
         }
     }
@@ -99,7 +113,6 @@ class LyricsViewController: NSViewController {
     
     
     var timer: NSTimer?
-    var trackTime: Int! = 0
     
     @IBOutlet weak var imageView: NSImageView! {
         didSet {
@@ -134,12 +147,36 @@ class LyricsViewController: NSViewController {
         NSCursor.pointingHandCursor().set()
         view.needsLayout = true
         print("mouse go innnnnnnn")
+        //showControlPanel()
     }
     
     override func mouseExited(theEvent: NSEvent) {
         NSCursor.arrowCursor().set()
         view.needsLayout = false
         print("mouse go outtttttt")
+        //hideControlPanel()
+    }
+    
+    func showControlPanel() {
+        NSAnimationContext.runAnimationGroup({ (context) in
+            //
+            self.bottomPanelHeight.constant = 0
+            
+        }) {
+            //
+            self.bottomPanelHeight.constant = 50
+        }
+    }
+    
+    func hideControlPanel() {
+        NSAnimationContext.runAnimationGroup({ (context) in
+            //
+            self.bottomPanelHeight.constant = 50
+            
+        }) {
+            //
+            self.bottomPanelHeight.constant = 0
+        }
     }
 
     override func viewDidLoad() {
@@ -147,6 +184,8 @@ class LyricsViewController: NSViewController {
         
         traigleView = PopoverContentView(frame: view.frame)
         view.addSubview(traigleView!)
+     
+        
     }
 
     override func viewDidAppear() {
@@ -201,13 +240,18 @@ class LyricsViewController: NSViewController {
         trackTime = trackTime - 1
     }
     
+    func setupTimer(timerInterval: NSTimeInterval) {
+        
+        timer = NSTimer(timeInterval: timerInterval, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        NSRunLoop.mainRunLoop().addTimer(timer!, forMode: NSDefaultRunLoopMode)
+    }
+    
     func resumeTimer() {
         trackTime - 1
         if timer != nil {
             timer = nil
         }
-        timer = NSTimer(timeInterval: 1.0, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-        NSRunLoop.mainRunLoop().addTimer(timer!, forMode: NSDefaultRunLoopMode)
+        setupTimer(1.0)
     }
     
     func stopTimer() {

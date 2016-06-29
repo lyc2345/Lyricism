@@ -167,7 +167,7 @@ extension AppDelegate {
         
         let destinationViewController = popover.contentViewController as! LyricsViewController
         destinationViewController.lyrics = nil
-        destinationViewController.coverImageURL = nil
+        destinationViewController.artworkURL = nil
         
         closePopover(eventMonitor)
     }
@@ -185,13 +185,20 @@ extension AppDelegate {
         lyricsViewController.timeString = time
         lyricsViewController.marqueeText = "\(artist) - \(track)"
         
+    
+        if let artwork = iTunes.currentTrack?.artworks!().firstObject as? NSImage {
+            lyricsViewController.imageView.image = artwork
+        } else {
+            print("No Local Image: \(iTunes.currentTrack?.artworks!().firstObject )")
+        }
+        
         MusiXMatchApi.getLyricsNCoverURL(artist, track: track, completion: { (success, lyrics, coverURL) in
             
             if success {
                 
                 self.printLog("get lyric success")
                 if let coverURL = coverURL, let lyrics = lyrics {
-                    lyricsViewController.coverImageURL = coverURL
+                    lyricsViewController.artworkURL = coverURL
                     lyricsViewController.lyrics = lyrics
                 }
             } else {
@@ -211,6 +218,9 @@ extension AppDelegate: NSPopoverDelegate {
             print("Popover did show and new song")
             queryMusicInfo()
         }
+        
+        print("iTunes.playerPosition:\(iTunes.playerPosition!)")
+        
     }
     
     func popoverWillShow(notification: NSNotification) {
