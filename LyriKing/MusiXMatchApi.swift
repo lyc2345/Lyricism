@@ -57,11 +57,6 @@ protocol MusiXMatchMatcher {
 
 class MusiXMatchApi {
     
-    struct ReceiveD {
-        static var trackID: NSNumber?
-        static var trackArtworkURLString: String?
-    }
-    
     class func matchSongUtimatly(track: MusiXTrack, completion: (success: Bool, trackID: NSNumber?) -> Void) {
         
         let parameter = ["apikey": MusiXMatchURL.Apikey.rawValue, "q_track": track.name, "q_artist": track.artist]
@@ -92,7 +87,6 @@ class MusiXMatchApi {
             if response.result.isSuccess {
                 
                 let json = JSON(data: response.data!)
-                
                 if json["message"]["header"]["status_code"] == 200 {
                     
                     let track = Track.sharedTrack
@@ -100,7 +94,6 @@ class MusiXMatchApi {
                     
                     if let trackID = json["message"]["body"]["track_list"][0]["track"]["track_id"].rawValue as? NSNumber {
                         print("track id: \(trackID)")
-                        self.ReceiveD.trackArtworkURLString = json["message"]["body"]["track_list"][0]["track"]["album_coverart_350x350"].string
                         return completion(success: true, trackID: trackID)
                     }
                 }
@@ -209,5 +202,4 @@ extension MusiXMatchApi {
             static let tracks = "http://api.musixmatch.com/ws/1.1/album.tracks.get?"
         }
     }
-
 }

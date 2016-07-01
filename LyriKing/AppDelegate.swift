@@ -20,6 +20,56 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var eventMonitor: EventMonitor?
     var isiTunesPaused = false
     
+    var lyricsShown: Bool {
+        
+        get {
+            return popoverViewController is LyricsViewController
+        }
+        
+        set {
+            if lyricsShown {
+                popoverViewController = lyricsViewController
+            } else {
+                popoverViewController = jumpOnLabelViewController
+            }
+        }
+    }
+    
+    var popoverViewController: NSViewController? {
+        
+        didSet {
+            
+            if popoverViewController is JumpOnLabelViewController {
+                popover.contentSize = CGSizeMake(300, 35)
+                popover.contentViewController?.view.autoresizingMask = NSAutoresizingMaskOptions([.ViewMaxXMargin, .ViewMaxYMargin]);
+            }
+            if popoverViewController is LyricsViewController{
+                popover.contentSize = CGSizeMake(350, 350)
+                popover.contentViewController?.view.autoresizingMask = NSAutoresizingMaskOptions([.ViewWidthSizable, .ViewHeightSizable]);
+                
+                if dismissTimer != nil {
+                    dismissTimer.invalidate()
+                    dismissTimer = nil
+                }
+            }
+            self.popover.contentViewController = popoverViewController
+        }
+    }
+    
+    var jumpOnLabelViewController: JumpOnLabelViewController! {
+        
+        didSet {
+            print("jumpOnLabelViewController:\(popover.contentSize)")
+        }
+    }
+    var lyricsViewController: LyricsViewController! {
+        didSet {
+            print("lyricsViewController:\(popover.contentSize)")
+        }
+    }
+    
+    var dismissTimer: NSTimer!
+    var dismissTime: NSTimeInterval = 3;
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         
@@ -30,11 +80,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             button.image = NSImage(named: "light_lyrics")
             button.action = #selector(togglePopover)
         }
+        lyricsViewController = NSStoryboard(name: "Main", bundle: nil).instantiateControllerWithIdentifier("lyrics_view_controller") as! LyricsViewController
         
-        let lyricsViewController = NSStoryboard(name: "Main", bundle: nil).instantiateControllerWithIdentifier("lyrics_view_controller") as! LyricsViewController
+        jumpOnLabelViewController = NSStoryboard(name: "Main", bundle: nil).instantiateControllerWithIdentifier("notification_label_view_controller") as! JumpOnLabelViewController
         
-        popover.contentViewController = lyricsViewController
-        popover.contentViewController?.view.autoresizingMask = NSAutoresizingMaskOptions([.ViewWidthSizable, .ViewHeightSizable]);
+        popoverViewController = jumpOnLabelViewController
+        
         popover.delegate = self
         
         NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: #selector(iTunesVaryStatus), name: "com.apple.iTunes.playerInfo", object: nil)
@@ -85,13 +136,15 @@ extension AppDelegate {
     
     func showPopover(sender: AnyObject?) {
         
+        print("show popover")
         if let button = statusItem.button {
-            popover.showRelativeToRect(button.bounds, ofView: button, preferredEdge: .MinY)
+            popover.showRelativeToRect(button.bounds, ofView: button, preferredEdge: .MaxY)
         }
         eventMonitor?.start()
     }
     
     func closePopover(sender: AnyObject?) {
+        print("close popover")
         popover.performClose(sender)
         eventMonitor?.stop()
     }
@@ -99,7 +152,15 @@ extension AppDelegate {
     func togglePopover(sender: AnyObject?) {
         
         if popover.shown {
-            closePopover(popover)
+            //popover.close()
+            if popoverViewController is JumpOnLabelViewController {
+                
+                popoverViewController = lyricsViewController
+                //showPopover(popover)
+            } else {
+                popoverViewController = jumpOnLabelViewController
+                popover.close()
+            }
         } else {
             showPopover(popover)
         }
@@ -141,33 +202,54 @@ extension AppDelegate {
         let iTunes = SwiftyiTunes.sharedInstance.iTunes
         print("itunes track playing:\(iTunes.currentTrack?.name!)")
         
-        let destinationViewController = popover.contentViewController as! LyricsViewController
-        
         if isiTunesPaused {
-            
-            destinationViewController.resumeTimer()
+            if popover.contentViewController is LyricsViewController {
+                (popover.contentViewController as! LyricsViewController).resumeTimer()
+            }
             isiTunesPaused = false
             print("song keep playing")
         } else {
             print("new song playing")
-            queryMusicInfo()
-        }
-        if popover.shown == false {
-            showPopover(popover)
+            
+            if popover.shown == false {
+                showPopover(popover)
+            }
+            
+            if !lyricsShown {
+                popoverViewController = jumpOnLabelViewController
+                (popover.contentViewController as! JumpOnLabelViewController).trackTitle =
+                    "\(iTunes.currentTrack!.artist!) - \(iTunes.currentTrack!.name!)"
+                
+                dismissTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(dismissLabel), userInfo: nil, repeats: true)
+            } else {
+                queryMusicInfo()
+            }
         }
     }
     
+    func dismissLabel() {
+        
+        if let timer = dismissTimer where dismissTime == 0 {
+            timer.invalidate()
+            dismissTimer = nil
+            popover.close()
+        }
+        dismissTime -= 1
+    }
+    
     func iTunesPaused() {
-        let destinationViewController = popover.contentViewController as! LyricsViewController
-        destinationViewController.stopTimer()
+        if popover.contentViewController is LyricsViewController {
+            (popover.contentViewController as! LyricsViewController).stopTimer()
+        }
         isiTunesPaused = true
     }
     
     func iTunesStop() {
         
-        let destinationViewController = popover.contentViewController as! LyricsViewController
-        destinationViewController.lyrics = nil
-        destinationViewController.artworkURL = nil
+        if popover.contentViewController is LyricsViewController {
+            (popover.contentViewController as! LyricsViewController).lyrics = nil
+            (popover.contentViewController as! LyricsViewController).artworkURL = nil
+        }
         
         closePopover(eventMonitor)
     }
@@ -175,29 +257,33 @@ extension AppDelegate {
     func queryMusicInfo() {
         
         let iTunes = SwiftyiTunes.sharedInstance.iTunes
-        let lyricsViewController = popover.contentViewController as! LyricsViewController
-        
         
         guard let artist = iTunes.currentTrack?.artist, name = iTunes.currentTrack?.name, time = iTunes.currentTrack?.time else {
             return
         }
         // new song playing
-        lyricsViewController.timeString = time
-        lyricsViewController.marqueeText = "\(artist) - \(name)"
-    
+        /*
         if let artwork = iTunes.currentTrack?.artworks!().firstObject as? NSImage {
             lyricsViewController.imageView.image = artwork
         } else {
             print("No Local Image: \(iTunes.currentTrack?.artworks!().firstObject )")
-        }
+        }*/
         
         let track = MusiXTrack(artist: artist, name: name, lyrics: nil, time: time)
         
         MusiXMatchApi.searchLyrics(track) { (success, lyrics) in
             
             self.printLog("lyrics:\(lyrics)")
-            lyricsViewController.lyrics = success ? lyrics : nil
+            let track  = MusiXTrack(artist: artist, name: name, lyrics: lyrics, time: time)
+            self.passLyricsViewController(track)
         }
+    }
+    
+    func passLyricsViewController(track: MusiXTrack) {
+        
+        lyricsViewController.timeString = track.time
+        lyricsViewController.marqueeText = "\(track.artist) - \(track.name)"
+        lyricsViewController.lyrics = track.lyrics
     }
 }
 
@@ -205,21 +291,20 @@ extension AppDelegate: NSPopoverDelegate {
     
     func popoverDidShow(notification: NSNotification) {
         print("Popover did show")
-        let iTunes = SwiftyiTunes.sharedInstance.iTunes
-        // new song
-        if iTunes.currentTrack?.name != Track.sharedTrack.track_name {
-            print("Popover did show and new song")
-            //queryMusicInfo()
-        }
-        
-        print("iTunes.playerPosition:\(iTunes.playerPosition!)")
     }
     
     func popoverWillShow(notification: NSNotification) {
         
     }
     
+    // popover windows set apart with status button
     func popoverShouldDetach(popover: NSPopover) -> Bool {
+        
         return true
+    }
+    
+    func popoverDidClose(notification: NSNotification) {
+        
+        lyricsShown = false
     }
 }

@@ -193,12 +193,13 @@ class LyricsViewController: NSViewController {
         super.viewDidAppear()
         
         createTrackingArea()
+        
         let iTunes = SwiftyiTunes.sharedInstance.iTunes
         guard let artist = iTunes.currentTrack?.artist, name = iTunes.currentTrack?.name, time = iTunes.currentTrack?.time else {
             return
         }
         marqueeText = "\(artist) - \(name)"
-        //queryMusicInfo(artist, track: track, itunes: iTunes)
+        timeString = time
         
         let track = MusiXTrack(artist: artist, name: name, lyrics: nil, time: time)
         

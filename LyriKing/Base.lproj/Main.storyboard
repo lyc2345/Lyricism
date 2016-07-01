@@ -876,6 +876,41 @@
             </objects>
             <point key="canvasLocation" x="599.5" y="782"/>
         </scene>
+        <!--Jump On Label View Controller-->
+        <scene sceneID="gxC-He-xd6">
+            <objects>
+                <viewController storyboardIdentifier="notification_label_view_controller" id="QHV-7c-F4q" customClass="JumpOnLabelViewController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="ZRQ-yK-ZDV">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="35"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WhX-q9-W5l">
+                                <rect key="frame" x="-2" y="3" width="304" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="QfT-5A-Mon"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="dUd-Uc-P4Z">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="WhX-q9-W5l" firstAttribute="centerX" secondItem="ZRQ-yK-ZDV" secondAttribute="centerX" id="LnJ-Hj-vy3"/>
+                            <constraint firstItem="WhX-q9-W5l" firstAttribute="leading" secondItem="ZRQ-yK-ZDV" secondAttribute="leading" id="Lqa-OF-Y4Q"/>
+                            <constraint firstItem="WhX-q9-W5l" firstAttribute="centerY" secondItem="ZRQ-yK-ZDV" secondAttribute="centerY" id="YsW-fY-JJP"/>
+                            <constraint firstAttribute="trailing" secondItem="WhX-q9-W5l" secondAttribute="trailing" id="wWe-2O-y7N"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="titleLabel" destination="WhX-q9-W5l" id="D4i-O9-VPr"/>
+                    </connections>
+                </viewController>
+                <customObject id="Dna-bP-awk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="592" y="1195.5"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="cIf-5e-Ez0">
             <objects>
