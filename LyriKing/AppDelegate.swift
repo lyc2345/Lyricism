@@ -178,13 +178,12 @@ extension AppDelegate {
         let lyricsViewController = popover.contentViewController as! LyricsViewController
         
         
-        guard let artist = iTunes.currentTrack?.artist, track = iTunes.currentTrack?.name, time = iTunes.currentTrack?.time else {
+        guard let artist = iTunes.currentTrack?.artist, name = iTunes.currentTrack?.name, time = iTunes.currentTrack?.time else {
             return
         }
         // new song playing
         lyricsViewController.timeString = time
-        lyricsViewController.marqueeText = "\(artist) - \(track)"
-        
+        lyricsViewController.marqueeText = "\(artist) - \(name)"
     
         if let artwork = iTunes.currentTrack?.artworks!().firstObject as? NSImage {
             lyricsViewController.imageView.image = artwork
@@ -192,13 +191,18 @@ extension AppDelegate {
             print("No Local Image: \(iTunes.currentTrack?.artworks!().firstObject )")
         }
         
-        MusiXMatchApi.getLyricsNCoverURL(artist, track: track, completion: { (success, lyrics, coverURL) in
+        let track = MusiXTrack(artist: artist, name: name, lyrics: nil, time: time)
+        
+        MusiXMatchApi.searchLyrics(track) { (success, lyrics) in
             
-            self.printLog("cover URL:\(coverURL), lyrics:\(lyrics)")
-            
-            lyricsViewController.artworkURL = success ? coverURL : nil
+            self.printLog("lyrics:\(lyrics)")
             lyricsViewController.lyrics = success ? lyrics : nil
-        })
+        }
+        
+        MusiXMatchApi.searchArtwork(track) { (success, url) in
+            lyricsViewController.artworkURL = success ? url : nil
+        }
+        
     }
 }
 
@@ -214,7 +218,6 @@ extension AppDelegate: NSPopoverDelegate {
         }
         
         print("iTunes.playerPosition:\(iTunes.playerPosition!)")
-        
     }
     
     func popoverWillShow(notification: NSNotification) {

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		1851CB459819F56A50C2C747 /* Pods_LyriKing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89CE8D50737B17B73218C8BD /* Pods_LyriKing.framework */; };
 		F60BF8B51D13A68900F7C6DA /* MusiXMatchApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */; };
-		F60BF8B71D13EDCA00F7C6DA /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8B61D13EDCA00F7C6DA /* Track.swift */; };
+		F60BF8B71D13EDCA00F7C6DA /* Tracks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8B61D13EDCA00F7C6DA /* Tracks.swift */; };
 		F60BF8D21D1424D800F7C6DA /* LyricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */; };
 		F60BF8D61D1430D300F7C6DA /* MacUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */; };
 		F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F616EBB51D15221800D1A40C /* NSObject+Extension.swift */; };
@@ -30,6 +30,7 @@
 		F68BC71F1D128ACE00A36247 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BC71E1D128ACE00A36247 /* Document.swift */; };
 		F68BC7211D128ACE00A36247 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F68BC7201D128ACE00A36247 /* Assets.xcassets */; };
 		F68BC7241D128ACE00A36247 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F68BC7221D128ACE00A36247 /* Main.storyboard */; };
+		F696A2C11D2668FD00EBE049 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = F696A2C01D2668FD00EBE049 /* Track.swift */; };
 		F6A7DE431D20CACF001D5AD7 /* MarqueeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A7DE421D20CACF001D5AD7 /* MarqueeView.swift */; };
 		F6D339B51D22865C0066F03F /* iTunes.sdef in Resources */ = {isa = PBXBuildFile; fileRef = F6D339B21D22865C0066F03F /* iTunes.sdef */; };
 		F6D339B61D22865C0066F03F /* iTunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D339B31D22865C0066F03F /* iTunes.swift */; };
@@ -73,7 +74,7 @@
 		E335D29E9F196A8F0400DD3F /* Pods-LyriKing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LyriKing.release.xcconfig"; path = "Pods/Target Support Files/Pods-LyriKing/Pods-LyriKing.release.xcconfig"; sourceTree = "<group>"; };
 		F60BF8A31D139B3E00F7C6DA /* LyriKing-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LyriKing-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusiXMatchApi.swift; sourceTree = "<group>"; };
-		F60BF8B61D13EDCA00F7C6DA /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		F60BF8B61D13EDCA00F7C6DA /* Tracks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tracks.swift; sourceTree = "<group>"; };
 		F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsViewController.swift; sourceTree = "<group>"; };
 		F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacUtilities.swift; sourceTree = "<group>"; };
 		F616EBB51D15221800D1A40C /* NSObject+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
@@ -96,6 +97,7 @@
 		F68BC7201D128ACE00A36247 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F68BC7231D128ACE00A36247 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F68BC7251D128ACE00A36247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F696A2C01D2668FD00EBE049 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		F6A7DE421D20CACF001D5AD7 /* MarqueeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarqueeView.swift; sourceTree = "<group>"; };
 		F6D339B11D22865C0066F03F /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
 		F6D339B21D22865C0066F03F /* iTunes.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = iTunes.sdef; sourceTree = "<group>"; };
@@ -179,7 +181,8 @@
 		F67B7F9B1D23D6CE001E7ED3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F60BF8B61D13EDCA00F7C6DA /* Track.swift */,
+				F60BF8B61D13EDCA00F7C6DA /* Tracks.swift */,
+				F696A2C01D2668FD00EBE049 /* Track.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -435,10 +438,11 @@
 				F60BF8D61D1430D300F7C6DA /* MacUtilities.swift in Sources */,
 				F60BF8D21D1424D800F7C6DA /* LyricsViewController.swift in Sources */,
 				F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */,
+				F696A2C11D2668FD00EBE049 /* Track.swift in Sources */,
 				F6A7DE431D20CACF001D5AD7 /* MarqueeView.swift in Sources */,
 				F68BC71D1D128ACE00A36247 /* ViewController.swift in Sources */,
 				F6434ECD1D1A4040006FDFE2 /* PreferencesWindownController.swift in Sources */,
-				F60BF8B71D13EDCA00F7C6DA /* Track.swift in Sources */,
+				F60BF8B71D13EDCA00F7C6DA /* Tracks.swift in Sources */,
 				F6D339B71D22865C0066F03F /* iTunesScripting.swift in Sources */,
 				F672A8311D1949BC00FD518D /* EventMonitor.swift in Sources */,
 				F60BF8B51D13A68900F7C6DA /* MusiXMatchApi.swift in Sources */,

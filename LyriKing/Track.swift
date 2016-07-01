@@ -1,28 +1,15 @@
 //
 //  Track.swift
-//  macOS
+//  LyriKing
 //
-//  Created by Stan Liu on 17/06/2016.
+//  Created by Stan Liu on 01/07/2016.
 //  Copyright © 2016 Stan Liu. All rights reserved.
 //
 
 import Foundation
 import SwiftyJSON
 
-struct PlayingTrack {
-    
-    var track = ""
-    var artist = ""
-    var album = ""
-    var time = ""
-}
-
 class Track: NSObject {
-    
-    override init() {
-        super.init()
-        
-    }
     
     static let sharedTrack: Track = Track()
     
@@ -35,13 +22,13 @@ class Track: NSObject {
     var track_id: NSNumber!
     var artist_mbid: String!
     var artist_name: String!
-    var album_coverart_800x800: String!
+    var album_coverart_800x800: String?
     var artist_id: NSNumber!
     var updated_time: String!
     var album_id: NSNumber!
-    var album_coverart_100x100: String!
+    var album_coverart_100x100: String?
     var first_release_date: String!
-    var album_coverart_350x350: String!
+    var album_coverart_350x350: String?
     var lyrics_id: NSNumber!
     var track_name: String!
     var track_length: NSNumber!
@@ -62,50 +49,46 @@ class Track: NSObject {
         //TODO: Clean up this code after testing
         let iTunes = SwiftyiTunes.sharedInstance.iTunes
         
-        guard let artist = iTunes.currentTrack?.artist, track = iTunes.currentTrack?.name else {
+        guard let artist = iTunes.currentTrack?.artist, name = iTunes.currentTrack?.name, time = iTunes.currentTrack?.time else {
             
             return
         }
-        
-        MusiXMatchApi.getTrackInfo(artist, track: track) { (success) in
-            if success {} else {}
+        let track = MusiXTrack(artist: artist, name: name, lyrics: nil, time: time)
+        MusiXMatchApi.searchTrackID(track) { (success, trackID) in
+            //
         }
     }
     
-    func getTrackPropertyAndValue(json: JSON) -> Track? {
+    func getTrackPropertyAndValue(json: JSON) {
         
-        let track = Track.sharedTrack
-        let properties = track.propertyNames()
-        
+        let properties = self.propertyNames()
         for key in properties {
             
-            if let stringValue = json["message"]["body"]["track_list"][0]["track"][key].string {
+            if let stringValue = json["message"]["body"]["track"][key].string {
                 
-                //print("property: \(key), value: \(stringValue)")
-                track.setValue(stringValue, forKey: key)
-            } else if let numberValue = json["message"]["body"]["track_list"][0]["track"][key].int {
+                print("property: \(key), value: \(stringValue)")
+                self.setValue(stringValue, forKey: key)
+            } else if let numberValue = json["message"]["body"]["track"][key].int {
                 
-                //print("property: \(key), value: \(value)")
-                track.setValue(numberValue, forKey: key)
+                print("property: \(key), value: \(numberValue)")
+                self.setValue(numberValue, forKey: key)
             } else {
                 
                 //primary_genre
-                if let _ = json["message"]["body"]["track_list"][0]["track"]["primary_genres"].dictionary {
-                    //print("property: \(key), value: \(primary_genres)")
+                if let primary_genres = json["message"]["body"]["track"]["primary_genres"].dictionary {
+                    print("property: \(key), value: \(primary_genres)")
                     
                 }
-                if let genreStringValue = json["message"]["body"]["track_list"][0]["track"]["primary_genres"]["music_genre_list"][0]["music_genre"][key].string {
-                    
-                    track.setValue(genreStringValue, forKey: key)
+                if let genreStringValue = json["message"]["body"]["track"]["primary_genres"]["music_genre_list"][0]["music_genre"][key].string {
+                    print("property: \(key), value: \(genreStringValue)")
+                    self.setValue(genreStringValue, forKey: key)
                     
                 }
-                if let genreNumberValue = json["message"]["body"]["track_list"][0]["track"]["primary_genres"]["music_genre_list"][0]["music_genre"][key].number {
-                    
-                    track.setValue(genreNumberValue, forKey: key)
+                if let genreNumberValue = json["message"]["body"]["track"]["primary_genres"]["music_genre_list"][0]["music_genre"][key].number {
+                    print("property: \(key), value: \(genreNumberValue)")
+                    self.setValue(genreNumberValue, forKey: key)
                 }
-                
             }
         }
-        return track
     }
 }

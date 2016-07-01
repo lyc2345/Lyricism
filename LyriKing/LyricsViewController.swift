@@ -194,10 +194,12 @@ class LyricsViewController: NSViewController {
         
         createTrackingArea()
         let iTunes = SwiftyiTunes.sharedInstance.iTunes
-        guard let artist = iTunes.currentTrack?.artist, track = iTunes.currentTrack?.name else {
+        guard let artist = iTunes.currentTrack?.artist, track = iTunes.currentTrack?.name, _ = iTunes.currentTrack?.time else {
             return
         }
         marqueeText = "\(artist) - \(track)"
+        //queryMusicInfo(artist, track: track, itunes: iTunes)
+            
     }
     
     deinit {
@@ -216,7 +218,21 @@ class LyricsViewController: NSViewController {
         
         topToggleState = !topToggleState
     }
-
+    
+    func queryMusicInfo(track: MusiXTrack, itunes: iTunesApplication) {
+        
+        if let artwork = itunes.currentTrack?.artworks!().firstObject as? NSImage {
+            self.imageView.image = artwork
+        } else {
+            print("No Local Image: \(itunes.currentTrack?.artworks!().firstObject )")
+        }
+        
+        MusiXMatchApi.searchLyrics(track) { (success, lyrics) in
+            
+            self.printLog("lyrics:\(lyrics)")
+            self.lyrics = success ? lyrics : nil
+        }
+    }
     
     func updateTime() {
         
@@ -280,7 +296,6 @@ extension String {
         
         return self.stringByReplacingOccurrencesOfString(".", withString: ". \n").stringByReplacingOccurrencesOfString("\n", withString: "\n\n").stringByReplacingOccurrencesOfString("\n ", withString: "\n\n").stringByReplacingOccurrencesOfString(" \n", withString: "\n\n")
     }
-    
 }
 
 extension LyricsViewController {

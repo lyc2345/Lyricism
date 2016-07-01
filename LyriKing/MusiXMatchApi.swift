@@ -11,45 +11,83 @@ import Alamofire
 import SwiftyJSON
 import SWXMLHash
 
-class MusiXMatchApi: NSObject {
+
+struct MusiXTrack {
     
-    typealias TrackHandler = (Void) -> Void
+    var artist: String
+    var name: String
+    var lyrics: String?
+    var time: String
+}
+
+struct MusiXAlbum {
+    var artist: String
+    var tracks: [MusiXTrack]
+    var composer: String
+}
+
+struct MusiXArtist {
     
-    private class func getTrackID(artist: String, track: String, completion: (success: Bool, trackID: NSNumber?) -> Void) {
+    var name: String
+    var albums: [MusiXAlbum]
+}
+
+protocol MusiXMatchTrack {
+    
+    func searchTrackID(track: MusiXTrack!, completion:(success: Bool, trackID: NSNumber?) -> Void)
+}
+
+protocol MusiXMatchArtist {
+    
+    
+}
+
+protocol MusiXMatchAlbum {
+    
+    
+}
+
+protocol MusiXMatchMatcher {
+    
+    //func matchSongPrimer(track: MusiXTrack, completion:(Void) -> Void)
+    //func matchSongMoreDifficult(track: MusiXTrack, completion: (Void) -> Void)
+    func matchSongUtimatly(track: MusiXTrack, completion: (success: Bool, trackID: NSNumber?) -> Void)
+    
+}
+
+class MusiXMatchApi {
+    
+    struct ReceiveD {
+        static var trackID: NSNumber?
+        static var trackArtworkURLString: String?
+    }
+    
+    class func matchSongUtimatly(track: MusiXTrack, completion: (success: Bool, trackID: NSNumber?) -> Void) {
         
-        let parameter = ["apikey": MusiXMatchURL.apikey,"q_artist": artist, "q_track": track]
-        Alamofire.request(.GET, MusiXMatchURL.track.itself, parameters: parameter, encoding: .URL).responseJSON { (response) in
+        let parameter = ["apikey": MusiXMatchURL.Apikey.rawValue, "q_track": track.name, "q_artist": track.artist]
+        Alamofire.request(.GET, MusiXMatchURL.MatchMore.itself.rawValue, parameters: parameter, encoding: .URL).responseJSON { (response) in
             
             if response.result.isSuccess {
                 
                 let json = JSON(data: response.data!)
-                
                 if json["message"]["header"]["status_code"] == 200 {
                     
-                    let track = Track.sharedTrack
-                    
-                    if let _ = track.getTrackPropertyAndValue(json), trackID = track.track_id {
-                        print("track id: \(trackID)")
+                    if let trackID = json["message"]["body"]["track"]["track_id"].rawValue as? NSNumber {
                         
+                        let track = Track.sharedTrack
+                        track.getTrackPropertyAndValue(json)
                         return completion(success: true, trackID: trackID)
-                    } else {
-                        return completion(success: false, trackID: nil)
                     }
-                    
-                } else {
-                    // handler error when query lyrics
-                    return completion(success: false, trackID: nil)
                 }
-            } else {
                 return completion(success: false, trackID: nil)
             }
         }
     }
     
-    class func getTrackInfo(artist: String, track: String, completion: (success: Bool) -> Void) {
+    class func searchTrackID(track: MusiXTrack, completion: (success: Bool, trackID: NSNumber?) -> Void) {
         
-        let parameter = ["apikey": MusiXMatchURL.apikey,"q_artist": artist, "q_track": track]
-        Alamofire.request(.GET, MusiXMatchURL.track.itself, parameters: parameter, encoding: .URL).responseJSON { (response) in
+        let parameter = ["apikey": MusiXMatchURL.Apikey.rawValue,"q_artist": track.artist, "q_track": track.name]
+        Alamofire.request(.GET, MusiXMatchURL.track.itself.rawValue, parameters: parameter, encoding: .URL).responseJSON { (response) in
             
             if response.result.isSuccess {
                 
@@ -58,74 +96,93 @@ class MusiXMatchApi: NSObject {
                 if json["message"]["header"]["status_code"] == 200 {
                     
                     let track = Track.sharedTrack
+                    track.getTrackPropertyAndValue(json)
                     
-                    if let _ = track.getTrackPropertyAndValue(json), trackID = track.track_id {
+                    if let trackID = json["message"]["body"]["track_list"][0]["track"]["track_id"].rawValue as? NSNumber {
                         print("track id: \(trackID)")
-                        
-                        return completion(success: true)
-                    } else {
-                        return completion(success: false)
+                        self.ReceiveD.trackArtworkURLString = json["message"]["body"]["track_list"][0]["track"]["album_coverart_350x350"].string
+                        return completion(success: true, trackID: trackID)
                     }
-                    
-                } else {
-                    // handler error when query lyrics
-                    return completion(success: false)
                 }
-            } else {
-                return completion(success: false)
             }
+            return completion(success: false, trackID: nil)
         }
     }
-
-    
-    
-    class func getLyricsNCoverURL(artist: String, track: String, completion: (success: Bool, lyrics: String?, coverURL: NSURL?) -> Void) {
         
-        getTrackID(artist, track: track) { (success, trackID) in
+    class func searchLyrics(track: MusiXTrack, completion: (success: Bool, lyrics: String?) -> Void) {
+        
+        matchSongUtimatly(track) { (success, trackID) in
             
             if success {
                 
-                let parameter: [String: AnyObject]? = ["apikey": MusiXMatchURL.apikey,"track_id": trackID!.stringValue]
-                
-                Alamofire.request(.GET, MusiXMatchURL.track.lyrics, parameters: parameter, encoding: .URL).responseJSON(completionHandler: { (response) in
+                let parameter: [String: AnyObject]? = ["apikey": MusiXMatchURL.Apikey.rawValue,"track_id": trackID!.stringValue]
+                Alamofire.request(.GET, MusiXMatchURL.track.lyrics.rawValue, parameters: parameter, encoding: .URL).responseJSON(completionHandler: { (response) in
                     
                     if response.result.isSuccess {
                         
                         let json = JSON(data: response.data!)
-                        
                         if json["message"]["header"]["status_code"] == 200 {
                             
-                            let trackJSON = JSON(data: response.data!)
-                            Track.sharedTrack.getTrackPropertyAndValue(trackJSON)
-                            print("artist:\(artist), track:\(track)")
-                            print("apilyrics: \(trackJSON["message"]["body"]["lyrics"]["lyrics_body"].string)")
-                            
                             // TODO:
-                            if let imageURLString = Track.sharedTrack.album_coverart_350x350, lyrics = trackJSON["message"]["body"]["lyrics"]["lyrics_body"].string {
-                                completion(success: true, lyrics: lyrics, coverURL: NSURL(string: imageURLString)!)
+                            if let lyrics = json["message"]["body"]["lyrics"]["lyrics_body"].string {
+                                
+                                print("apilyrics: \(json["message"]["body"]["lyrics"]["lyrics_body"].string)")
+                                return completion(success: true, lyrics: lyrics)
                             }
                         }
-                    } else {
-                        completion(success: false, lyrics: nil, coverURL: nil)
                     }
+                    return completion(success: false, lyrics: nil)
                 })
-            } else {
-                completion(success: false, lyrics: nil, coverURL: nil)
             }
-            
         }
     }
     
-    class func getSongInfo(artist: String, track: String, completion:(Void) -> JSON) {
+    class func searchArtwork(track: MusiXTrack, completion: (success: Bool, url: NSURL?) -> Void) {
+        if let urlString = Track.sharedTrack.album_coverart_350x350 {
+            return completion(success: true, url: NSURL(string: urlString))
+        } else {
+            return completion(success: false, url: nil)
+        }
+    }
+}
+
+
+
+enum MusiXMatchURL: String {
+    
+    case Apikey = "65aa00d5f25b9dcc100deea97d14ce45"
+    
+    enum Chart: String {
+        case artist = "http://api.musixmatch.com/ws/1.1/chart.aritsts.get?"
+        case tracks = "http://api.musixmatch.com/ws/1.1/chart.tracks.get?"
+    }
+    
+    enum track: String {
+        case itself = "http://api.musixmatch.com/ws/1.1/track.search?"
+        case subtitle = "http://api.musixmatch.com/ws/1.1/track.subtitle.get?"
+        case lyrics = "http://api.musixmatch.com/ws/1.1/track.lyrics.get?"
+        case snippet = "http://api.musixmatch.com/ws/1.1/track.snippet.get?"
+    }
+    
+    enum artist: String {
         
-        
-        
+        case itself = "http://api.musixmatch.com/ws/1.1/artist.get?"
+        case related = "http://api.musixmatch.com/ws/1.1/artist.related.get?"
+    }
+    
+    enum album: String {
+        case itself = "http://api.musixmatch.com/ws/1.1/album.get?"
+        case tracks = "http://api.musixmatch.com/ws/1.1/album.tracks.get?"
+    }
+    
+    enum MatchMore: String {
+        case itself = "http://api.musixmatch.com/ws/1.1/matcher.track.get?"
     }
 }
 
 extension MusiXMatchApi {
     
-    private struct MusiXMatchURL {
+    private struct MusiXMatchURLYY {
         
         private static let apikey = "65aa00d5f25b9dcc100deea97d14ce45"
         
