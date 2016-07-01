@@ -194,12 +194,24 @@ class LyricsViewController: NSViewController {
         
         createTrackingArea()
         let iTunes = SwiftyiTunes.sharedInstance.iTunes
-        guard let artist = iTunes.currentTrack?.artist, track = iTunes.currentTrack?.name, _ = iTunes.currentTrack?.time else {
+        guard let artist = iTunes.currentTrack?.artist, name = iTunes.currentTrack?.name, time = iTunes.currentTrack?.time else {
             return
         }
-        marqueeText = "\(artist) - \(track)"
+        marqueeText = "\(artist) - \(name)"
         //queryMusicInfo(artist, track: track, itunes: iTunes)
+        
+        let track = MusiXTrack(artist: artist, name: name, lyrics: nil, time: time)
+        
+        MusiXMatchApi.searchLyrics(track) { (success, lyrics) in
             
+            self.printLog("lyrics:\(lyrics)")
+            self.lyrics = success ? lyrics : nil
+            
+            if let urlString = Track.sharedTrack.album_coverart_350x350 {
+                
+                self.artworkURL = NSURL(string: urlString)
+            }
+        }
     }
     
     deinit {

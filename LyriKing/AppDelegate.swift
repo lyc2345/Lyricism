@@ -198,11 +198,6 @@ extension AppDelegate {
             self.printLog("lyrics:\(lyrics)")
             lyricsViewController.lyrics = success ? lyrics : nil
         }
-        
-        MusiXMatchApi.searchArtwork(track) { (success, url) in
-            lyricsViewController.artworkURL = success ? url : nil
-        }
-        
     }
 }
 
@@ -214,7 +209,7 @@ extension AppDelegate: NSPopoverDelegate {
         // new song
         if iTunes.currentTrack?.name != Track.sharedTrack.track_name {
             print("Popover did show and new song")
-            queryMusicInfo()
+            //queryMusicInfo()
         }
         
         print("iTunes.playerPosition:\(iTunes.playerPosition!)")

@@ -137,7 +137,7 @@ class MusiXMatchApi {
         }
     }
     
-    class func searchArtwork(track: MusiXTrack, completion: (success: Bool, url: NSURL?) -> Void) {
+    class func searchArtwork(completion: (success: Bool, url: NSURL?) -> Void) {
         if let urlString = Track.sharedTrack.album_coverart_350x350 {
             return completion(success: true, url: NSURL(string: urlString))
         } else {
