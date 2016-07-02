@@ -10,10 +10,28 @@ import Cocoa
 
 class PreferencesWindownController: NSWindowController {
 
+    @IBOutlet weak var toolBar: NSToolbar!
+    
+    var preferenceViewController: PreferenceViewController {
+        
+        return contentViewController as! PreferenceViewController
+    }
+    
     override func windowDidLoad() {
         super.windowDidLoad()
     
-        // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+        preferenceViewController.preferenceCategory(.appearance)
     }
+    
+    @IBAction func appearanceBtnPressed(sender: AnyObject) {
+        
+        preferenceViewController.preferenceCategory(.appearance)
+    }
+    
+    @IBAction func otherBtnPressed(sender: AnyObject) {
+        
+        preferenceViewController.preferenceCategory(.other)
+    }
+    
 
 }

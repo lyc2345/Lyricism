@@ -14,6 +14,8 @@
 		F60BF8D61D1430D300F7C6DA /* MacUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */; };
 		F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F616EBB51D15221800D1A40C /* NSObject+Extension.swift */; };
 		F617FCA31D269452001A933B /* JumpOnLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F617FCA21D269452001A933B /* JumpOnLabelViewController.swift */; };
+		F6252D541D27D8AB002CF7F4 /* PreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6252D531D27D8AB002CF7F4 /* PreferenceViewController.swift */; };
+		F6252D561D27DD40002CF7F4 /* PreferenceSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6252D551D27DD40002CF7F4 /* PreferenceSegue.swift */; };
 		F62903F21D27ACF80025F190 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F62903F11D27ACF80025F190 /* Assets.xcassets */; };
 		F62903F41D27B6940025F190 /* SettingMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62903F31D27B6940025F190 /* SettingMenu.swift */; };
 		F62903F61D27BE6B0025F190 /* Utilities.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F62903F51D27BE6B0025F190 /* Utilities.storyboard */; };
@@ -82,6 +84,8 @@
 		F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacUtilities.swift; sourceTree = "<group>"; };
 		F616EBB51D15221800D1A40C /* NSObject+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		F617FCA21D269452001A933B /* JumpOnLabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JumpOnLabelViewController.swift; sourceTree = "<group>"; };
+		F6252D531D27D8AB002CF7F4 /* PreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceViewController.swift; sourceTree = "<group>"; };
+		F6252D551D27DD40002CF7F4 /* PreferenceSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceSegue.swift; sourceTree = "<group>"; };
 		F62903F11D27ACF80025F190 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F62903F31D27B6940025F190 /* SettingMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingMenu.swift; sourceTree = "<group>"; };
 		F62903F51D27BE6B0025F190 /* Utilities.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Utilities.storyboard; sourceTree = "<group>"; };
@@ -151,6 +155,18 @@
 				E335D29E9F196A8F0400DD3F /* Pods-LyriKing.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		F6252D571D27DFEA002CF7F4 /* Preference */ = {
+			isa = PBXGroup;
+			children = (
+				F6E639E01D1A3E9E0065D082 /* Preferences.storyboard */,
+				F6434ED01D1A4472006FDFE2 /* LyricsSettingViewController.swift */,
+				F6434ECC1D1A4040006FDFE2 /* PreferencesWindownController.swift */,
+				F6252D531D27D8AB002CF7F4 /* PreferenceViewController.swift */,
+				F6252D551D27DD40002CF7F4 /* PreferenceSegue.swift */,
+			);
+			name = Preference;
 			sourceTree = "<group>";
 		};
 		F64E2D8D1D2118DD002F2513 /* API */ = {
@@ -236,12 +252,10 @@
 				F68BC71E1D128ACE00A36247 /* Document.swift */,
 				F617FCA21D269452001A933B /* JumpOnLabelViewController.swift */,
 				F62903F31D27B6940025F190 /* SettingMenu.swift */,
-				F6434ED01D1A4472006FDFE2 /* LyricsSettingViewController.swift */,
-				F6434ECC1D1A4040006FDFE2 /* PreferencesWindownController.swift */,
 				F68BC7221D128ACE00A36247 /* Main.storyboard */,
 				F62903F51D27BE6B0025F190 /* Utilities.storyboard */,
-				F6E639E01D1A3E9E0065D082 /* Preferences.storyboard */,
 				F62903F11D27ACF80025F190 /* Assets.xcassets */,
+				F6252D571D27DFEA002CF7F4 /* Preference */,
 				F67B7F9A1D23D6B6001E7ED3 /* Utilities */,
 				F67B7F991D23D6A3001E7ED3 /* View */,
 				F64E2D8D1D2118DD002F2513 /* API */,
@@ -453,10 +467,12 @@
 				F68BC71D1D128ACE00A36247 /* ViewController.swift in Sources */,
 				F6434ECD1D1A4040006FDFE2 /* PreferencesWindownController.swift in Sources */,
 				F60BF8B71D13EDCA00F7C6DA /* Tracks.swift in Sources */,
+				F6252D541D27D8AB002CF7F4 /* PreferenceViewController.swift in Sources */,
 				F6D339B71D22865C0066F03F /* iTunesScripting.swift in Sources */,
 				F672A8311D1949BC00FD518D /* EventMonitor.swift in Sources */,
 				F60BF8B51D13A68900F7C6DA /* MusiXMatchApi.swift in Sources */,
 				F64E2D8C1D2115CD002F2513 /* MResponse.swift in Sources */,
+				F6252D561D27DD40002CF7F4 /* PreferenceSegue.swift in Sources */,
 				F68BC71B1D128ACE00A36247 /* AppDelegate.swift in Sources */,
 				F62903F41D27B6940025F190 /* SettingMenu.swift in Sources */,
 				F617FCA31D269452001A933B /* JumpOnLabelViewController.swift in Sources */,

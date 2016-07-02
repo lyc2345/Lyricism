@@ -14,18 +14,30 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-                        <toolbar key="toolbar" implicitIdentifier="DB3A3EDF-0F50-40C5-88F9-F021E2A3D3F6" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="mzp-ui-jkW">
+                        <toolbar key="toolbar" implicitIdentifier="DB3A3EDF-0F50-40C5-88F9-F021E2A3D3F6" explicitIdentifier="appearance" autosavesConfiguration="NO" displayMode="labelOnly" sizeMode="regular" id="mzp-ui-jkW">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="67C3201D-614E-482A-88CC-7358916C8E28" label="General" paletteLabel="General" tag="-1" image="setting" id="f52-T9-yzN"/>
+                                <toolbarItem implicitItemIdentifier="88783789-DE4A-423B-89C2-0B636DE24680" label="Appearance" paletteLabel="Appearance" tag="-1" selectable="YES" id="tcP-hs-3Wz">
+                                    <connections>
+                                        <action selector="appearanceBtnPressed:" target="cxR-se-Lbb" id="iK4-MP-4Hd"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="67C3201D-614E-482A-88CC-7358916C8E28" label="General" paletteLabel="General" tag="-1" image="fast-forward" selectable="YES" id="f52-T9-yzN">
+                                    <connections>
+                                        <action selector="otherBtnPressed:" target="cxR-se-Lbb" id="Bbv-z8-Nex"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="19473F4E-8EE7-4854-8D45-27E247F9777F" label="Toolbar Item" paletteLabel="Toolbar Item" tag="-1" image="avatar" id="3eN-9f-m6k"/>
                                 <toolbarItem implicitItemIdentifier="E2EB2CE5-1177-457F-824F-D1CE5056B64B" label="Toolbar Item" paletteLabel="Toolbar Item" tag="-1" image="light_lyrics" id="gWp-sW-icq"/>
                                 <toolbarItem implicitItemIdentifier="31BF9944-CB39-40C1-9543-86E0CCAD9BFC" label="Toolbar Item" paletteLabel="Toolbar Item" tag="-1" image="dark_lyrics" id="DaZ-LR-WvL"/>
-                                <toolbarItem implicitItemIdentifier="F79F18C1-2CFF-4748-A099-BC273A0A33F2" label="Toolbar Item" paletteLabel="Toolbar Item" tag="-1" image="pin" id="tcP-hs-3Wz"/>
                             </allowedToolbarItems>
-                            <defaultToolbarItems/>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="tcP-hs-3Wz"/>
+                                <toolbarItem reference="f52-T9-yzN"/>
+                            </defaultToolbarItems>
                         </toolbar>
                     </window>
                     <connections>
+                        <outlet property="toolBar" destination="mzp-ui-jkW" id="HEK-ie-RkZ"/>
                         <segue destination="emk-5F-dIo" kind="relationship" relationship="window.shadowedContentViewController" id="WQC-Vr-vRv"/>
                     </connections>
                 </windowController>
@@ -33,10 +45,10 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="334"/>
         </scene>
-        <!--Lyrics Setting View Controller-->
+        <!--View Controller-->
         <scene sceneID="M5D-iQ-kmN">
             <objects>
-                <viewController id="lbg-R7-NyH" customClass="LyricsSettingViewController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lbg-R7-NyH" sceneMemberID="viewController">
                     <view key="view" id="LDI-6a-Gye">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -58,12 +70,12 @@
                 </viewController>
                 <customObject id="ycj-ow-4g1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="177" y="787"/>
+            <point key="canvasLocation" x="957" y="777"/>
         </scene>
-        <!--General View Controller-->
+        <!--View Controller-->
         <scene sceneID="Ka9-Ej-Z8v">
             <objects>
-                <viewController id="ht6-tM-xrT" customClass="GeneralViewController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ht6-tM-xrT" sceneMemberID="viewController">
                     <view key="view" id="IOI-OF-Oik">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -85,27 +97,30 @@
                 </viewController>
                 <customObject id="0Yz-sn-1Tl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-355" y="787"/>
+            <point key="canvasLocation" x="318" y="769"/>
         </scene>
-        <!--View Controller-->
+        <!--Preference View Controller-->
         <scene sceneID="kmy-hv-PzX">
             <objects>
-                <viewController id="emk-5F-dIo" sceneMemberID="viewController">
+                <viewController id="emk-5F-dIo" customClass="PreferenceViewController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="SnH-jP-swO">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </view>
+                    <connections>
+                        <segue destination="ht6-tM-xrT" kind="custom" identifier="appearance" customClass="PreferenceSegue" customModule="LyriKing" customModuleProvider="target" id="SNb-BJ-6xk"/>
+                        <segue destination="lbg-R7-NyH" kind="custom" identifier="other" customClass="PreferenceSegue" customModule="LyriKing" customModuleProvider="target" id="CjV-hv-vTV"/>
+                    </connections>
                 </viewController>
                 <customObject id="Lex-R4-GWE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="602" y="298"/>
+            <point key="canvasLocation" x="612" y="334"/>
         </scene>
     </scenes>
     <resources>
         <image name="avatar" width="228" height="228"/>
         <image name="dark_lyrics" width="30" height="30"/>
+        <image name="fast-forward" width="44" height="44"/>
         <image name="light_lyrics" width="30" height="30"/>
-        <image name="pin" width="30" height="30"/>
-        <image name="setting" width="30" height="30"/>
     </resources>
 </document>
