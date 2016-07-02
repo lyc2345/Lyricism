@@ -50,8 +50,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // button image on status bar
         if let button = statusItem.button {
             
-            
-            
             button.image = NSImage(named: "note_dark")
             button.alternateImage = NSImage(named: "note_light")
             button.action = #selector(togglePopover)
@@ -69,9 +67,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         eventMonitor?.start()
     }
     
+    func applicationShouldTerminate(sender: NSApplication) -> NSApplicationTerminateReply {
+
+        return .TerminateNow
+    }
+    
     func applicationWillTerminate(aNotification: NSNotification) {
-        // Insert code here to tear down your application
-        NSDistributedNotificationCenter.defaultCenter().removeObserver(self, forKeyPath: "com.apple.iTunes.playerInfo")
+        NSDistributedNotificationCenter.defaultCenter().removeObserver(self)
     }
     
 }
@@ -116,7 +118,7 @@ extension AppDelegate {
     
     func closePopover(sender: AnyObject?) {
         print("close popover")
-        if (sender as! NSPopover) == popoverLyrics {
+        if (sender as? NSPopover) == popoverLyrics {
             popoverLyrics.performClose(sender)
         } else {
             popoverPrompt.performClose(sender)
@@ -233,7 +235,7 @@ extension AppDelegate {
             (popoverLyrics.contentViewController as! LyricsViewController).artworkURL = nil
         }
         
-        closePopover(eventMonitor)
+        closePopover(popoverLyrics)
     }
     
     func queryMusicInfo() {

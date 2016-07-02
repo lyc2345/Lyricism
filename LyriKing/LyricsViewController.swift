@@ -39,9 +39,6 @@ class PopoverBackgroundView: NSView {
 
 class LyricsViewController: NSViewController {
     
-    @IBOutlet weak var bottomPanel: NSView!
-    @IBOutlet weak var bottomPanelHeight: NSLayoutConstraint!
-    
     @IBOutlet weak var controlPanel: NSView!
     
     var lyrics: String? {
@@ -130,8 +127,10 @@ class LyricsViewController: NSViewController {
             topToggleBtn.image = (topToggleState ? NSImage(named: "pin") : NSImage(named: "unpin"))
         }
     }
+    @IBOutlet var settingMenu: NSMenu!
     
     private var trackingArea: NSTrackingArea!
+    
     func createTrackingArea() {
         if trackingArea != nil {
             
@@ -141,41 +140,35 @@ class LyricsViewController: NSViewController {
         let flag = NSTrackingAreaOptions.MouseEnteredAndExited.rawValue + NSTrackingAreaOptions.ActiveInActiveApp.rawValue
         trackingArea = NSTrackingArea(rect: circleRect, options: NSTrackingAreaOptions(rawValue: flag), owner: self, userInfo: nil)
         view.addTrackingArea(trackingArea)
+        hideControlPanel()
     }
     
+    // MARK: NSTrackingAreaOptions
     override func mouseEntered(theEvent: NSEvent) {
         NSCursor.pointingHandCursor().set()
         view.needsLayout = true
-        print("mouse go innnnnnnn")
-        //showControlPanel()
+        showControlPanel()
     }
     
     override func mouseExited(theEvent: NSEvent) {
         NSCursor.arrowCursor().set()
         view.needsLayout = false
-        print("mouse go outtttttt")
-        //hideControlPanel()
+        hideControlPanel()
     }
     
     func showControlPanel() {
         NSAnimationContext.runAnimationGroup({ (context) in
-            //
-            self.bottomPanelHeight.constant = 0
-            
+            self.controlPanel.hidden = true
         }) {
-            //
-            self.bottomPanelHeight.constant = 50
+            self.controlPanel.hidden = false
         }
     }
     
     func hideControlPanel() {
         NSAnimationContext.runAnimationGroup({ (context) in
-            //
-            self.bottomPanelHeight.constant = 50
-            
+            self.controlPanel.hidden = false
         }) {
-            //
-            self.bottomPanelHeight.constant = 0
+            self.controlPanel.hidden = true
         }
     }
 
@@ -184,8 +177,6 @@ class LyricsViewController: NSViewController {
         
         traigleView = PopoverContentView(frame: view.frame)
         view.addSubview(traigleView!)
-     
-        
     }
 
     override func viewDidAppear() {
@@ -218,7 +209,14 @@ class LyricsViewController: NSViewController {
         
     }
     
+    @IBAction func settingBtnPressed(sender: AnyObject) {
+        let button = sender as! NSButton
+        let point = CGPoint(x: button.frame.origin.x, y: button.frame.origin.y)
+        settingMenu.popUpMenuPositioningItem(nil, atLocation: NSEvent.mouseLocation(), inView: nil)
+        //NSMenu.popUpContextMenu(settingMenu, withEvent: NSEvent.mouseEventWithType(NSEventType.LeftMouseDown, location: NSEvent.mouseLocation(), modifierFlags: NSEventModifierFlags.DeviceIndependentModifierFlagsMask, timestamp: 0, windowNumber: 0, context: nil, eventNumber: 0, clickCount: 0, pressure: 0)!, forView: self.view)
+    }
     
+    // TODO: Rubbish needs to restructure
     @IBOutlet weak var topToggleBtn: NSButton! {
         
         didSet {
@@ -340,3 +338,15 @@ extension LyricsViewController {
         }
     }*/
 }
+
+extension LyricsViewController {
+    
+    @IBAction func settingButtonPressed(sender: AnyObject) {
+    }
+    
+    @IBAction func quitButtonPressed(sender: AnyObject) {
+        NSApplication.sharedApplication().terminate(self)
+    }
+}
+
+

@@ -15,6 +15,8 @@
 		F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F616EBB51D15221800D1A40C /* NSObject+Extension.swift */; };
 		F617FCA31D269452001A933B /* JumpOnLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F617FCA21D269452001A933B /* JumpOnLabelViewController.swift */; };
 		F62903F21D27ACF80025F190 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F62903F11D27ACF80025F190 /* Assets.xcassets */; };
+		F62903F41D27B6940025F190 /* SettingMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62903F31D27B6940025F190 /* SettingMenu.swift */; };
+		F62903F61D27BE6B0025F190 /* Utilities.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F62903F51D27BE6B0025F190 /* Utilities.storyboard */; };
 		F6434ECD1D1A4040006FDFE2 /* PreferencesWindownController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6434ECC1D1A4040006FDFE2 /* PreferencesWindownController.swift */; };
 		F6434ED21D1A4472006FDFE2 /* LyricsSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6434ED01D1A4472006FDFE2 /* LyricsSettingViewController.swift */; };
 		F64E2D8C1D2115CD002F2513 /* MResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64E2D8B1D2115CD002F2513 /* MResponse.swift */; };
@@ -81,6 +83,8 @@
 		F616EBB51D15221800D1A40C /* NSObject+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		F617FCA21D269452001A933B /* JumpOnLabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JumpOnLabelViewController.swift; sourceTree = "<group>"; };
 		F62903F11D27ACF80025F190 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F62903F31D27B6940025F190 /* SettingMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingMenu.swift; sourceTree = "<group>"; };
+		F62903F51D27BE6B0025F190 /* Utilities.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Utilities.storyboard; sourceTree = "<group>"; };
 		F6434ECC1D1A4040006FDFE2 /* PreferencesWindownController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindownController.swift; sourceTree = "<group>"; };
 		F6434ED01D1A4472006FDFE2 /* LyricsSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsSettingViewController.swift; sourceTree = "<group>"; };
 		F64E2D8B1D2115CD002F2513 /* MResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MResponse.swift; sourceTree = "<group>"; };
@@ -231,9 +235,11 @@
 				F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */,
 				F68BC71E1D128ACE00A36247 /* Document.swift */,
 				F617FCA21D269452001A933B /* JumpOnLabelViewController.swift */,
+				F62903F31D27B6940025F190 /* SettingMenu.swift */,
 				F6434ED01D1A4472006FDFE2 /* LyricsSettingViewController.swift */,
 				F6434ECC1D1A4040006FDFE2 /* PreferencesWindownController.swift */,
 				F68BC7221D128ACE00A36247 /* Main.storyboard */,
+				F62903F51D27BE6B0025F190 /* Utilities.storyboard */,
 				F6E639E01D1A3E9E0065D082 /* Preferences.storyboard */,
 				F62903F11D27ACF80025F190 /* Assets.xcassets */,
 				F67B7F9A1D23D6B6001E7ED3 /* Utilities */,
@@ -362,6 +368,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F62903F61D27BE6B0025F190 /* Utilities.storyboard in Resources */,
 				F67B7FA31D23D75E001E7ED3 /* Lato-Lig.ttf in Resources */,
 				F668464F1D18D26E007DB6CF /* BlurBackground.xib in Resources */,
 				F67B7F961D23A832001E7ED3 /* PlayerControllerPanel.xib in Resources */,
@@ -451,6 +458,7 @@
 				F60BF8B51D13A68900F7C6DA /* MusiXMatchApi.swift in Sources */,
 				F64E2D8C1D2115CD002F2513 /* MResponse.swift in Sources */,
 				F68BC71B1D128ACE00A36247 /* AppDelegate.swift in Sources */,
+				F62903F41D27B6940025F190 /* SettingMenu.swift in Sources */,
 				F617FCA31D269452001A933B /* JumpOnLabelViewController.swift in Sources */,
 				F68BC71F1D128ACE00A36247 /* Document.swift in Sources */,
 				F668464D1D18D20E007DB6CF /* BlurBackground.swift in Sources */,
