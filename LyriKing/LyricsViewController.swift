@@ -42,7 +42,6 @@ class LyricsViewController: NSViewController {
     @IBOutlet weak var bottomPanel: NSView!
     @IBOutlet weak var bottomPanelHeight: NSLayoutConstraint!
     
-    
     @IBOutlet weak var controlPanel: NSView!
     
     var lyrics: String? {

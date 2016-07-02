@@ -30,7 +30,7 @@ class PopoverContentViewJumpOnLabel: NSView {
 class ColorBackgroundView: NSView {
     
     override func drawRect(dirtyRect: NSRect) {
-        NSColor(colorLiteralRed: 41.0/255.0, green: 48.0/255.0, blue: 66.0/255.0, alpha: 1.0).set()
+        NSColor(colorLiteralRed: 41.0/255.0, green: 48.0/255.0, blue: 66.0/255.0, alpha: 6.0).set()
         NSRectFill(bounds)
     }
 }
@@ -42,7 +42,7 @@ class JumpOnLabelViewController: NSViewController {
         
         didSet {
             
-            titleLabel.font = NSFont(name: "Lato Regular", size: 15)
+            titleLabel.font = NSFont(name: "Lato Regular", size: 12)
             titleLabel.textColor = NSColor.whiteColor()
         }
     }

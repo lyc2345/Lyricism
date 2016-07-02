@@ -692,7 +692,7 @@
                 </windowController>
                 <customObject id="6f7-a7-6o1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="-91" y="268"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -864,8 +864,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="bottomPanel" destination="dGe-Sm-Vif" id="F79-7Q-gBd"/>
-                        <outlet property="bottomPanelHeight" destination="EOm-Dt-0T2" id="OJH-Wb-sVn"/>
                         <outlet property="imageView" destination="897-1E-ERB" id="C70-6T-e4I"/>
                         <outlet property="scrollTextView" destination="bi9-ja-2dh" id="K8l-jd-IQw"/>
                         <outlet property="timeLabel" destination="FFI-ia-lvV" id="kDX-33-036"/>
@@ -874,25 +872,25 @@
                 </viewController>
                 <customObject id="igd-KZ-G8E" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="599.5" y="782"/>
+            <point key="canvasLocation" x="165" y="1017"/>
         </scene>
         <!--Jump On Label View Controller-->
         <scene sceneID="gxC-He-xd6">
             <objects>
                 <viewController storyboardIdentifier="notification_label_view_controller" id="QHV-7c-F4q" customClass="JumpOnLabelViewController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="ZRQ-yK-ZDV">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="35"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="25"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WhX-q9-W5l">
-                                <rect key="frame" x="-2" y="3" width="304" height="30"/>
+                                <rect key="frame" x="-2" y="2" width="304" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="QfT-5A-Mon"/>
+                                    <constraint firstAttribute="height" constant="22" id="QYa-oH-EOM"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="dUd-Uc-P4Z">
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" size="12" name="SFUIDisplay-Regular"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                 </textFieldCell>
                             </textField>
                         </subviews>
@@ -922,6 +920,7 @@
                 </viewController>
                 <customObject id="rSS-Sf-WVs" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="794" y="970"/>
         </scene>
     </scenes>
     <resources>
