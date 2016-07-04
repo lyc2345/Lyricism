@@ -18,6 +18,7 @@ struct MusiXTrack {
     var name: String
     var lyrics: String?
     var time: String
+    var artwork: NSURL?
 }
 
 struct MusiXAlbum {

@@ -197,7 +197,7 @@ class LyricsViewController: NSViewController {
         timeString = time
         
         
-        let track = MusiXTrack(artist: artist, name: name, lyrics: nil, time: time)
+        let track = MusiXTrack(artist: artist, name: name, lyrics: nil, time: time, artwork: nil)
         
         MusiXMatchApi.searchLyrics(track) { (success, lyrics) in
             

@@ -272,12 +272,12 @@ extension AppDelegate {
          print("No Local Image: \(iTunes.currentTrack?.artworks!().firstObject )")
          }*/
         
-        let track = MusiXTrack(artist: artist, name: name, lyrics: nil, time: time)
+        let track = MusiXTrack(artist: artist, name: name, lyrics: nil, time: time, artwork: nil)
         
         MusiXMatchApi.searchLyrics(track) { (success, lyrics) in
             
             self.printLog("lyrics:\(lyrics)")
-            let track  = MusiXTrack(artist: artist, name: name, lyrics: lyrics, time: time)
+            let track  = MusiXTrack(artist: artist, name: name, lyrics: lyrics, time: time, artwork: nil)
             self.passLyricsViewController(track)
         }
     }
@@ -292,6 +292,10 @@ extension AppDelegate {
             lyricsViewController.timeString = track.time
             lyricsViewController.marqueeText = "\(track.artist) - \(track.name)"
             lyricsViewController.lyrics = track.lyrics
+            
+            if let artworkURLString = Track.sharedTrack.album_coverart_350x350 {
+                lyricsViewController.artworkURL = NSURL(string: artworkURLString)
+            }
         }
     }
 }
