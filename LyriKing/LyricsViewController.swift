@@ -42,6 +42,7 @@ class LyricsViewController: NSViewController {
     @IBOutlet weak var controlPanel: NSView!
     
     var lyrics: String? {
+        
         didSet {
             
             dispatch_async(dispatch_get_main_queue(), {
@@ -105,7 +106,6 @@ class LyricsViewController: NSViewController {
     @IBOutlet weak var timeLabel: NSTextField!
     @IBOutlet weak var trackNameArtistLabel: MarqueeView!
     
-    
     var timer: NSTimer?
     
     @IBOutlet weak var imageView: NSImageView!
@@ -121,11 +121,16 @@ class LyricsViewController: NSViewController {
     
     var traigleView: NSView?
     
-    var topToggleState: Bool = true {
+    @IBAction func alwaysOnTopBtnPressed(sender: AnyObject) {
+        //        isAlwaysOnTop.title = topToggleState ? "✔︎ On Top" : "  Not On Top"
+        let attributedString = NSAttributedString(string: !topToggleState ? "✔︎ On Top" : "  Not On Top")
+        isAlwaysOnTop.attributedTitle = attributedString
+        NSUserDefaults.standardUserDefaults().setBool(!topToggleState, forKey: "isAlwaysOnTop")
+    }
+    @IBOutlet weak var isAlwaysOnTop: NSMenuItem!
+    var topToggleState: Bool {
         
-        didSet {
-            topToggleBtn.image = (topToggleState ? NSImage(named: "pin") : NSImage(named: "unpin"))
-        }
+        return NSUserDefaults.standardUserDefaults().boolForKey("isAlwaysOnTop")
     }
     @IBOutlet var settingMenu: NSMenu!
     
@@ -191,6 +196,7 @@ class LyricsViewController: NSViewController {
         marqueeText = "\(artist) - \(name)"
         timeString = time
         
+        
         let track = MusiXTrack(artist: artist, name: name, lyrics: nil, time: time)
         
         MusiXMatchApi.searchLyrics(track) { (success, lyrics) in
@@ -211,22 +217,19 @@ class LyricsViewController: NSViewController {
     
     @IBAction func settingBtnPressed(sender: AnyObject) {
         let button = sender as! NSButton
-        let point = CGPoint(x: button.frame.origin.x, y: button.frame.origin.y)
+        let _ = CGPoint(x: button.frame.origin.x, y: button.frame.origin.y)
         settingMenu.popUpMenuPositioningItem(nil, atLocation: NSEvent.mouseLocation(), inView: nil)
         //NSMenu.popUpContextMenu(settingMenu, withEvent: NSEvent.mouseEventWithType(NSEventType.LeftMouseDown, location: NSEvent.mouseLocation(), modifierFlags: NSEventModifierFlags.DeviceIndependentModifierFlagsMask, timestamp: 0, windowNumber: 0, context: nil, eventNumber: 0, clickCount: 0, pressure: 0)!, forView: self.view)
     }
     
     // TODO: Rubbish needs to restructure
     @IBOutlet weak var topToggleBtn: NSButton! {
-        
-        didSet {
-            topToggleBtn.image = (topToggleState ? NSImage(named: "pin") : NSImage(named: "unpin"))
-        }
+        didSet { self.topToggleBtn.hidden = true }
     }
     
     @IBAction func toggleAlwaysOnTop(sender: AnyObject) {
         
-        topToggleState = !topToggleState
+        NSUserDefaults.standardUserDefaults().setBool(!topToggleState, forKey: "isAlwaysOnTop")
     }
     
     func queryMusicInfo(track: MusiXTrack, itunes: iTunesApplication) {
@@ -305,6 +308,19 @@ extension String {
     func applyLyricsFormat() -> String {
         
         return self.stringByReplacingOccurrencesOfString(".", withString: ". \n").stringByReplacingOccurrencesOfString("\n", withString: "\n\n").stringByReplacingOccurrencesOfString("\n ", withString: "\n\n").stringByReplacingOccurrencesOfString(" \n", withString: "\n\n")
+    }
+}
+
+extension LyricsViewController {
+    
+    @IBAction func dockHide(sender: AnyObject) {
+        NSUserDefaults.standardUserDefaults().setBool(false, forKey: "show_dock_option")
+        NSApp.setActivationPolicy(.Accessory)
+    }
+    
+    @IBAction func dockUnhide(sender: AnyObject) {
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "show_dock_option")
+        NSApp.setActivationPolicy(.Regular)
     }
 }
 

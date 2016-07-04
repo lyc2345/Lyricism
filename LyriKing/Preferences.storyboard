@@ -32,7 +32,6 @@
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="tcP-hs-3Wz"/>
-                                <toolbarItem reference="f52-T9-yzN"/>
                             </defaultToolbarItems>
                         </toolbar>
                     </window>
@@ -72,32 +71,18 @@
             </objects>
             <point key="canvasLocation" x="957" y="777"/>
         </scene>
-        <!--View Controller-->
+        <!--Appearance View Controller-->
         <scene sceneID="Ka9-Ej-Z8v">
             <objects>
-                <viewController id="ht6-tM-xrT" sceneMemberID="viewController">
+                <viewController id="ht6-tM-xrT" customClass="AppearanceViewController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="IOI-OF-Oik">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OOL-pK-gN3">
-                                <rect key="frame" x="200" y="142" width="50" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="general" id="aq2-bc-o8M">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="OOL-pK-gN3" firstAttribute="centerX" secondItem="IOI-OF-Oik" secondAttribute="centerX" id="o7b-mL-84Y"/>
-                            <constraint firstItem="OOL-pK-gN3" firstAttribute="centerY" secondItem="IOI-OF-Oik" secondAttribute="centerY" id="wwc-cO-WR2"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="0Yz-sn-1Tl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="318" y="769"/>
+            <point key="canvasLocation" x="317" y="777"/>
         </scene>
         <!--Preference View Controller-->
         <scene sceneID="kmy-hv-PzX">
@@ -118,7 +103,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="avatar" width="228" height="228"/>
+        <image name="avatar" width="890" height="890"/>
         <image name="dark_lyrics" width="30" height="30"/>
         <image name="fast-forward" width="44" height="44"/>
         <image name="light_lyrics" width="30" height="30"/>

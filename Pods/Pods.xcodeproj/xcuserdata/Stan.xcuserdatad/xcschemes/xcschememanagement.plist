@@ -8,39 +8,31 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>Pods-LyriKing.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
+		</dict>
+		<key>ReachabilitySwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>SWXMLHash.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>5B16EB2EA2C1913260C010985929327E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5D7FF8003E5C2EA8D72041A69617F6C5</key>
+		<key>558C80E9AF84FEE1C2075D1FE795CD8E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -50,7 +42,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C134EBED54921A705A589AF5F977ACDA</key>
+		<key>860047DFE3018043D425D575846FA550</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A823CDCA1F128C86A700470156C3C3C0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EEE15E7AC55C6DE46A50F99B9901B067</key>
 		<dict>
 			<key>primary</key>
 			<true/>

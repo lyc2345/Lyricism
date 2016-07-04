@@ -39,13 +39,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var isiTunesPaused = false
     
     var dismissTimer: NSTimer!
-    var dismissTime: NSTimeInterval = 4;
+    var dismissTime: NSTimeInterval = 3;
     
+    var isAlwaysOnTop: Bool {
+        
+        return NSUserDefaults.standardUserDefaults().boolForKey("isAlwaysOnTop")
+    }
     
     // MARK: NSApplicationDelegate
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         
         showDock()
+        
+        //NSUserDefaults.standardUserDefaults().registerDefaults(["isAlwaysOnTop": true])
+        /*
+        let window = NSApplication.sharedApplication().windows.first
+        
+        if isAlwaysOnTop {
+            
+            window!.level = Int(CGWindowLevelForKey(.ScreenSaverWindowLevelKey))
+        } else {
+            window!.level = Int(CGWindowLevelForKey(.NormalWindowLevelKey))
+        }*/
         
         // button image on status bar
         if let button = statusItem.button {
@@ -61,14 +76,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             [unowned self] event in
             if self.popoverLyrics.shown {
                 //self.closePopover(event)
-                self.closePopover(self.popoverLyrics)
+                if self.isAlwaysOnTop {
+                    
+                } else {
+                    self.closePopover(self.popoverLyrics)
+                }
             }
         }
         eventMonitor?.start()
     }
     
     func applicationShouldTerminate(sender: NSApplication) -> NSApplicationTerminateReply {
-
+        
         return .TerminateNow
     }
     
@@ -214,7 +233,7 @@ extension AppDelegate {
     func timerStart() {
         
         guard let timer = dismissTimer else {
-           dismissTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(dismissTimerCountDown), userInfo: nil, repeats: true)
+            dismissTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(dismissTimerCountDown), userInfo: nil, repeats: true)
             return
         }
         timer.invalidate()
@@ -247,11 +266,11 @@ extension AppDelegate {
         }
         // new song playing
         /*
-        if let artwork = iTunes.currentTrack?.artworks!().firstObject as? NSImage {
-            lyricsViewController.imageView.image = artwork
-        } else {
-            print("No Local Image: \(iTunes.currentTrack?.artworks!().firstObject )")
-        }*/
+         if let artwork = iTunes.currentTrack?.artworks!().firstObject as? NSImage {
+         lyricsViewController.imageView.image = artwork
+         } else {
+         print("No Local Image: \(iTunes.currentTrack?.artworks!().firstObject )")
+         }*/
         
         let track = MusiXTrack(artist: artist, name: name, lyrics: nil, time: time)
         
@@ -270,9 +289,9 @@ extension AppDelegate {
         }
         
         if let lyricsViewController = popoverLyrics.contentViewController as? LyricsViewController {
-        lyricsViewController.timeString = track.time
-        lyricsViewController.marqueeText = "\(track.artist) - \(track.name)"
-        lyricsViewController.lyrics = track.lyrics
+            lyricsViewController.timeString = track.time
+            lyricsViewController.marqueeText = "\(track.artist) - \(track.name)"
+            lyricsViewController.lyrics = track.lyrics
         }
     }
 }

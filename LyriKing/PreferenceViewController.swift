@@ -10,23 +10,19 @@ import Cocoa
 
 class PreferenceViewController: NSViewController {
     
-    var currentSegueIdentifier: String!
-    
     enum PreferenceType: String {
         
         case appearance
         case other
     }
     
+    var currentSegueIdentifier: String!
     var currentViewController: NSViewController?
     var pastViewController: NSViewController?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        print("preference view controller view did load")
-        
         
     }
     
@@ -38,7 +34,6 @@ class PreferenceViewController: NSViewController {
         case .other:
             currentSegueIdentifier = PreferenceType.other.rawValue
         }
-        
         performSegueWithIdentifier(currentSegueIdentifier, sender: self)
     }
     

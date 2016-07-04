@@ -765,6 +765,9 @@
                         <subviews>
                             <imageView horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="897-1E-ERB">
                                 <rect key="frame" x="0.0" y="0.0" width="350" height="350"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="su1-Xc-GRd"/>
+                                </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" image="avatar" id="UDU-Xx-RIK"/>
                             </imageView>
                             <customView autoresizesSubviews="NO" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="tuY-vm-MWf" customClass="BlurBackground" customModule="LyriKing" customModuleProvider="target">
@@ -827,20 +830,11 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="dGe-Sm-Vif">
-                                <rect key="frame" x="0.0" y="0.0" width="350" height="0.0"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" id="EOm-Dt-0T2"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="PUE-f6-9Fc" kind="embed" id="Kkh-vC-i2k"/>
-                                </connections>
-                            </containerView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="6ch-b5-MOg">
-                                <rect key="frame" x="0.0" y="0.0" width="350" height="45"/>
+                                <rect key="frame" x="305" y="0.0" width="45" height="300"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Qw-4V-5en">
-                                        <rect key="frame" x="308" y="5" width="35" height="35"/>
+                                        <rect key="frame" x="5" y="5" width="35" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="1De-wO-MHH"/>
                                             <constraint firstAttribute="width" constant="35" id="yhq-S3-TfV"/>
@@ -854,11 +848,25 @@
                                             <outlet property="menu" destination="uAM-xs-CCp" id="gwB-iR-Gvx"/>
                                         </connections>
                                     </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hrb-KG-KY6">
+                                        <rect key="frame" x="5" y="50" width="35" height="35"/>
+                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="pin" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="e7J-JY-bWU">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="toggleAlwaysOnTop:" target="hcA-47-AYn" id="f54-DY-ZvS"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="8Qw-4V-5en" secondAttribute="trailing" constant="7" id="CTU-6l-n3r"/>
-                                    <constraint firstItem="8Qw-4V-5en" firstAttribute="centerY" secondItem="6ch-b5-MOg" secondAttribute="centerY" id="N2f-Hf-9C0"/>
-                                    <constraint firstAttribute="height" constant="45" id="ROk-2l-dBb"/>
+                                    <constraint firstItem="hrb-KG-KY6" firstAttribute="width" secondItem="8Qw-4V-5en" secondAttribute="width" id="0SF-Kz-tUj"/>
+                                    <constraint firstItem="hrb-KG-KY6" firstAttribute="height" secondItem="8Qw-4V-5en" secondAttribute="height" id="7W6-nT-KlM"/>
+                                    <constraint firstItem="hrb-KG-KY6" firstAttribute="centerX" secondItem="8Qw-4V-5en" secondAttribute="centerX" id="96w-Lj-w9X"/>
+                                    <constraint firstAttribute="width" constant="45" id="ROk-2l-dBb"/>
+                                    <constraint firstAttribute="bottom" secondItem="8Qw-4V-5en" secondAttribute="bottom" constant="5" id="UMZ-i8-Ui9"/>
+                                    <constraint firstItem="8Qw-4V-5en" firstAttribute="top" secondItem="hrb-KG-KY6" secondAttribute="bottom" constant="10" id="roh-z3-o5o"/>
+                                    <constraint firstItem="8Qw-4V-5en" firstAttribute="centerX" secondItem="6ch-b5-MOg" secondAttribute="centerX" id="tbC-wP-rhR"/>
                                 </constraints>
                             </customView>
                         </subviews>
@@ -872,19 +880,16 @@
                             <constraint firstAttribute="bottom" secondItem="6ch-b5-MOg" secondAttribute="bottom" id="Ltf-B3-HMH"/>
                             <constraint firstItem="1qW-9e-nzZ" firstAttribute="centerY" secondItem="FFI-ia-lvV" secondAttribute="centerY" id="S2h-NL-yu4"/>
                             <constraint firstItem="FFI-ia-lvV" firstAttribute="top" secondItem="Fy6-Fe-DG3" secondAttribute="top" constant="10" id="Trr-dk-CUU"/>
-                            <constraint firstAttribute="bottom" secondItem="dGe-Sm-Vif" secondAttribute="bottom" id="WHX-Rq-er5"/>
                             <constraint firstAttribute="bottom" secondItem="897-1E-ERB" secondAttribute="bottom" id="XGb-IV-jq3"/>
                             <constraint firstAttribute="trailing" secondItem="bi9-ja-2dh" secondAttribute="trailing" constant="30" id="ZH3-Ez-PcY"/>
-                            <constraint firstItem="6ch-b5-MOg" firstAttribute="leading" secondItem="Fy6-Fe-DG3" secondAttribute="leading" id="ZP5-V7-gqQ"/>
                             <constraint firstItem="1qW-9e-nzZ" firstAttribute="leading" secondItem="FFI-ia-lvV" secondAttribute="trailing" constant="5" id="ceu-nq-U7V"/>
                             <constraint firstItem="tuY-vm-MWf" firstAttribute="top" secondItem="Fy6-Fe-DG3" secondAttribute="top" id="ebQ-se-nnk"/>
-                            <constraint firstItem="dGe-Sm-Vif" firstAttribute="leading" secondItem="Fy6-Fe-DG3" secondAttribute="leading" id="glQ-xu-BGQ"/>
-                            <constraint firstItem="dGe-Sm-Vif" firstAttribute="top" secondItem="bi9-ja-2dh" secondAttribute="bottom" id="kB5-oe-Dhh"/>
+                            <constraint firstItem="6ch-b5-MOg" firstAttribute="top" secondItem="Fy6-Fe-DG3" secondAttribute="top" constant="50" id="fbE-v4-nnl"/>
+                            <constraint firstItem="bi9-ja-2dh" firstAttribute="top" secondItem="FFI-ia-lvV" secondAttribute="bottom" constant="11" id="hau-Nb-FVX"/>
                             <constraint firstItem="tuY-vm-MWf" firstAttribute="leading" secondItem="Fy6-Fe-DG3" secondAttribute="leading" id="lfI-uv-67o"/>
                             <constraint firstAttribute="trailing" secondItem="tuY-vm-MWf" secondAttribute="trailing" id="lh0-Xr-c5W"/>
                             <constraint firstItem="bi9-ja-2dh" firstAttribute="leading" secondItem="Fy6-Fe-DG3" secondAttribute="leading" constant="30" id="m3I-Pt-mex"/>
                             <constraint firstAttribute="bottom" secondItem="tuY-vm-MWf" secondAttribute="bottom" id="mwZ-69-uS9"/>
-                            <constraint firstAttribute="trailing" secondItem="dGe-Sm-Vif" secondAttribute="trailing" id="nW4-JK-HWg"/>
                             <constraint firstItem="897-1E-ERB" firstAttribute="leading" secondItem="Fy6-Fe-DG3" secondAttribute="leading" id="ooh-8q-l0A"/>
                             <constraint firstAttribute="trailing" secondItem="1qW-9e-nzZ" secondAttribute="trailing" constant="10" id="pSR-d0-glB"/>
                             <constraint firstItem="1qW-9e-nzZ" firstAttribute="bottom" secondItem="FFI-ia-lvV" secondAttribute="bottom" id="qqs-Lu-c3H"/>
@@ -894,9 +899,11 @@
                     <connections>
                         <outlet property="controlPanel" destination="6ch-b5-MOg" id="sua-bO-VS2"/>
                         <outlet property="imageView" destination="897-1E-ERB" id="C70-6T-e4I"/>
+                        <outlet property="isAlwaysOnTop" destination="O7q-aC-rNo" id="Cf8-JS-03d"/>
                         <outlet property="scrollTextView" destination="bi9-ja-2dh" id="K8l-jd-IQw"/>
                         <outlet property="settingMenu" destination="uAM-xs-CCp" id="hbe-FD-Sb7"/>
                         <outlet property="timeLabel" destination="FFI-ia-lvV" id="kDX-33-036"/>
+                        <outlet property="topToggleBtn" destination="hrb-KG-KY6" id="j0A-Dh-dTE"/>
                         <outlet property="trackNameArtistLabel" destination="1qW-9e-nzZ" id="a2m-2k-vPV"/>
                     </connections>
                 </viewController>
@@ -907,6 +914,38 @@
                             <connections>
                                 <action selector="settingButtonPressed:" target="hcA-47-AYn" id="L6t-gp-69H"/>
                             </connections>
+                        </menuItem>
+                        <menuItem title="Dock" id="HvW-4e-6Tm">
+                            <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
+                            <menu key="submenu" title="Dock" id="5e2-as-t16">
+                                <items>
+                                    <menuItem title="Show Dock" id="6h8-NY-AGO">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                        <connections>
+                                            <action selector="dockUnhide:" target="hcA-47-AYn" id="hct-8y-wUn"/>
+                                        </connections>
+                                    </menuItem>
+                                    <menuItem title="Hide Dock" id="fbk-OB-bN3">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                        <connections>
+                                            <action selector="dockHide:" target="hcA-47-AYn" id="j52-g8-Zvg"/>
+                                        </connections>
+                                    </menuItem>
+                                </items>
+                            </menu>
+                        </menuItem>
+                        <menuItem title="Top" id="j38-m3-Ee1">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <menu key="submenu" title="Top" id="t3g-kh-rcq">
+                                <items>
+                                    <menuItem title="On TOP" id="O7q-aC-rNo">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                        <connections>
+                                            <action selector="alwaysOnTopBtnPressed:" target="hcA-47-AYn" id="wLP-dz-Xvu"/>
+                                        </connections>
+                                    </menuItem>
+                                </items>
+                            </menu>
                         </menuItem>
                         <menuItem title="Quit" keyEquivalent="q" id="RvO-BI-vrc">
                             <connections>
@@ -935,7 +974,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WhX-q9-W5l">
-                                <rect key="frame" x="-2" y="2" width="304" height="22"/>
+                                <rect key="frame" x="-2" y="1" width="304" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="QYa-oH-EOM"/>
                                 </constraints>
@@ -976,7 +1015,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="avatar" width="228" height="228"/>
+        <image name="avatar" width="890" height="890"/>
+        <image name="pin" width="30" height="30"/>
         <image name="setting_light" width="30" height="30"/>
     </resources>
 </document>

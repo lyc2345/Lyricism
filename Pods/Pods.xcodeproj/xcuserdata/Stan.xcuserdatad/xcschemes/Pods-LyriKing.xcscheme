@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5B16EB2EA2C1913260C010985929327E"
+               BlueprintIdentifier = "A823CDCA1F128C86A700470156C3C3C0"
                BuildableName = "Pods_LyriKing.framework"
                BlueprintName = "Pods-LyriKing"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5B16EB2EA2C1913260C010985929327E"
+            BlueprintIdentifier = "A823CDCA1F128C86A700470156C3C3C0"
             BuildableName = "Pods_LyriKing.framework"
             BlueprintName = "Pods-LyriKing"
             ReferencedContainer = "container:Pods.xcodeproj">
