@@ -109,6 +109,7 @@
 		F68BC7251D128ACE00A36247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F696A2C01D2668FD00EBE049 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		F6A7DE421D20CACF001D5AD7 /* MarqueeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarqueeView.swift; sourceTree = "<group>"; };
+		F6A969241D3374FC00645AA2 /* LyriKing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = LyriKing.entitlements; sourceTree = "<group>"; };
 		F6D339B11D22865C0066F03F /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
 		F6D339B21D22865C0066F03F /* iTunes.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = iTunes.sdef; sourceTree = "<group>"; };
 		F6D339B31D22865C0066F03F /* iTunes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iTunes.swift; sourceTree = "<group>"; };
@@ -246,6 +247,7 @@
 		F68BC7191D128ACE00A36247 /* LyriKing */ = {
 			isa = PBXGroup;
 			children = (
+				F6A969241D3374FC00645AA2 /* LyriKing.entitlements */,
 				F60BF8A31D139B3E00F7C6DA /* LyriKing-Bridging-Header.h */,
 				F68BC71A1D128ACE00A36247 /* AppDelegate.swift */,
 				F68BC71C1D128ACE00A36247 /* ViewController.swift */,
@@ -352,6 +354,11 @@
 				TargetAttributes = {
 					F68BC7161D128ACD00A36247 = {
 						CreatedOnToolsVersion = 7.3;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					F6D339BC1D22867A0066F03F = {
 						CreatedOnToolsVersion = 7.3;
@@ -603,11 +610,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = LyriKing/LyriKing.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/LyriKing/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Stan.LyriKing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stan.lyricKing;
 				PRODUCT_NAME = LyriKing;
 				SWIFT_OBJC_BRIDGING_HEADER = "LyriKing-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -620,11 +629,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = LyriKing/LyriKing.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/LyriKing/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Stan.LyriKing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stan.lyricKing;
 				PRODUCT_NAME = LyriKing;
 				SWIFT_OBJC_BRIDGING_HEADER = "LyriKing-Bridging-Header.h";
 			};
