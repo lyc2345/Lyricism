@@ -72,8 +72,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		53FCF23E1D4078AF00028F6D /* SFPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SFPopover.swift; path = "../../../../../stanliu/Documents/New Folder With Items/lyricswiftyr/LyriKing/SFPopover.swift"; sourceTree = "<group>"; };
-		53FCF2431D40BE2E00028F6D /* PreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferenceViewController.swift; path = "../../../../../stanliu/Documents/New Folder With Items/lyricswiftyr/LyriKing/PreferenceViewController.swift"; sourceTree = "<group>"; };
+		53FCF23E1D4078AF00028F6D /* SFPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFPopover.swift; sourceTree = "<group>"; };
+		53FCF2431D40BE2E00028F6D /* PreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceViewController.swift; sourceTree = "<group>"; };
 		89CE8D50737B17B73218C8BD /* Pods_LyriKing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LyriKing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9687906AF1675794AFF78B7 /* Pods-LyriKing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LyriKing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LyriKing/Pods-LyriKing.debug.xcconfig"; sourceTree = "<group>"; };
 		E335D29E9F196A8F0400DD3F /* Pods-LyriKing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LyriKing.release.xcconfig"; path = "Pods/Target Support Files/Pods-LyriKing/Pods-LyriKing.release.xcconfig"; sourceTree = "<group>"; };
@@ -346,6 +346,7 @@
 				TargetAttributes = {
 					F68BC7161D128ACD00A36247 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 29DN3FMVP9;
 					};
 					F6D339BC1D22867A0066F03F = {
 						CreatedOnToolsVersion = 7.3;
@@ -595,12 +596,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/LyriKing/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Stan.LyriKing;
 				PRODUCT_NAME = LyriKing;
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "LyriKing-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -612,12 +616,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/LyriKing/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Stan.LyriKing;
 				PRODUCT_NAME = LyriKing;
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "LyriKing-Bridging-Header.h";
 			};
 			name = Release;
