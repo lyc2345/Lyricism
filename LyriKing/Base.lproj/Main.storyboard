@@ -758,7 +758,7 @@
         <!--Lyrics View Controller-->
         <scene sceneID="YfF-Qn-2fd">
             <objects>
-                <viewController storyboardIdentifier="lyrics_view_controller" showSeguePresentationStyle="single" id="hcA-47-AYn" customClass="LyricsViewController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LyricsViewController" showSeguePresentationStyle="single" id="hcA-47-AYn" customClass="LyricsViewController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Fy6-Fe-DG3">
                         <rect key="frame" x="0.0" y="0.0" width="350" height="350"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -968,7 +968,7 @@
         <!--Jump On Label View Controller-->
         <scene sceneID="gxC-He-xd6">
             <objects>
-                <viewController storyboardIdentifier="notification_label_view_controller" id="QHV-7c-F4q" customClass="JumpOnLabelViewController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JumpOnLabelViewController" id="QHV-7c-F4q" customClass="JumpOnLabelViewController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="ZRQ-yK-ZDV">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="25"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1851CB459819F56A50C2C747 /* Pods_LyriKing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89CE8D50737B17B73218C8BD /* Pods_LyriKing.framework */; };
 		53FCF23F1D4078AF00028F6D /* SFPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FCF23E1D4078AF00028F6D /* SFPopover.swift */; };
+		53FCF2441D40BE2E00028F6D /* PreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FCF2431D40BE2E00028F6D /* PreferenceViewController.swift */; };
 		F60BF8B51D13A68900F7C6DA /* MusiXMatchApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */; };
 		F60BF8B71D13EDCA00F7C6DA /* Tracks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8B61D13EDCA00F7C6DA /* Tracks.swift */; };
 		F60BF8D21D1424D800F7C6DA /* LyricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */; };
@@ -72,6 +73,7 @@
 
 /* Begin PBXFileReference section */
 		53FCF23E1D4078AF00028F6D /* SFPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SFPopover.swift; path = "../../../../../stanliu/Documents/New Folder With Items/lyricswiftyr/LyriKing/SFPopover.swift"; sourceTree = "<group>"; };
+		53FCF2431D40BE2E00028F6D /* PreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferenceViewController.swift; path = "../../../../../stanliu/Documents/New Folder With Items/lyricswiftyr/LyriKing/PreferenceViewController.swift"; sourceTree = "<group>"; };
 		89CE8D50737B17B73218C8BD /* Pods_LyriKing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LyriKing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9687906AF1675794AFF78B7 /* Pods-LyriKing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LyriKing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LyriKing/Pods-LyriKing.debug.xcconfig"; sourceTree = "<group>"; };
 		E335D29E9F196A8F0400DD3F /* Pods-LyriKing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LyriKing.release.xcconfig"; path = "Pods/Target Support Files/Pods-LyriKing/Pods-LyriKing.release.xcconfig"; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				F617FCA21D269452001A933B /* JumpOnLabelViewController.swift */,
 				F6434ED01D1A4472006FDFE2 /* LyricsSettingViewController.swift */,
 				F6434ECC1D1A4040006FDFE2 /* PreferencesWindownController.swift */,
+				53FCF2431D40BE2E00028F6D /* PreferenceViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -457,6 +460,7 @@
 				53FCF23F1D4078AF00028F6D /* SFPopover.swift in Sources */,
 				F68BC71D1D128ACE00A36247 /* ViewController.swift in Sources */,
 				F6434ECD1D1A4040006FDFE2 /* PreferencesWindownController.swift in Sources */,
+				53FCF2441D40BE2E00028F6D /* PreferenceViewController.swift in Sources */,
 				F60BF8B71D13EDCA00F7C6DA /* Tracks.swift in Sources */,
 				F6D339B71D22865C0066F03F /* iTunesScripting.swift in Sources */,
 				F672A8311D1949BC00FD518D /* EventMonitor.swift in Sources */,

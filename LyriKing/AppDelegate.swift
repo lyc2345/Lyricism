@@ -24,12 +24,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     lazy var lyricsViewController = {
         
-       return NSStoryboard(name: "Main", bundle: nil).instantiateControllerWithIdentifier("lyrics_view_controller") as! LyricsViewController
+       return NSStoryboard(name: "Main", bundle: nil).instantiateControllerWithIdentifier(String(LyricsViewController)) as! LyricsViewController
     }()
     
     lazy var jumpOnLabelViewController = {
         
-        return NSStoryboard(name: "Main", bundle: nil).instantiateControllerWithIdentifier("notification_label_view_controller") as! JumpOnLabelViewController
+        return NSStoryboard(name: "Main", bundle: nil).instantiateControllerWithIdentifier(String(JumpOnLabelViewController)) as! JumpOnLabelViewController
     }()
     
     var eventMonitor: EventMonitor?
@@ -226,12 +226,12 @@ extension AppDelegate {
             print("No Local Image: \(iTunes.currentTrack?.artworks!().firstObject )")
         }*/
         
-        let track = MusiXTrack(artist: artist, name: name, lyrics: nil, time: time)
+        let track = MusiXTrack(artist: artist, name: name, lyrics: nil, time: time, artwork: nil)
         
         MusiXMatchApi.searchLyrics(track) { (success, lyrics) in
             
             self.printLog("lyrics:\(lyrics)")
-            let track  = MusiXTrack(artist: artist, name: name, lyrics: lyrics, time: time)
+            let track  = MusiXTrack(artist: artist, name: name, lyrics: lyrics, time: time, artwork: nil)
             self.passLyricsViewController(track)
         }
     }
