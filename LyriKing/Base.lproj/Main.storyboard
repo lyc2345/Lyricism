@@ -787,7 +787,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="yDq-Bk-ufm"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="00:00" id="Jj4-BK-137">
-                                    <font key="font" size="25" name="SFUIDisplay-Regular"/>
+                                    <font key="font" metaFont="system" size="25"/>
                                     <color key="textColor" name="controlLightHighlightColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -979,7 +979,7 @@
                                     <constraint firstAttribute="height" constant="22" id="QYa-oH-EOM"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="dUd-Uc-P4Z">
-                                    <font key="font" size="12" name="SFUIDisplay-Regular"/>
+                                    <font key="font" metaFont="cellTitle"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                 </textFieldCell>

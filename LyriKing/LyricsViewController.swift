@@ -103,7 +103,13 @@ class LyricsViewController: NSViewController {
         }
     }
     
-    @IBOutlet weak var timeLabel: NSTextField!
+    @IBOutlet weak var timeLabel: NSTextField! {
+        
+        didSet {
+            
+            timeLabel.font = NSFont(name: "Lato Regular", size: 25)
+        }
+    }
     @IBOutlet weak var trackNameArtistLabel: MarqueeView!
     
     var timer: NSTimer?
