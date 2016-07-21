@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>ATSApplicationFontsPath</key>
-	<string></string>
+	<string>Fonts</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDocumentTypes</key>
@@ -58,12 +58,5 @@
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Lato-Black.ttf</string>
-		<string>Lato-Bol.ttf</string>
-		<string>Lato-Lig.ttf</string>
-		<string>Lato-Reg.ttf</string>
-	</array>
 </dict>
 </plist>
