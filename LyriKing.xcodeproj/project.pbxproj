@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1851CB459819F56A50C2C747 /* Pods_LyriKing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89CE8D50737B17B73218C8BD /* Pods_LyriKing.framework */; };
+		53FCF23F1D4078AF00028F6D /* SFPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FCF23E1D4078AF00028F6D /* SFPopover.swift */; };
 		F60BF8B51D13A68900F7C6DA /* MusiXMatchApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */; };
 		F60BF8B71D13EDCA00F7C6DA /* Tracks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8B61D13EDCA00F7C6DA /* Tracks.swift */; };
 		F60BF8D21D1424D800F7C6DA /* LyricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */; };
@@ -70,6 +71,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		53FCF23E1D4078AF00028F6D /* SFPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SFPopover.swift; path = "../../../../../stanliu/Documents/New Folder With Items/lyricswiftyr/LyriKing/SFPopover.swift"; sourceTree = "<group>"; };
 		89CE8D50737B17B73218C8BD /* Pods_LyriKing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LyriKing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9687906AF1675794AFF78B7 /* Pods-LyriKing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LyriKing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LyriKing/Pods-LyriKing.debug.xcconfig"; sourceTree = "<group>"; };
 		E335D29E9F196A8F0400DD3F /* Pods-LyriKing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LyriKing.release.xcconfig"; path = "Pods/Target Support Files/Pods-LyriKing/Pods-LyriKing.release.xcconfig"; sourceTree = "<group>"; };
@@ -140,6 +142,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		53FCF2411D40A9C800028F6D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F68BC71C1D128ACE00A36247 /* ViewController.swift */,
+				F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */,
+				F617FCA21D269452001A933B /* JumpOnLabelViewController.swift */,
+				F6434ED01D1A4472006FDFE2 /* LyricsSettingViewController.swift */,
+				F6434ECC1D1A4040006FDFE2 /* PreferencesWindownController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		53FCF2421D40A9D800028F6D /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				F68BC7221D128ACE00A36247 /* Main.storyboard */,
+				F6E639E01D1A3E9E0065D082 /* Preferences.storyboard */,
+			);
+			name = Storyboard;
+			sourceTree = "<group>";
+		};
 		EB3E0201C3E3C41B81CAC41A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +183,7 @@
 		F67B7F991D23D6A3001E7ED3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				53FCF23E1D4078AF00028F6D /* SFPopover.swift */,
 				F6A7DE421D20CACF001D5AD7 /* MarqueeView.swift */,
 				F67B7F951D23A832001E7ED3 /* PlayerControllerPanel.xib */,
 				F67B7F971D23A845001E7ED3 /* PlayerControllerPanel.swift */,
@@ -169,22 +193,16 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		F67B7F9A1D23D6B6001E7ED3 /* Utilities */ = {
+		F67B7F9A1D23D6B6001E7ED3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F64E2D8B1D2115CD002F2513 /* MResponse.swift */,
+				F60BF8B61D13EDCA00F7C6DA /* Tracks.swift */,
+				F696A2C01D2668FD00EBE049 /* Track.swift */,
 				F6D339CC1D22A8020066F03F /* SwiftyiTunes.swift */,
 				F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */,
 				F672A8301D1949BC00FD518D /* EventMonitor.swift */,
 				F616EBB51D15221800D1A40C /* NSObject+Extension.swift */,
-			);
-			name = Utilities;
-			sourceTree = "<group>";
-		};
-		F67B7F9B1D23D6CE001E7ED3 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				F60BF8B61D13EDCA00F7C6DA /* Tracks.swift */,
-				F696A2C01D2668FD00EBE049 /* Track.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -227,20 +245,13 @@
 			children = (
 				F60BF8A31D139B3E00F7C6DA /* LyriKing-Bridging-Header.h */,
 				F68BC71A1D128ACE00A36247 /* AppDelegate.swift */,
-				F68BC71C1D128ACE00A36247 /* ViewController.swift */,
-				F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */,
-				F68BC71E1D128ACE00A36247 /* Document.swift */,
-				F617FCA21D269452001A933B /* JumpOnLabelViewController.swift */,
-				F6434ED01D1A4472006FDFE2 /* LyricsSettingViewController.swift */,
-				F6434ECC1D1A4040006FDFE2 /* PreferencesWindownController.swift */,
-				F68BC7221D128ACE00A36247 /* Main.storyboard */,
-				F6E639E01D1A3E9E0065D082 /* Preferences.storyboard */,
-				F62903F11D27ACF80025F190 /* Assets.xcassets */,
-				F67B7F9A1D23D6B6001E7ED3 /* Utilities */,
+				53FCF2411D40A9C800028F6D /* Controller */,
+				53FCF2421D40A9D800028F6D /* Storyboard */,
+				F67B7F9A1D23D6B6001E7ED3 /* Model */,
 				F67B7F991D23D6A3001E7ED3 /* View */,
 				F64E2D8D1D2118DD002F2513 /* API */,
-				F64E2D8B1D2115CD002F2513 /* MResponse.swift */,
-				F67B7F9B1D23D6CE001E7ED3 /* Model */,
+				F68BC71E1D128ACE00A36247 /* Document.swift */,
+				F62903F11D27ACF80025F190 /* Assets.xcassets */,
 				F68BC7251D128ACE00A36247 /* Info.plist */,
 			);
 			path = LyriKing;
@@ -363,14 +374,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F67B7FA31D23D75E001E7ED3 /* Lato-Lig.ttf in Resources */,
+				F67B7FA21D23D75E001E7ED3 /* Lato-Bol.ttf in Resources */,
+				F67B7FA41D23D75E001E7ED3 /* Lato-Reg.ttf in Resources */,
+				F67B7FA11D23D75E001E7ED3 /* Lato-Black.ttf in Resources */,
 				F668464F1D18D26E007DB6CF /* BlurBackground.xib in Resources */,
 				F67B7F961D23A832001E7ED3 /* PlayerControllerPanel.xib in Resources */,
-				F67B7FA21D23D75E001E7ED3 /* Lato-Bol.ttf in Resources */,
 				F62903F21D27ACF80025F190 /* Assets.xcassets in Resources */,
 				F6E639E11D1A3E9E0065D082 /* Preferences.storyboard in Resources */,
-				F67B7FA11D23D75E001E7ED3 /* Lato-Black.ttf in Resources */,
 				F68BC7241D128ACE00A36247 /* Main.storyboard in Resources */,
-				F67B7FA41D23D75E001E7ED3 /* Lato-Reg.ttf in Resources */,
 				F6D339B51D22865C0066F03F /* iTunes.sdef in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -443,6 +454,7 @@
 				F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */,
 				F696A2C11D2668FD00EBE049 /* Track.swift in Sources */,
 				F6A7DE431D20CACF001D5AD7 /* MarqueeView.swift in Sources */,
+				53FCF23F1D4078AF00028F6D /* SFPopover.swift in Sources */,
 				F68BC71D1D128ACE00A36247 /* ViewController.swift in Sources */,
 				F6434ECD1D1A4040006FDFE2 /* PreferencesWindownController.swift in Sources */,
 				F60BF8B71D13EDCA00F7C6DA /* Tracks.swift in Sources */,
