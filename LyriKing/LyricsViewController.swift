@@ -352,6 +352,7 @@ extension LyricsViewController {
             
             if newOrigin.y < 650 {
                 newOrigin.y = 650
+     
             }
             print("the New Origin points:\(newOrigin)")
             

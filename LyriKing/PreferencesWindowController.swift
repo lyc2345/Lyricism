@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class PreferencesWindownController: NSWindowController {
+class PreferencesWindowController: NSWindowController {
 
     @IBOutlet weak var toolBar: NSToolbar!
     
@@ -20,6 +20,7 @@ class PreferencesWindownController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
     
+        
         preferenceViewController.preferenceCategory(.appearance)
     }
     

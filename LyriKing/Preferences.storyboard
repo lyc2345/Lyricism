@@ -8,7 +8,7 @@
         <!--Window Controller-->
         <scene sceneID="ArT-h8-F04">
             <objects>
-                <windowController id="cxR-se-Lbb" customClass="PreferencesWindownController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="PreferencesWindowController" id="cxR-se-Lbb" customClass="PreferencesWindowController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="q06-sO-Ayg">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -37,69 +37,52 @@
                     </window>
                     <connections>
                         <outlet property="toolBar" destination="mzp-ui-jkW" id="HEK-ie-RkZ"/>
-                        <segue destination="emk-5F-dIo" kind="relationship" relationship="window.shadowedContentViewController" id="WQC-Vr-vRv"/>
+                        <segue destination="HHd-EP-FJ5" kind="relationship" relationship="window.shadowedContentViewController" id="rYZ-Ag-KhA"/>
                     </connections>
                 </windowController>
                 <customObject id="JBe-Ji-LDe" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="0.0" y="334"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="M5D-iQ-kmN">
+        <!--Appearance View Controller-->
+        <scene sceneID="dxB-2p-Jgm">
             <objects>
-                <viewController id="lbg-R7-NyH" sceneMemberID="viewController">
-                    <view key="view" id="LDI-6a-Gye">
+                <viewController storyboardIdentifier="AppearanceViewController" id="SJS-Tt-bdV" customClass="AppearanceViewController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="kP0-aM-TwG">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="gp3-ik-RmY" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6" y="735"/>
+        </scene>
+        <!--Preference View Controller-->
+        <scene sceneID="GDC-2q-TNS">
+            <objects>
+                <viewController id="HHd-EP-FJ5" customClass="PreferenceViewController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Avm-tm-mzF">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hsy-h6-BbI">
-                                <rect key="frame" x="211" y="142" width="29" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="font" id="UTd-GH-ZYH">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
+                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="zgf-DO-K6f">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                            </containerView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="hsy-h6-BbI" firstAttribute="centerY" secondItem="LDI-6a-Gye" secondAttribute="centerY" id="Lba-jB-7gS"/>
-                            <constraint firstItem="hsy-h6-BbI" firstAttribute="centerX" secondItem="LDI-6a-Gye" secondAttribute="centerX" id="WfB-rs-2qW"/>
+                            <constraint firstAttribute="trailing" secondItem="zgf-DO-K6f" secondAttribute="trailing" id="C4l-hZ-jCp"/>
+                            <constraint firstItem="zgf-DO-K6f" firstAttribute="leading" secondItem="Avm-tm-mzF" secondAttribute="leading" id="Q8J-4e-hUS"/>
+                            <constraint firstAttribute="bottom" secondItem="zgf-DO-K6f" secondAttribute="bottom" id="Ud4-TM-BCw"/>
+                            <constraint firstItem="zgf-DO-K6f" firstAttribute="top" secondItem="Avm-tm-mzF" secondAttribute="top" id="k7K-Kh-Nut"/>
                         </constraints>
                     </view>
-                </viewController>
-                <customObject id="ycj-ow-4g1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="957" y="777"/>
-        </scene>
-        <!--Appearance View Controller-->
-        <scene sceneID="Ka9-Ej-Z8v">
-            <objects>
-                <viewController id="ht6-tM-xrT" customClass="AppearanceViewController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="IOI-OF-Oik">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
-                </viewController>
-                <customObject id="0Yz-sn-1Tl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="317" y="777"/>
-        </scene>
-        <!--Preference View Controller-->
-        <scene sceneID="kmy-hv-PzX">
-            <objects>
-                <viewController id="emk-5F-dIo" customClass="PreferenceViewController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="SnH-jP-swO">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
                     <connections>
-                        <segue destination="ht6-tM-xrT" kind="custom" identifier="appearance" customClass="PreferenceSegue" customModule="LyriKing" customModuleProvider="target" id="SNb-BJ-6xk"/>
-                        <segue destination="lbg-R7-NyH" kind="custom" identifier="other" customClass="PreferenceSegue" customModule="LyriKing" customModuleProvider="target" id="CjV-hv-vTV"/>
+                        <outlet property="containerView" destination="zgf-DO-K6f" id="LFT-9Z-UqJ"/>
                     </connections>
                 </viewController>
-                <customObject id="Lex-R4-GWE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="WkW-kg-JGI" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="612" y="334"/>
+            <point key="canvasLocation" x="572" y="319"/>
         </scene>
     </scenes>
     <resources>

@@ -16,46 +16,85 @@ class PreferenceViewController: NSViewController {
         case other
     }
     
-    var currentSegueIdentifier: String!
+    @IBOutlet weak var containerView: NSView!
+    
+    var containerViewController: NSViewController!
+    
+    var appearanceViewController: AppearanceViewController?
+    
     var currentViewController: NSViewController?
-    var pastViewController: NSViewController?
     
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()        
         
     }
     
     func preferenceCategory(prefer: PreferenceType) {
+    
+        var newViewController: NSViewController!
+        let preferenceStoryboard = NSStoryboard(name: "Preferences", bundle: nil)
         
         switch prefer {
         case .appearance:
-            currentSegueIdentifier = PreferenceType.appearance.rawValue
+            newViewController = preferenceStoryboard.instantiateControllerWithIdentifier(String(AppearanceViewController)) as? AppearanceViewController
         case .other:
-            currentSegueIdentifier = PreferenceType.other.rawValue
+            newViewController = preferenceStoryboard.instantiateControllerWithIdentifier(String(AppearanceViewController)) as? AppearanceViewController
         }
-        performSegueWithIdentifier(currentSegueIdentifier, sender: self)
+        
+        cycleFrom(currentViewController, to: newViewController)
     }
+    
+    func addSubview(subview: NSView, to parentview: NSView) {
+        
+        parentview.addSubview(subview)
+        var viewBindingsDict = [String: AnyObject]()
+        viewBindingsDict["subView"] = subview
+        parentview.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[subView]|",
+            options: [], metrics: nil, views: viewBindingsDict))
+        parentview.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[subView]|",
+            options: [], metrics: nil, views: viewBindingsDict))
+    }
+    
+    func cycleFrom(oldViewController: NSViewController?, to newViewController: NSViewController) {
+        
+        newViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        addChildViewController(newViewController)
+        
+        addSubview(newViewController.view, to: containerView)
+        
+        newViewController.view.alphaValue = 0
+        newViewController.view.layoutSubtreeIfNeeded()
+        
+        /*
+        UIView.animateWithDuration(0.5, animations: {
+            
+            newViewController.view.alpha = 1
+            oldViewController?.view.alpha = 0
+            
+            }, completion: { finished in
+                
+                oldViewController?.view.removeFromSuperview()
+                oldViewController?.removeFromParentViewController()
+                newViewController.didMoveToParentViewController(self)
+                self.wcToolViewController = newViewController
+        })*/
+
+        newViewController.view.alphaValue = 1
+        oldViewController?.view.alphaValue = 0
+        
+        oldViewController?.view.removeFromSuperview()
+        oldViewController?.removeFromParentViewController()
+        
+        currentViewController = newViewController
+    }
+    
     
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
         
-        if segue.identifier == currentSegueIdentifier {
-            if pastViewController != nil {
-                pastViewController?.view.removeFromSuperview()
-            }
+        if segue.destinationController is PreferenceViewController {
             
-            guard let currentViewController = segue.destinationController as? NSViewController else {
-            return
-            }
-            
-            addChildViewController(currentViewController)
-            currentViewController.view.frame = view.bounds
-            view.addSubview(currentViewController.view)
-            
-            currentViewController.removeFromParentViewController()
-            pastViewController = currentViewController
+            containerViewController = segue.destinationController as? PreferenceViewController
         }
     }
-    
-    
 }
