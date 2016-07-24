@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/Stan/Desktop/iOS/GitHub/LyriKing/Lyricism.xcodeproj">
+      location = "group:Lyricism.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

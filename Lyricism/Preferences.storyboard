@@ -8,7 +8,7 @@
         <!--Window Controller-->
         <scene sceneID="ArT-h8-F04">
             <objects>
-                <windowController storyboardIdentifier="PreferencesWindowController" id="cxR-se-Lbb" customClass="PreferencesWindowController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="PreferencesWindowController" id="cxR-se-Lbb" customClass="PreferencesWindowController" customModule="Lyricism" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="q06-sO-Ayg">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -47,7 +47,7 @@
         <!--Appearance View Controller-->
         <scene sceneID="dxB-2p-Jgm">
             <objects>
-                <viewController storyboardIdentifier="AppearanceViewController" id="SJS-Tt-bdV" customClass="AppearanceViewController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AppearanceViewController" id="SJS-Tt-bdV" customClass="AppearanceViewController" customModule="Lyricism" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="kP0-aM-TwG">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -102,7 +102,7 @@
         <!--Preference View Controller-->
         <scene sceneID="GDC-2q-TNS">
             <objects>
-                <viewController id="HHd-EP-FJ5" customClass="PreferenceViewController" customModule="LyriKing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="HHd-EP-FJ5" customClass="PreferenceViewController" customModule="Lyricism" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Avm-tm-mzF">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>

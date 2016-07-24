@@ -9,7 +9,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-LyriKing.xcscheme</key>
+		<key>Pods-Lyricism.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -32,27 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>558C80E9AF84FEE1C2075D1FE795CD8E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>860047DFE3018043D425D575846FA550</key>
+		<key>7BC717F669368595BCC1F3D089CDEF45</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A823CDCA1F128C86A700470156C3C3C0</key>
+		<key>7C90F640E3762DE01B7B46732B0A34E3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EEE15E7AC55C6DE46A50F99B9901B067</key>
+		<key>8B2C16E08711CB2F780DC206B75D0010</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B43810FEA4DCFC321909A9E5240E1D85</key>
 		<dict>
 			<key>primary</key>
 			<true/>
