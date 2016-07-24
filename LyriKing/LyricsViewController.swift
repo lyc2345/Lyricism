@@ -41,6 +41,8 @@ class LyricsViewController: NSViewController {
     
     @IBOutlet weak var controlPanel: NSView!
     
+    var preferenceWindowController: PreferencesWindowController!
+    
     var lyrics: String? {
         
         didSet {
@@ -134,6 +136,7 @@ class LyricsViewController: NSViewController {
         NSUserDefaults.standardUserDefaults().setBool(!topToggleState, forKey: "isAlwaysOnTop")
     }
     @IBOutlet weak var isAlwaysOnTop: NSMenuItem!
+    
     var topToggleState: Bool {
         
         return NSUserDefaults.standardUserDefaults().boolForKey("isAlwaysOnTop")
@@ -365,6 +368,13 @@ extension LyricsViewController {
 extension LyricsViewController {
     
     @IBAction func settingButtonPressed(sender: AnyObject) {
+        
+        let preferenceStoryboard = NSStoryboard(name: "Preferences", bundle: nil)
+        preferenceWindowController = preferenceStoryboard.instantiateControllerWithIdentifier(String(PreferencesWindowController)) as! PreferencesWindowController
+        
+        
+
+        preferenceWindowController.showWindow(self)
     }
     
     @IBAction func quitButtonPressed(sender: AnyObject) {

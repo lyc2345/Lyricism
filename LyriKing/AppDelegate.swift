@@ -15,12 +15,16 @@ import MediaLibrary
 // MARK: Main AppDelegate
 class AppDelegate: NSObject, NSApplicationDelegate {
     
+    var window: NSWindow?
+    
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-2)
     
+    var popover = SFPopover()
+    /*
     lazy var popover: SFPopover = {
         
         return SFPopover()
-    }()
+    }()*/
     
     lazy var lyricsViewController = {
         
@@ -57,6 +61,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             button.action = #selector(showLyrics)
             statusButton = button
         }
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(setPreferenceWindows), name: NSWindowWillCloseNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(setPreferenceWindows), name: NSWindowDidBecomeMainNotification, object: nil)
         
         NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: #selector(iTunesVaryStatus), name: "com.apple.iTunes.playerInfo", object: nil)
         
@@ -64,7 +71,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         eventMonitor = EventMonitor(mask: [.LeftMouseDownMask, .RightMouseDownMask]) {
             [unowned self] event in
             
-            if self.popover.shown {
+            if self.popover.shown && !NSUserDefaults.standardUserDefaults().boolForKey("isAlwaysOnTop") {
                 
                 self.popover.close(nil)
             }
@@ -75,8 +82,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
         NSDistributedNotificationCenter.defaultCenter().removeObserver(self, forKeyPath: "com.apple.iTunes.playerInfo")
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+    
+    func setPreferenceWindows(notification: NSNotification) {
+        
+        print("notification:\(notification)")
+        
+        if notification == NSWindowWillCloseNotification {
+            
+            NSApp.setActivationPolicy(.Regular)
+        } else {
+            NSApp.setActivationPolicy(.Accessory)
+        }
+    }
 }
 // MARK: Dock Setting
 extension AppDelegate {

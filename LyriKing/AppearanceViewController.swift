@@ -21,11 +21,40 @@ class AppearanceViewController: NSViewController {
             }
         }
     }*/
+    @IBOutlet weak var isOnDockBtn: NSButton!
+    @IBOutlet weak var isAlwaysTopBtn: NSButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        isOnDockBtn.state = NSUserDefaults.standardUserDefaults().boolForKey("show_dock_option") ? 1: 0
+        isAlwaysTopBtn.state = NSUserDefaults.standardUserDefaults().boolForKey("isAlwaysOnTop") ? 1: 0
+    }
+
+    @IBAction func hideDock(sender: AnyObject) {
         
+        print("show:\((sender as! NSButton).state)")
+        
+        if isOnDockBtn.state == 1 {
+        
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "show_dock_option")
+            NSApp.setActivationPolicy(.Regular)
+            
+        } else {
+            
+            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "show_dock_option")
+            NSApp.setActivationPolicy(.Accessory)
+        }
+    }
+    
+    @IBAction func onTop(sender: AnyObject) {
+        
+        if isAlwaysTopBtn.state == 1 {
+        
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isAlwaysOnTop")
+        } else {
+            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "isAlwaysOnTop")
+        }
     }
 }
 

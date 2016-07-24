@@ -9,10 +9,10 @@
         <!--Preferences-->
         <scene sceneID="1nt-Ds-aga">
             <objects>
-                <controllerPlaceholder storyboardName="Preferences" id="F9T-KI-kJB" sceneMemberID="viewController"/>
+                <controllerPlaceholder storyboardIdentifier="Preferences" storyboardName="Preferences" id="F9T-KI-kJB" sceneMemberID="viewController"/>
                 <customObject id="nhE-Wl-rpF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-43.5" y="-135"/>
+            <point key="canvasLocation" x="439" y="0.0"/>
         </scene>
         <!--Application-->
         <scene sceneID="JPo-4y-FX3">
@@ -31,7 +31,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                        <menuItem title="Preferences" keyEquivalent="," id="BOF-NM-1cW">
                                             <connections>
                                                 <segue destination="F9T-KI-kJB" kind="show" id="7PT-kp-8H3"/>
                                             </connections>
@@ -689,10 +689,13 @@
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                     </window>
+                    <connections>
+                        <segue destination="5gI-5U-AMq" kind="relationship" relationship="window.shadowedContentViewController" id="aPr-g1-8iE"/>
+                    </connections>
                 </windowController>
                 <customObject id="6f7-a7-6o1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-91" y="268"/>
+            <point key="canvasLocation" x="323" y="228"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -753,7 +756,7 @@
                 </viewController>
                 <customObject id="2Tp-Fl-jBw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="311" y="627"/>
         </scene>
         <!--Lyrics View Controller-->
         <scene sceneID="YfF-Qn-2fd">
@@ -910,7 +913,7 @@
                 <customObject id="igd-KZ-G8E" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <menu id="uAM-xs-CCp">
                     <items>
-                        <menuItem title="Preference" keyEquivalent="s" id="O3m-3i-qAl">
+                        <menuItem title="Preference" keyEquivalent="," id="O3m-3i-qAl">
                             <connections>
                                 <action selector="settingButtonPressed:" target="hcA-47-AYn" id="L6t-gp-69H"/>
                             </connections>
