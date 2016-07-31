@@ -10,31 +10,12 @@ import Cocoa
 import ScriptingBridge
 import AVFoundation
 
-// Change Triagle Background Color
-class PopoverContentView: NSView {
+protocol LyricsViewPresentable {
     
-    var backgroundView: PopoverBackgroundView?
-    override func viewDidMoveToWindow() {
-        
-        super.viewDidMoveToWindow()
-        
-        if let frameView = self.window?.contentView?.superview {
-            if backgroundView == nil {
-                
-                backgroundView = PopoverBackgroundView(frame: frameView.bounds)
-                backgroundView!.autoresizingMask = NSAutoresizingMaskOptions([.ViewWidthSizable, .ViewHeightSizable]);
-                frameView.addSubview(backgroundView!, positioned: NSWindowOrderingMode.Below, relativeTo: frameView)
-            }
-        }
-    }
-}
-// Change Triagle Background Color
-class PopoverBackgroundView: NSView {
-    
-    override func drawRect(dirtyRect: NSRect) {
-        NSColor(colorLiteralRed: 41.0/255.0, green: 48.0/255.0, blue: 66.0/255.0, alpha: 0.4).set()
-        NSRectFill(bounds)
-    }
+    var lvLyrics: String { get }
+    var lvArtworkURL: NSURL? { get }
+    var lvTime: String { get }
+    var lvArtistNTrack: (artist: String, trackName: String) { get }
 }
 
 class LyricsViewController: NSViewController {
@@ -43,62 +24,45 @@ class LyricsViewController: NSViewController {
     
     var preferenceWindowController: PreferencesWindowController!
     
-    var lyrics: String? {
-        
+    private var lyrics: String? {
         didSet {
-            
-            dispatch_async(dispatch_get_main_queue(), {
+            guard let textView = self.scrollTextView.contentView.documentView as? NSTextView else {
                 
-                if let textView = self.scrollTextView.contentView.documentView as? NSTextView where self.lyrics != nil {
-                    textView.string = self.lyrics?.applyLyricsFormat()
-                    return
-                }
-                if let textView = self.scrollTextView.contentView.documentView as? NSTextView {
-                    textView.string = ""
-                }
-            })
+                return
+            }
+            textView.string = self.lyrics?.applyLyricsFormat() ?? ""
         }
     }
-    var artworkURL: NSURL? {
-        
+    
+    private  var artworkURL: NSURL? {
         didSet {
-            dispatch_async(dispatch_get_main_queue(), {
-                
-                self.imageView.image = self.artworkURL != nil ? NSImage(contentsOfURL: self.artworkURL!) : NSImage(named: "avatar")
-            })
+            self.imageView.image = self.artworkURL != nil ? NSImage(contentsOfURL: self.artworkURL!) : NSImage(named: "avatar")
         }
     }
     var trackTime: Int! = 0
-    var timeString: String = "00:00" {
+    private var timeString: String = "00:00" {
         
         willSet {
             trackTime = nil
-            print("time string will set")
         }
         
         didSet {
-            print("time string did set")
             let seconds = String(timeString.characters.dropFirst(2)).copy()
             let minutes = String(timeString.characters.dropLast(3)).stringByReplacingOccurrencesOfString("-", withString: "").copy()
-            printLog("timestring:\(timeString)")
-            printLog("second:\(String(timeString.characters.dropFirst(3))), minutes:\(String(timeString.characters.dropLast(3)).stringByReplacingOccurrencesOfString("-", withString: ""))")
             
             let iTunes = SwiftyiTunes.sharedInstance.iTunes
             trackTime = Int(minutes!.intValue * 60 + seconds!.intValue) - Int(iTunes.playerPosition!)
             
-            if timer != nil {
-                timer!.invalidate()
-                timer = nil
-            }
+            stopTimer()
             setupTimer(1.0)
         }
     }
     
-    var marqueeText: String? {
+    private var artistNtrack: (artist: String, trackName: String)? {
         
         didSet {
-            if let marqueeText = marqueeText where marqueeText != " - " {
-                self.trackNameArtistLabel.text = marqueeText
+            if let artistNtrack = artistNtrack {
+                self.trackNameArtistLabel.text = "\(artistNtrack.0) - \(artistNtrack.1)"
             } else {
                 trackNameArtistLabel.text = ""
             }
@@ -106,12 +70,9 @@ class LyricsViewController: NSViewController {
     }
     
     @IBOutlet weak var timeLabel: NSTextField! {
-        
-        didSet {
-            
-            timeLabel.font = NSFont(name: "Lato Regular", size: 25)
-        }
+        didSet { timeLabel.font = NSFont(name: "Lato Regular", size: 25) }
     }
+    
     @IBOutlet weak var trackNameArtistLabel: MarqueeView!
     
     var timer: NSTimer?
@@ -128,6 +89,54 @@ class LyricsViewController: NSViewController {
     }
     
     var traigleView: NSView?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        traigleView = PopoverContentView(frame: view.frame)
+        view.addSubview(traigleView!)
+        createTrackingArea()
+        
+        if Track.sharedTrack.info.lyric == nil {
+            let iTunes = SwiftyiTunes.sharedInstance.iTunes
+            guard let artist = iTunes.currentTrack?.artist, name = iTunes.currentTrack?.name, time = iTunes.currentTrack?.time else {
+                
+                print("iTunes.currentTrack is nil")
+                return
+            }
+            let track = MusiXTrack(artist: artist, name: name, lyrics: nil, time: time, artwork: nil)
+            configure(withPresenter: track)
+        }
+    }
+    
+    func configure(withPresenter presenter: LyricsViewPresentable) {
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            self.lyrics = presenter.lvLyrics
+            self.artworkURL = presenter.lvArtworkURL
+            self.timeString = presenter.lvTime
+            self.artistNtrack = presenter.lvArtistNTrack
+        }
+        searchLyricNArtwork(presenter)
+    }
+
+    
+    func searchLyricNArtwork(presenter: LyricsViewPresentable) {
+        
+        dispatch_async(dispatch_get_global_queue(0, 0)) {
+            
+            MusiXMatchApi.searchLyrics(presenter.lvArtistNTrack.artist, trackName: presenter.lvArtistNTrack.trackName, completion: { (success, lyrics) in
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    self.lyrics = lyrics
+                    if let urlString = Track.sharedTrack.info.album_coverart_350x350 {
+                        self.artworkURL = NSURL(string: urlString)!
+                    }
+                })
+            })
+        }
+    }
     
     @IBAction func alwaysOnTopBtnPressed(sender: AnyObject) {
         //        isAlwaysOnTop.title = topToggleState ? "✔︎ On Top" : "  Not On Top"
@@ -146,8 +155,8 @@ class LyricsViewController: NSViewController {
     private var trackingArea: NSTrackingArea!
     
     func createTrackingArea() {
+        
         if trackingArea != nil {
-            
             view.removeTrackingArea(trackingArea)
         }
         let circleRect = view.bounds
@@ -185,50 +194,11 @@ class LyricsViewController: NSViewController {
             self.controlPanel.hidden = true
         }
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        traigleView = PopoverContentView(frame: view.frame)
-        view.addSubview(traigleView!)
-    }
-
-    override func viewDidAppear() {
-        super.viewDidAppear()
-        
-        createTrackingArea()
-        
-        let iTunes = SwiftyiTunes.sharedInstance.iTunes
-        guard let artist = iTunes.currentTrack?.artist, name = iTunes.currentTrack?.name, time = iTunes.currentTrack?.time else {
-            return
-        }
-        marqueeText = "\(artist) - \(name)"
-        timeString = time
-        
-        
-        let track = MusiXTrack(artist: artist, name: name, lyrics: nil, time: time, artwork: nil)
-        
-        MusiXMatchApi.searchLyrics(track) { (success, lyrics) in
-            
-            self.printLog("lyrics:\(lyrics)")
-            self.lyrics = success ? lyrics : nil
-            
-            if let urlString = Track.sharedTrack.album_coverart_350x350 {
-                
-                self.artworkURL = NSURL(string: urlString)
-            }
-        }
-    }
-    
-    deinit {
-        
-    }
     
     @IBAction func settingBtnPressed(sender: AnyObject) {
         let button = sender as! NSButton
         let _ = CGPoint(x: button.frame.origin.x, y: button.frame.origin.y)
         settingMenu.popUpMenuPositioningItem(nil, atLocation: NSEvent.mouseLocation(), inView: nil)
-        //NSMenu.popUpContextMenu(settingMenu, withEvent: NSEvent.mouseEventWithType(NSEventType.LeftMouseDown, location: NSEvent.mouseLocation(), modifierFlags: NSEventModifierFlags.DeviceIndependentModifierFlagsMask, timestamp: 0, windowNumber: 0, context: nil, eventNumber: 0, clickCount: 0, pressure: 0)!, forView: self.view)
     }
     
     // TODO: Rubbish needs to restructure
@@ -241,21 +211,6 @@ class LyricsViewController: NSViewController {
         NSUserDefaults.standardUserDefaults().setBool(!topToggleState, forKey: "isAlwaysOnTop")
     }
     
-    func queryMusicInfo(track: MusiXTrack, itunes: iTunesApplication) {
-        
-        if let artwork = itunes.currentTrack?.artworks!().firstObject as? NSImage {
-            self.imageView.image = artwork
-        } else {
-            print("No Local Image: \(itunes.currentTrack?.artworks!().firstObject )")
-        }
-        
-        MusiXMatchApi.searchLyrics(track) { (success, lyrics) in
-            
-            self.printLog("lyrics:\(lyrics)")
-            self.lyrics = success ? lyrics : nil
-        }
-    }
-    
     func updateTime() {
         
         if trackTime == 0 {
@@ -266,21 +221,15 @@ class LyricsViewController: NSViewController {
         let seconds = trackTime % 60
         
         var timeString: String = ""
-        if minutes < 10 {
-            timeString = "0\(minutes)"
-        } else {
-            timeString = "\(minutes)"
-        }
-        if seconds < 10 {
-            timeString = ("\(timeString):0\(seconds)")
-        } else {
-            timeString = ("\(timeString):\(seconds)")
-        }
+        
+        timeString = minutes < 10 ? "0\(minutes)" : "\(minutes)"
+        
+        timeString = seconds < 10 ? ("\(timeString):0\(seconds)") : ("\(timeString):\(seconds)")
+
         dispatch_async(dispatch_get_main_queue()) { 
             self.timeLabel.stringValue = timeString
         }
         //print("track time :\(timeString)")
-        
         trackTime = trackTime - 1
     }
     
@@ -316,7 +265,9 @@ extension String {
     
     func applyLyricsFormat() -> String {
         
-        return self.stringByReplacingOccurrencesOfString(".", withString: ". \n").stringByReplacingOccurrencesOfString("\n", withString: "\n\n").stringByReplacingOccurrencesOfString("\n ", withString: "\n\n").stringByReplacingOccurrencesOfString(" \n", withString: "\n\n")
+        
+        
+        return self == "" ? "Couldn't Find Any Relative Lyrics" : self.stringByReplacingOccurrencesOfString(".", withString: ". \n").stringByReplacingOccurrencesOfString("\n", withString: "\n\n").stringByReplacingOccurrencesOfString("\n ", withString: "\n\n").stringByReplacingOccurrencesOfString(" \n", withString: "\n\n")
     }
 }
 
@@ -372,8 +323,6 @@ extension LyricsViewController {
         let preferenceStoryboard = NSStoryboard(name: "Preferences", bundle: nil)
         preferenceWindowController = preferenceStoryboard.instantiateControllerWithIdentifier(String(PreferencesWindowController)) as! PreferencesWindowController
         
-        
-
         preferenceWindowController.showWindow(self)
     }
     

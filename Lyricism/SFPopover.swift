@@ -11,6 +11,7 @@ import Cocoa
 class SFPopover: NSPopover {
 
     enum PopoverType {
+        
         case lyrics, prompt
         
         func rawValue() -> (sizeValue: CGSize, identifierValue: String) {
@@ -28,8 +29,9 @@ class SFPopover: NSPopover {
     override init() {
         
         super.init()
+        //contentSize = PopoverType.lyrics.rawValue().sizeValue
+        //contentViewController?.view.autoresizingMask = NSAutoresizingMaskOptions([.ViewWidthSizable, .ViewHeightSizable]);
         
-        contentViewController?.view.autoresizingMask = NSAutoresizingMaskOptions([.ViewWidthSizable, .ViewHeightSizable]);
         delegate = self
     }
     
@@ -38,22 +40,36 @@ class SFPopover: NSPopover {
         super.init(coder: coder)
     }
     
-    func getSize(viewController: NSViewController) -> CGSize {
+    private func getSize(type: PopoverType) -> CGSize {
         
-        if viewController is LyricsViewController {
-            return CGSizeMake(350, 350)
-        } else {
-            return CGSizeMake(200, 25)
-        }
+        return type.rawValue().sizeValue
     }
     
-    func show(viewController: NSViewController, at view: NSView, handler: (Void) -> Void) {
+    private func viewController(type: PopoverType) -> NSViewController {
+        
+        let identifier = type.rawValue().identifierValue
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        
+        return storyboard.instantiateControllerWithIdentifier(identifier) as! NSViewController
+    }
 
-        print("show popover")
-        contentViewController = viewController
-        contentSize = getSize(viewController)
-        showRelativeToRect(view.bounds, ofView: view, preferredEdge: .MaxY)
+    func show(viewController vc: NSViewController, at sender: NSView, handler:(Void) -> Void) {
+
+        contentViewController = vc
+        contentSize = (vc is LyricsViewController) ? getSize(.lyrics) : getSize(.prompt)
+        showRelativeToRect(sender.bounds, ofView: sender, preferredEdge: .MaxY)
+        
         handler()
+    }
+    
+    func show(type: PopoverType, at view: NSView, handler:(viewController: NSViewController) -> Void) {
+        
+        let vc = viewController(type)
+        contentViewController = vc
+        contentSize = getSize(type)
+        showRelativeToRect(view.bounds, ofView: view, preferredEdge: .MaxY)
+        
+        handler(viewController: vc)
     }
     
     func close(handler: ((Void) -> Void)?) {
@@ -61,17 +77,17 @@ class SFPopover: NSPopover {
         if let h = handler {
             h()
         }
-        print("close popover")
+        //print("close popover")
         performClose(self)
     }
     
     func toggle(from vc1: NSViewController, to vc2: NSViewController, at view: NSView, handler: (Void) -> Void) {
-        
+        /*
         if self.shown {
             close(){  }
         } else {
             show(vc2, at: view, handler: handler)
-        }
+        }*/
     }
 
 }
@@ -80,7 +96,7 @@ extension SFPopover: NSPopoverDelegate {
     
     
     func popoverDidShow(notification: NSNotification) {
-        print("Popover did show")
+        //print("Popover did show")
     }
     
     func popoverWillShow(notification: NSNotification) {

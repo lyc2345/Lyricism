@@ -10,7 +10,6 @@
 		012089740B3F599CD9C3512A /* Pods_Lyricism.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76B527F76D97FC69D993092C /* Pods_Lyricism.framework */; };
 		53FCF23F1D4078AF00028F6D /* SFPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FCF23E1D4078AF00028F6D /* SFPopover.swift */; };
 		F60BF8B51D13A68900F7C6DA /* MusiXMatchApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */; };
-		F60BF8B71D13EDCA00F7C6DA /* Tracks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8B61D13EDCA00F7C6DA /* Tracks.swift */; };
 		F60BF8D21D1424D800F7C6DA /* LyricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */; };
 		F60BF8D61D1430D300F7C6DA /* MacUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */; };
 		F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F616EBB51D15221800D1A40C /* NSObject+Extension.swift */; };
@@ -25,6 +24,7 @@
 		F668464D1D18D20E007DB6CF /* BlurBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668464C1D18D20E007DB6CF /* BlurBackground.swift */; };
 		F668464F1D18D26E007DB6CF /* BlurBackground.xib in Resources */ = {isa = PBXBuildFile; fileRef = F668464E1D18D26E007DB6CF /* BlurBackground.xib */; };
 		F672A8311D1949BC00FD518D /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F672A8301D1949BC00FD518D /* EventMonitor.swift */; };
+		F677D5EA1D4CA1BA0057C028 /* MusiXMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F677D5E91D4CA1BA0057C028 /* MusiXMatch.swift */; };
 		F67B7F961D23A832001E7ED3 /* PlayerControllerPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = F67B7F951D23A832001E7ED3 /* PlayerControllerPanel.xib */; };
 		F67B7F981D23A845001E7ED3 /* PlayerControllerPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B7F971D23A845001E7ED3 /* PlayerControllerPanel.swift */; };
 		F67B7FA11D23D75E001E7ED3 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F67B7F9D1D23D75E001E7ED3 /* Lato-Black.ttf */; };
@@ -37,6 +37,7 @@
 		F68BC7241D128ACE00A36247 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F68BC7221D128ACE00A36247 /* Main.storyboard */; };
 		F696A2C11D2668FD00EBE049 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = F696A2C01D2668FD00EBE049 /* Track.swift */; };
 		F6A7DE431D20CACF001D5AD7 /* MarqueeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A7DE421D20CACF001D5AD7 /* MarqueeView.swift */; };
+		F6BF27B11D4E002A00AA04BB /* PopoverContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BF27B01D4E002A00AA04BB /* PopoverContentView.swift */; };
 		F6D339B51D22865C0066F03F /* iTunes.sdef in Resources */ = {isa = PBXBuildFile; fileRef = F6D339B21D22865C0066F03F /* iTunes.sdef */; };
 		F6D339B61D22865C0066F03F /* iTunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D339B31D22865C0066F03F /* iTunes.swift */; };
 		F6D339B71D22865C0066F03F /* iTunesScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D339B41D22865C0066F03F /* iTunesScripting.swift */; };
@@ -82,7 +83,6 @@
 		E335D29E9F196A8F0400DD3F /* Pods-LyriKing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LyriKing.release.xcconfig"; path = "Pods/Target Support Files/Pods-LyriKing/Pods-LyriKing.release.xcconfig"; sourceTree = "<group>"; };
 		F60BF8A31D139B3E00F7C6DA /* Lyricism-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lyricism-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusiXMatchApi.swift; sourceTree = "<group>"; };
-		F60BF8B61D13EDCA00F7C6DA /* Tracks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tracks.swift; sourceTree = "<group>"; };
 		F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsViewController.swift; sourceTree = "<group>"; };
 		F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacUtilities.swift; sourceTree = "<group>"; };
 		F616EBB51D15221800D1A40C /* NSObject+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
@@ -97,6 +97,7 @@
 		F668464C1D18D20E007DB6CF /* BlurBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurBackground.swift; sourceTree = "<group>"; };
 		F668464E1D18D26E007DB6CF /* BlurBackground.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlurBackground.xib; sourceTree = "<group>"; };
 		F672A8301D1949BC00FD518D /* EventMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
+		F677D5E91D4CA1BA0057C028 /* MusiXMatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusiXMatch.swift; sourceTree = "<group>"; };
 		F67B7F951D23A832001E7ED3 /* PlayerControllerPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerControllerPanel.xib; sourceTree = "<group>"; };
 		F67B7F971D23A845001E7ED3 /* PlayerControllerPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerControllerPanel.swift; sourceTree = "<group>"; };
 		F67B7F9D1D23D75E001E7ED3 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
@@ -111,6 +112,7 @@
 		F68BC7251D128ACE00A36247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F696A2C01D2668FD00EBE049 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		F6A7DE421D20CACF001D5AD7 /* MarqueeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarqueeView.swift; sourceTree = "<group>"; };
+		F6BF27B01D4E002A00AA04BB /* PopoverContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverContentView.swift; sourceTree = "<group>"; };
 		F6D339B11D22865C0066F03F /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
 		F6D339B21D22865C0066F03F /* iTunes.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = iTunes.sdef; sourceTree = "<group>"; };
 		F6D339B31D22865C0066F03F /* iTunes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iTunes.swift; sourceTree = "<group>"; };
@@ -184,17 +186,10 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		F64E2D8D1D2118DD002F2513 /* API */ = {
-			isa = PBXGroup;
-			children = (
-				F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */,
-			);
-			name = API;
-			sourceTree = "<group>";
-		};
 		F67B7F991D23D6A3001E7ED3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F6BF27B01D4E002A00AA04BB /* PopoverContentView.swift */,
 				53FCF23E1D4078AF00028F6D /* SFPopover.swift */,
 				F6A7DE421D20CACF001D5AD7 /* MarqueeView.swift */,
 				F67B7F951D23A832001E7ED3 /* PlayerControllerPanel.xib */,
@@ -209,7 +204,8 @@
 			isa = PBXGroup;
 			children = (
 				F64E2D8B1D2115CD002F2513 /* MResponse.swift */,
-				F60BF8B61D13EDCA00F7C6DA /* Tracks.swift */,
+				F677D5E91D4CA1BA0057C028 /* MusiXMatch.swift */,
+				F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */,
 				F696A2C01D2668FD00EBE049 /* Track.swift */,
 				F6D339CC1D22A8020066F03F /* SwiftyiTunes.swift */,
 				F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */,
@@ -261,7 +257,6 @@
 				53FCF2421D40A9D800028F6D /* Storyboard */,
 				F67B7F9A1D23D6B6001E7ED3 /* Model */,
 				F67B7F991D23D6A3001E7ED3 /* View */,
-				F64E2D8D1D2118DD002F2513 /* API */,
 				F68BC71E1D128ACE00A36247 /* Document.swift */,
 				F62903F11D27ACF80025F190 /* Assets.xcassets */,
 				F68BC7251D128ACE00A36247 /* Info.plist */,
@@ -470,17 +465,18 @@
 				F6A7DE431D20CACF001D5AD7 /* MarqueeView.swift in Sources */,
 				53FCF23F1D4078AF00028F6D /* SFPopover.swift in Sources */,
 				F68BC71D1D128ACE00A36247 /* ViewController.swift in Sources */,
-				F60BF8B71D13EDCA00F7C6DA /* Tracks.swift in Sources */,
 				F6624B2A1D437A9100D2D42E /* PreferenceViewController.swift in Sources */,
 				F6D339B71D22865C0066F03F /* iTunesScripting.swift in Sources */,
 				F672A8311D1949BC00FD518D /* EventMonitor.swift in Sources */,
 				F60BF8B51D13A68900F7C6DA /* MusiXMatchApi.swift in Sources */,
+				F677D5EA1D4CA1BA0057C028 /* MusiXMatch.swift in Sources */,
 				F64E2D8C1D2115CD002F2513 /* MResponse.swift in Sources */,
 				F68BC71B1D128ACE00A36247 /* AppDelegate.swift in Sources */,
 				F617FCA31D269452001A933B /* JumpOnLabelViewController.swift in Sources */,
 				F68BC71F1D128ACE00A36247 /* Document.swift in Sources */,
 				F668464D1D18D20E007DB6CF /* BlurBackground.swift in Sources */,
 				F6D339B61D22865C0066F03F /* iTunes.swift in Sources */,
+				F6BF27B11D4E002A00AA04BB /* PopoverContentView.swift in Sources */,
 				F6624B291D437A9100D2D42E /* PreferencesWindowController.swift in Sources */,
 				F67B7F981D23A845001E7ED3 /* PlayerControllerPanel.swift in Sources */,
 				F6D339CD1D22A8020066F03F /* SwiftyiTunes.swift in Sources */,

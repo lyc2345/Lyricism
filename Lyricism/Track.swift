@@ -13,6 +13,15 @@ class Track: NSObject {
     
     static let sharedTrack: Track = Track()
     
+    override init() {
+        info = Info()
+    }
+    
+    var info: Info!
+}
+
+class Info: NSObject {
+    
     var has_lyrics: NSNumber!
     
     var track_share_url: String!
@@ -44,6 +53,8 @@ class Track: NSObject {
     var music_genre_name: String?
     var music_genre_name_extended: String?
     
+    var lyric: String?
+    
     
     func getCurrentTrackID() {
         //TODO: Clean up this code after testing
@@ -66,26 +77,26 @@ class Track: NSObject {
             
             if let stringValue = json["message"]["body"]["track"][key].string {
                 
-                print("property: \(key), value: \(stringValue)")
+                //print("property: \(key), value: \(stringValue)")
                 self.setValue(stringValue, forKey: key)
             } else if let numberValue = json["message"]["body"]["track"][key].int {
                 
-                print("property: \(key), value: \(numberValue)")
+                //print("property: \(key), value: \(numberValue)")
                 self.setValue(numberValue, forKey: key)
             } else {
                 
                 //primary_genre
-                if let primary_genres = json["message"]["body"]["track"]["primary_genres"].dictionary {
-                    print("property: \(key), value: \(primary_genres)")
+                if let _ = json["message"]["body"]["track"]["primary_genres"].dictionary {
+                    //print("property: \(key), value: \(primary_genres)")
                     
                 }
                 if let genreStringValue = json["message"]["body"]["track"]["primary_genres"]["music_genre_list"][0]["music_genre"][key].string {
-                    print("property: \(key), value: \(genreStringValue)")
+                    //print("property: \(key), value: \(genreStringValue)")
                     self.setValue(genreStringValue, forKey: key)
                     
                 }
                 if let genreNumberValue = json["message"]["body"]["track"]["primary_genres"]["music_genre_list"][0]["music_genre"][key].number {
-                    print("property: \(key), value: \(genreNumberValue)")
+                    //print("property: \(key), value: \(genreNumberValue)")
                     self.setValue(genreNumberValue, forKey: key)
                 }
             }

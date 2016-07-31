@@ -51,8 +51,6 @@ class ViewController: NSViewController {
          print(data)
          
          }*/
-        
-        NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: #selector(songSwitch), name: "com.apple.iTunes.playerInfo", object: nil)
     }
     
     override var representedObject: AnyObject? {
@@ -64,23 +62,6 @@ class ViewController: NSViewController {
     
     deinit {
         
-        NSDistributedNotificationCenter.defaultCenter().removeObserver(self)
-    }
-    
-    func songSwitch(notification: NSNotification) {
-        
-        print("song switched!")
-        //TODO: Clean up this code after testing
-        /*
-        let trackDict = MacUtilities.getCurrentMusicInfo()
-        
-        guard let _ = trackDict?.artist, _ = trackDict?.track else {
-            
-            return
-        }
-
-        getCurrentIconImage()
-         */
     }
     
     func printAllTheLibraryName() {

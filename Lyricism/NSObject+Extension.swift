@@ -44,7 +44,7 @@ class iOSXFoundation {
             //let cname = name.cStringUsingEncoding(NSUTF8StringEncoding)
             if let value = track.valueForKey(name) {
                 
-                print("property name: \(name), value:\(value)")
+                //print("property name: \(name), value:\(value)")
             }
         }
     }
@@ -85,7 +85,7 @@ extension NSObject {
         
         for (_, name) in propertiesName.enumerate() {
             
-            print("property name: \(name), value:\(myClass.valueForKey(name))")
+            //print("property name: \(name), value:\(myClass.valueForKey(name))")
         }
     }
     
@@ -104,7 +104,7 @@ extension NSObject {
             
             let attribute = property_getAttributes(property)
             let attributeString = String(UTF8String: attribute)
-            print("attributeString:\(attributeString!)")
+            //print("attributeString:\(attributeString!)")
             let attributes = attributeString!.componentsSeparatedByString(",")
             
             results.append(attributes)

@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SQLite.swift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SWXMLHash.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,27 +37,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>372694E421579E808D7587A4A0DAF4AF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7BC717F669368595BCC1F3D089CDEF45</key>
+		<key>80564B07517285ADEE1A97F6319F26E5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7C90F640E3762DE01B7B46732B0A34E3</key>
+		<key>9A6286E8AC420AF5F79CAB20C4F20B2E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8B2C16E08711CB2F780DC206B75D0010</key>
+		<key>BD2AACFCB00B02FAA551795C335EAF88</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B43810FEA4DCFC321909A9E5240E1D85</key>
+		<key>FF7760B1BD0B72AAA4A27518C13F3D64</key>
 		<dict>
 			<key>primary</key>
 			<true/>

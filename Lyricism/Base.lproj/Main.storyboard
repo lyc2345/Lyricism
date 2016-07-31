@@ -689,9 +689,6 @@
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                     </window>
-                    <connections>
-                        <segue destination="5gI-5U-AMq" kind="relationship" relationship="window.shadowedContentViewController" id="aPr-g1-8iE"/>
-                    </connections>
                 </windowController>
                 <customObject id="6f7-a7-6o1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -762,7 +759,7 @@
         <scene sceneID="YfF-Qn-2fd">
             <objects>
                 <viewController storyboardIdentifier="LyricsViewController" showSeguePresentationStyle="single" id="hcA-47-AYn" customClass="LyricsViewController" customModule="Lyricism" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="Fy6-Fe-DG3">
+                    <view key="view" autoresizesSubviews="NO" id="Fy6-Fe-DG3">
                         <rect key="frame" x="0.0" y="0.0" width="350" height="350"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -795,7 +792,7 @@
                                     <color key="backgroundColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="bi9-ja-2dh">
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="bi9-ja-2dh">
                                 <rect key="frame" x="30" y="0.0" width="290" height="294"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="UKF-j9-9S6">
                                     <rect key="frame" x="0.0" y="0.0" width="290" height="294"/>

@@ -16,7 +16,6 @@ class AppearanceViewController: NSViewController {
             if let tableView = scrollView.documentView as? NSTableView {
                 tableView.setDataSource(self)
                 tableView.setDelegate(self)
-                print("delegate yo ho")
                 tableView.backgroundColor = NSColor.grayColor()
             }
         }

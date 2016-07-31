@@ -64,7 +64,7 @@ class MarqueeView: NSView {
     var text: String = "" {
         
         didSet {
-            self.printLog("label.stringvalue: \(text)")
+            //self.printLog("label.stringvalue: \(text)")
             fullString = text.copy() as? String
             point = NSZeroPoint
             stringWidth = NSString(string: text).sizeWithAttributes(textAttributes).width
