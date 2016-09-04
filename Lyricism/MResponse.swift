@@ -19,8 +19,6 @@ public struct MResponse {
     public let albumName: String?
     public let albumID: NSNumber?
     
-    
-    
     public init(
         lyrics: String?,
         photo100x100URL: NSURL?,

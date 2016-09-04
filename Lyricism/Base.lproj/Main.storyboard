@@ -759,7 +759,7 @@
         <scene sceneID="YfF-Qn-2fd">
             <objects>
                 <viewController storyboardIdentifier="LyricsViewController" showSeguePresentationStyle="single" id="hcA-47-AYn" customClass="LyricsViewController" customModule="Lyricism" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" autoresizesSubviews="NO" id="Fy6-Fe-DG3">
+                    <view key="view" autoresizesSubviews="NO" wantsLayer="YES" id="Fy6-Fe-DG3">
                         <rect key="frame" x="0.0" y="0.0" width="350" height="350"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -915,7 +915,7 @@
                                 <action selector="settingButtonPressed:" target="hcA-47-AYn" id="L6t-gp-69H"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Dock" id="HvW-4e-6Tm">
+                        <menuItem title="Dock" hidden="YES" id="HvW-4e-6Tm">
                             <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
                             <menu key="submenu" title="Dock" id="5e2-as-t16">
                                 <items>
@@ -934,7 +934,7 @@
                                 </items>
                             </menu>
                         </menuItem>
-                        <menuItem title="Top" id="j38-m3-Ee1">
+                        <menuItem title="Top" hidden="YES" id="j38-m3-Ee1">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <menu key="submenu" title="Top" id="t3g-kh-rcq">
                                 <items>

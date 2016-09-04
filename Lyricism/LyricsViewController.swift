@@ -18,7 +18,44 @@ protocol LyricsViewPresentable {
     var lvArtistNTrack: (artist: String, trackName: String) { get }
 }
 
-class LyricsViewController: NSViewController {
+protocol TextViewSetable {
+    
+    var aligment: NSTextAlignment { get }
+    var textColor: NSColor { get }
+    
+    func fontWithSize(size: CGFloat) -> NSFont
+}
+
+extension TextViewSetable {
+    
+    var aligment: NSTextAlignment { return .Center }
+    var textColor: NSColor { return NSColor.whiteColor() }
+    
+    func fontWithSize(size: CGFloat) -> NSFont {
+        
+        return NSFont(name: "Lato Regular", size: size)!
+    }
+}
+
+struct TextViewViewModel { }
+extension TextViewViewModel: TextViewSetable { }
+
+extension NSTextField: TextViewSetable { }
+
+extension NSScrollView {
+    
+    func defaultSetting(withPresenter presenter: TextViewSetable) {
+        
+        if let textView = self.contentView.documentView as? NSTextView {
+            
+            textView.font = presenter.fontWithSize(17)
+            textView.alignment = presenter.aligment
+            textView.textColor = presenter.textColor
+        }
+    }
+}
+
+class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable {
     
     @IBOutlet weak var controlPanel: NSView!
     
@@ -26,7 +63,7 @@ class LyricsViewController: NSViewController {
     
     private var lyrics: String? {
         didSet {
-            guard let textView = self.scrollTextView.contentView.documentView as? NSTextView else {
+            guard let textView = scrollTextView.contentView.documentView as? NSTextView else {
                 
                 return
             }
@@ -39,7 +76,10 @@ class LyricsViewController: NSViewController {
             self.imageView.image = self.artworkURL != nil ? NSImage(contentsOfURL: self.artworkURL!) : NSImage(named: "avatar")
         }
     }
-    var trackTime: Int! = 0
+    // protocol Timerable
+    var timer: NSTimer?
+    var trackTime: Int!
+    
     private var timeString: String = "00:00" {
         
         willSet {
@@ -54,7 +94,8 @@ class LyricsViewController: NSViewController {
             trackTime = Int(minutes!.intValue * 60 + seconds!.intValue) - Int(iTunes.playerPosition!)
             
             stopTimer()
-            setupTimer(1.0)
+            //setupTimer(1.0)
+            initTimer(1.0, target: self, selector: #selector(updateTime), repeats: true)
         }
     }
     
@@ -70,22 +111,15 @@ class LyricsViewController: NSViewController {
     }
     
     @IBOutlet weak var timeLabel: NSTextField! {
-        didSet { timeLabel.font = NSFont(name: "Lato Regular", size: 25) }
+        didSet { timeLabel.font = timeLabel.fontWithSize(25) }
     }
     
     @IBOutlet weak var trackNameArtistLabel: MarqueeView!
     
-    var timer: NSTimer?
-    
     @IBOutlet weak var imageView: NSImageView!
+    
     @IBOutlet weak var scrollTextView: NSScrollView! {
-        didSet {
-            if let textView = self.scrollTextView.contentView.documentView as? NSTextView {
-                textView.font = NSFont(name: "Lato Regular", size: 17)
-                textView.alignment = .Center
-                textView.textColor = NSColor.whiteColor()
-            }
-        }
+        didSet { self.scrollTextView.defaultSetting(withPresenter: TextViewViewModel()) }
     }
     
     var traigleView: NSView?
@@ -112,6 +146,7 @@ class LyricsViewController: NSViewController {
     func configure(withPresenter presenter: LyricsViewPresentable) {
         
         dispatch_async(dispatch_get_main_queue()) {
+            
             self.lyrics = presenter.lvLyrics
             self.artworkURL = presenter.lvArtworkURL
             self.timeString = presenter.lvTime
@@ -139,17 +174,12 @@ class LyricsViewController: NSViewController {
     }
     
     @IBAction func alwaysOnTopBtnPressed(sender: AnyObject) {
-        //        isAlwaysOnTop.title = topToggleState ? "✔︎ On Top" : "  Not On Top"
-        let attributedString = NSAttributedString(string: !topToggleState ? "✔︎ On Top" : "  Not On Top")
-        isAlwaysOnTop.attributedTitle = attributedString
-        NSUserDefaults.standardUserDefaults().setBool(!topToggleState, forKey: "isAlwaysOnTop")
+        
+        isAlwaysOnTop.attributedTitle = NSAttributedString(string: !isWindowsOnTop() ? "✔︎ On Top" : "  Not On Top")
+        setWinowsOnTop()
     }
     @IBOutlet weak var isAlwaysOnTop: NSMenuItem!
-    
-    var topToggleState: Bool {
-        
-        return NSUserDefaults.standardUserDefaults().boolForKey("isAlwaysOnTop")
-    }
+
     @IBOutlet var settingMenu: NSMenu!
     
     private var trackingArea: NSTrackingArea!
@@ -208,51 +238,18 @@ class LyricsViewController: NSViewController {
     
     @IBAction func toggleAlwaysOnTop(sender: AnyObject) {
         
-        NSUserDefaults.standardUserDefaults().setBool(!topToggleState, forKey: "isAlwaysOnTop")
+        setWindowsOnTop(isWindowsOnTop() ? .yes : .no)
     }
     
     func updateTime() {
-        
-        if trackTime == 0 {
-            stopTimer()
-        }
-        
-        let minutes = trackTime / 60
-        let seconds = trackTime % 60
-        
-        var timeString: String = ""
-        
-        timeString = minutes < 10 ? "0\(minutes)" : "\(minutes)"
-        
-        timeString = seconds < 10 ? ("\(timeString):0\(seconds)") : ("\(timeString):\(seconds)")
-
-        dispatch_async(dispatch_get_main_queue()) { 
+        updateTimer() { (timeString) in
             self.timeLabel.stringValue = timeString
         }
-        //print("track time :\(timeString)")
-        trackTime = trackTime - 1
-    }
-    
-    func setupTimer(timerInterval: NSTimeInterval) {
-        
-        timer = NSTimer(timeInterval: timerInterval, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-        NSRunLoop.mainRunLoop().addTimer(timer!, forMode: NSDefaultRunLoopMode)
     }
     
     func resumeTimer() {
-        trackTime - 1
-        if timer != nil {
-            timer = nil
-        }
-        setupTimer(1.0)
-    }
-    
-    func stopTimer() {
         
-        if timer != nil {
-            timer!.invalidate()
-            timer = nil
-        }
+        resumeTimer(self, selector: #selector(updateTime), repeats: true)
     }
     
     func terminateApp() {
@@ -265,8 +262,6 @@ extension String {
     
     func applyLyricsFormat() -> String {
         
-        
-        
         return self == "" ? "Couldn't Find Any Relative Lyrics" : self.stringByReplacingOccurrencesOfString(".", withString: ". \n").stringByReplacingOccurrencesOfString("\n", withString: "\n\n").stringByReplacingOccurrencesOfString("\n ", withString: "\n\n").stringByReplacingOccurrencesOfString(" \n", withString: "\n\n")
     }
 }
@@ -274,13 +269,11 @@ extension String {
 extension LyricsViewController {
     
     @IBAction func dockHide(sender: AnyObject) {
-        NSUserDefaults.standardUserDefaults().setBool(false, forKey: "show_dock_option")
-        NSApp.setActivationPolicy(.Accessory)
+        setDocker(.no)
     }
     
     @IBAction func dockUnhide(sender: AnyObject) {
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "show_dock_option")
-        NSApp.setActivationPolicy(.Regular)
+        setDocker(.yes)
     }
 }
 

@@ -15,85 +15,85 @@ import SWXMLHash
 import SwiftyJSON
 
 class ViewController: NSViewController {
+  
+  @IBOutlet weak var scrollTextView: NSScrollView! {
     
-    @IBOutlet weak var scrollTextView: NSScrollView! {
+    didSet {
+      if let textView = self.scrollTextView.contentView.documentView as? NSTextView {
         
-        didSet {
-            if let textView = self.scrollTextView.contentView.documentView as? NSTextView {
-                
-                textView.editable = false
-                textView.textStorage?.mutableString.setString("default")
-            }
-        }
+        textView.editable = false
+        textView.textStorage?.mutableString.setString("default")
+      }
     }
-    @IBOutlet weak var imageView: NSImageView!
+  }
+  @IBOutlet weak var imageView: NSImageView!
+  
+  var url = NSURL(string: "https://www.google.com/#q=james+blunt+postcards+lyrics")
+  
+  @IBOutlet weak var webView: WebView! {
     
-    var url = NSURL(string: "https://www.google.com/#q=james+blunt+postcards+lyrics")
-    
-    @IBOutlet weak var webView: WebView! {
-        
-        didSet {
-            
-            webView.policyDelegate = self
-        }
+    didSet {
+      
+      webView.policyDelegate = self
     }
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        /*
-         let request = NSURLRequest(URL: url!)
-         webView.mainFrame.loadRequest(request)
-         
-         NSURLSession.sharedSession().dataTaskWithURL(url!) {
-         (data, response, error) in
-         // deal with error etc accordingly
-         print(data)
-         
-         }*/
+    /*
+     let request = NSURLRequest(URL: url!)
+     webView.mainFrame.loadRequest(request)
+     
+     NSURLSession.sharedSession().dataTaskWithURL(url!) {
+     (data, response, error) in
+     // deal with error etc accordingly
+     print(data)
+     
+     }*/
+  }
+  
+  override var representedObject: AnyObject? {
+    didSet {
+      // Update the view, if already loaded.
+      
     }
+  }
+  
+  deinit {
     
-    override var representedObject: AnyObject? {
-        didSet {
-            // Update the view, if already loaded.
-            
-        }
-    }
+  }
+  
+  func printAllTheLibraryName() {
     
-    deinit {
-        
-    }
     
-    func printAllTheLibraryName() {
-        
-        
-    }
+  }
+  
+  func getCurrentIconImage() {
     
-    func getCurrentIconImage() {
-        
-        
-        iOSXFoundation.propertyValues(Track)
-        
-    }
+    
+    iOSXFoundation.propertyValues(Track)
+    
+  }
 }
 
 extension ViewController: WebPolicyDelegate {
+  
+  func webView(webView: WebView!, decidePolicyForNavigationAction actionInformation: [NSObject : AnyObject]!, request: NSURLRequest!, frame: WebFrame!, decisionListener listener: WebPolicyDecisionListener!) {
     
-    func webView(webView: WebView!, decidePolicyForNavigationAction actionInformation: [NSObject : AnyObject]!, request: NSURLRequest!, frame: WebFrame!, decisionListener listener: WebPolicyDecisionListener!) {
-        
-        if WebNavigationType.LinkClicked.rawValue == actionInformation[WebActionNavigationTypeKey] as! Int {
-            listener.ignore()
-            //NSWorkspace.sharedWorkspace().openURL(request.URL!)
-            webView.mainFrame.loadRequest(request)
-        }
-        
-        print("request url:\(request.URL!)")
-        listener.use()
-        
+    if WebNavigationType.LinkClicked.rawValue == actionInformation[WebActionNavigationTypeKey] as! Int {
+      listener.ignore()
+      //NSWorkspace.sharedWorkspace().openURL(request.URL!)
+      webView.mainFrame.loadRequest(request)
     }
     
-    func webView(webView: WebView!, decidePolicyForNewWindowAction actionInformation: [NSObject : AnyObject]!, request: NSURLRequest!, newFrameName frameName: String!, decisionListener listener: WebPolicyDecisionListener!) {
-        
-    }
+    print("request url:\(request.URL!)")
+    listener.use()
+    
+  }
+  
+  func webView(webView: WebView!, decidePolicyForNewWindowAction actionInformation: [NSObject : AnyObject]!, request: NSURLRequest!, newFrameName frameName: String!, decisionListener listener: WebPolicyDecisionListener!) {
+    
+  }
 }
 

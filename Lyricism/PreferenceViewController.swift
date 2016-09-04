@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class PreferenceViewController: NSViewController {
+class PreferenceViewController: NSViewController, ContainerSwitchable {
     
     enum PreferenceType: String {
         
@@ -22,12 +22,15 @@ class PreferenceViewController: NSViewController {
     
     var appearanceViewController: AppearanceViewController?
     
+    var tTarget: NSViewController { return self }
+    var tContainerView: NSView { return containerView }
     var currentViewController: NSViewController?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()        
-        
+      
+      
     }
     
     func preferenceCategory(prefer: PreferenceType) {
@@ -42,55 +45,11 @@ class PreferenceViewController: NSViewController {
             newViewController = preferenceStoryboard.instantiateControllerWithIdentifier(String(AppearanceViewController)) as? AppearanceViewController
         }
         
-        cycleFrom(currentViewController, to: newViewController)
+        cycleFromViewController(currentViewController, toViewController: newViewController)
     }
     
-    func addSubview(subview: NSView, to parentview: NSView) {
-        
-        parentview.addSubview(subview)
-        var viewBindingsDict = [String: AnyObject]()
-        viewBindingsDict["subView"] = subview
-        parentview.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[subView]|",
-            options: [], metrics: nil, views: viewBindingsDict))
-        parentview.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[subView]|",
-            options: [], metrics: nil, views: viewBindingsDict))
-    }
-    
-    func cycleFrom(oldViewController: NSViewController?, to newViewController: NSViewController) {
-        
-        newViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        addChildViewController(newViewController)
-        
-        addSubview(newViewController.view, to: containerView)
-        
-        newViewController.view.alphaValue = 0
-        newViewController.view.layoutSubtreeIfNeeded()
-        
-        /*
-        UIView.animateWithDuration(0.5, animations: {
-            
-            newViewController.view.alpha = 1
-            oldViewController?.view.alpha = 0
-            
-            }, completion: { finished in
-                
-                oldViewController?.view.removeFromSuperview()
-                oldViewController?.removeFromParentViewController()
-                newViewController.didMoveToParentViewController(self)
-                self.wcToolViewController = newViewController
-        })*/
-
-        newViewController.view.alphaValue = 1
-        oldViewController?.view.alphaValue = 0
-        
-        oldViewController?.view.removeFromSuperview()
-        oldViewController?.removeFromParentViewController()
-        
-        currentViewController = newViewController
-    }
-    
-    
-    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+  @available(OSX 10.10, *)
+  override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
         
         if segue.destinationController is PreferenceViewController {
             

@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class AppearanceViewController: NSViewController {
+class AppearanceViewController: NSViewController, PreferencesSetable {
 
     /*
     @IBOutlet weak var scrollView: NSScrollView! {
@@ -25,35 +25,22 @@ class AppearanceViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+      isOnDockBtn.state = isDockerShown() ? 1 : 0
+      isAlwaysTopBtn.state = isWindowsOnTop() ? 1 : 0
         
-        isOnDockBtn.state = NSUserDefaults.standardUserDefaults().boolForKey("show_dock_option") ? 1: 0
-        isAlwaysTopBtn.state = NSUserDefaults.standardUserDefaults().boolForKey("isAlwaysOnTop") ? 1: 0
     }
 
     @IBAction func hideDock(sender: AnyObject) {
         
-        print("show:\((sender as! NSButton).state)")
-        
-        if isOnDockBtn.state == 1 {
-        
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "show_dock_option")
-            NSApp.setActivationPolicy(.Regular)
-            
-        } else {
-            
-            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "show_dock_option")
-            NSApp.setActivationPolicy(.Accessory)
-        }
+      print("show:\((sender as! NSButton).state)")
+      
+      setDocker(Settings.Docker(rawValue: isOnDockBtn.state)!)
     }
     
     @IBAction func onTop(sender: AnyObject) {
-        
-        if isAlwaysTopBtn.state == 1 {
-        
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isAlwaysOnTop")
-        } else {
-            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "isAlwaysOnTop")
-        }
+      
+      setWindowsOnTop(Settings.WindowsOnTop(rawValue: isAlwaysTopBtn.state)!)
     }
 }
 
