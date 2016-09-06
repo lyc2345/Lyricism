@@ -10,12 +10,6 @@ import Cocoa
 
 class PreferenceViewController: NSViewController, ContainerSwitchable {
     
-    enum PreferenceType: String {
-        
-        case appearance
-        case other
-    }
-    
     @IBOutlet weak var containerView: NSView!
     
     var containerViewController: NSViewController!
@@ -33,7 +27,7 @@ class PreferenceViewController: NSViewController, ContainerSwitchable {
       
     }
     
-    func preferenceCategory(prefer: PreferenceType) {
+    func preferenceCategory(prefer: PreferencesIdentifiers) {
     
         var newViewController: NSViewController!
         let preferenceStoryboard = NSStoryboard(name: "Preferences", bundle: nil)

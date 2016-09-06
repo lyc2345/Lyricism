@@ -8,6 +8,7 @@
 
 import Cocoa
 import SwiftyJSON
+import AppKit
 import ScriptingBridge
 import MediaLibrary
 
@@ -20,8 +21,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, PreferencesSetable, DismissT
   var window: NSWindow?
   
   let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-2)
-  
-  //var popoverContainer: SFPopoverContainer!
   
   let lyricsPopover = NSPopover()
   let jumpOnLabelPopover = SFPopover()
@@ -41,8 +40,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, PreferencesSetable, DismissT
   
   var dismissTimer: NSTimer!
   var dismissTime: Int = 4;
-  
-  var statusButton: NSButton!
   
   let iTunes = SwiftyiTunes.sharedInstance.iTunes
   
@@ -64,7 +61,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, PreferencesSetable, DismissT
       button.alternateImage = NSImage(named: "note_light")
       button.action = #selector(AppDelegate.showLyrics(_:))
     }
-    
+    //NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(iTunesVaryStatus), name: "com.apple.iTunes.playerInfo", object: nil)
     NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: #selector(iTunesVaryStatus), name: "com.apple.iTunes.playerInfo", object: nil)
     
     // Detect mouse down event
@@ -80,7 +77,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, PreferencesSetable, DismissT
   
   func applicationWillTerminate(aNotification: NSNotification) {
     // Insert code here to tear down your application
-    NSDistributedNotificationCenter.defaultCenter().removeObserver(self, forKeyPath: "com.apple.iTunes.playerInfo")
+    //NSNotificationCenter.defaultCenter().removeObserver(self)
+    //NSDistributedNotificationCenter.defaultCenter().removeObserver(self, forKeyPath: "com.apple.iTunes.playerInfo")
   }
 }
 // MARK: Dock Setting
@@ -145,9 +143,11 @@ extension AppDelegate {
       // iTunes playing after a "Stop" or "New Song"
       print("new song playing")
       
+      
+      
       if lyricsPopover.shown && lyricsPopover.contentViewController is LyricsViewController {
         queryMusicInfo()
-      } else {
+      } else if !lyricsPopover.shown {
         showJumpOnLabel(iTunes.currentTrack!.artist!, trackName: iTunes.currentTrack!.name!)
       }
     }
@@ -226,15 +226,15 @@ extension AppDelegate {
     
     timerStop()
     
+    if jumpOnLabelPopover.shown {
+      jumpOnLabelPopover.close()
+    }
+    
     if lyricsPopover.shown {
       lyricsPopover.close()
       return
     } else {
-      
       lyricsPopover.showRelativeToRect(sender.bounds, ofView: sender as! NSView, preferredEdge: .MinY)
     }
-  }
-  
-  func togglePopover() {
   }
 }

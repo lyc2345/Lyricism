@@ -16,13 +16,11 @@ class PopoverContentViewJumpOnLabel: NSView {
     
     super.viewDidMoveToWindow()
     
-    if let frameView = self.window?.contentView?.superview {
-      if backgroundView == nil {
-        
+    if let frameView = self.window?.contentView?.superview where backgroundView == nil {
+      
         backgroundView = ColorBackgroundView(frame: frameView.bounds)
         backgroundView!.autoresizingMask = NSAutoresizingMaskOptions([.ViewWidthSizable, .ViewHeightSizable]);
         frameView.addSubview(backgroundView!, positioned: NSWindowOrderingMode.Below, relativeTo: frameView)
-      }
     }
   }
 }
@@ -63,8 +61,8 @@ class JumpOnLabelViewController: NSViewController {
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     titleLabel.topAnchor.constraintEqualToAnchor(view.topAnchor, constant: 0).active = true
     titleLabel.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor, constant: 0).active = true
-    titleLabel.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor, constant: 0).active = true
-    titleLabel.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor, constant: 0).active = true
+    //titleLabel.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor, constant: 0).active = true
+    //titleLabel.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor, constant: 0).active = true
   }
   
   override func viewDidLoad() {

@@ -970,11 +970,11 @@
             <objects>
                 <viewController storyboardIdentifier="JumpOnLabelViewController" id="QHV-7c-F4q" customClass="JumpOnLabelViewController" customModule="Lyricism" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="ZRQ-yK-ZDV">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="25"/>
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="24"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WhX-q9-W5l">
-                                <rect key="frame" x="-2" y="1" width="304" height="22"/>
+                                <rect key="frame" x="8" y="1" width="134" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="QYa-oH-EOM"/>
                                 </constraints>
@@ -987,9 +987,9 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="WhX-q9-W5l" firstAttribute="centerX" secondItem="ZRQ-yK-ZDV" secondAttribute="centerX" id="LnJ-Hj-vy3"/>
-                            <constraint firstItem="WhX-q9-W5l" firstAttribute="leading" secondItem="ZRQ-yK-ZDV" secondAttribute="leading" id="Lqa-OF-Y4Q"/>
+                            <constraint firstItem="WhX-q9-W5l" firstAttribute="leading" secondItem="ZRQ-yK-ZDV" secondAttribute="leading" constant="10" id="Lqa-OF-Y4Q"/>
                             <constraint firstItem="WhX-q9-W5l" firstAttribute="centerY" secondItem="ZRQ-yK-ZDV" secondAttribute="centerY" id="YsW-fY-JJP"/>
-                            <constraint firstAttribute="trailing" secondItem="WhX-q9-W5l" secondAttribute="trailing" id="wWe-2O-y7N"/>
+                            <constraint firstAttribute="trailing" secondItem="WhX-q9-W5l" secondAttribute="trailing" constant="10" id="wWe-2O-y7N"/>
                         </constraints>
                     </view>
                     <connections>
@@ -998,7 +998,7 @@
                 </viewController>
                 <customObject id="Dna-bP-awk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="385" y="1259.5"/>
+            <point key="canvasLocation" x="385" y="1259"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="cIf-5e-Ez0">

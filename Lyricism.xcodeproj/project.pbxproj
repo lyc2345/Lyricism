@@ -109,6 +109,7 @@
 		F67B7F9E1D23D75E001E7ED3 /* Lato-Bol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bol.ttf"; sourceTree = "<group>"; };
 		F67B7F9F1D23D75E001E7ED3 /* Lato-Lig.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Lig.ttf"; sourceTree = "<group>"; };
 		F67B7FA01D23D75E001E7ED3 /* Lato-Reg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Reg.ttf"; sourceTree = "<group>"; };
+		F67BEBA21D7E9B97005D0B54 /* Lyricism.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Lyricism.entitlements; sourceTree = "<group>"; };
 		F68BC7171D128ACE00A36247 /* Lyricism.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lyricism.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F68BC71A1D128ACE00A36247 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F68BC71C1D128ACE00A36247 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -164,10 +165,7 @@
 				F68BC71C1D128ACE00A36247 /* ViewController.swift */,
 				F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */,
 				F617FCA21D269452001A933B /* JumpOnLabelViewController.swift */,
-				F6434ED01D1A4472006FDFE2 /* LyricsSettingViewController.swift */,
-				F6624B271D437A9100D2D42E /* PreferencesWindowController.swift */,
-				F6624B281D437A9100D2D42E /* PreferenceViewController.swift */,
-				F6624B2D1D437AA600D2D42E /* AppearanceViewController.swift */,
+				F67BEBA11D7E99A8005D0B54 /* Setting */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -242,6 +240,17 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
+		F67BEBA11D7E99A8005D0B54 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				F6434ED01D1A4472006FDFE2 /* LyricsSettingViewController.swift */,
+				F6624B271D437A9100D2D42E /* PreferencesWindowController.swift */,
+				F6624B281D437A9100D2D42E /* PreferenceViewController.swift */,
+				F6624B2D1D437AA600D2D42E /* AppearanceViewController.swift */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
 		F68BC70E1D128ACD00A36247 = {
 			isa = PBXGroup;
 			children = (
@@ -267,6 +276,7 @@
 		F68BC7191D128ACE00A36247 /* Lyricism */ = {
 			isa = PBXGroup;
 			children = (
+				F67BEBA21D7E9B97005D0B54 /* Lyricism.entitlements */,
 				F60BF8A31D139B3E00F7C6DA /* Lyricism-Bridging-Header.h */,
 				F68BC71A1D128ACE00A36247 /* AppDelegate.swift */,
 				53FCF2411D40A9C800028F6D /* Controller */,
@@ -368,6 +378,11 @@
 					F68BC7161D128ACD00A36247 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 29DN3FMVP9;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					F6D339BC1D22867A0066F03F = {
 						CreatedOnToolsVersion = 7.3;
@@ -624,6 +639,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Lyricism/Lyricism.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -644,6 +660,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Lyricism/Lyricism.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;

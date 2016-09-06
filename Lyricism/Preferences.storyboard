@@ -14,9 +14,9 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-                        <toolbar key="toolbar" implicitIdentifier="DB3A3EDF-0F50-40C5-88F9-F021E2A3D3F6" explicitIdentifier="appearance" autosavesConfiguration="NO" displayMode="labelOnly" sizeMode="regular" id="mzp-ui-jkW">
+                        <toolbar key="toolbar" implicitIdentifier="DB3A3EDF-0F50-40C5-88F9-F021E2A3D3F6" autosavesConfiguration="NO" displayMode="labelOnly" sizeMode="regular" id="mzp-ui-jkW">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="88783789-DE4A-423B-89C2-0B636DE24680" label="Appearance" paletteLabel="Appearance" tag="-1" selectable="YES" id="tcP-hs-3Wz">
+                                <toolbarItem implicitItemIdentifier="88783789-DE4A-423B-89C2-0B636DE24680" explicitItemIdentifier="appearance" label="Appearance" paletteLabel="Appearance" selectable="YES" id="tcP-hs-3Wz">
                                     <connections>
                                         <action selector="appearanceBtnPressed:" target="cxR-se-Lbb" id="iK4-MP-4Hd"/>
                                     </connections>

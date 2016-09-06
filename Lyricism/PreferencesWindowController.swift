@@ -8,31 +8,39 @@
 
 import Cocoa
 
+enum PreferencesIdentifiers: String {
+  
+  case appearance = "appearance"
+  case other = ""
+}
+
 class PreferencesWindowController: NSWindowController {
-
-    @IBOutlet weak var toolBar: NSToolbar!
+  
+  @IBOutlet weak var toolBar: NSToolbar!
+  
+  var preferenceViewController: PreferenceViewController {
     
-    var preferenceViewController: PreferenceViewController {
-        
-        return contentViewController as! PreferenceViewController
-    }
+    return contentViewController as! PreferenceViewController
+  }
+  
+  override func windowDidLoad() {
+    super.windowDidLoad()
     
-    override func windowDidLoad() {
-        super.windowDidLoad()
     
-        
-        preferenceViewController.preferenceCategory(.appearance)
-    }
+    preferenceViewController.preferenceCategory(.appearance)
+    toolBar.selectedItemIdentifier = PreferencesIdentifiers.appearance.rawValue
     
-    @IBAction func appearanceBtnPressed(sender: AnyObject) {
-        
-        preferenceViewController.preferenceCategory(.appearance)
-    }
+  }
+  
+  @IBAction func appearanceBtnPressed(sender: AnyObject) {
     
-    @IBAction func otherBtnPressed(sender: AnyObject) {
-        
-        preferenceViewController.preferenceCategory(.other)
-    }
+    preferenceViewController.preferenceCategory(.appearance)
+  }
+  
+  @IBAction func otherBtnPressed(sender: AnyObject) {
     
-
+    preferenceViewController.preferenceCategory(.other)
+  }
+  
+  
 }
