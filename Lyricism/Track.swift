@@ -20,10 +20,43 @@ class Track: NSObject {
     var info: Info!
 }
 
+protocol Propertyable {
+  
+}
+
+extension Propertyable {
+  /*
+  func propertyNames() -> [String] {
+    
+    var results: [String] = []
+    // retrieve the properties via the class_copyPropertyList function
+    var count: UInt32 = 0
+    let myClass: AnyClass = self.classForCoder
+    let properties = class_copyPropertyList(myClass, &count)
+    
+    // iterate each objc_property_t struct
+    for i: UInt32 in 0 ..< count {
+      
+      let property = properties[Int(i)]
+      // retrieve the property name by calling property_getName function
+      let cname = property_getName(property)
+      // convert the c string into a swift string
+      let name = String.fromCString(cname)
+      results.append(name!)
+    }
+    
+    // release objc_property_t struct
+    free(properties)
+    
+    return results
+  }
+*/
+}
+
 class Info: NSObject {
-    
+  
     var has_lyrics: NSNumber!
-    
+  
     var track_share_url: String!
     var commontrack_vanity_id: String!
     var restricted: NSNumber!
@@ -58,7 +91,7 @@ class Info: NSObject {
     
     func getCurrentTrackID() {
         //TODO: Clean up this code after testing
-        let iTunes = SwiftyiTunes.sharedInstance.iTunes
+        let iTunes = AppDelegate.sharedDelegate.iTunes
         
         guard let artist = iTunes.currentTrack?.artist, name = iTunes.currentTrack?.name, time = iTunes.currentTrack?.time else {
             
@@ -103,3 +136,6 @@ class Info: NSObject {
         }
     }
 }
+
+
+

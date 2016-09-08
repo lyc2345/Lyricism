@@ -12,12 +12,14 @@ import AppKit
 import ScriptingBridge
 import MediaLibrary
 
+import Fabric
+import Crashlytics
+
 @NSApplicationMain
 // MARK: Main AppDelegate
 class AppDelegate: NSObject, NSApplicationDelegate, PreferencesSetable, DismissTimerable {
   
-  static let sharedDelegate = AppDelegate()
-  
+  static let sharedDelegate = AppDelegate()  
   var window: NSWindow?
   
   let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-2)
@@ -25,38 +27,34 @@ class AppDelegate: NSObject, NSApplicationDelegate, PreferencesSetable, DismissT
   let lyricsPopover = NSPopover()
   let jumpOnLabelPopover = SFPopover()
   
-  var lyricsViewController: LyricsViewController {
-    
-    return NSStoryboard(name: "Main", bundle: nil).instantiateControllerWithIdentifier(String(LyricsViewController)) as! LyricsViewController
-  }
-  
-  var jumpOnLabelViewController: JumpOnLabelViewController {
-    
-    return NSStoryboard(name: "Main", bundle: nil).instantiateControllerWithIdentifier(String(JumpOnLabelViewController)) as! JumpOnLabelViewController
-  }
-  
   var eventMonitor: EventMonitor?
   var isiTunesPaused = false
   
   var dismissTimer: NSTimer!
   var dismissTime: Int = 4;
   
-  let iTunes = SwiftyiTunes.sharedInstance.iTunes
+  let iTunes: iTunesApplication = SBApplication(bundleIdentifier: "com.apple.iTunes") as! iTunesApplication
   
   // MARK: NSApplicationDelegate
   func applicationDidFinishLaunching(aNotification: NSNotification) {
     
+    // [Crashlytics Crash] Warning: NSApplicationCrashOnExceptions is not set. This will result in poor top-level uncaught exception reporting.
+    // https://docs.fabric.io/apple/crashlytics/os-x.html
+    NSUserDefaults.standardUserDefaults().registerDefaults(["NSApplicationCrashOnExceptions": true])
+    Fabric.with([Crashlytics.self])
+    
     //MARK: To print all the fonts' name
     //print(NSFontManager.sharedFontManager().availableFontFamilies.description)
     
-    lyricsPopover.contentViewController = lyricsViewController
-    jumpOnLabelPopover.contentViewController = jumpOnLabelViewController
+    lyricsPopover.contentViewController = NSStoryboard(name: "Main", bundle: nil).instantiateControllerWithIdentifier(String(LyricsViewController)) as! LyricsViewController
+    jumpOnLabelPopover.contentViewController = NSStoryboard(name: "Main", bundle: nil).instantiateControllerWithIdentifier(String(JumpOnLabelViewController)) as! JumpOnLabelViewController
     
     showDock()
     
     // button image on status bar
     if let button = statusItem.button {
       
+      button.target = self
       button.image = NSImage(named: "note_dark")
       button.alternateImage = NSImage(named: "note_light")
       button.action = #selector(AppDelegate.showLyrics(_:))
@@ -132,7 +130,7 @@ extension AppDelegate {
     // This is a flag if iTunes playing after a "PAUSE".
     if isiTunesPaused {
       
-      if lyricsPopover.shown && lyricsPopover.contentViewController is LyricsViewController {
+      if lyricsPopover.shown {
         (lyricsPopover.contentViewController as! LyricsViewController).resumeTimer()
       }
       
@@ -145,7 +143,7 @@ extension AppDelegate {
       
       
       
-      if lyricsPopover.shown && lyricsPopover.contentViewController is LyricsViewController {
+      if lyricsPopover.shown {
         queryMusicInfo()
       } else if !lyricsPopover.shown {
         showJumpOnLabel(iTunes.currentTrack!.artist!, trackName: iTunes.currentTrack!.name!)
@@ -165,18 +163,13 @@ extension AppDelegate {
   
   func iTunesPaused() {
     
-    if lyricsPopover.contentViewController is LyricsViewController {
-      (lyricsPopover.contentViewController as! LyricsViewController).stopTimer()
-    }
+    (lyricsPopover.contentViewController as! LyricsViewController).stopTimer()
+    
     isiTunesPaused = true
   }
   
   func iTunesStop() {
     
-    if lyricsPopover.contentViewController is LyricsViewController {
-      //lyricsViewController.lyrics = nil
-      //lyricsViewController.artworkURL = nil
-    }
     lyricsPopover.close()
   }
   
@@ -184,25 +177,20 @@ extension AppDelegate {
     
     guard let artist = iTunes.currentTrack?.artist, name = iTunes.currentTrack?.name, time = iTunes.currentTrack?.time else {
       
-      fatalError("iTunes.currentTrack is nil")
+      //fatalError("iTunes.currentTrack is nil")
+      return
     }
-    // use local artwork
-    /*
-     if let artwork = iTunes.currentTrack?.artworks!().firstObject as? NSImage {
-     lyricsViewController.imageView.image = artwork
-     } else {
-     print("No Local Image: \(iTunes.currentTrack?.artworks!().firstObject )")
-     }*/
-    var track = MusiXTrack(artist: artist, name: name, lyrics: nil, time: time, artwork: nil)
+    let track = MusiXTrack(artist: artist, name: name, lyrics: nil, time: time, artwork: nil)
     
-    passLyricsViewController(&track)
+    (lyricsPopover.contentViewController as! LyricsViewController).track = track
   }
-  
+  /*
   func passLyricsViewController(inout track: MusiXTrack) {
     
+    (lyricsPopover.contentViewController as! LyricsViewController).track = track
     (lyricsPopover.contentViewController as! LyricsViewController).configure(withPresenter: track)
     // why not pass artwork, because it alwasy nil from this musiXmatch api
-  }
+  }*/
   
   func showJumpOnLabel(artist: String, trackName: String) {
     
@@ -211,7 +199,7 @@ extension AppDelegate {
     }
     
     jumpOnLabelPopover.showRelativeToRect(statusItem.button!.frame, ofView: statusItem.button!, preferredEdge: .MinY)
-
+    
     (jumpOnLabelPopover.contentViewController as! JumpOnLabelViewController).trackTitle = "\(artist) - \(trackName)"
     
     timerStop()
@@ -223,18 +211,18 @@ extension AppDelegate {
 extension AppDelegate {
   
   func showLyrics(sender: AnyObject) {
+        
+    self.timerStop()
     
-    timerStop()
-    
-    if jumpOnLabelPopover.shown {
-      jumpOnLabelPopover.close()
+    if self.jumpOnLabelPopover.shown {
+      self.jumpOnLabelPopover.close()
     }
     
-    if lyricsPopover.shown {
-      lyricsPopover.close()
+    if self.lyricsPopover.shown {
+      self.lyricsPopover.close()
       return
     } else {
-      lyricsPopover.showRelativeToRect(sender.bounds, ofView: sender as! NSView, preferredEdge: .MinY)
+      self.lyricsPopover.showRelativeToRect(sender.bounds, ofView: sender as! NSView, preferredEdge: .MinY)
     }
   }
 }

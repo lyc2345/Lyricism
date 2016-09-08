@@ -12,16 +12,6 @@ import ScriptingBridge
 import iTunesScripting
 
 class SwiftyiTunes: NSObject {
+  
 
-    static let sharedInstance: SwiftyiTunes = SwiftyiTunes()
-    
-    override init() {
-        super.init()
-        
-    }
-    
-    let iTunes: iTunesApplication = {
-        
-        return SBApplication(bundleIdentifier: "com.apple.iTunes") as! iTunesApplication
-    }()
 }

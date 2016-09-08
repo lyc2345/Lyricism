@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G1004" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
@@ -970,11 +970,11 @@
             <objects>
                 <viewController storyboardIdentifier="JumpOnLabelViewController" id="QHV-7c-F4q" customClass="JumpOnLabelViewController" customModule="Lyricism" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="ZRQ-yK-ZDV">
-                        <rect key="frame" x="0.0" y="0.0" width="150" height="24"/>
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WhX-q9-W5l">
-                                <rect key="frame" x="8" y="1" width="134" height="22"/>
+                                <rect key="frame" x="10" y="4" width="130" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="QYa-oH-EOM"/>
                                 </constraints>
@@ -987,9 +987,9 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="WhX-q9-W5l" firstAttribute="centerX" secondItem="ZRQ-yK-ZDV" secondAttribute="centerX" id="LnJ-Hj-vy3"/>
-                            <constraint firstItem="WhX-q9-W5l" firstAttribute="leading" secondItem="ZRQ-yK-ZDV" secondAttribute="leading" constant="10" id="Lqa-OF-Y4Q"/>
+                            <constraint firstItem="WhX-q9-W5l" firstAttribute="leading" secondItem="ZRQ-yK-ZDV" secondAttribute="leading" constant="12" id="Lqa-OF-Y4Q"/>
                             <constraint firstItem="WhX-q9-W5l" firstAttribute="centerY" secondItem="ZRQ-yK-ZDV" secondAttribute="centerY" id="YsW-fY-JJP"/>
-                            <constraint firstAttribute="trailing" secondItem="WhX-q9-W5l" secondAttribute="trailing" constant="10" id="wWe-2O-y7N"/>
+                            <constraint firstAttribute="trailing" secondItem="WhX-q9-W5l" secondAttribute="trailing" constant="12" id="wWe-2O-y7N"/>
                         </constraints>
                     </view>
                     <connections>

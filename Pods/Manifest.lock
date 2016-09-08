@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (3.4.1)
-  - Crashlytics (3.7.2):
+  - Crashlytics (3.8.0):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.7)
   - ReachabilitySwift (2.3.3)
@@ -19,7 +19,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
-  Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
+  Crashlytics: 8601d9c74a4c4d28f3e7f408bf4c0e490c70e8b4
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
   SQLite.swift: 6a6e4b034efc317ce4e203b6af2d3024fee2b570

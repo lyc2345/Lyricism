@@ -336,6 +336,7 @@
 				E8693AB7BCAD321D07598E48 /* [CP] Embed Pods Frameworks */,
 				AE34DD7C096D300F2F0C25CC /* [CP] Copy Pods Resources */,
 				F6D339C91D22867A0066F03F /* Embed Frameworks */,
+				F6EC8F8F1D810A4A00CD020D /* Fabric Crashlytic */,
 			);
 			buildRules = (
 			);
@@ -480,6 +481,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lyricism/Pods-Lyricism-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		F6EC8F8F1D810A4A00CD020D /* Fabric Crashlytic */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Fabric Crashlytic";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 4904cf7385aa6323b6e41446da80613995dbdfa2 de9a6948cd4d8561c602e2a4b3fd257419cf66e1fa23a37858cfd482f795183d";
 		};
 /* End PBXShellScriptBuildPhase section */
 
