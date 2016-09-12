@@ -9,33 +9,53 @@
 import Foundation
 import SwiftyJSON
 
+struct PlayerTrack {
+  
+  let artist: String
+  let name: String
+  let time: String
+}
+
+
+extension PlayerTrack: LyricsViewPresentable {
+  
+  var lvTime: String { return time }
+  var lvArtistNTrack: (artist: String, trackName: String) { return (artist, name) }
+}
+
 struct MusiXTrack {
-    
-    var artist: String
-    var name: String
-    var lyrics: String?
-    var time: String
-    var artwork: NSURL?
+  
+  let id: Int
+  let name: String
+  let time: String
+  
+  let lyric_id: Int
+  let album_id: Int
+  let spotify_id: Int
+  let artist_id: Int
 }
 
 struct MusiXAlbum {
-    var artist: String
-    var tracks: [MusiXTrack]
-    var composer: String
+  let id: Int
+  let name: String
+  let artist_id: String
+  let url_str: String
+  let artwork: NSData
+  let tracks: [Int]
+  //let composer: String
 }
 
 struct MusiXArtist {
-    
-    var name: String
-    var albums: [MusiXAlbum]
+  
+  let id: Int
+  let name: String
 }
 
-extension MusiXTrack: LyricsViewPresentable {
-    
-    var lvLyrics: String { return lyrics ?? "" }
-    var lvArtworkURL: NSURL? { return artwork }
-    var lvTime: String { return time }
-    var lvArtistNTrack: (artist: String, trackName: String) { return (artist, name) }
+struct MusiXLyric {
+  
+  let id: Int
+  let name: String
+  let text: String
 }
 
 struct MusicInfo {

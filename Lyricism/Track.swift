@@ -8,9 +8,91 @@
 
 import Foundation
 import SwiftyJSON
+import RealmSwift
+
+class MAlbum: Object {
+  
+  dynamic var id: Int = 0 //pk
+  dynamic var name: String = ""
+  dynamic var artist_id: Int = 0 //fk
+  dynamic var url_str: String = ""
+  dynamic var artwork: NSData?
+  var tracks: RealmOptional<Int> = RealmOptional<Int>()
+  
+  override static func primaryKey() -> String? {
+    
+    return "id"
+  }
+}
+
+class MTrack: Object {
+  
+  dynamic var id: Int = 0 //pk
+  dynamic var name: String = ""
+  dynamic var time: Int = 0
+  dynamic var album_name: String = ""
+  
+  dynamic var lyric_id: Int = 0 //fk
+  dynamic var album_id: Int = 0 //fk
+  dynamic var spotify_id: Int = 0 //fk
+  dynamic var artist_id: Int = 0 //fk
+  
+  override static func primaryKey() -> String? {
+    
+    return "id"
+  }
+}
+
+class MArtist: Object {
+  
+  dynamic var id: Int = 0 //pk
+  dynamic var name: String = ""
+  
+  override static func primaryKey() -> String? {
+    
+    return "id"
+  }
+}
+
+class MLyric: Object {
+  
+  dynamic var id: Int = 0 //pk
+  dynamic var name: String = ""
+  dynamic var text: String = ""
+  
+  override static func primaryKey() -> String? {
+    
+    return "id"
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class Track: NSObject {
-    
+  
     static let sharedTrack: Track = Track()
     
     override init() {
@@ -58,16 +140,17 @@ class Info: NSObject {
     var has_lyrics: NSNumber!
   
     var track_share_url: String!
-    var commontrack_vanity_id: String!
+    var commontrack_vanity_id: NSNumber!
     var restricted: NSNumber!
-    var track_spotify_id: String!
+    var track_spotify_id: NSNumber!
     var track_id: NSNumber!
-    var artist_mbid: String!
+    var artist_mbid: NSNumber!
     var artist_name: String!
     var album_coverart_800x800: String?
     var artist_id: NSNumber!
     var updated_time: String!
     var album_id: NSNumber!
+    var album_name: String! 
     var album_coverart_100x100: String?
     var first_release_date: String!
     var album_coverart_350x350: String?
@@ -97,7 +180,7 @@ class Info: NSObject {
             
             return
         }
-        let track = MusiXTrack(artist: artist, name: name, lyrics: nil, time: time, artwork: nil)
+      let track = PlayerTrack(artist: artist, name: name, time: time)
         MusiXMatchApi.searchTrackID(track) { (success, trackID) in
             //
         }
@@ -135,6 +218,35 @@ class Info: NSObject {
             }
         }
     }
+  
+  func saveInRealm() {
+    
+    let track = MTrack()
+    track.id = self.track_id.integerValue
+    track.name = self.track_name
+    track.lyric_id = self.lyrics_id.integerValue
+    track.album_id = self.album_id.integerValue
+    track.spotify_id = self.track_spotify_id.integerValue
+    track.artist_id = self.artist_id.integerValue
+    
+    let artist = MArtist()
+    artist.id = self.artist_id.integerValue
+    artist.name = self.artist_name
+    
+    let album = MAlbum()
+    album.id = self.album_id.integerValue
+    if let url = self.album_coverart_350x350 {
+      album.url_str = url
+      album.artwork = NSData(contentsOfURL: NSURL(string: url)!)
+    }
+    album.artist_id = self.artist_id.integerValue
+    
+    let realm = try! Realm()
+    
+    try! realm.write {
+      realm.add([track, artist, album])
+    }
+  }
 }
 
 

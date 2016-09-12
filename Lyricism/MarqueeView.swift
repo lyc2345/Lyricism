@@ -43,7 +43,6 @@ class MarqueeView: NSView {
             NSString(string: text).drawAtPoint(centerPointX, withAttributes: textAttributes)
             return
         }
-        
 
         // Drawing code here.
         //self.printLog("point.x: \(point.x)")

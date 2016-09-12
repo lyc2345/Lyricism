@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="cxR-se-Lbb">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G1004" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="cxR-se-Lbb">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
@@ -78,6 +78,14 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ILC-f8-1ZY">
+                                <rect key="frame" x="71" y="130" width="139" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Default Player Source:" id="W8y-yp-OSf">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kv2-z6-jzg">
                                 <rect key="frame" x="214" y="204" width="64" height="18"/>
                                 <buttonCell key="cell" type="check" title="YES" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="XqT-od-Pj6">
@@ -88,16 +96,38 @@
                                     <action selector="onTop:" target="SJS-Tt-bdV" id="4o5-PZ-eEn"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uWz-f4-Gij">
+                                <rect key="frame" x="222" y="118" width="40" height="40"/>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="iTunes" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="0dT-TS-YT2">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="sourceButtonsPressed:" target="SJS-Tt-bdV" id="QTX-67-jNe"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ipl-ab-lkH">
+                                <rect key="frame" x="283" y="118" width="40" height="40"/>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="spotify" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="YyL-kf-vwa">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="sourceButtonsPressed:" target="SJS-Tt-bdV" id="jLk-vA-n9f"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="iTunesButton" destination="uWz-f4-Gij" id="Yk3-ar-VoR"/>
                         <outlet property="isAlwaysTopBtn" destination="kv2-z6-jzg" id="fTS-g6-W0K"/>
                         <outlet property="isOnDockBtn" destination="AUL-vo-spy" id="XR0-iQ-C2s"/>
+                        <outlet property="spotifyButton" destination="ipl-ab-lkH" id="jHs-cy-t2t"/>
                     </connections>
                 </viewController>
                 <customObject id="gp3-ik-RmY" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6" y="735"/>
+            <point key="canvasLocation" x="-367" y="730"/>
         </scene>
         <!--Preference View Controller-->
         <scene sceneID="GDC-2q-TNS">
@@ -131,6 +161,8 @@
         <image name="avatar" width="890" height="890"/>
         <image name="dark_lyrics" width="30" height="30"/>
         <image name="fast-forward" width="44" height="44"/>
+        <image name="iTunes" width="944" height="944"/>
         <image name="light_lyrics" width="30" height="30"/>
+        <image name="spotify" width="934" height="940"/>
     </resources>
 </document>

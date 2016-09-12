@@ -9,7 +9,10 @@ target 'Lyricism' do
   pod 'SwiftyJSON'
   pod 'SWXMLHash', '~> 2.3.0'
   pod 'ReachabilitySwift'  
-  pod 'SQLite.swift', '~> 0.10.1'
+  
+  pod 'RealmSwift'
+  pod 'Kingfisher', '~> 2.4'
+  
   # Fabric
   pod 'Fabric'
   pod 'Crashlytics'

@@ -34,6 +34,8 @@ extension MusicTimerable where Self: LyricsViewController {
       self.stopTimer()
     }
     
+    trackTime = trackTime - 1
+    
     let minutes = trackTime / 60
     let seconds = trackTime % 60
     
@@ -48,8 +50,6 @@ extension MusicTimerable where Self: LyricsViewController {
       handler(timeString: timeString)
     }
     //print("track time :\(timeString)")
-    trackTime = trackTime - 1
-    
   }
   
   func resumeTimer(target: AnyObject, selector: Selector, repeats: Bool) {
@@ -69,7 +69,7 @@ extension MusicTimerable where Self: LyricsViewController {
       
       return
     }
-    timer?.invalidate()
+    timer!.invalidate()
     timer = nil
   }
 }

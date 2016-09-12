@@ -19,7 +19,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SQLite.swift.xcscheme</key>
+		<key>Realm.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>RealmSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -37,7 +42,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>372694E421579E808D7587A4A0DAF4AF</key>
+		<key>3FD5FF23436760EFABD9E4CA3654F082</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4E4FECD8B365E86D752E603A09F0245E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -47,22 +57,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>80564B07517285ADEE1A97F6319F26E5</key>
+		<key>AAE02CD00B8D4927EE0E908B624B8FB2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9A6286E8AC420AF5F79CAB20C4F20B2E</key>
+		<key>B3BAE343E46357510EF45134E328B856</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BD2AACFCB00B02FAA551795C335EAF88</key>
+		<key>E24B555DD54DF5F6A607A43D948D3FC7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FF7760B1BD0B72AAA4A27518C13F3D64</key>
+		<key>E6B5C23805E07C5272A66B93C05637E2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
