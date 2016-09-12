@@ -1,0 +1,48 @@
+
+/* Class = "NSToolbarItem"; label = "Toolbar Item"; ObjectID = "3eN-9f-m6k"; */
+"3eN-9f-m6k.label" = "Toolbar Item";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Toolbar Item"; ObjectID = "3eN-9f-m6k"; */
+"3eN-9f-m6k.paletteLabel" = "Toolbar Item";
+
+/* Class = "NSTextFieldCell"; title = "Dock:"; ObjectID = "8sI-vs-XX6"; */
+"8sI-vs-XX6.title" = "Dock:";
+
+/* Class = "NSToolbarItem"; label = "Toolbar Item"; ObjectID = "DaZ-LR-WvL"; */
+"DaZ-LR-WvL.label" = "Toolbar Item";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Toolbar Item"; ObjectID = "DaZ-LR-WvL"; */
+"DaZ-LR-WvL.paletteLabel" = "Toolbar Item";
+
+/* Class = "NSTextFieldCell"; title = "Default Player Source:"; ObjectID = "W8y-yp-OSf"; */
+"W8y-yp-OSf.title" = "選擇預設播放器來源:";
+
+/* Class = "NSButtonCell"; title = "YES"; ObjectID = "XqT-od-Pj6"; */
+"XqT-od-Pj6.title" = "YES";
+
+/* Class = "NSButtonCell"; title = "Show"; ObjectID = "eSY-KU-cna"; */
+"eSY-KU-cna.title" = "顯示";
+
+/* Class = "NSToolbarItem"; label = "General"; ObjectID = "f52-T9-yzN"; */
+"f52-T9-yzN.label" = "一般";
+
+/* Class = "NSToolbarItem"; paletteLabel = "General"; ObjectID = "f52-T9-yzN"; */
+"f52-T9-yzN.paletteLabel" = "一般";
+
+/* Class = "NSToolbarItem"; label = "Toolbar Item"; ObjectID = "gWp-sW-icq"; */
+"gWp-sW-icq.label" = "Toolbar Item";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Toolbar Item"; ObjectID = "gWp-sW-icq"; */
+"gWp-sW-icq.paletteLabel" = "Toolbar Item";
+
+/* Class = "NSWindow"; title = "Preferences"; ObjectID = "q06-sO-Ayg"; */
+"q06-sO-Ayg.title" = "設定";
+
+/* Class = "NSTextFieldCell"; title = "Always On Top:"; ObjectID = "qaa-Ev-WUO"; */
+"qaa-Ev-WUO.title" = "顯示於最上層:";
+
+/* Class = "NSToolbarItem"; label = "Appearance"; ObjectID = "tcP-hs-3Wz"; */
+"tcP-hs-3Wz.label" = "介面";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Appearance"; ObjectID = "tcP-hs-3Wz"; */
+"tcP-hs-3Wz.paletteLabel" = "介面";

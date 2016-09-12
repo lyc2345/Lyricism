@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings.strings
+  Lyricism
+
+  Created by Stan Liu on 12/09/2016.
+  Copyright © 2016 Stan Liu. All rights reserved.
+*/
+
+
+"✔︎ On Top" : "顯示於最上層";
+"  Not On Top" : "不顯示於最上層";
+
+"Couldn't Find Any Relative Lyrics": "未搜尋到相關歌詞...";
+
+
+
+

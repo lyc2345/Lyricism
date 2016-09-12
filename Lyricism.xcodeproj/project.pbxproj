@@ -21,7 +21,6 @@
 		F64E2D8C1D2115CD002F2513 /* MResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64E2D8B1D2115CD002F2513 /* MResponse.swift */; };
 		F6624B291D437A9100D2D42E /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6624B271D437A9100D2D42E /* PreferencesWindowController.swift */; };
 		F6624B2A1D437A9100D2D42E /* PreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6624B281D437A9100D2D42E /* PreferenceViewController.swift */; };
-		F6624B2C1D437A9700D2D42E /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6624B2B1D437A9700D2D42E /* Preferences.storyboard */; };
 		F6624B2E1D437AA600D2D42E /* AppearanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6624B2D1D437AA600D2D42E /* AppearanceViewController.swift */; };
 		F668464D1D18D20E007DB6CF /* BlurBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668464C1D18D20E007DB6CF /* BlurBackground.swift */; };
 		F668464F1D18D26E007DB6CF /* BlurBackground.xib in Resources */ = {isa = PBXBuildFile; fileRef = F668464E1D18D26E007DB6CF /* BlurBackground.xib */; };
@@ -46,6 +45,8 @@
 		F69836261D7C02F30046569A /* PreferencesSetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69836251D7C02F20046569A /* PreferencesSetable.swift */; };
 		F6A7DE431D20CACF001D5AD7 /* MarqueeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A7DE421D20CACF001D5AD7 /* MarqueeView.swift */; };
 		F6BF27B11D4E002A00AA04BB /* PopoverContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BF27B01D4E002A00AA04BB /* PopoverContentView.swift */; };
+		F6D0C00F1D87079D001474D8 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6D0C0111D87079D001474D8 /* Preferences.storyboard */; };
+		F6D0C0221D870A66001474D8 /* Localizable.strings.strings in Resources */ = {isa = PBXBuildFile; fileRef = F6D0C0241D870A66001474D8 /* Localizable.strings.strings */; };
 		F6D339B51D22865C0066F03F /* iTunes.sdef in Resources */ = {isa = PBXBuildFile; fileRef = F6D339B21D22865C0066F03F /* iTunes.sdef */; };
 		F6D339B61D22865C0066F03F /* iTunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D339B31D22865C0066F03F /* iTunes.swift */; };
 		F6D339B71D22865C0066F03F /* iTunesScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D339B41D22865C0066F03F /* iTunesScripting.swift */; };
@@ -85,7 +86,6 @@
 		F64E2D8B1D2115CD002F2513 /* MResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MResponse.swift; sourceTree = "<group>"; };
 		F6624B271D437A9100D2D42E /* PreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		F6624B281D437A9100D2D42E /* PreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceViewController.swift; sourceTree = "<group>"; };
-		F6624B2B1D437A9700D2D42E /* Preferences.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
 		F6624B2D1D437AA600D2D42E /* AppearanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceViewController.swift; sourceTree = "<group>"; };
 		F668464C1D18D20E007DB6CF /* BlurBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurBackground.swift; sourceTree = "<group>"; };
 		F668464E1D18D26E007DB6CF /* BlurBackground.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlurBackground.xib; sourceTree = "<group>"; };
@@ -114,6 +114,19 @@
 		F69836251D7C02F20046569A /* PreferencesSetable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesSetable.swift; sourceTree = "<group>"; };
 		F6A7DE421D20CACF001D5AD7 /* MarqueeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarqueeView.swift; sourceTree = "<group>"; };
 		F6BF27B01D4E002A00AA04BB /* PopoverContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverContentView.swift; sourceTree = "<group>"; };
+		F6D0C0101D87079D001474D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Preferences.storyboard; sourceTree = "<group>"; };
+		F6D0C0131D8707B6001474D8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Preferences.strings; sourceTree = "<group>"; };
+		F6D0C0151D8707BA001474D8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		F6D0C01A1D87088A001474D8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		F6D0C01B1D87088A001474D8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Preferences.strings"; sourceTree = "<group>"; };
+		F6D0C01C1D870891001474D8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		F6D0C01D1D870891001474D8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Preferences.strings; sourceTree = "<group>"; };
+		F6D0C01E1D870897001474D8 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Main.strings; sourceTree = "<group>"; };
+		F6D0C01F1D870897001474D8 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Preferences.strings; sourceTree = "<group>"; };
+		F6D0C0201D8708AE001474D8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		F6D0C0211D8708AE001474D8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Preferences.strings; sourceTree = "<group>"; };
+		F6D0C0231D870A66001474D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings.strings; sourceTree = "<group>"; };
+		F6D0C0251D870A6C001474D8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings.strings"; sourceTree = "<group>"; };
 		F6D339B11D22865C0066F03F /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
 		F6D339B21D22865C0066F03F /* iTunes.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = iTunes.sdef; sourceTree = "<group>"; };
 		F6D339B31D22865C0066F03F /* iTunes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iTunes.swift; sourceTree = "<group>"; };
@@ -160,7 +173,8 @@
 			isa = PBXGroup;
 			children = (
 				F68BC7221D128ACE00A36247 /* Main.storyboard */,
-				F6624B2B1D437A9700D2D42E /* Preferences.storyboard */,
+				F6D0C0111D87079D001474D8 /* Preferences.storyboard */,
+				F6D0C0241D870A66001474D8 /* Localizable.strings.strings */,
 			);
 			name = Storyboard;
 			sourceTree = "<group>";
@@ -360,6 +374,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hant",
 			);
 			mainGroup = F68BC70E1D128ACD00A36247;
 			productRefGroup = F68BC7181D128ACE00A36247 /* Products */;
@@ -377,9 +392,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F67B7FA31D23D75E001E7ED3 /* Lato-Lig.ttf in Resources */,
+				F6D0C0221D870A66001474D8 /* Localizable.strings.strings in Resources */,
 				F67B7FA21D23D75E001E7ED3 /* Lato-Bol.ttf in Resources */,
 				F67B7FA41D23D75E001E7ED3 /* Lato-Reg.ttf in Resources */,
-				F6624B2C1D437A9700D2D42E /* Preferences.storyboard in Resources */,
+				F6D0C00F1D87079D001474D8 /* Preferences.storyboard in Resources */,
 				F67B7FA11D23D75E001E7ED3 /* Lato-Black.ttf in Resources */,
 				F67428CE1D82F5BD001FBC56 /* Spotify.sdef in Resources */,
 				F668464F1D18D26E007DB6CF /* BlurBackground.xib in Resources */,
@@ -499,8 +515,35 @@
 			isa = PBXVariantGroup;
 			children = (
 				F68BC7231D128ACE00A36247 /* Base */,
+				F6D0C0151D8707BA001474D8 /* en */,
+				F6D0C01A1D87088A001474D8 /* zh-Hant */,
+				F6D0C01C1D870891001474D8 /* ja */,
+				F6D0C01E1D870897001474D8 /* th */,
+				F6D0C0201D8708AE001474D8 /* es */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F6D0C0111D87079D001474D8 /* Preferences.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F6D0C0101D87079D001474D8 /* Base */,
+				F6D0C0131D8707B6001474D8 /* en */,
+				F6D0C01B1D87088A001474D8 /* zh-Hant */,
+				F6D0C01D1D870891001474D8 /* ja */,
+				F6D0C01F1D870897001474D8 /* th */,
+				F6D0C0211D8708AE001474D8 /* es */,
+			);
+			name = Preferences.storyboard;
+			sourceTree = "<group>";
+		};
+		F6D0C0241D870A66001474D8 /* Localizable.strings.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F6D0C0231D870A66001474D8 /* Base */,
+				F6D0C0251D870A6C001474D8 /* zh-Hant */,
+			);
+			name = Localizable.strings.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

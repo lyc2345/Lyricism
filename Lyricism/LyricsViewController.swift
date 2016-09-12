@@ -263,7 +263,7 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
   
   @IBAction func alwaysOnTopBtnPressed(sender: AnyObject) {
     
-    isAlwaysOnTop.attributedTitle = NSAttributedString(string: !isWindowsOnTop() ? "✔︎ On Top" : "  Not On Top")
+    isAlwaysOnTop.attributedTitle = NSAttributedString(string: !isWindowsOnTop() ? NSLocalizedString("✔︎ On Top", comment: "✔︎ On Top") : NSLocalizedString("  Not On Top", comment: "  Not On Top"))
     //setWinowsOnTop()
   }
   
@@ -305,7 +305,7 @@ extension String {
   
   func applyLyricsFormat() -> String {
     
-    return self == "" ? "Couldn't Find Any Relative Lyrics" : self//.stringByReplacingOccurrencesOfString(".", withString: ". \n")
+    return self == "" ? NSLocalizedString("Couldn't Find Any Relative Lyrics", comment: "Couldn't Find Any Relative Lyrics") : self//.stringByReplacingOccurrencesOfString(".", withString: ". \n")
   }
 }
 
