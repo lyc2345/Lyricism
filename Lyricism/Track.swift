@@ -91,9 +91,9 @@ class MLyric: Object {
 
 
 
-class Track: NSObject {
+class Player: NSObject {
   
-    static let sharedTrack: Track = Track()
+    static let sharedPlayer: Player = Player()
     
     override init() {
         info = Info()
@@ -174,9 +174,10 @@ class Info: NSObject {
     
     func getCurrentTrackID() {
         //TODO: Clean up this code after testing
-        let iTunes = AppDelegate.sharedDelegate.iTunes
+      
+      let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: "com.apple.iTunes"))
         
-        guard let artist = iTunes.currentTrack?.artist, name = iTunes.currentTrack?.name, time = iTunes.currentTrack?.time else {
+        guard let artist = iTunesApp.track_artist, name = iTunesApp.track_name, time = iTunesApp.track_time else {
             
             return
         }

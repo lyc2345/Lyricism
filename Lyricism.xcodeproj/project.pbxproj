@@ -50,6 +50,7 @@
 		F6D339B51D22865C0066F03F /* iTunes.sdef in Resources */ = {isa = PBXBuildFile; fileRef = F6D339B21D22865C0066F03F /* iTunes.sdef */; };
 		F6D339B61D22865C0066F03F /* iTunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D339B31D22865C0066F03F /* iTunes.swift */; };
 		F6D339B71D22865C0066F03F /* iTunesScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D339B41D22865C0066F03F /* iTunesScripting.swift */; };
+		F6F1C4331D882F8F0081C501 /* iTunesPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F1C4321D882F8F0081C501 /* iTunesPresentable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -133,6 +134,7 @@
 		F6D339B41D22865C0066F03F /* iTunesScripting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iTunesScripting.swift; sourceTree = "<group>"; };
 		F6D339BF1D22867A0066F03F /* iTunesScripting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = iTunesScripting.h; path = iTunesScripting/iTunesScripting.h; sourceTree = SOURCE_ROOT; };
 		F6D339C11D22867A0066F03F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = iTunesScripting/Info.plist; sourceTree = SOURCE_ROOT; };
+		F6F1C4321D882F8F0081C501 /* iTunesPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iTunesPresentable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 				F68BC71C1D128ACE00A36247 /* ViewController.swift */,
 				F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */,
 				F67428D51D8403B3001FBC56 /* SFRealm.swift */,
+				F6F1C4321D882F8F0081C501 /* iTunesPresentable.swift */,
 				F67428D11D83DB6E001FBC56 /* Text.swift */,
 				F617FCA21D269452001A933B /* JumpOnLabelViewController.swift */,
 				F67BEBA11D7E99A8005D0B54 /* Setting */,
@@ -480,6 +483,7 @@
 				F67428D01D82F5BD001FBC56 /* SpotifyScripting.swift in Sources */,
 				F60BF8D61D1430D300F7C6DA /* MacUtilities.swift in Sources */,
 				F67428CF1D82F5BD001FBC56 /* Spotify.swift in Sources */,
+				F6F1C4331D882F8F0081C501 /* iTunesPresentable.swift in Sources */,
 				F60BF8D21D1424D800F7C6DA /* LyricsViewController.swift in Sources */,
 				F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */,
 				F696A2C11D2668FD00EBE049 /* Track.swift in Sources */,
@@ -570,6 +574,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -616,6 +621,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -643,13 +649,17 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Lyricism/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				PODS_ROOT = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.stan.lyricism;
 				PRODUCT_NAME = Lyricism;
 				PROVISIONING_PROFILE = "";
@@ -673,8 +683,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Lyricism/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				PODS_ROOT = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.stan.lyricism;
 				PRODUCT_NAME = Lyricism;
 				PROVISIONING_PROFILE = "";

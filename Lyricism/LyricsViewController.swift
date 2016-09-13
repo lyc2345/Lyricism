@@ -90,10 +90,10 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
     
     super.viewWillAppear()
    
-    weak var iTunes = AppDelegate.sharedDelegate.iTunes
-    guard let artist = iTunes?.currentTrack?.artist, name = iTunes?.currentTrack?.name, time = iTunes?.currentTrack?.time else {
+    let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
+    
+    guard let artist = iTunesApp.track_artist, name = iTunesApp.track_name, time = iTunesApp.track_time else {
       
-      //fatalError("iTunes.currentTrack is nil")
       return
     }
     let track = PlayerTrack(artist: artist, name: name, time: time)
@@ -123,11 +123,13 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
     trackTime = currentTimeFromString(presenter.lvTime)
     artistNtrack = presenter.lvArtistNTrack
     
-    weak var iTunes = AppDelegate.sharedDelegate.iTunes
-    guard let artist = iTunes?.currentTrack?.artist, name = iTunes?.currentTrack?.name, timeString = iTunes?.currentTrack?.time else {
+    let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
+    
+    guard let artist = iTunesApp.track_artist, name = iTunesApp.track_name, time = iTunesApp.track_time else {
+      
       return
     }
-    let itunes_track = PlayerTrack(artist: artist, name: name, time: timeString)
+    let itunes_track = PlayerTrack(artist: artist, name: name, time: time)
     
     guard let realm_track = SFRealm.query(name: name, t: MTrack.self) else {
       print("realm_track is nil")
@@ -158,7 +160,7 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
     
     guard let track_time = (realm_track.valueForKey("time") as? [Int])?.first else {
       
-      trackTime = currentTimeFromString(timeString)
+      trackTime = currentTimeFromString(time)
       return
     }
     
@@ -345,25 +347,26 @@ extension LyricsViewController {
     return currentTimeFromInt(time.timeInterval)
   }
   
-  func currentTimeFromInt(i: Int) -> Int {
+  func currentTimeFromInt(time: Int) -> Int {
     
-    weak var iTunes = AppDelegate.sharedDelegate.iTunes
-    guard let playerPos = iTunes?.playerPosition else {
-      return i - Int(0)
+    let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
+    
+    guard let i = iTunesApp.player, playerPos = iTunesApp.player?.playerPosition else {
+      return time - Int(0)
     }
     
-    if iTunes!.playerState == iTunesEPlS.Playing {
+    if i.playerState == iTunesEPlS.Playing {
       stopTimer()
       initTimer(1.0, target: self, selector: #selector(updateTime), repeats: true)
       
-    } else if iTunes!.playerState == iTunesEPlS.Paused {
+    } else if i.playerState == iTunesEPlS.Paused {
       stopTimer()
-    } else if iTunes!.playerState == iTunesEPlS.Stopped {
+    } else if i.playerState == iTunesEPlS.Stopped {
       stopTimer()
     } else{
       print("Lyrics View Controller is not in the case")
     }
-    return i - Int(playerPos)
+    return time - Int(playerPos)
   }
   
   /*

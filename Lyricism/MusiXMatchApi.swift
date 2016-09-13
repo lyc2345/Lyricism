@@ -96,8 +96,8 @@ class MusiXMatchApi {
         return completion(success: false, info: nil)
       }
       
-      let info = Track.sharedTrack.info
-      info.getTrackPropertyAndValue(json)
+      weak var info = Player.sharedPlayer.info
+      info?.getTrackPropertyAndValue(json)
       return completion(success: true, info: info)
     }
   }
@@ -113,12 +113,9 @@ class MusiXMatchApi {
                 
                 let json = JSON(data: response.data!)
                 if json["message"]["header"]["status_code"] == 200 {
-                    
-                    guard let info = Track.sharedTrack.info else {
-                      
-                        return
-                    }
-                    info.getTrackPropertyAndValue(json)
+                  
+                  weak var info = Player.sharedPlayer.info
+                    info?.getTrackPropertyAndValue(json)
                     
                     if let trackID = json["message"]["body"]["track_list"][0]["track"]["track_id"].rawValue as? NSNumber {
                         //print("track id: \(trackID)")
@@ -167,7 +164,7 @@ class MusiXMatchApi {
   
     class func searchArtwork(completion: (success: Bool, url: NSURL?) -> Void) {
       
-      guard let urlString = Track.sharedTrack.info?.album_coverart_350x350 else {
+      guard let urlString = Player.sharedPlayer.info?.album_coverart_350x350 else {
           return completion(success: false, url: nil)
       }
       return completion(success: true, url: NSURL(string: urlString))

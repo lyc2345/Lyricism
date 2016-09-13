@@ -1,8 +1,9 @@
 PODS:
-  - Alamofire (3.4.1)
+  - Alamofire (3.5.0)
   - Crashlytics (3.8.1):
     - Fabric (~> 1.6.3)
-  - Fabric (1.6.7)
+  - Fabric (1.6.8)
+  - Kingfisher (2.6.0)
   - ReachabilitySwift (2.3.3)
   - Realm (1.0.2):
     - Realm/Headers (= 1.0.2)
@@ -10,27 +11,29 @@ PODS:
   - RealmSwift (1.0.2):
     - Realm (= 1.0.2)
   - SwiftyJSON (2.3.2)
-  - SWXMLHash (2.3.1)
+  - SWXMLHash (2.3.2)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
   - Crashlytics
   - Fabric
+  - Kingfisher (~> 2.4)
   - ReachabilitySwift
   - RealmSwift
   - SwiftyJSON
   - SWXMLHash (~> 2.3.0)
 
 SPEC CHECKSUMS:
-  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
   Crashlytics: 4391d8df0b125345e9f209c5db6e7f40a6a8435d
-  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
+  Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
+  Kingfisher: d84c5fd176ea86cc7b8aac65fd55feda6f70f130
   ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
   Realm: 9d5c46a4d7d27958530a8dfc58f63a99e5c2cba3
   RealmSwift: 82f3ac5e24530143dddfde2033acc0d308f27d96
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
-  SWXMLHash: 795c66e74f4cc9473ad6465c6653c5a6f59f417e
+  SWXMLHash: 2f8c49af765718ad56020c4f875ec3ff22612f06
 
-PODFILE CHECKSUM: cb36eace1fdc2da669259ed9c3d4b167a01a530b
+PODFILE CHECKSUM: c6f81e1d45bc00495d320f841238e3d58999cd7c
 
 COCOAPODS: 1.0.1

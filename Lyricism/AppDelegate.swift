@@ -57,31 +57,36 @@ class AppDelegate: NSObject, NSApplicationDelegate, PreferencesSetable, DismissT
   var dismissTimer: NSTimer!
   var dismissTime: Int = 4;
   
-  let iTunes: iTunesApplication = SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app) as! iTunesApplication
-  
-  let spotify: SpotifyApplication = SBApplication(bundleIdentifier: SBApplicationID.spotify.values().app) as! SpotifyApplication
-  
   // MARK: NSApplicationDelegate
   func applicationDidFinishLaunching(aNotification: NSNotification) {
     
     // [Crashlytics Crash] Warning: NSApplicationCrashOnExceptions is not set. This will result in poor top-level uncaught exception reporting.
     // https://docs.fabric.io/apple/crashlytics/os-x.html
     NSUserDefaults.standardUserDefaults().registerDefaults(["NSApplicationCrashOnExceptions": true])
-    Fabric.with([Crashlytics.self])
+    Fabric.with([Crashlytics.self, Answers.self])
+    /*
+    Answers.logCustomEventWithName("Video Played", customAttributes: [
+      "Category": "Comedy",
+      "Length": 350])
     
+    Answers.logContentViewWithName("Popup", contentType: "Text", contentId: "1234",
+                                   customAttributes: [
+                                    "MessageLength": 11,
+                                    "MessageText": "Hello World"])
+    */
     // Realm Migration
     print("realm path: \(Realm.Configuration.defaultConfiguration.fileURL)")
     
     let config = Realm.Configuration(
       // Set the new schema version. This must be greater than the previously used
       // version (if you've never set a schema version before, the version is 0).
-      schemaVersion: 2,
+      schemaVersion: 1,
       
       // Set the block which will be called automatically when opening a Realm with
       // a schema version lower than the one set above
       migrationBlock: { migration, oldSchemaVersion in
         // We haven’t migrated anything yet, so oldSchemaVersion == 0
-        if (oldSchemaVersion < 2) {
+        if (oldSchemaVersion < 1) {
           // Nothing to do!
           // Realm will automatically detect new properties and removed properties
           // And will update the schema on disk automatically
@@ -98,7 +103,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, PreferencesSetable, DismissT
     lyricsPopover.contentViewController = NSStoryboard(name: "Main", bundle: nil).instantiateControllerWithIdentifier(String(LyricsViewController)) as! LyricsViewController
     jumpOnLabelPopover.contentViewController = NSStoryboard(name: "Main", bundle: nil).instantiateControllerWithIdentifier(String(JumpOnLabelViewController)) as! JumpOnLabelViewController
     
-    iTunes.delegate = self
     
     showDock()
     
@@ -111,10 +115,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, PreferencesSetable, DismissT
       button.action = #selector(AppDelegate.showLyrics(_:))
     }
     
-    NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: #selector(iTunesVaryStatus(_:)), name: SBApplicationID.itunes.values().playerstate, object: nil)
-    NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: #selector(spotifyVaryStatus(_:)), name: SBApplicationID.spotify.values().playerstate, object: nil)
-    
-    
     // Detect mouse down event
     eventMonitor = EventMonitor(mask: [.LeftMouseDownMask, .RightMouseDownMask]) {
       [unowned self] event in
@@ -124,6 +124,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, PreferencesSetable, DismissT
       }
     }
     eventMonitor?.start()
+    
+    let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
+    
+    let spotifyApp = Spotify(player: SBApplication(bundleIdentifier: SBApplicationID.spotify.values().app))
+    
+    print("itunes:\(iTunesApp)")
+    
+    print("spotify:\(spotifyApp)")
+    
+    NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: #selector(iTunesVaryStatus(_:)), name: SBApplicationID.itunes.values().playerstate, object: nil)
+
+    
   }
   
   func applicationWillTerminate(aNotification: NSNotification) {
@@ -132,6 +144,40 @@ class AppDelegate: NSObject, NSApplicationDelegate, PreferencesSetable, DismissT
     NSDistributedNotificationCenter.defaultCenter().removeObserver(self)
   }
 }
+
+extension AppDelegate {
+  
+  func iTunesSetup() {
+    
+    let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
+    
+    guard let iTunes = iTunesApp.player else {
+      
+      return
+    }
+    iTunes.activate()
+    iTunes.delegate = self
+    
+    //NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: #selector(iTunesVaryStatus(_:)), name: SBApplicationID.itunes.values().playerstate, object: nil)
+  }
+  
+  func spotifySetup() {
+    
+    let spotifyApp = Spotify(player: SBApplication(bundleIdentifier: SBApplicationID.spotify.values().app))
+    
+    guard let spotify = spotifyApp.player else {
+      
+      return
+    }
+    spotify.activate()
+    spotify.delegate = self
+    
+    //NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: #selector(spotifyVaryStatus(_:)), name: SBApplicationID.spotify.values().playerstate, object: nil)
+  }
+}
+
+
+
 // MARK: Dock Setting
 extension AppDelegate {
   
@@ -169,6 +215,12 @@ extension AppDelegate {
   
   func iTunesVaryStatus(notification: NSNotification) {
     
+    let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
+    
+    guard let iTunes = iTunesApp.player else {
+      return
+    }
+    
     if iTunes.playerState == iTunesEPlS.Playing {
       print("iTunes playing")
       iTunesPlaying()
@@ -187,7 +239,35 @@ extension AppDelegate {
     }
   }
   
+  func playerIsPlaying(name: String, artist: String, time: String) {
+    if isiTunesPaused {
+      
+      if lyricsPopover.shown {
+        (lyricsPopover.contentViewController as! LyricsViewController).resumeTimer()
+        print("timer resume!")
+      }
+      isiTunesPaused = false
+      print("song keep playing")
+    } else {
+      // iTunes playing after a "Stop" or "New Song"
+      print("new song playing")
+      if lyricsPopover.shown {
+        
+        let track = PlayerTrack(artist: artist, name: name, time: time)
+        (self.lyricsPopover.contentViewController as! LyricsViewController).configure(withPresenter: track)
+        print("query Music info")
+        
+      } else if !lyricsPopover.shown {
+        
+        showJumpOnLabel(artist, trackName: name)
+      }
+    }
+    
+  }
+  
   func iTunesPlaying() {
+    
+    let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
     
     // This is a flag if iTunes playing after a "PAUSE".
     if isiTunesPaused {
@@ -203,14 +283,23 @@ extension AppDelegate {
       print("new song playing")
       if lyricsPopover.shown {
         
-        guard let artist = iTunes.currentTrack?.artist, name = iTunes.currentTrack?.name, time = iTunes.currentTrack?.time else { return }
+        guard let artist = iTunesApp.track_artist, name = iTunesApp.track_name, time = iTunesApp.track_time else {
+          
+          return
+        }
+
         let track = PlayerTrack(artist: artist, name: name, time: time)
         (self.lyricsPopover.contentViewController as! LyricsViewController).configure(withPresenter: track)
         print("query Music info")
         
       } else if !lyricsPopover.shown {
         
-        showJumpOnLabel(iTunes.currentTrack!.artist!, trackName: iTunes.currentTrack!.name!)
+        guard let artist = iTunesApp.track_artist, name = iTunesApp.track_name, time = iTunesApp.track_time else {
+          
+          return
+        }
+        
+        showJumpOnLabel(artist, trackName: name)
       }
     }
   }
@@ -279,7 +368,21 @@ extension AppDelegate: SBApplicationDelegate {
   func eventDidFail(event: UnsafePointer<AppleEvent>, withError error: NSError) -> AnyObject {
     
     print("event:\(event) fail: \(error.localizedDescription)")
+        
+    let i = error.userInfo
     
-    return ""
+    let error_brief_message = i["ErrorBriefMessage"]
+    let error_expected_type = i["ErrorExpectedType"]
+    let error_offending_object = i["ErrorOffendingObject"]
+    let error_string = i["ErrorString"]
+    let error_number = i["ErrorNumber"]
+    
+    print("error_brief_message:\(error_brief_message)")
+    print("error_expected_type:\(error_expected_type)")
+    print("error_offending_object:\(error_offending_object)")
+    print("error_string:\(error_string)")
+    print("error_number:\(error_number)")
+    
+    return error.userInfo
   }
 }

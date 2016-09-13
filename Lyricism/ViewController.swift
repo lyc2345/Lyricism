@@ -72,7 +72,7 @@ class ViewController: NSViewController {
   func getCurrentIconImage() {
     
     
-    iOSXFoundation.propertyValues(Track)
+    iOSXFoundation.propertyValues(Player)
     
   }
 }

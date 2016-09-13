@@ -18,7 +18,6 @@ target 'Lyricism' do
   pod 'Crashlytics'
   #pod 'Optimizely-iOS-SDK'
   #pod 'Appsee'
-  
 
 
 end
