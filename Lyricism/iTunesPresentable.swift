@@ -19,17 +19,17 @@ protocol PlayerPresentable {
   var track_time_position: Double? { get }
 }
 
-struct iTunes {
+struct iTunes: PlayerPresentable {
 
   let player: iTunesApplication?
 }
 
-struct Spotify {
+struct Spotify: PlayerPresentable {
   
   let player: SpotifyApplication?
 }
 
-extension iTunes: PlayerPresentable {
+extension iTunes {
   
   var track_name: String? {
     
@@ -71,7 +71,7 @@ extension iTunes: PlayerPresentable {
     return p.playerPosition
   }
 }
-extension Spotify: PlayerPresentable {
+extension Spotify {
 
   var track_name: String? {
     

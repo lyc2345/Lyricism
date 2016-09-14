@@ -91,12 +91,47 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
     super.viewWillAppear()
    
     let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
+    print("itunes is running \(iTunesApp.player!.running)")
+    let spotifyApp = Spotify(player: SBApplication(bundleIdentifier: SBApplicationID.spotify.values().app))
+    print("spotify is running \(spotifyApp.player!.running)")
     
-    guard let artist = iTunesApp.track_artist, name = iTunesApp.track_name, time = iTunesApp.track_time else {
+    guard let i = iTunesApp.player where i.running else {
+      
+      guard let s = spotifyApp.player where s.running else {
+        return
+      }
+      NSNotificationCenter.defaultCenter().postNotificationName(SBApplicationID.sourceKey, object: SBApplicationID.spotify.values().player)
+      getSpotifyPlayerPlayingInformation(spotifyApp)
+      print("spotify get current playing information:\(spotifyApp)")
+      return
+    }
+    NSNotificationCenter.defaultCenter().postNotificationName(SBApplicationID.sourceKey, object: SBApplicationID.itunes.values().app)
+    getiTunesPlayingInformation(iTunesApp)
+    print("itunes  get current playing information:\(iTunesApp)")
+  }
+  
+  func getiTunesPlayingInformation<P where P: PlayerPresentable>(p: P) {
+    
+    guard let artist = p.track_artist, name = p.track_name, time = p.track_time as? String else {
+      return
+    }
+      
+    let track = PlayerTrack(artist: artist, name: name, time: time)
+    configure(withPresenter: track)
+  }
+  
+  func getSpotifyPlayerPlayingInformation<P where P: PlayerPresentable>(p: P) {
+    
+    guard let artist = p.track_artist, name = p.track_name, time = p.track_time as? Int else {
       
       return
     }
-    let track = PlayerTrack(artist: artist, name: name, time: time)
+    let milliTime = time / 1000
+    let minutes = Int(milliTime / 60)
+    let seconds = Int(milliTime % 60)
+    
+    let timeString = "\(minutes):\(seconds < 10 ? "0\(seconds)" : "\(seconds)")"
+    let track = PlayerTrack(artist: artist, name: name, time: timeString)
     configure(withPresenter: track)
   }
   
@@ -107,9 +142,18 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
   // PlayerSourceable Delegate
   func setSourceImage(notification: NSNotification) {
     
-    switch getPlayerSource() {
-    case .itunes: sourceImageView.image = NSImage(named: "iTunes")
-    case .spotify: sourceImageView.image = NSImage(named: "spotify")
+    guard let source = notification.object as? String else {
+      
+      return
+    }
+    dispatch_async(dispatch_get_main_queue()) { 
+      
+      switch source {
+      case SBApplicationID.itunes.values().app: self.sourceImageView.image = NSImage(named: "iTunes")
+      case SBApplicationID.spotify.values().app: self.sourceImageView.image = NSImage(named: "spotify")
+      default:
+        fatalError("out of SBApplicationID type")
+      }
     }
   }
   
@@ -119,19 +163,17 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
   }
   
   func configure(withPresenter presenter: LyricsViewPresentable) {
-    
+    print("time: \(presenter.lvTime)")
     trackTime = currentTimeFromString(presenter.lvTime)
     artistNtrack = presenter.lvArtistNTrack
     
-    let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
+    let artist = artistNtrack?.artist
+    let name = artistNtrack?.trackName
+    let time = presenter.lvTime
+
+    let itunes_track = PlayerTrack(artist: artist!, name: name!, time: time)
     
-    guard let artist = iTunesApp.track_artist, name = iTunesApp.track_name, time = iTunesApp.track_time else {
-      
-      return
-    }
-    let itunes_track = PlayerTrack(artist: artist, name: name, time: time)
-    
-    guard let realm_track = SFRealm.query(name: name, t: MTrack.self) else {
+    guard let realm_track = SFRealm.query(name: name!, t: MTrack.self) else {
       print("realm_track is nil")
       searchLyricNArtwork(itunes_track)
       return

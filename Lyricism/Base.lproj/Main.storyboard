@@ -869,8 +869,8 @@
                                     <constraint firstItem="8Qw-4V-5en" firstAttribute="centerX" secondItem="6ch-b5-MOg" secondAttribute="centerX" id="tbC-wP-rhR"/>
                                 </constraints>
                             </customView>
-                            <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Dj-H1-zJ7">
-                                <rect key="frame" x="10" y="10" width="30" height="30"/>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Dj-H1-zJ7">
+                                <rect key="frame" x="5" y="5" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="E9Z-AY-ohl"/>
                                     <constraint firstAttribute="width" constant="30" id="naa-o4-iOz"/>
@@ -883,7 +883,7 @@
                             <constraint firstAttribute="trailing" secondItem="897-1E-ERB" secondAttribute="trailing" id="6aj-dt-F0S"/>
                             <constraint firstAttribute="bottom" secondItem="bi9-ja-2dh" secondAttribute="bottom" id="79D-VU-641"/>
                             <constraint firstItem="FFI-ia-lvV" firstAttribute="leading" secondItem="Fy6-Fe-DG3" secondAttribute="leading" constant="10" id="ACM-5T-aCG"/>
-                            <constraint firstItem="9Dj-H1-zJ7" firstAttribute="leading" secondItem="Fy6-Fe-DG3" secondAttribute="leading" constant="10" id="H23-L1-IA8"/>
+                            <constraint firstItem="9Dj-H1-zJ7" firstAttribute="leading" secondItem="Fy6-Fe-DG3" secondAttribute="leading" constant="5" id="H23-L1-IA8"/>
                             <constraint firstItem="bi9-ja-2dh" firstAttribute="height" secondItem="Fy6-Fe-DG3" secondAttribute="height" multiplier="0.84:1" id="KMa-eN-91L"/>
                             <constraint firstItem="897-1E-ERB" firstAttribute="top" secondItem="Fy6-Fe-DG3" secondAttribute="top" id="L5S-0R-LTM"/>
                             <constraint firstAttribute="bottom" secondItem="6ch-b5-MOg" secondAttribute="bottom" id="Ltf-B3-HMH"/>
@@ -891,7 +891,7 @@
                             <constraint firstItem="FFI-ia-lvV" firstAttribute="top" secondItem="Fy6-Fe-DG3" secondAttribute="top" constant="10" id="Trr-dk-CUU"/>
                             <constraint firstAttribute="bottom" secondItem="897-1E-ERB" secondAttribute="bottom" id="XGb-IV-jq3"/>
                             <constraint firstAttribute="trailing" secondItem="bi9-ja-2dh" secondAttribute="trailing" constant="30" id="ZH3-Ez-PcY"/>
-                            <constraint firstAttribute="bottom" secondItem="9Dj-H1-zJ7" secondAttribute="bottom" constant="10" id="bBV-PV-PKK"/>
+                            <constraint firstAttribute="bottom" secondItem="9Dj-H1-zJ7" secondAttribute="bottom" constant="5" id="bBV-PV-PKK"/>
                             <constraint firstItem="1qW-9e-nzZ" firstAttribute="leading" secondItem="FFI-ia-lvV" secondAttribute="trailing" constant="5" id="ceu-nq-U7V"/>
                             <constraint firstItem="tuY-vm-MWf" firstAttribute="top" secondItem="Fy6-Fe-DG3" secondAttribute="top" id="ebQ-se-nnk"/>
                             <constraint firstItem="6ch-b5-MOg" firstAttribute="top" secondItem="Fy6-Fe-DG3" secondAttribute="top" constant="50" id="fbE-v4-nnl"/>
