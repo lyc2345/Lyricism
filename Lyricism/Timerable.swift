@@ -49,7 +49,7 @@ extension MusicTimerable where Self: LyricsViewController {
       //self.timeLabel.stringValue = timeString
       handler(timeString: timeString)
     }
-    //print("track time :\(timeString)")
+    //s_print("track time :\(timeString)")
   }
   
   func resumeTimer(target: AnyObject, selector: Selector, repeats: Bool) {

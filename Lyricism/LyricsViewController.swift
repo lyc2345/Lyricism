@@ -15,6 +15,7 @@ protocol LyricsViewPresentable {
   
   var lvTime: String { get }
   var lvArtistNTrack: (artist: String, trackName: String) { get }
+  var lvTrack: PlayerTrack { get }
 }
 
 class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable, PlayerSourceable {
@@ -72,6 +73,10 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
   var timer: NSTimer?
   var trackTime: Int!
   
+  
+  // This one just for 
+  var track: PlayerTrack?
+  
   @IBOutlet weak var isAlwaysOnTop: NSMenuItem!
   @IBOutlet var settingMenu: NSMenu!
   private var trackingArea: NSTrackingArea!
@@ -90,24 +95,34 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
     
     super.viewWillAppear()
    
-    let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
-    print("itunes is running \(iTunesApp.player!.running)")
-    let spotifyApp = Spotify(player: SBApplication(bundleIdentifier: SBApplicationID.spotify.values().app))
-    print("spotify is running \(spotifyApp.player!.running)")
+    showCurrentPlaying()
+  }
+  
+  func showCurrentPlaying() {
     
-    guard let i = iTunesApp.player where i.running else {
+    let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
+    s_print("itunes is running \(iTunesApp.player!.running)")
+    let spotifyApp = Spotify(player: SBApplication(bundleIdentifier: SBApplicationID.spotify.values().app))
+    s_print("spotify is running \(spotifyApp.player!.running)")
+    
+    guard let i = iTunesApp.player where i.running && i.playerState == .Playing else {
       
       guard let s = spotifyApp.player where s.running else {
+        
+        
+        // TODO: Show alert to remind user to open one of players
         return
       }
+      
       NSNotificationCenter.defaultCenter().postNotificationName(SBApplicationID.sourceKey, object: SBApplicationID.spotify.values().player)
       getSpotifyPlayerPlayingInformation(spotifyApp)
-      print("spotify get current playing information:\(spotifyApp)")
+      s_print("spotify get current playing information:\(spotifyApp)")
       return
     }
     NSNotificationCenter.defaultCenter().postNotificationName(SBApplicationID.sourceKey, object: SBApplicationID.itunes.values().app)
     getiTunesPlayingInformation(iTunesApp)
-    print("itunes  get current playing information:\(iTunesApp)")
+    s_print("itunes  get current playing information:\(iTunesApp)")
+
   }
   
   func getiTunesPlayingInformation<P where P: PlayerPresentable>(p: P) {
@@ -122,16 +137,10 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
   
   func getSpotifyPlayerPlayingInformation<P where P: PlayerPresentable>(p: P) {
     
-    guard let artist = p.track_artist, name = p.track_name, time = p.track_time as? Int else {
+    guard let track = track else {
       
       return
     }
-    let milliTime = time / 1000
-    let minutes = Int(milliTime / 60)
-    let seconds = Int(milliTime % 60)
-    
-    let timeString = "\(minutes):\(seconds < 10 ? "0\(seconds)" : "\(seconds)")"
-    let track = PlayerTrack(artist: artist, name: name, time: timeString)
     configure(withPresenter: track)
   }
   
@@ -166,6 +175,7 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
     print("time: \(presenter.lvTime)")
     trackTime = currentTimeFromString(presenter.lvTime)
     artistNtrack = presenter.lvArtistNTrack
+    track = presenter.lvTrack
     
     let artist = artistNtrack?.artist
     let name = artistNtrack?.trackName
@@ -174,20 +184,20 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
     let itunes_track = PlayerTrack(artist: artist!, name: name!, time: time)
     
     guard let realm_track = SFRealm.query(name: name!, t: MTrack.self) else {
-      print("realm_track is nil")
+      s_print("realm_track is nil")
       searchLyricNArtwork(itunes_track)
       return
     }
     
     guard let track_id = (realm_track.valueForKey("lyric_id") as? [Int])?.first else {
-      print("lyric_id is nil")
+      s_print("lyric_id is nil")
       searchLyricNArtwork(itunes_track)
       return
     }
     
     guard let realm_lyric = SFRealm.query(id: track_id, t: MLyric.self), album_id = (realm_track.valueForKey("album_id") as? [Int])?.first else {
       searchLyricNArtwork(itunes_track)
-      print("realm_lyric or album_id is nil")
+      s_print("realm_lyric or album_id is nil")
       return
     }
     
@@ -195,7 +205,7 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
     
     guard let realm_album = SFRealm.query(id: album_id, t: MAlbum.self), artwork_data = (realm_album.valueForKey("artwork") as? [NSData])?.first else {
       searchLyricNArtwork(itunes_track)
-      print("realm_album is nil")
+      s_print("realm_album is nil")
       return
     }
     imageCache = artwork_data
@@ -205,7 +215,6 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
       trackTime = currentTimeFromString(time)
       return
     }
-    
     trackTime = currentTimeFromInt(track_time)
   }
   
@@ -214,12 +223,12 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
     MusiXMatchApi.searchLyrics(presenter.lvArtistNTrack.artist, trackName: presenter.lvArtistNTrack.trackName, completion: { (success, info, lyric) in
       
       guard let i = info, ly = lyric else {
-        self.printLog("info , lyric is nil")
+        self.s_print("info , lyric is nil")
         return
       }
       
       guard let urlString = i.album_coverart_350x350, url = NSURL(string:urlString) else {
-        self.printLog("urlString, url is nil")
+        self.s_print("urlString, url is nil")
         return
       }
       
@@ -393,8 +402,19 @@ extension LyricsViewController {
     
     let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
     
-    guard let i = iTunesApp.player, playerPos = iTunesApp.player?.playerPosition else {
-      return time - Int(0)
+    guard let i = iTunesApp.player, iplayerPos = iTunesApp.player?.playerPosition where i.running && i.playerState == .Playing else {
+      
+      let spotifyApp = Spotify(player: SBApplication(bundleIdentifier: SBApplicationID.spotify.values().app))
+      
+      guard let s = spotifyApp.player, splayerPos = spotifyApp.player?.playerPosition where s.running else {
+        
+        return time - Int(0)
+      }
+      
+      stopTimer()
+      initTimer(1.0, target: self, selector: #selector(updateTime), repeats: true)
+      
+      return time - Int(splayerPos)
     }
     
     if i.playerState == iTunesEPlS.Playing {
@@ -406,9 +426,9 @@ extension LyricsViewController {
     } else if i.playerState == iTunesEPlS.Stopped {
       stopTimer()
     } else{
-      print("Lyrics View Controller is not in the case")
+      s_print("Lyrics View Controller is not in the case")
     }
-    return time - Int(playerPos)
+    return time - Int(iplayerPos)
   }
   
   /*

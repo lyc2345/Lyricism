@@ -69,7 +69,7 @@ class SFPopover: NSPopover, Popoverable {
         if let h = handler {
             h()
         }
-        //print("close popover")
+        //s_print("close popover")
         performClose(self)
     }
     
@@ -149,7 +149,7 @@ extension SFPopoverContainer: Popoverable {
         if let h = handler {
             h()
         }
-        //print("close popover")
+        //s_print("close popover")
         popover.performClose(popover)
     }
     
@@ -168,7 +168,7 @@ extension SFPopoverContainer: Popoverable {
 extension SFPopover: NSPopoverDelegate {
     
     func popoverDidShow(notification: NSNotification) {
-        //print("Popover did show")
+        //s_print("Popover did show")
     }
     
     func popoverWillShow(notification: NSNotification) {

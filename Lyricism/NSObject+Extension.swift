@@ -85,7 +85,7 @@ extension NSObject {
         
         for (_, name) in propertiesName.enumerate() {
             
-            //print("property name: \(name), value:\(myClass.valueForKey(name))")
+            //s_print("property name: \(name), value:\(myClass.valueForKey(name))")
         }
     }
     
@@ -104,7 +104,7 @@ extension NSObject {
             
             let attribute = property_getAttributes(property)
             let attributeString = String(UTF8String: attribute)
-            //print("attributeString:\(attributeString!)")
+            //s_print("attributeString:\(attributeString!)")
             let attributes = attributeString!.componentsSeparatedByString(",")
             
             results.append(attributes)

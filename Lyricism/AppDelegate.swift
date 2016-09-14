@@ -63,16 +63,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, PreferencesSetable, DismissT
     // https://docs.fabric.io/apple/crashlytics/os-x.html
     NSUserDefaults.standardUserDefaults().registerDefaults(["NSApplicationCrashOnExceptions": true])
     Fabric.with([Crashlytics.self, Answers.self])
-    /*
-    Answers.logCustomEventWithName("Video Played", customAttributes: [
-      "Category": "Comedy",
-      "Length": 350])
-    
-    Answers.logContentViewWithName("Popup", contentType: "Text", contentId: "1234",
-                                   customAttributes: [
-                                    "MessageLength": 11,
-                                    "MessageText": "Hello World"])
-    */
+
     // Realm Migration
     print("realm path: \(Realm.Configuration.defaultConfiguration.fileURL)")
     
@@ -94,7 +85,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, PreferencesSetable, DismissT
     
     // Tell Realm to use this new configuration object for the default Realm
     Realm.Configuration.defaultConfiguration = config
-    
     // Now that we've told Realm how to handle the schema change, opening the file
     // will automatically perform the migration
     
@@ -106,8 +96,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, PreferencesSetable, DismissT
   }
   
   func applicationWillTerminate(aNotification: NSNotification) {
-    // Insert code here to tear down your application
-    //NSNotificationCenter.defaultCenter().removeObserver(self)
+    
     NSDistributedNotificationCenter.defaultCenter().removeObserver(self)
   }
 }
@@ -118,14 +107,13 @@ extension AppDelegate {
     
     let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
     NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerStateChanged(_:)), name: SBApplicationID.itunes.values().playerstate, object: nil)
-    print("itunes:\(iTunesApp)")
+    s_print("itunes:\(iTunesApp)")
     
     guard let iTunes = iTunesApp.player else {
       
       return
     }
     //iTunes.activate()
-    
     guard iTunes.running else {
       return
     }
@@ -136,14 +124,13 @@ extension AppDelegate {
     
     let spotifyApp = Spotify(player: SBApplication(bundleIdentifier: SBApplicationID.spotify.values().app))
     NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerStateChanged(_:)), name: SBApplicationID.spotify.values().playerstate, object: nil)
-    print("spotify:\(spotifyApp)")
+    s_print("spotify:\(spotifyApp)")
     
     guard let spotify = spotifyApp.player else {
       
       return
     }
     //spotify.activate()
-    
     guard spotify.running else {
       return
     }
@@ -166,7 +153,7 @@ extension AppDelegate {
       button.target = self
       button.image = NSImage(named: "note_dark")
       button.alternateImage = NSImage(named: "note_light")
-      button.action = #selector(AppDelegate.showLyrics(_:))
+      button.action = #selector(showLyrics(_:))
     }
     
     // Detect mouse down event
@@ -200,7 +187,7 @@ extension AppDelegate {
   
   func playerStateChanged(notification: NSNotification) {
     
-    print("notification:\(notification)")
+    s_print("notification:\(notification)")
     
     guard notification.object as? String == SBApplicationID.itunes.values().player  else {
       
@@ -210,20 +197,20 @@ extension AppDelegate {
       }
       
       if playerState == "Playing" {
-        print("spotify playing")
+        s_print("spotify playing")
         
         let milliTime = time / 1000
         let minutes = Int(milliTime / 60)
         let seconds = Int(milliTime % 60)
-        
         let timeString = "\(minutes):\(seconds < 10 ? "0\(seconds)" : "\(seconds)")"
-        print("spotify time:\(timeString)")
         playerIsPlaying(name, artist: artist, time: timeString)
+        
       } else if playerState == "Paused" {
-        print("spotify paused")
+        s_print("spotify paused")
         playerPaused()
+        
       } else if playerState == "Stopped" {
-        print("spotify stopped")
+        s_print("spotify stopped")
         playerStop()
       }
       return
@@ -232,50 +219,52 @@ extension AppDelegate {
     let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
     
     if iTunesApp.player!.playerState == iTunesEPlS.Playing {
-      print("iTunes playing")
-      //iTunesPlaying()
+      
+      s_print("iTunes playing")
       playerIsPlaying(iTunesApp.track_name!, artist: iTunesApp.track_artist!, time: iTunesApp.track_time!)
+      
     } else if iTunesApp.player!.playerState == iTunesEPlS.Paused {
-      print("iTunes Paused")
+      s_print("iTunes Paused")
       playerPaused()
+      
     } else if iTunesApp.player!.playerState == iTunesEPlS.Stopped {
-      print("iTunes Stopped")
+      s_print("iTunes Stopped")
       playerStop()
+      
     } else if iTunesApp.player!.playerState == iTunesEPlS.FastForwarding {
-      print("iTunes FastForwarding")
+      s_print("iTunes FastForwarding")
     } else if iTunesApp.player!.playerState == iTunesEPlS.Rewinding {
-      print("iTunes Rewinding")
+      s_print("iTunes Rewinding")
     } else {
-      print("iTunes default")
+      s_print("iTunes default")
     }
   }
   
   func playerIsPlaying(name: String, artist: String, time: String) {
     
+    let track = PlayerTrack(artist: artist, name: name, time: time)
     
     if isPlayerPaused {
       
       if lyricsPopover.shown {
         
-        let track = PlayerTrack(artist: artist, name: name, time: time)
         (self.lyricsPopover.contentViewController as! LyricsViewController).configure(withPresenter: track)
         (lyricsPopover.contentViewController as! LyricsViewController).resumeTimer()
-        print("timer resume!")
+        s_print("timer resume!")
       }
       isPlayerPaused = false
-      print("song keep playing")
+      s_print("song keep playing")
     } else {
       // iTunes playing after a "Stop" or "New Song"
-      print("new song playing")
+      s_print("new song playing")
       if lyricsPopover.shown {
         
-        let track = PlayerTrack(artist: artist, name: name, time: time)
         (self.lyricsPopover.contentViewController as! LyricsViewController).configure(withPresenter: track)
-        print("query Music info")
+        s_print("query Music info")
         
       } else if !lyricsPopover.shown {
         
-        showMusicHUD(artist, trackName: name)
+        showMusicHUD(track)
       }
     }
     
@@ -292,6 +281,18 @@ extension AppDelegate {
     
     lyricsPopover.close()
   }
+  
+  func showMusicHUD(track: PlayerTrack) {
+    
+    if jumpOnLabelPopover.shown {
+      jumpOnLabelPopover.close()
+    }
+    jumpOnLabelPopover.showRelativeToRect(statusItem.button!.frame, ofView: statusItem.button!, preferredEdge: .MinY)
+    (jumpOnLabelPopover.contentViewController as! JumpOnLabelViewController).trackTitle = "\(track.artist) - \(track.name)"
+    
+    timerStop()
+    timerStart()
+  }
 
   func dismissTimerCountDown() {
     
@@ -301,19 +302,6 @@ extension AppDelegate {
       return
     }
     dismissTime -= 1
-  }
-  
-  func showMusicHUD(artist: String, trackName: String) {
-    
-    if jumpOnLabelPopover.shown {
-      jumpOnLabelPopover.close()
-    }
-    
-    jumpOnLabelPopover.showRelativeToRect(statusItem.button!.frame, ofView: statusItem.button!, preferredEdge: .MinY)
-    (jumpOnLabelPopover.contentViewController as! JumpOnLabelViewController).trackTitle = "\(artist) - \(trackName)"
-    
-    timerStop()
-    timerStart()
   }
 }
 
@@ -334,7 +322,7 @@ extension AppDelegate {
       return
     } else {
       self.lyricsPopover.showRelativeToRect(sender.bounds, ofView: sender as! NSView, preferredEdge: .MinY)
-      NSApplication.sharedApplication().activateIgnoringOtherApps(true)
+      //NSApplication.sharedApplication().activateIgnoringOtherApps(true)
     }
   }
 }
@@ -343,7 +331,7 @@ extension AppDelegate: SBApplicationDelegate {
   
   func eventDidFail(event: UnsafePointer<AppleEvent>, withError error: NSError) -> AnyObject {
     
-    print("event:\(event) fail: \(error.localizedDescription)")
+    s_print("event:\(event) fail: \(error.localizedDescription)")
         
     let i = error.userInfo
     
@@ -353,11 +341,11 @@ extension AppDelegate: SBApplicationDelegate {
     let error_string = i["ErrorString"]
     let error_number = i["ErrorNumber"]
     
-    print("error_brief_message:\(error_brief_message)")
-    print("error_expected_type:\(error_expected_type)")
-    print("error_offending_object:\(error_offending_object)")
-    print("error_string:\(error_string)")
-    print("error_number:\(error_number)")
+    s_print("error_brief_message:\(error_brief_message)")
+    s_print("error_expected_type:\(error_expected_type)")
+    s_print("error_offending_object:\(error_offending_object)")
+    s_print("error_string:\(error_string)")
+    s_print("error_number:\(error_number)")
     
     return error.userInfo
   }

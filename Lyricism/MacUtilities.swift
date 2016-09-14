@@ -49,13 +49,22 @@ class MacUtilities: NSObject {
 
 extension NSObject {
     
-    func printLog<T>(message: T,
-                  file: String = #file,
-                  method: String = #function,
-                  line: Int = #line)
-    {
-        #if DEBUG
-            print("\((file as NSString).lastPathComponent)[\(line)], \(method): \(message)")
-        #endif
-    }
+  func printLog<T>(message: T,
+                file: String = #file,
+                method: String = #function,
+                line: Int = #line)
+  {
+    #if DEBUG
+      print("\((file as NSString).lastPathComponent)[\(line)], \(method): \(message)")
+    #endif
+  }
+  
+  func s_print(message: String, method: String = #function) {
+    
+    #if DEBUG
+      print("\(method): \(message)")
+    #endif
+  }
+  
+  
 }

@@ -55,11 +55,11 @@ extension PreferencesSetable {
     switch type {
     case .yes:
       NSUserDefaults.standardUserDefaults().setBool(true, forKey: Settings.windows_on_top_setting)
-      print("bool: \(NSUserDefaults.standardUserDefaults().boolForKey(Settings.windows_on_top_setting))")
+      //print("bool: \(NSUserDefaults.standardUserDefaults().boolForKey(Settings.windows_on_top_setting))")
       
     case .no:
       NSUserDefaults.standardUserDefaults().setBool(false, forKey: Settings.windows_on_top_setting)
-      print("bool: \(NSUserDefaults.standardUserDefaults().boolForKey(Settings.windows_on_top_setting))")
+      //print("bool: \(NSUserDefaults.standardUserDefaults().boolForKey(Settings.windows_on_top_setting))")
     }
   }
   

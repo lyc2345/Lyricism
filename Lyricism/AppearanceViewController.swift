@@ -31,7 +31,7 @@ extension PlayerSourceable where Self: NSViewController {
     case 0: return SBApplicationID.itunes
     case 1: return SBApplicationID.spotify
     default:
-      print("getPlayerSource SBApplicationID out of bounds, AppearanceViewController, Line: 33")
+      s_print("getPlayerSource SBApplicationID out of bounds, AppearanceViewController, Line: 33")
       return SBApplicationID.itunes
     }
   }
@@ -74,7 +74,7 @@ class AppearanceViewController: NSViewController, PreferencesSetable, PlayerSour
 
     @IBAction func hideDock(sender: AnyObject) {
         
-      print("show:\((sender as! NSButton).state)")
+      s_print("show:\((sender as! NSButton).state)")
       
       setDocker(Settings.Docker(rawValue: isOnDockBtn.state)!)
     }
@@ -99,7 +99,7 @@ class AppearanceViewController: NSViewController, PreferencesSetable, PlayerSour
     (sender as! NSButton).selected(true)
     
     setPlayerSource((sender as! NSButton) == iTunesButton ? .itunes : .spotify)
-    print("source: \((sender as! NSButton) == iTunesButton ? "itunes" : "spotify")")
+    s_print("source: \((sender as! NSButton) == iTunesButton ? "itunes" : "spotify")")
     
     NSNotificationCenter.defaultCenter().postNotificationName(SBApplicationID.sourceKey, object: nil)
   }

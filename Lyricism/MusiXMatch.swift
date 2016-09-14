@@ -21,6 +21,7 @@ extension PlayerTrack: LyricsViewPresentable {
   
   var lvTime: String { return time }
   var lvArtistNTrack: (artist: String, trackName: String) { return (artist, name) }
+  var lvTrack: PlayerTrack { return PlayerTrack(artist: artist, name: name, time: time) }
 }
 
 struct MusiXTrack {
