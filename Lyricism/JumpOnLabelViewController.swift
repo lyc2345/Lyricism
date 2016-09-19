@@ -11,30 +11,53 @@ import Cocoa
 // Change Triagle Background Color
 class PopoverContentViewJumpOnLabel: NSView {
   
-  var backgroundView: ColorBackgroundView?
+  var backgroundViewLayer: ColorBackgroundView?
+  
   override func viewDidMoveToWindow() {
     
-    super.viewDidMoveToWindow()
-    
-    if let frameView = self.window?.contentView?.superview where backgroundView == nil {
+    if let frameView = self.window?.contentView?.superview where backgroundViewLayer == nil {
       
-        backgroundView = ColorBackgroundView(frame: frameView.bounds)
-        backgroundView!.autoresizingMask = NSAutoresizingMaskOptions([.ViewWidthSizable, .ViewHeightSizable]);
-        frameView.addSubview(backgroundView!, positioned: NSWindowOrderingMode.Below, relativeTo: frameView)
+        backgroundViewLayer = ColorBackgroundView(frame: frameView.bounds)
+        backgroundViewLayer!.autoresizingMask = NSAutoresizingMaskOptions([.ViewWidthSizable, .ViewHeightSizable]);
+        frameView.addSubview(backgroundViewLayer!, positioned: NSWindowOrderingMode.Below, relativeTo: frameView)
     }
+    super.viewDidMoveToWindow()
   }
 }
 // Change Triagle Background Color
 class ColorBackgroundView: NSView {
   
+  // NSColor(colorLiteralRed: 41.0/255.0, green: 48.0/255.0, blue: 66.0/255.0, alpha: 6.0)
+  var color: NSColor = NSColor(colorLiteralRed: 41.0/255.0, green: 48.0/255.0, blue: 66.0/255.0, alpha: 6.0)
+  
   override func drawRect(dirtyRect: NSRect) {
-    NSColor(colorLiteralRed: 41.0/255.0, green: 48.0/255.0, blue: 66.0/255.0, alpha: 6.0).set()
+    
+    color.set()
     NSRectFill(bounds)
   }
 }
 
+// dark blue: NSColor(colorLiteralRed: 41.0/255.0, green: 48.0/255.0, blue: 66.0/255.0, alpha: 6.0)
+// Spotify green: NSColor(colorLiteralRed: 90.0/255.0, green: 213.0/255.0, blue: 79.0/255.0, alpha: 6.0)
+// iTunes white: NSColor(colorLiteralRed: 218.0/255.0, green: 223.0/255.0, blue: 227.0/255.0, alpha: 6.0)
+// iTunes font: NSColor(colorLiteralRed: 230.0/255.0, green: 62.0/255.0, blue: 92.0/255.0, alpha: 6.0)
 
 class JumpOnLabelViewController: NSViewController {
+  
+  var source: SBApplicationID = .itunes {
+    
+    didSet {
+      
+      switch source {
+      case .itunes:
+        (traigleView as! PopoverContentViewJumpOnLabel).backgroundViewLayer!.color = NSColor(colorLiteralRed: 41.0/255.0, green: 48.0/255.0, blue: 66.0/255.0, alpha: 6.0)
+        titleLabel.textColor = NSColor.whiteColor()
+      case .spotify:
+        (traigleView as! PopoverContentViewJumpOnLabel).backgroundViewLayer!.color = NSColor(colorLiteralRed: 41.0/255.0, green: 48.0/255.0, blue: 66.0/255.0, alpha: 6.0)
+        titleLabel.textColor = NSColor.whiteColor()
+      }
+    }
+  }
   
   @IBOutlet weak var titleLabel: NSTextField! {
     

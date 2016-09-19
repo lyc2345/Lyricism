@@ -759,7 +759,7 @@
         <scene sceneID="YfF-Qn-2fd">
             <objects>
                 <viewController storyboardIdentifier="LyricsViewController" showSeguePresentationStyle="single" id="hcA-47-AYn" customClass="LyricsViewController" customModule="Lyricism" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" autoresizesSubviews="NO" wantsLayer="YES" id="Fy6-Fe-DG3">
+                    <view key="view" autoresizesSubviews="NO" id="Fy6-Fe-DG3">
                         <rect key="frame" x="0.0" y="0.0" width="350" height="350"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -792,13 +792,13 @@
                                     <color key="backgroundColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="bi9-ja-2dh">
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" scrollerKnobStyle="dark" findBarPosition="belowContent" translatesAutoresizingMaskIntoConstraints="NO" id="bi9-ja-2dh">
                                 <rect key="frame" x="30" y="0.0" width="290" height="294"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="UKF-j9-9S6">
                                     <rect key="frame" x="0.0" y="0.0" width="290" height="294"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView editable="NO" selectable="NO" drawsBackground="NO" importsGraphics="NO" horizontallyResizable="YES" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="zlN-bT-muU">
+                                        <textView editable="NO" selectable="NO" drawsBackground="NO" importsGraphics="NO" richText="NO" horizontallyResizable="YES" findStyle="panel" verticallyResizable="YES" id="zlN-bT-muU">
                                             <rect key="frame" x="0.0" y="0.0" width="290" height="294"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
@@ -821,6 +821,7 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </clipView>
+                                <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="H7m-yn-mIS">
                                     <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                     <autoresizingMask key="autoresizingMask"/>
@@ -877,8 +878,38 @@
                                 </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" image="iTunes" id="Qky-oT-QNP"/>
                             </imageView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="QEi-RU-YjE" customClass="Spinner" customModule="ProgressKit">
+                                <rect key="frame" x="160" y="160" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="oeT-N6-0AK"/>
+                                    <constraint firstAttribute="width" constant="30" id="vQR-BK-vcB"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="foreground">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="distance">
+                                        <real key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="starCount">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="duration">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="starSize">
+                                        <size key="value" width="4" height="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="background">
+                                        <color key="value" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </customView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="QEi-RU-YjE" firstAttribute="centerY" secondItem="Fy6-Fe-DG3" secondAttribute="centerY" id="48a-Jd-tgN"/>
                             <constraint firstItem="1qW-9e-nzZ" firstAttribute="height" secondItem="FFI-ia-lvV" secondAttribute="height" id="509-RC-UXE"/>
                             <constraint firstAttribute="trailing" secondItem="897-1E-ERB" secondAttribute="trailing" id="6aj-dt-F0S"/>
                             <constraint firstAttribute="bottom" secondItem="bi9-ja-2dh" secondAttribute="bottom" id="79D-VU-641"/>
@@ -887,6 +918,7 @@
                             <constraint firstItem="bi9-ja-2dh" firstAttribute="height" secondItem="Fy6-Fe-DG3" secondAttribute="height" multiplier="0.84:1" id="KMa-eN-91L"/>
                             <constraint firstItem="897-1E-ERB" firstAttribute="top" secondItem="Fy6-Fe-DG3" secondAttribute="top" id="L5S-0R-LTM"/>
                             <constraint firstAttribute="bottom" secondItem="6ch-b5-MOg" secondAttribute="bottom" id="Ltf-B3-HMH"/>
+                            <constraint firstItem="QEi-RU-YjE" firstAttribute="centerX" secondItem="Fy6-Fe-DG3" secondAttribute="centerX" id="Q7n-yp-AtF"/>
                             <constraint firstItem="1qW-9e-nzZ" firstAttribute="centerY" secondItem="FFI-ia-lvV" secondAttribute="centerY" id="S2h-NL-yu4"/>
                             <constraint firstItem="FFI-ia-lvV" firstAttribute="top" secondItem="Fy6-Fe-DG3" secondAttribute="top" constant="10" id="Trr-dk-CUU"/>
                             <constraint firstAttribute="bottom" secondItem="897-1E-ERB" secondAttribute="bottom" id="XGb-IV-jq3"/>
@@ -913,6 +945,7 @@
                         <outlet property="scrollTextView" destination="bi9-ja-2dh" id="K8l-jd-IQw"/>
                         <outlet property="settingMenu" destination="uAM-xs-CCp" id="hbe-FD-Sb7"/>
                         <outlet property="sourceImageView" destination="9Dj-H1-zJ7" id="tVB-ye-YWh"/>
+                        <outlet property="spinnerProgress" destination="QEi-RU-YjE" id="eh6-2T-Yjs"/>
                         <outlet property="timeLabel" destination="FFI-ia-lvV" id="kDX-33-036"/>
                         <outlet property="topToggleBtn" destination="hrb-KG-KY6" id="j0A-Dh-dTE"/>
                         <outlet property="trackNameArtistLabel" destination="1qW-9e-nzZ" id="a2m-2k-vPV"/>
@@ -984,8 +1017,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WhX-q9-W5l">
-                                <rect key="frame" x="10" y="4" width="130" height="22"/>
+                            <textField horizontalHuggingPriority="501" verticalHuggingPriority="501" translatesAutoresizingMaskIntoConstraints="NO" id="WhX-q9-W5l">
+                                <rect key="frame" x="71" y="4" width="8" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="QYa-oH-EOM"/>
                                 </constraints>
@@ -998,9 +1031,9 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="WhX-q9-W5l" firstAttribute="centerX" secondItem="ZRQ-yK-ZDV" secondAttribute="centerX" id="LnJ-Hj-vy3"/>
-                            <constraint firstItem="WhX-q9-W5l" firstAttribute="leading" secondItem="ZRQ-yK-ZDV" secondAttribute="leading" constant="12" id="Lqa-OF-Y4Q"/>
+                            <constraint firstItem="WhX-q9-W5l" firstAttribute="leading" secondItem="ZRQ-yK-ZDV" secondAttribute="leading" priority="500" constant="12" id="Lqa-OF-Y4Q"/>
                             <constraint firstItem="WhX-q9-W5l" firstAttribute="centerY" secondItem="ZRQ-yK-ZDV" secondAttribute="centerY" id="YsW-fY-JJP"/>
-                            <constraint firstAttribute="trailing" secondItem="WhX-q9-W5l" secondAttribute="trailing" constant="12" id="wWe-2O-y7N"/>
+                            <constraint firstAttribute="trailing" secondItem="WhX-q9-W5l" secondAttribute="trailing" priority="500" constant="12" id="wWe-2O-y7N"/>
                         </constraints>
                     </view>
                     <connections>

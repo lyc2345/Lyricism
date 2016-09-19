@@ -8,6 +8,8 @@
 
 import Cocoa
 
+// This is For LyricViewController use only, not JumpOnLabel
+
 // Change Triagle Background Color
 class PopoverContentView: NSView {
     

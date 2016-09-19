@@ -93,11 +93,34 @@ class AppDelegate: NSObject, NSApplicationDelegate, PreferencesSetable, DismissT
 
     iTunesSetup()
     spotifySetup()
+    
+    guard NSUserDefaults.standardUserDefaults().boolForKey("tutorial_keep_remind") == false else {
+      
+      showTutorial()
+      return
+    }
   }
   
   func applicationWillTerminate(aNotification: NSNotification) {
     
     NSDistributedNotificationCenter.defaultCenter().removeObserver(self)
+  }
+  
+  func showTutorial() {
+    
+    let alert = NSAlert()
+    alert.messageText = "Tutorial"
+    alert.informativeText = "Lyricism is a lyrics plugin with Your iTunes or Spotify. \n\nPlay, Lyric and Sing!"
+    alert.alertStyle = .WarningAlertStyle
+    alert.addButtonWithTitle("I know")
+    alert.addButtonWithTitle("Don't Remind me!")
+    let res = alert.runModal()
+    
+    if res == NSAlertFirstButtonReturn {
+    } else {
+      NSUserDefaults.standardUserDefaults().setBool(false, forKey: "tutorial_keep_remind")
+    }
+
   }
 }
 
@@ -109,36 +132,34 @@ extension AppDelegate {
     NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerStateChanged(_:)), name: SBApplicationID.itunes.values().playerstate, object: nil)
     s_print("itunes:\(iTunesApp)")
     
-    guard let iTunes = iTunesApp.player else {
+    guard let i = iTunesApp.player else {
       
       return
     }
     //iTunes.activate()
-    guard iTunes.running else {
+    guard i.running else {
       return
     }
-    iTunes.delegate = self
+    i.delegate = self
   }
   
   func spotifySetup() {
     
     let spotifyApp = Spotify(player: SBApplication(bundleIdentifier: SBApplicationID.spotify.values().app))
     NSDistributedNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerStateChanged(_:)), name: SBApplicationID.spotify.values().playerstate, object: nil)
-    s_print("spotify:\(spotifyApp)")
+    sd_print("spotify:\(spotifyApp)")
     
-    guard let spotify = spotifyApp.player else {
+    guard let s = spotifyApp.player else {
       
       return
     }
     //spotify.activate()
-    guard spotify.running else {
+    guard s.running else {
       return
     }
-    spotify.delegate = self
+    s.delegate = self
   }
 }
-
-
 
 // MARK: Dock Setting
 extension AppDelegate {
@@ -151,11 +172,18 @@ extension AppDelegate {
     // button image on status bar
     if let button = statusItem.button {
       button.target = self
-      button.image = NSImage(named: "note_dark")
-      button.alternateImage = NSImage(named: "note_light")
       button.action = #selector(showLyrics(_:))
+      guard NSAppearance.currentAppearance().name.hasPrefix("NSAppearanceNameVibrantDark") else {
+        
+        button.image = NSImage(named: "note_dark")
+        button.alternateImage = NSImage(named: "note_light")
+        return
+      }
+      button.image = NSImage(named: "note_light")
+      button.alternateImage = NSImage(named: "note_dark")
+      
     }
-    
+  
     // Detect mouse down event
     eventMonitor = EventMonitor(mask: [.LeftMouseDownMask, .RightMouseDownMask]) {
       [unowned self] event in
@@ -196,6 +224,10 @@ extension AppDelegate {
         return
       }
       
+      let spotifyApp = Spotify(player: SBApplication(bundleIdentifier: SBApplicationID.spotify.values().app))
+      
+      print("spotify playerState:\(spotifyApp.player!.playerState == SpotifyEPlS.Playing)")
+      
       if playerState == "Playing" {
         s_print("spotify playing")
         
@@ -203,7 +235,7 @@ extension AppDelegate {
         let minutes = Int(milliTime / 60)
         let seconds = Int(milliTime % 60)
         let timeString = "\(minutes):\(seconds < 10 ? "0\(seconds)" : "\(seconds)")"
-        playerIsPlaying(name, artist: artist, time: timeString)
+        playerIsPlaying(.spotify, name: name, artist: artist, time: timeString)
         
       } else if playerState == "Paused" {
         s_print("spotify paused")
@@ -221,7 +253,7 @@ extension AppDelegate {
     if iTunesApp.player!.playerState == iTunesEPlS.Playing {
       
       s_print("iTunes playing")
-      playerIsPlaying(iTunesApp.track_name!, artist: iTunesApp.track_artist!, time: iTunesApp.track_time!)
+      playerIsPlaying(.itunes, name: iTunesApp.track_name!, artist: iTunesApp.track_artist!, time: iTunesApp.track_time!)
       
     } else if iTunesApp.player!.playerState == iTunesEPlS.Paused {
       s_print("iTunes Paused")
@@ -240,7 +272,7 @@ extension AppDelegate {
     }
   }
   
-  func playerIsPlaying(name: String, artist: String, time: String) {
+  func playerIsPlaying(source: SBApplicationID, name: String, artist: String, time: String) {
     
     let track = PlayerTrack(artist: artist, name: name, time: time)
     
@@ -264,7 +296,7 @@ extension AppDelegate {
         
       } else if !lyricsPopover.shown {
         
-        showMusicHUD(track)
+        showMusicHUD(source, track: track)
       }
     }
     
@@ -282,14 +314,14 @@ extension AppDelegate {
     lyricsPopover.close()
   }
   
-  func showMusicHUD(track: PlayerTrack) {
+  func showMusicHUD(source: SBApplicationID, track: PlayerTrack) {
     
     if jumpOnLabelPopover.shown {
       jumpOnLabelPopover.close()
     }
     jumpOnLabelPopover.showRelativeToRect(statusItem.button!.frame, ofView: statusItem.button!, preferredEdge: .MinY)
     (jumpOnLabelPopover.contentViewController as! JumpOnLabelViewController).trackTitle = "\(track.artist) - \(track.name)"
-    
+    (jumpOnLabelPopover.contentViewController as! JumpOnLabelViewController).source = source
     timerStop()
     timerStart()
   }

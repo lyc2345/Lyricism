@@ -12,6 +12,7 @@ target 'Lyricism' do
   
   pod 'RealmSwift'
   pod 'Kingfisher', '~> 2.4'
+  pod 'ProgressKit'
   
   # Fabric
   pod 'Fabric'

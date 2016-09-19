@@ -100,7 +100,7 @@ struct SFPopoverContainer {
                 return (CGSizeMake(350, 350), String(LyricsViewController))
                 
             case .prompt:
-                return (CGSizeMake(320, 25), String(JumpOnLabelViewController))
+                return (CGSizeMake(30, 25), String(JumpOnLabelViewController))
             }
         }
     }

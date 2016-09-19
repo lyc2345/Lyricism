@@ -49,7 +49,7 @@ class MacUtilities: NSObject {
 
 extension NSObject {
     
-  func printLog<T>(message: T,
+  func sd_print<T>(message: T,
                 file: String = #file,
                 method: String = #function,
                 line: Int = #line)

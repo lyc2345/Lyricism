@@ -10,6 +10,7 @@ import Cocoa
 import ScriptingBridge
 import AVFoundation
 import RealmSwift
+import ProgressKit
 
 protocol LyricsViewPresentable {
   
@@ -26,6 +27,14 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
     
     didSet {
       guard let textView = scrollTextView.contentView.documentView as? NSTextView else { return }
+      /*
+      let str = self.lyrics?.applyLyricsFormat() ?? ""
+      let attrStr =  NSMutableAttributedString(string: str)
+      let attributes = [NSForegroundColorAttributeName: NSColor.whiteColor(), NSFontAttributeName: NSFont(name: "Lato Regular", size: 20)!]
+      attrStr.setAttributes(attributes, range: NSMakeRange(0, str.characters.count))
+      
+      textView.textStorage?.setAttributedString(attrStr)
+       */
       textView.string = self.lyrics?.applyLyricsFormat() ?? ""
     }
   }
@@ -33,7 +42,6 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
   private var imageCache: NSData? {
     
     didSet {
-      
       guard let data = imageCache else {
         return
       }
@@ -53,6 +61,7 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
     }
   }
   
+  @IBOutlet weak var spinnerProgress: Spinner!
   @IBOutlet weak var controlPanel: NSView!
   @IBOutlet weak var sourceImageView: NSImageView! { didSet { sourceImageView.alphaValue = 0.4 } }
   @IBOutlet weak var timeLabel: NSTextField! { didSet { timeLabel.font = NSFont(name: "Lato Regular", size: 25)! } }
@@ -63,7 +72,7 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
       guard let textView = self.scrollTextView.contentView.documentView as? NSTextView  else {
         return
       }
-      textView.font = NSFont(name: "Lato Light", size: 20)!
+      textView.font = NSFont(name: "Lato Regular", size: 20)!
       textView.alignment = .Center
       textView.textColor = NSColor.whiteColor()
     }
@@ -72,7 +81,6 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
   // protocol Timerable
   var timer: NSTimer?
   var trackTime: Int!
-  
   
   // This one just for 
   var track: PlayerTrack?
@@ -90,7 +98,7 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
     
     NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(setSourceImage(_:)), name: SBApplicationID.sourceKey, object: nil)
   }
-  
+
   override func viewWillAppear() {
     
     super.viewWillAppear()
@@ -101,16 +109,33 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
   func showCurrentPlaying() {
     
     let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
-    s_print("itunes is running \(iTunesApp.player!.running)")
+    s_print("itunes is running \(iTunesApp.player?.running)")
     let spotifyApp = Spotify(player: SBApplication(bundleIdentifier: SBApplicationID.spotify.values().app))
-    s_print("spotify is running \(spotifyApp.player!.running)")
+    s_print("spotify is running \(spotifyApp.player?.running)")
     
     guard let i = iTunesApp.player where i.running && i.playerState == .Playing else {
       
       guard let s = spotifyApp.player where s.running else {
         
-        
         // TODO: Show alert to remind user to open one of players
+        // TODO: Spotify cant detect...fuck
+        /*
+        let alert = NSAlert()
+        alert.messageText = "NOT Detect iTunes or Spotify are running"
+        alert.informativeText = "Lyricism needs you to open your iTunes or Spotify"
+        alert.alertStyle = .WarningAlertStyle
+        alert.addButtonWithTitle("iTunes")
+        alert.addButtonWithTitle("Spotify")
+        alert.addButtonWithTitle("Cancel")
+        let res = alert.runModal()
+        if res == NSAlertFirstButtonReturn {
+          iTunesApp.player?.activate()
+        } else if res == NSAlertSecondButtonReturn {
+          spotifyApp.player?.activate()
+        } else {
+          // do nothing
+        }*/
+        
         return
       }
       
@@ -122,7 +147,6 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
     NSNotificationCenter.defaultCenter().postNotificationName(SBApplicationID.sourceKey, object: SBApplicationID.itunes.values().app)
     getiTunesPlayingInformation(iTunesApp)
     s_print("itunes  get current playing information:\(iTunesApp)")
-
   }
   
   func getiTunesPlayingInformation<P where P: PlayerPresentable>(p: P) {
@@ -173,6 +197,7 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
   
   func configure(withPresenter presenter: LyricsViewPresentable) {
     print("time: \(presenter.lvTime)")
+    spinnerProgress.animate = true
     trackTime = currentTimeFromString(presenter.lvTime)
     artistNtrack = presenter.lvArtistNTrack
     track = presenter.lvTrack
@@ -216,11 +241,16 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
       return
     }
     trackTime = currentTimeFromInt(track_time)
+    spinnerProgress.animate = false
   }
   
   func searchLyricNArtwork(presenter: LyricsViewPresentable) {
     
     MusiXMatchApi.searchLyrics(presenter.lvArtistNTrack.artist, trackName: presenter.lvArtistNTrack.trackName, completion: { (success, info, lyric) in
+      
+      dispatch_async(dispatch_get_main_queue(), {
+        self.spinnerProgress.animate = false
+      })
       
       guard let i = info, ly = lyric else {
         self.s_print("info , lyric is nil")
@@ -236,6 +266,8 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
         
         self.lyrics = ly.text
         self.imageCache = NSData(contentsOfURL: url)
+        
+        self.spinnerProgress.animate = false
       })
       
       let t = MTrack()
@@ -349,7 +381,6 @@ class LyricsViewController: NSViewController, MusicTimerable, PreferencesSetable
   }
   
   func terminateApp() {
-    
     NSApplication.sharedApplication().terminate(self)
   }
 }
@@ -358,7 +389,7 @@ extension String {
   
   func applyLyricsFormat() -> String {
     
-    return self == "" ? NSLocalizedString("Couldn't Find Any Relative Lyrics", comment: "Couldn't Find Any Relative Lyrics") : self//.stringByReplacingOccurrencesOfString(".", withString: ". \n")
+    return self == "" ? NSLocalizedString("Couldn't Find Any Relative Lyrics", comment: "Couldn't Find Any Relative Lyrics") : self.stringByReplacingOccurrencesOfString(".", withString: ". \n").stringByReplacingOccurrencesOfString("  ", withString: "\n")
   }
 }
 
@@ -474,5 +505,13 @@ extension LyricsViewController {
   
   @IBAction func quitButtonPressed(sender: AnyObject) {
     NSApplication.sharedApplication().terminate(self)
+  }
+}
+
+extension LyricsViewController: NSTextDelegate {
+  
+  func textDidChange(notification: NSNotification) {
+    
+    
   }
 }

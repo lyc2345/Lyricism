@@ -4,6 +4,7 @@ PODS:
     - Fabric (~> 1.6.3)
   - Fabric (1.6.8)
   - Kingfisher (2.6.0)
+  - ProgressKit (0.5.1)
   - ReachabilitySwift (2.3.3)
   - Realm (1.0.2):
     - Realm/Headers (= 1.0.2)
@@ -18,6 +19,7 @@ DEPENDENCIES:
   - Crashlytics
   - Fabric
   - Kingfisher (~> 2.4)
+  - ProgressKit
   - ReachabilitySwift
   - RealmSwift
   - SwiftyJSON
@@ -28,12 +30,13 @@ SPEC CHECKSUMS:
   Crashlytics: 4391d8df0b125345e9f209c5db6e7f40a6a8435d
   Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
   Kingfisher: d84c5fd176ea86cc7b8aac65fd55feda6f70f130
+  ProgressKit: 67a1bb2fceefe3c3c3bafa7bb5a66bc96826a9ea
   ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
   Realm: 9d5c46a4d7d27958530a8dfc58f63a99e5c2cba3
   RealmSwift: 82f3ac5e24530143dddfde2033acc0d308f27d96
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   SWXMLHash: 2f8c49af765718ad56020c4f875ec3ff22612f06
 
-PODFILE CHECKSUM: c6f81e1d45bc00495d320f841238e3d58999cd7c
+PODFILE CHECKSUM: fda2f555afcae8af77237631726f9745f27a743a
 
 COCOAPODS: 1.0.1
