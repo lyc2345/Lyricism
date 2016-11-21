@@ -99,9 +99,8 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
   func showCurrentPlaying() {
     
     let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
-    s_print("itunes is running \(iTunesApp.player?.running)")
-		
     let spotifyApp = Spotify(player: SBApplication(bundleIdentifier: SBApplicationID.spotify.values().app))
+		s_print("itunes is running \(iTunesApp.player?.running)")
     s_print("spotify is running \(spotifyApp.player?.running)")
     
     guard let i = iTunesApp.player, i.running && i.playerState == .playing else {
@@ -228,7 +227,7 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
   
   func searchLyricNArtwork(_ presenter: LyricsViewPresentable) {
     
-    MusiXMatchApi.searchLyrics(presenter.lvArtistNTrack.artist, trackName: presenter.lvArtistNTrack.trackName, completion: { (success, info, lyric) in
+    MusiXMatchApi.searchLyrics(presenter.lvArtistNTrack.artist, trackName: presenter.lvArtistNTrack.trackName, completion: { (success, lyric) in
       
       DispatchQueue.main.async(execute: {
         self.spinnerProgress.animate = false

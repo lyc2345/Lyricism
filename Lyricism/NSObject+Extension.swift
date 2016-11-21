@@ -37,15 +37,15 @@ class iOSXFoundation {
         var count: UInt32 = 0
         let properties = class_copyPropertyList(classObject, &count)
         
-        weak var player: Player? = Player.sharedPlayer
+        //weak var player: Player? = Player.sharedPlayer
         
         for name in propertyNames {
             
             //let cname = name.cStringUsingEncoding(NSUTF8StringEncoding)
-            if let value = player!.value(forKey: name) {
-                
-                //print("property name: \(name), value:\(value)")
-            }
+//            if let value = player!.value(forKey: name) {
+//                
+//                //print("property name: \(name), value:\(value)")
+//            }
         }
     }
     

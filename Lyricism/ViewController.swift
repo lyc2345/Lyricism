@@ -53,21 +53,7 @@ class ViewController: NSViewController {
     }
   }
   
-  deinit {
-    
-  }
   
-  func printAllTheLibraryName() {
-    
-    
-  }
-  
-  func getCurrentIconImage() {
-    
-    
-    iOSXFoundation.propertyValues(Player)
-    
-  }
 }
 
 extension ViewController: WebPolicyDelegate {

@@ -46,7 +46,7 @@ enum MusiXMatchURL {
 
 class MusiXMatchApi {
     
-  class func matchSongUtimatly(_ artist: String, trackName: String, completion: @escaping (_ success: Bool, _ info: Info?) -> Void) {
+  private class func matchSongUtimatly(_ artist: String, trackName: String, completion: @escaping (_ success: Bool, _ info: Info?) -> Void) {
     
     let parameter = ["apikey": MusiXMatchURL.Apikey, "q_track": trackName, "q_artist": artist]
     
@@ -63,43 +63,45 @@ class MusiXMatchApi {
         print("json status code != 200,")
         return completion(false, nil)
       }
+			
+			
       
-      weak var info = Player.sharedPlayer.info
-      info?.getTrackPropertyAndValue(json)
+      //weak var info = Player.sharedPlayer.info
+      //info?.getTrackPropertyAndValue(json)
       return completion(true, info)
     }
   }
   
     // 這個超弱 有些會搜尋不到
-    class func searchTrackID(_ track: PlayerTrack, completion: @escaping (_ success: Bool, _ trackID: NSNumber?) -> Void) {
-        
-        let parameter = ["apikey": MusiXMatchURL.Apikey,"q_artist": track.artist, "q_track": track.name]
-        
-        Alamofire.request(MusiXMatchURL.track.itself, parameters: parameter).responseJSON() { (response) in
-            
-            if response.result.isSuccess {
-                
-                let json = JSON(data: response.data!)
-                if json["message"]["header"]["status_code"] == 200 {
-                  
-                  weak var info = Player.sharedPlayer.info
-                    info?.getTrackPropertyAndValue(json)
-                    
-                    if let trackID = json["message"]["body"]["track_list"][0]["track"]["track_id"].rawValue as? NSNumber {
-                        //print("track id: \(trackID)")
-                        return completion(true, trackID)
-                    }
-                }
-            }
-            return completion(false, nil)
-        }
-    }
-        
-  class func searchLyrics(_ artist: String, trackName: String, completion: @escaping (_ success: Bool, _ info: Info?, _ lyric: String?) -> Void) {
+//    class func searchTrackID(_ track: PlayerTrack, completion: @escaping (_ success: Bool, _ trackID: NSNumber?) -> Void) {
+//        
+//        let parameter = ["apikey": MusiXMatchURL.Apikey,"q_artist": track.artist, "q_track": track.name]
+//        
+//        Alamofire.request(MusiXMatchURL.track.itself, parameters: parameter).responseJSON() { (response) in
+//            
+//            if response.result.isSuccess {
+//                
+//                let json = JSON(data: response.data!)
+//                if json["message"]["header"]["status_code"] == 200 {
+//                  
+//                  weak var info = Player.sharedPlayer.info
+//                    info?.getTrackPropertyAndValue(json)
+//                    
+//                    if let trackID = json["message"]["body"]["track_list"][0]["track"]["track_id"].rawValue as? NSNumber {
+//                        //print("track id: \(trackID)")
+//                        return completion(true, trackID)
+//                    }
+//                }
+//            }
+//            return completion(false, nil)
+//        }
+//    }
+	
+  class func searchLyrics(_ artist: String, trackName: String, completion: @escaping (_ success: Bool, _ lyric: String?) -> Void) {
     
     matchSongUtimatly(artist, trackName: trackName) { (success, info) in
       
-      if let info = info, success == true {
+      if success == true {
         
         let parameter: [String: AnyObject]? = ["apikey": MusiXMatchURL.Apikey as AnyObject,"track_id": info.track_id]
 				
@@ -124,9 +126,24 @@ class MusiXMatchApi {
           }
           let lyric_id = json["message"]["body"]["lyrics"]["lyrics_id"].stringValue
           //let l = MusiXLyric(id: NSString(string: lyric_id).integerValue, name: info.track_name, text: lyric)
-          return completion(true, info, lyric)
 					
+					let artistInformation = Artist(JSONString: json["message"]["body"]["track"])
+					let albumInformation = Album(JSONString: json["message"]["body"]["track"])
+					let trackInformation = Track(JSONString: json["message"]["body"]["track"])
+					let lyricInformation = Lyric(JSONString: json["message"]["body"]["lyrics"])
+
 					
+					let art = Artist()
+					art.id = info.artist_id.intValue
+					art.name = info.artist_name
+					SFRealm.update(art)
+					
+					let a = Album()
+					a.id = info.album_id.intValue
+					a.name = info.album_name
+					a.artist = art
+					a.url_str = info.album_coverart_350x350!
+					SFRealm.update(a)
 					
 					let t = Track()
 					t.id = info.track_id.intValue
@@ -134,33 +151,12 @@ class MusiXMatchApi {
 					// TODO: edit here
 					t.time = Time(allTimeString: "2:21").timeInterval
 					//t.time = Time(allTimeString: presenter.lvTime).timeInterval
-					t.album_name = info.album_name
+					t.album = a
 					t.lyric_id = info.lyrics_id.intValue
 					t.album_id = info.album_id.intValue
 					t.spotify_id = info.track_spotify_id.intValue
-					t.artist_id = info.artist_id.intValue
+					t.artist = art
 					SFRealm.update(t)
-					
-					let a = Album()
-					a.id = info.album_id.intValue
-					a.name = info.album_name
-					a.artist_id = info.artist_id.intValue
-					a.url_str = info.album_coverart_350x350!
-					
-					do {
-					let url = URL(string: a.url_str)
-					a.artwork = try Data(contentsOf: url!)
-					
-					a.tracks.value = info.track_id.intValue
-					SFRealm.update(a)
-					} catch {
-						
-					}
-					
-					let art = Artist()
-					art.id = info.artist_id.intValue
-					art.name = info.artist_name
-					SFRealm.update(art)
 					
 					let l = Lyric()
 					l.id = info.lyrics_id.intValue
@@ -168,16 +164,17 @@ class MusiXMatchApi {
 					l.text = lyric
 					SFRealm.update(l)
 
+					return completion(true, lyric)
         }
       }
     }
   }
 	
-    class func searchArtwork(_ completion: (_ success: Bool, _ url: URL?) -> Void) {
-      
-      guard let urlString = Player.sharedPlayer.info?.album_coverart_350x350 else {
-          return completion(false, nil)
-      }
-      return completion(true, URL(string: urlString))
-    }
+//    class func searchArtwork(_ completion: (_ success: Bool, _ url: URL?) -> Void) {
+//      
+//      guard let urlString = Player.sharedPlayer.info?.album_coverart_350x350 else {
+//          return completion(false, nil)
+//      }
+//      return completion(true, URL(string: urlString))
+//    }
 }

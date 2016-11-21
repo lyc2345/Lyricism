@@ -15,10 +15,10 @@ class Album: Object, Mappable {
 	
 	dynamic var id: Int = 0 //pk
 	dynamic var name: String = ""
-	dynamic var artist_id: Int = 0 //fk
 	dynamic var url_str: String = ""
 	dynamic var artwork: Data?
-	var tracks: [Track] = []
+	var artist: Artist?
+	var tracks: List<Track>?
 	
 	override static func primaryKey() -> String? {
 		
@@ -33,7 +33,6 @@ class Album: Object, Mappable {
 		do {
 			id  <- map["album_id"]
 			name <- map["album_name"]
-			artist_id <- map["artist_mbid"]
 			url_str <- map["album_coverart_350x350"]
 			artwork = try Data(contentsOf: URL(string: url_str)!)
 			
@@ -43,18 +42,18 @@ class Album: Object, Mappable {
 	}
 }
 
-class Track: Object {
+class Track: Object, Mappable {
   
   dynamic var id: Int = 0 //pk
   dynamic var name: String = ""
   dynamic var time: Int = 0
-  dynamic var album_name: String = ""
+  weak dynamic var album: Album?
   
   dynamic var lyric_id: Int = 0 //fk
   dynamic var album_id: Int = 0 //fk
   dynamic var spotify_id: Int = 0 //fk
-  dynamic var artist_id: Int = 0 //fk
-  
+	weak dynamic var artist: Artist?
+	
   override static func primaryKey() -> String? {
     
     return "id"
@@ -64,11 +63,15 @@ class Track: Object {
 		
 	}
 	func mapping(map: Map) {
-		
+		id <- map["track_id"]
+		name <- map["track_name"]
+		lyric_id <- map["lyric_id"]
+		album_id <- map["album_id"]
+		spotify_id <- map["track_spotify_id"]
 	}
 }
 
-class Artist: Object {
+class Artist: Object, Mappable {
   
   dynamic var id: Int = 0 //pk
   dynamic var name: String = ""
@@ -83,11 +86,12 @@ class Artist: Object {
 		
 	}
 	func mapping(map: Map) {
-		
+		id <- map["artist_id"]
+		name <- map["artist_name"]
 	}
 }
 
-class Lyric: Object {
+class Lyric: Object, Mappable {
   
   dynamic var id: Int = 0 //pk
   dynamic var name: String = ""
@@ -102,21 +106,22 @@ class Lyric: Object {
 		self.init()
 	}
 	func mapping(map: Map) {
-		
+		id <- map["lyrics_id"]
+		name <- map["track_name"]
 	}
 }
-
-class Player: NSObject {
-  
-    static let sharedPlayer: Player = Player()
-    
-    override init() {
-        info = Info()
-    }
-    
-    var info: Info!
-}
-
+//
+//class Player: NSObject {
+//  
+//    static let sharedPlayer: Player = Player()
+//    
+//    override init() {
+//        info = Info()
+//    }
+//    
+//    var info: Info!
+//}
+//
 struct Time {
 	
 	let allTimeString: String
@@ -162,7 +167,7 @@ extension Propertyable {
   }
 */
 }
-
+/*
 class Info: NSObject {
   
     var has_lyrics: NSNumber!
@@ -250,13 +255,7 @@ class Info: NSObject {
   
   func saveInRealm() {
     
-    let track = Track()
-    track.id = self.track_id.intValue
-    track.name = self.track_name
-    track.lyric_id = self.lyrics_id.intValue
-    track.album_id = self.album_id.intValue
-    track.spotify_id = self.track_spotify_id.intValue
-    track.artist_id = self.artist_id.intValue
+		
     
     let artist = Artist()
     artist.id = self.artist_id.intValue
@@ -268,8 +267,16 @@ class Info: NSObject {
       album.url_str = url
       album.artwork = try? Data(contentsOf: URL(string: url)!)
     }
-    album.artist_id = self.artist_id.intValue
-    
+    album.artist = artist
+		
+		let track = Track()
+		track.id = self.track_id.intValue
+		track.name = self.track_name
+		track.lyric_id = self.lyrics_id.intValue
+		track.album_id = self.album_id.intValue
+		track.spotify_id = self.track_spotify_id.intValue
+		track.artist = artist
+		
     let realm = try! Realm()
     
     try! realm.write {
@@ -279,4 +286,4 @@ class Info: NSObject {
 }
 
 
-
+*/
