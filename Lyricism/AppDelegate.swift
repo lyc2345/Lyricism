@@ -41,7 +41,7 @@ enum SBApplicationID {
 
 @NSApplicationMain
 // MARK: Main AppDelegate
-class AppDelegate: NSObject, NSApplicationDelegate, PreferencesSetable, DismissTimerable {
+class AppDelegate: NSObject, NSApplicationDelegate, DockerSettable, WindowSettable, Dismissable {
   
   var window: NSWindow?
   
@@ -90,6 +90,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, PreferencesSetable, DismissT
     
     userSetting()
     appSetting()
+		initailEventMonitor()
 
     iTunesSetup()
     spotifySetup()
@@ -120,7 +121,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, PreferencesSetable, DismissT
     } else {
       UserDefaults.standard.set(false, forKey: "tutorial_keep_remind")
     }
-
   }
 }
 
@@ -183,7 +183,9 @@ extension AppDelegate {
       button.alternateImage = NSImage(named: "note_dark")
       
     }
-  
+	}
+	
+	func initailEventMonitor() {
     // Detect mouse down event
     eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown]) {
       [unowned self] event in

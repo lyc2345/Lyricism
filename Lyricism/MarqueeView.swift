@@ -16,9 +16,9 @@ class MarqueeView: NSView {
     var point: CGPoint! = CGPoint.zero
     var stringWidth: CGFloat!
     
-    var textAttributes: [String: AnyObject] = [NSFontAttributeName: NSFont(name: "Lato Light", size: 23.0)!, NSForegroundColorAttributeName: NSColor.white]
+    var textAttributes: [String: AnyObject] = [NSFontAttributeName: NSFont.fontForMarqueeLabel(), NSForegroundColorAttributeName: NSColor.white]
     // yellow color for test marquee label
-    var otherTextAttributes: [String: AnyObject] = [NSFontAttributeName: NSFont(name: "Lato Light", size: 23.0)!, NSForegroundColorAttributeName: NSColor.yellow]
+    var otherTextAttributes: [String: AnyObject] = [NSFontAttributeName: NSFont.fontForMarqueeLabel(), NSForegroundColorAttributeName: NSColor.yellow]
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)

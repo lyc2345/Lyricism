@@ -13,25 +13,34 @@ import ObjectMapper
 
 class Album: Object, Mappable {
 	
+	dynamic var id: Int = 0 //pk
+	dynamic var name: String = ""
+	dynamic var artist_id: Int = 0 //fk
+	dynamic var url_str: String = ""
+	dynamic var artwork: Data?
+	var tracks: [Track] = []
+	
+	override static func primaryKey() -> String? {
+		
+		return "id"
+	}
+	
 	required convenience init?(map: Map) {
-		self.init()
+		self.init(map: map)
 		
 	}
-		func mapping(map: Map) {
-		
+	func mapping(map: Map) {
+		do {
+			id  <- map["album_id"]
+			name <- map["album_name"]
+			artist_id <- map["artist_mbid"]
+			url_str <- map["album_coverart_350x350"]
+			artwork = try Data(contentsOf: URL(string: url_str)!)
+			
+		} catch {
+			
+		}
 	}
-
-  dynamic var id: Int = 0 //pk
-  dynamic var name: String = ""
-  dynamic var artist_id: Int = 0 //fk
-  dynamic var url_str: String = ""
-  dynamic var artwork: Data?
-  var tracks: RealmOptional<Int> = RealmOptional<Int>()
-  
-  override static func primaryKey() -> String? {
-    
-    return "id"
-  }
 }
 
 class Track: Object {
@@ -50,6 +59,13 @@ class Track: Object {
     
     return "id"
   }
+	required convenience init?(map: Map) {
+		self.init()
+		
+	}
+	func mapping(map: Map) {
+		
+	}
 }
 
 class Artist: Object {
@@ -61,6 +77,14 @@ class Artist: Object {
     
     return "id"
   }
+	
+	required convenience init?(map: Map) {
+		self.init()
+		
+	}
+	func mapping(map: Map) {
+		
+	}
 }
 
 class Lyric: Object {
@@ -73,6 +97,13 @@ class Lyric: Object {
     
     return "id"
   }
+	
+	required convenience init?(map: Map) {
+		self.init()
+	}
+	func mapping(map: Map) {
+		
+	}
 }
 
 class Player: NSObject {

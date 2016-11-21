@@ -100,7 +100,7 @@ struct SFPopoverContainer {
                 return (CGSize(width: 350, height: 350), String(describing: LyricsVC.self))
                 
             case .prompt:
-                return (CGSize(width: 30, height: 25), String(describing: PopoverVC.self.self))
+                return (CGSize(width: 30, height: 25), String(describing: PopoverVC.self))
             }
         }
     }

@@ -16,7 +16,6 @@ struct PlayerTrack {
   let time: String
 }
 
-
 extension PlayerTrack: LyricsViewPresentable {
   
   var lvTime: String { return time }

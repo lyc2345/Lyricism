@@ -74,31 +74,3 @@ extension MusicTimerable where Self: LyricsVC {
   }
 }
 
-protocol DismissTimerable {
-  
-  var dismissTimer: Timer! { get set }
-  var dismissTime: Int { get set }
-}
-
-extension DismissTimerable where Self: AppDelegate {
-  
-  func timerStop() {
-    if let timer = dismissTimer {
-      timer.invalidate()
-      dismissTimer = nil
-      dismissTime = 4
-    }
-  }
-  
-  func timerStart() {
-    
-    guard let timer = dismissTimer else {
-      dismissTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(dismissTimerCountDown), userInfo: nil, repeats: true)
-      return
-    }
-    timer.invalidate()
-    dismissTimer = nil
-  }
-  
-}
-

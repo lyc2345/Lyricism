@@ -24,9 +24,9 @@ struct Settings {
   }
 }
 
-protocol PreferencesSetable { }
+protocol DockerSettable { }
 
-extension PreferencesSetable {
+extension DockerSettable {
   
   func setDocker(_ type: Settings.Docker) {
     
@@ -50,27 +50,32 @@ extension PreferencesSetable {
     
     return UserDefaults.standard.bool(forKey: Settings.docker_setting)
   }
-  
-  func setWindowsOnTop(_ type: Settings.WindowsOnTop) {
-    switch type {
-    case .yes:
-      UserDefaults.standard.set(true, forKey: Settings.windows_on_top_setting)
-      //print("bool: \(NSUserDefaults.standardUserDefaults().boolForKey(Settings.windows_on_top_setting))")
-      
-    case .no:
-      UserDefaults.standard.set(false, forKey: Settings.windows_on_top_setting)
-      //print("bool: \(NSUserDefaults.standardUserDefaults().boolForKey(Settings.windows_on_top_setting))")
-    }
-  }
-  
-  func setWinowsOnTop() {
-    
-    let option = UserDefaults.standard.bool(forKey: Settings.windows_on_top_setting)
-    option ? setWindowsOnTop(.no) : setWindowsOnTop(.yes)
-  }
-  
-  func isWindowsOnTop() -> Bool {
-    
-    return UserDefaults.standard.bool(forKey: Settings.windows_on_top_setting)
-  }
+}
+
+protocol WindowSettable { }
+
+extension WindowSettable {
+	
+	func setWindowsOnTop(_ type: Settings.WindowsOnTop) {
+		switch type {
+		case .yes:
+			UserDefaults.standard.set(true, forKey: Settings.windows_on_top_setting)
+			//print("bool: \(NSUserDefaults.standardUserDefaults().boolForKey(Settings.windows_on_top_setting))")
+			
+		case .no:
+			UserDefaults.standard.set(false, forKey: Settings.windows_on_top_setting)
+			//print("bool: \(NSUserDefaults.standardUserDefaults().boolForKey(Settings.windows_on_top_setting))")
+		}
+	}
+	
+	func setWinowsOnTop() {
+		
+		let option = UserDefaults.standard.bool(forKey: Settings.windows_on_top_setting)
+		option ? setWindowsOnTop(.no) : setWindowsOnTop(.yes)
+	}
+	
+	func isWindowsOnTop() -> Bool {
+		
+		return UserDefaults.standard.bool(forKey: Settings.windows_on_top_setting)
+	}
 }

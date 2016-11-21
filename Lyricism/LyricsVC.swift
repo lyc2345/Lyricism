@@ -19,22 +19,15 @@ protocol LyricsViewPresentable {
   var lvTrack: PlayerTrack { get }
 }
 
-class LyricsVC: NSViewController, MusicTimerable, PreferencesSetable, PlayerSourceable {
+class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable, PlayerSourceable {
   
   var preferenceWC: PreferencesWC!
-  
+	
+	// Model
   fileprivate var lyric: Lyric? {
     
     didSet {
       guard let textView = scrollTextView.contentView.documentView as? NSTextView else { return }
-      /*
-      let str = self.lyrics?.applyLyricsFormat() ?? ""
-      let attrStr =  NSMutableAttributedString(string: str)
-      let attributes = [NSForegroundColorAttributeName: NSColor.whiteColor(), NSFontAttributeName: NSFont(name: "Lato Regular", size: 20)!]
-      attrStr.setAttributes(attributes, range: NSMakeRange(0, str.characters.count))
-      
-      textView.textStorage?.setAttributedString(attrStr)
-       */
       textView.string = self.lyric?.text.applyLyricsFormat() ?? ""
     }
   }
@@ -42,42 +35,35 @@ class LyricsVC: NSViewController, MusicTimerable, PreferencesSetable, PlayerSour
   fileprivate var imageData: Data? {
     
     didSet {
-      guard let data = imageData else {
-        return
-      }
+      guard let data = imageData else { return }
       imageView.image = NSImage(data: data)
     }
   }
   
-  fileprivate var artistNtrack: (artist: String, trackName: String)? {
+  fileprivate var artistNtrack: (artist: String, trackName: String) = ("", "") {
     
     didSet {
-      guard let artistNtrack = artistNtrack else {
-        
-        trackNameArtistLabel.text = ""
-        return
-      }
-      self.trackNameArtistLabel.text = "\(artistNtrack.0) - \(artistNtrack.1)"
+			self.trackNameArtistLabel.text = "\(artistNtrack.0) - \(artistNtrack.1)"
     }
   }
-  
+	
+	// View
   @IBOutlet weak var spinnerProgress: Spinner!
   @IBOutlet weak var controlPanel: NSView!
   @IBOutlet weak var sourceImageView: NSImageView! { didSet { sourceImageView.alphaValue = 0.4 } }
-  @IBOutlet weak var timeLabel: NSTextField! { didSet { timeLabel.font = NSFont(name: "Lato Regular", size: 25)! } }
+  @IBOutlet weak var timeLabel: NSTextField! { didSet { timeLabel.font = NSFont.fontForTimer() } }
   @IBOutlet weak var trackNameArtistLabel: MarqueeView!
   @IBOutlet weak var imageView: NSImageView!
   @IBOutlet weak var scrollTextView: NSScrollView! {
     didSet {
-      guard let textView = self.scrollTextView.contentView.documentView as? NSTextView  else {
-        return
-      }
-      textView.font = NSFont(name: "Lato Regular", size: 20)!
+      guard let textView = scrollTextView.contentView.documentView as? NSTextView else { return }
+      textView.font = NSFont.fontForLyricDisplay()
       textView.alignment = .center
       textView.textColor = NSColor.white
     }
   }
   fileprivate var traigleView: NSView?
+	
   // protocol Timerable
   var timer: Timer?
   var trackTime: Int!
@@ -105,11 +91,16 @@ class LyricsVC: NSViewController, MusicTimerable, PreferencesSetable, PlayerSour
    
     showCurrentPlaying()
   }
-  
+	
+	deinit {
+		NotificationCenter.default.removeObserver(self)
+	}
+	
   func showCurrentPlaying() {
     
     let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
     s_print("itunes is running \(iTunesApp.player?.running)")
+		
     let spotifyApp = Spotify(player: SBApplication(bundleIdentifier: SBApplicationID.spotify.values().app))
     s_print("spotify is running \(spotifyApp.player?.running)")
     
@@ -148,7 +139,7 @@ class LyricsVC: NSViewController, MusicTimerable, PreferencesSetable, PlayerSour
     getiTunesPlayingInformation(iTunesApp)
     s_print("itunes  get current playing information:\(iTunesApp)")
   }
-  
+	
   func getiTunesPlayingInformation<P>(_ p: P) where P: PlayerPresentable {
     
     guard let artist = p.track_artist, let name = p.track_name, let time = p.track_time as? String else {
@@ -166,10 +157,6 @@ class LyricsVC: NSViewController, MusicTimerable, PreferencesSetable, PlayerSour
       return
     }
     configure(withPresenter: track)
-  }
-  
-  deinit {
-    NotificationCenter.default.removeObserver(self)
   }
 
   // PlayerSourceable Delegate
@@ -189,12 +176,7 @@ class LyricsVC: NSViewController, MusicTimerable, PreferencesSetable, PlayerSour
       }
     }
   }
-  
-  func beforeConfigure(withPresenter presenter: LyricsViewPresentable) {
-    
-    artistNtrack = presenter.lvArtistNTrack
-  }
-  
+	
   func configure(withPresenter presenter: LyricsViewPresentable) {
     print("time: \(presenter.lvTime)")
     spinnerProgress.animate = true
@@ -202,13 +184,13 @@ class LyricsVC: NSViewController, MusicTimerable, PreferencesSetable, PlayerSour
     artistNtrack = presenter.lvArtistNTrack
     track = presenter.lvTrack
     
-    let artist = artistNtrack?.artist
-    let name = artistNtrack?.trackName
+    let artist = artistNtrack.artist
+    let name = artistNtrack.trackName
     let time = presenter.lvTime
 
-    let itunes_track = PlayerTrack(artist: artist!, name: name!, time: time)
+    let itunes_track = PlayerTrack(artist: artist, name: name, time: time)
     
-    guard let realm_track = SFRealm.query(name: name!, t: Track.self) else {
+    guard let realm_track = SFRealm.query(name: name, t: Track.self) else {
       s_print("realm_track is nil")
       searchLyricNArtwork(itunes_track)
       return
@@ -228,7 +210,7 @@ class LyricsVC: NSViewController, MusicTimerable, PreferencesSetable, PlayerSour
     
     lyric = realm_lyric.first
     
-    guard let realm_album = SFRealm.query(id: album_id, t: Album.self), let artwork_data = (realm_album.value(forKey: "artwork") as? [NSData])?.first else {
+    guard let realm_album = SFRealm.query(id: album_id, t: Album.self), let artwork_data = (realm_album.value(forKey: "artwork") as? [Data])?.first else {
       searchLyricNArtwork(itunes_track)
       s_print("realm_album is nil")
       return
@@ -281,40 +263,10 @@ class LyricsVC: NSViewController, MusicTimerable, PreferencesSetable, PlayerSour
       view.removeTrackingArea(trackingArea)
     }
     let circleRect = view.bounds
-    //let flag = NSTrackingAreaOptions.MouseEnteredAndExited.rawValue + NSTrackingAreaOptions.ActiveInKeyWindow.rawValue
     let flag = NSTrackingAreaOptions.mouseEnteredAndExited.rawValue + NSTrackingAreaOptions.activeAlways.rawValue
     trackingArea = NSTrackingArea(rect: circleRect, options: NSTrackingAreaOptions(rawValue: flag), owner: self, userInfo: nil)
     view.addTrackingArea(trackingArea)
     hideControlPanel()
-  }
-  
-  // MARK: NSTrackingAreaOptions
-  override func mouseEntered(with theEvent: NSEvent) {
-    NSCursor.pointingHand().set()
-    view.needsLayout = true
-    showControlPanel()
-  }
-  
-  override func mouseExited(with theEvent: NSEvent) {
-    NSCursor.arrow().set()
-    view.needsLayout = false
-    hideControlPanel()
-  }
-  
-  func showControlPanel() {
-    NSAnimationContext.runAnimationGroup({ (context) in
-      self.controlPanel.isHidden = true
-    }) {
-      self.controlPanel.isHidden = false
-    }
-  }
-  
-  func hideControlPanel() {
-    NSAnimationContext.runAnimationGroup({ (context) in
-      self.controlPanel.isHidden = false
-    }) {
-      self.controlPanel.isHidden = true
-    }
   }
   
   @IBAction func alwaysOnTopBtnPressed(_ sender: AnyObject) {
@@ -356,16 +308,24 @@ class LyricsVC: NSViewController, MusicTimerable, PreferencesSetable, PlayerSour
   }
 }
 
-extension String {
-  
-  func applyLyricsFormat() -> String {
-    
-    return self == "" ? NSLocalizedString("Couldn't Find Any Relative Lyrics", comment: "Couldn't Find Any Relative Lyrics") : self.replacingOccurrences(of: ".", with: ". \n").replacingOccurrences(of: "  ", with: "\n")
-  }
-}
-
 extension LyricsVC {
-  
+	
+	func showControlPanel() {
+		NSAnimationContext.runAnimationGroup({ (context) in
+			self.controlPanel.isHidden = true
+		}) {
+			self.controlPanel.isHidden = false
+		}
+	}
+	
+	func hideControlPanel() {
+		NSAnimationContext.runAnimationGroup({ (context) in
+			self.controlPanel.isHidden = false
+		}) {
+			self.controlPanel.isHidden = true
+		}
+	}
+	
   @IBAction func dockHide(_ sender: AnyObject) {
     setDocker(.no)
   }
@@ -373,6 +333,21 @@ extension LyricsVC {
   @IBAction func dockUnhide(_ sender: AnyObject) {
     setDocker(.yes)
   }
+	
+	
+	// MARK: NSTrackingAreaOptions
+	override func mouseEntered(with theEvent: NSEvent) {
+		NSCursor.pointingHand().set()
+		view.needsLayout = true
+		showControlPanel()
+	}
+	
+	override func mouseExited(with theEvent: NSEvent) {
+		NSCursor.arrow().set()
+		view.needsLayout = false
+		hideControlPanel()
+	}
+
 }
 
 extension LyricsVC {
@@ -430,13 +405,5 @@ extension LyricsVC {
   
   @IBAction func quitButtonPressed(_ sender: AnyObject) {
     NSApplication.shared().terminate(self)
-  }
-}
-
-extension LyricsVC: NSTextDelegate {
-  
-  func textDidChange(_ notification: Notification) {
-    
-    
   }
 }

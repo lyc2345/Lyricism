@@ -26,6 +26,8 @@ target 'Lyricism' do
   #pod 'Optimizely-iOS-SDK'
   #pod 'Appsee'
 	pod 'ObjectMapper', '~> 2.2'
+	#pod 'Alert', :git => 'https://github.com/lyc2345/alert.git'
+	pod 'Then', '~> 2.1'
 
 end
 

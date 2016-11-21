@@ -13,6 +13,7 @@ PODS:
   - RealmSwift (2.1.0):
     - Realm (= 2.1.0)
   - SwiftyJSON (3.1.3)
+  - Then (2.1.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
@@ -24,6 +25,7 @@ DEPENDENCIES:
   - ReachabilitySwift (~> 3)
   - RealmSwift
   - SwiftyJSON
+  - Then (~> 2.1)
 
 EXTERNAL SOURCES:
   ProgressKit:
@@ -45,7 +47,8 @@ SPEC CHECKSUMS:
   Realm: bc829ad0ef3d4eea70c34cfcc3b1704d18d50df1
   RealmSwift: a4d4abbf0088c337cab5b738054395842e4b3052
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
+  Then: 8496793c8fcac95482b943909b440724c7d8d82c
 
-PODFILE CHECKSUM: 17f7f0384ff42cd6cfd57dea762287495c69d674
+PODFILE CHECKSUM: 2fff230e6114d784e67258d782637337dd585da0
 
 COCOAPODS: 1.1.1

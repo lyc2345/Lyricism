@@ -63,7 +63,7 @@ class PopoverVC: NSViewController {
     
     didSet {
       
-      titleLabel.font = NSFont(name: "Lato Regular", size: 12)
+      titleLabel.font = NSFont.fontForPopover()
       titleLabel.textColor = NSColor.white
       titleLabel.alignment = .center
     }

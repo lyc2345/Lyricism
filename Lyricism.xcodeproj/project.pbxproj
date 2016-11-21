@@ -46,10 +46,15 @@
 		F6BF27B11D4E002A00AA04BB /* PopoverContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BF27B01D4E002A00AA04BB /* PopoverContentView.swift */; };
 		F6D0C00F1D87079D001474D8 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6D0C0111D87079D001474D8 /* Preferences.storyboard */; };
 		F6D0C0221D870A66001474D8 /* Localizable.strings.strings in Resources */ = {isa = PBXBuildFile; fileRef = F6D0C0241D870A66001474D8 /* Localizable.strings.strings */; };
+		F6D196F81DE2DC2300A7F73A /* PlaySourceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D196F71DE2DC2300A7F73A /* PlaySourceable.swift */; };
+		F6D196FA1DE2DDD400A7F73A /* Dismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D196F91DE2DDD400A7F73A /* Dismissable.swift */; };
 		F6D339B51D22865C0066F03F /* iTunes.sdef in Resources */ = {isa = PBXBuildFile; fileRef = F6D339B21D22865C0066F03F /* iTunes.sdef */; };
 		F6D339B61D22865C0066F03F /* iTunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D339B31D22865C0066F03F /* iTunes.swift */; };
 		F6D339B71D22865C0066F03F /* iTunesScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D339B41D22865C0066F03F /* iTunesScripting.swift */; };
-		F6F1C4331D882F8F0081C501 /* iTunesPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F1C4321D882F8F0081C501 /* iTunesPresentable.swift */; };
+		F6E13D361DE2D47A00857AF1 /* String+LyricFomatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E13D351DE2D47A00857AF1 /* String+LyricFomatter.swift */; };
+		F6E13D381DE2D4E900857AF1 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E13D371DE2D4E900857AF1 /* Debug.swift */; };
+		F6E13D3A1DE2D4FA00857AF1 /* UIFont+Lyricism.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E13D391DE2D4FA00857AF1 /* UIFont+Lyricism.swift */; };
+		F6F1C4331D882F8F0081C501 /* PlayerPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F1C4321D882F8F0081C501 /* PlayerPresentable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -126,13 +131,18 @@
 		F6D0C0211D8708AE001474D8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Preferences.strings; sourceTree = "<group>"; };
 		F6D0C0231D870A66001474D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings.strings; sourceTree = "<group>"; };
 		F6D0C0251D870A6C001474D8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings.strings"; sourceTree = "<group>"; };
+		F6D196F71DE2DC2300A7F73A /* PlaySourceable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySourceable.swift; sourceTree = "<group>"; };
+		F6D196F91DE2DDD400A7F73A /* Dismissable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dismissable.swift; sourceTree = "<group>"; };
 		F6D339B11D22865C0066F03F /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
 		F6D339B21D22865C0066F03F /* iTunes.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = iTunes.sdef; sourceTree = "<group>"; };
 		F6D339B31D22865C0066F03F /* iTunes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iTunes.swift; sourceTree = "<group>"; };
 		F6D339B41D22865C0066F03F /* iTunesScripting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iTunesScripting.swift; sourceTree = "<group>"; };
 		F6D339BF1D22867A0066F03F /* iTunesScripting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = iTunesScripting.h; path = iTunesScripting/iTunesScripting.h; sourceTree = SOURCE_ROOT; };
 		F6D339C11D22867A0066F03F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = iTunesScripting/Info.plist; sourceTree = SOURCE_ROOT; };
-		F6F1C4321D882F8F0081C501 /* iTunesPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iTunesPresentable.swift; sourceTree = "<group>"; };
+		F6E13D351DE2D47A00857AF1 /* String+LyricFomatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+LyricFomatter.swift"; sourceTree = "<group>"; };
+		F6E13D371DE2D4E900857AF1 /* Debug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
+		F6E13D391DE2D4FA00857AF1 /* UIFont+Lyricism.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Lyricism.swift"; sourceTree = "<group>"; };
+		F6F1C4321D882F8F0081C501 /* PlayerPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerPresentable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,12 +169,11 @@
 		53FCF2411D40A9C800028F6D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				F6E13D371DE2D4E900857AF1 /* Debug.swift */,
 				F68BC71C1D128ACE00A36247 /* ViewController.swift */,
 				F60BF8D11D1424D800F7C6DA /* LyricsVC.swift */,
-				F67428D51D8403B3001FBC56 /* SFRealm.swift */,
-				F6F1C4321D882F8F0081C501 /* iTunesPresentable.swift */,
-				F67428D11D83DB6E001FBC56 /* TextViewModel.swift */,
 				F617FCA21D269452001A933B /* PopoverVC.swift */,
+				F67428D51D8403B3001FBC56 /* SFRealm.swift */,
 				F67BEBA11D7E99A8005D0B54 /* Setting */,
 			);
 			name = Controller;
@@ -194,10 +203,13 @@
 		F62A2B441D796F8000235878 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
+				F6D196F71DE2DC2300A7F73A /* PlaySourceable.swift */,
+				F6F1C4321D882F8F0081C501 /* PlayerPresentable.swift */,
 				F69836251D7C02F20046569A /* PreferencesSetable.swift */,
 				F62A2B421D796C1000235878 /* ContainerSwitchable.swift */,
 				53FCF23E1D4078AF00028F6D /* SFPopover.swift */,
 				F62A2B451D79843300235878 /* Timerable.swift */,
+				F6D196F91DE2DDD400A7F73A /* Dismissable.swift */,
 				F65069631DE2A1C6002ECFB3 /* TimeFormattable.swift */,
 			);
 			name = Protocol;
@@ -238,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				F64E2D8B1D2115CD002F2513 /* MResponse.swift */,
+				F67428D11D83DB6E001FBC56 /* TextViewModel.swift */,
 				F677D5E91D4CA1BA0057C028 /* MusiXMatch.swift */,
 				F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */,
 				F696A2C01D2668FD00EBE049 /* Track.swift */,
@@ -296,6 +309,7 @@
 				F67BEBA21D7E9B97005D0B54 /* Lyricism.entitlements */,
 				F60BF8A31D139B3E00F7C6DA /* Lyricism-Bridging-Header.h */,
 				F68BC71A1D128ACE00A36247 /* AppDelegate.swift */,
+				F6E13D3B1DE2D66700857AF1 /* Extension */,
 				53FCF2411D40A9C800028F6D /* Controller */,
 				F62A2B441D796F8000235878 /* Protocol */,
 				F67B7F9A1D23D6B6001E7ED3 /* Model */,
@@ -319,6 +333,15 @@
 				F6D339C11D22867A0066F03F /* Info.plist */,
 			);
 			path = iTunes;
+			sourceTree = "<group>";
+		};
+		F6E13D3B1DE2D66700857AF1 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F6E13D391DE2D4FA00857AF1 /* UIFont+Lyricism.swift */,
+				F6E13D351DE2D47A00857AF1 /* String+LyricFomatter.swift */,
+			);
+			name = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -480,29 +503,34 @@
 				F67428D01D82F5BD001FBC56 /* SpotifyScripting.swift in Sources */,
 				F60BF8D61D1430D300F7C6DA /* MacUtilities.swift in Sources */,
 				F67428CF1D82F5BD001FBC56 /* Spotify.swift in Sources */,
-				F6F1C4331D882F8F0081C501 /* iTunesPresentable.swift in Sources */,
+				F6F1C4331D882F8F0081C501 /* PlayerPresentable.swift in Sources */,
 				F60BF8D21D1424D800F7C6DA /* LyricsVC.swift in Sources */,
 				F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */,
 				F696A2C11D2668FD00EBE049 /* Track.swift in Sources */,
 				F62A2B431D796C1000235878 /* ContainerSwitchable.swift in Sources */,
 				F6A7DE431D20CACF001D5AD7 /* MarqueeView.swift in Sources */,
 				53FCF23F1D4078AF00028F6D /* SFPopover.swift in Sources */,
+				F6D196FA1DE2DDD400A7F73A /* Dismissable.swift in Sources */,
 				F68BC71D1D128ACE00A36247 /* ViewController.swift in Sources */,
+				F6E13D381DE2D4E900857AF1 /* Debug.swift in Sources */,
 				F6624B2A1D437A9100D2D42E /* PreferenceVC.swift in Sources */,
 				F6D339B71D22865C0066F03F /* iTunesScripting.swift in Sources */,
 				F672A8311D1949BC00FD518D /* EventMonitor.swift in Sources */,
 				F60BF8B51D13A68900F7C6DA /* MusiXMatchApi.swift in Sources */,
 				F677D5EA1D4CA1BA0057C028 /* MusiXMatch.swift in Sources */,
 				F62A2B461D79843300235878 /* Timerable.swift in Sources */,
+				F6D196F81DE2DC2300A7F73A /* PlaySourceable.swift in Sources */,
 				F64E2D8C1D2115CD002F2513 /* MResponse.swift in Sources */,
 				F68BC71B1D128ACE00A36247 /* AppDelegate.swift in Sources */,
 				F65069641DE2A1C6002ECFB3 /* TimeFormattable.swift in Sources */,
 				F67428D21D83DB6E001FBC56 /* TextViewModel.swift in Sources */,
+				F6E13D3A1DE2D4FA00857AF1 /* UIFont+Lyricism.swift in Sources */,
 				F617FCA31D269452001A933B /* PopoverVC.swift in Sources */,
 				F68BC71F1D128ACE00A36247 /* Document.swift in Sources */,
 				F668464D1D18D20E007DB6CF /* BlurBackground.swift in Sources */,
 				F6D339B61D22865C0066F03F /* iTunes.swift in Sources */,
 				F6BF27B11D4E002A00AA04BB /* PopoverContentView.swift in Sources */,
+				F6E13D361DE2D47A00857AF1 /* String+LyricFomatter.swift in Sources */,
 				F6624B291D437A9100D2D42E /* PreferencesWC.swift in Sources */,
 				F69836261D7C02F30046569A /* PreferencesSetable.swift in Sources */,
 				F67428D61D8403B3001FBC56 /* SFRealm.swift in Sources */,
