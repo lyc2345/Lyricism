@@ -10,8 +10,8 @@ import Foundation
 import ScriptingBridge
 
 protocol PlayerPresentable {
-  
-  associatedtype T
+	
+	associatedtype T
   
   var track_name: String? { get }
   var track_artist: String? { get }

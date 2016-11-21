@@ -18,7 +18,7 @@ protocol ContainerSwitchable: class {
 
 extension ContainerSwitchable where Self: NSViewController {
     
-    func cycleFromViewController(oldViewController: NSViewController?, toViewController newViewController: NSViewController)  {
+    func cycleFromViewController(_ oldViewController: NSViewController?, toViewController newViewController: NSViewController)  {
         
         newViewController.view.translatesAutoresizingMaskIntoConstraints = false
         currentViewController = newViewController
@@ -49,15 +49,15 @@ extension ContainerSwitchable where Self: NSViewController {
     }
     
     // 把新的ViewController.view 貼到containerView上, 新的view需要autolayout
-    func addSubview(subView: NSView, toView parentView: NSView) {
+    func addSubview(_ subView: NSView, toView parentView: NSView) {
         
         parentView.addSubview(subView)
         
         var viewBindingsDict = [String: AnyObject]()
         viewBindingsDict["subView"] = subView
-        parentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[subView]|",
+        parentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[subView]|",
             options: [], metrics: nil, views: viewBindingsDict))
-        parentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[subView]|",
+        parentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[subView]|",
             options: [], metrics: nil, views: viewBindingsDict))
     }
 }

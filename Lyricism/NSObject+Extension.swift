@@ -10,7 +10,7 @@ import Foundation
 
 class iOSXFoundation {
     
-    class func getClassPropertyNames(myClass: AnyClass) -> [String] {
+    class func getClassPropertyNames(_ myClass: AnyClass) -> [String] {
         
         var results: [String] = []
         var count: UInt32 = 0
@@ -18,10 +18,10 @@ class iOSXFoundation {
         
         for i: UInt32 in 0 ..< count {
             
-            let property = properties[Int(i)]
+            let property = properties?[Int(i)]
             let cname = property_getName(property)
-            let name = String.fromCString(cname)
-            results.append(name!)
+            let name = String(cString: cname!)
+            results.append(name)
         }
         free(properties)
         
@@ -29,7 +29,7 @@ class iOSXFoundation {
     }
     
     
-    class func propertyValues(classObject: AnyClass) {
+    class func propertyValues(_ classObject: AnyClass) {
         
         //let myClass: AnyClass = classObject.classForCoder
         
@@ -42,7 +42,7 @@ class iOSXFoundation {
         for name in propertyNames {
             
             //let cname = name.cStringUsingEncoding(NSUTF8StringEncoding)
-            if let value = player!.valueForKey(name) {
+            if let value = player!.value(forKey: name) {
                 
                 //print("property name: \(name), value:\(value)")
             }
@@ -64,12 +64,12 @@ extension NSObject {
         // iterate each objc_property_t struct
         for i: UInt32 in 0 ..< count {
             
-            let property = properties[Int(i)]
+            let property = properties?[Int(i)]
             // retrieve the property name by calling property_getName function
             let cname = property_getName(property)
             // convert the c string into a swift string
-            let name = String.fromCString(cname)
-            results.append(name!)
+            let name = String(cString: cname!)
+            results.append(name)
         }
         
         // release objc_property_t struct
@@ -78,12 +78,12 @@ extension NSObject {
         return results
     }
     
-    func propertyValues(myClass: NSObject) {
+    func propertyValues(_ myClass: NSObject) {
         
         let propertiesName: [String] = myClass.propertyNames()
         
         
-        for (_, name) in propertiesName.enumerate() {
+        for (_, name) in propertiesName.enumerated() {
             
             //s_print("property name: \(name), value:\(myClass.valueForKey(name))")
         }
@@ -100,14 +100,14 @@ extension NSObject {
         // iterate each objc_property_t struct
         for i: UInt32 in 0 ..< count {
             
-            let property = properties[Int(i)]
+            let property = properties?[Int(i)]
             
             let attribute = property_getAttributes(property)
-            let attributeString = String(UTF8String: attribute)
+            let attributeString = String(validatingUTF8: attribute!)
             //s_print("attributeString:\(attributeString!)")
-            let attributes = attributeString!.componentsSeparatedByString(",")
+            let attributes = attributeString!.components(separatedBy: ",")
             
-            results.append(attributes)
+            results.append(attributes as AnyObject)
         }
         
         // release objc_property_t struct

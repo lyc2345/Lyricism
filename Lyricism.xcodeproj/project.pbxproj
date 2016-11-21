@@ -10,29 +10,28 @@
 		012089740B3F599CD9C3512A /* Pods_Lyricism.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76B527F76D97FC69D993092C /* Pods_Lyricism.framework */; };
 		53FCF23F1D4078AF00028F6D /* SFPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FCF23E1D4078AF00028F6D /* SFPopover.swift */; };
 		F60BF8B51D13A68900F7C6DA /* MusiXMatchApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */; };
-		F60BF8D21D1424D800F7C6DA /* LyricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */; };
+		F60BF8D21D1424D800F7C6DA /* LyricsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8D11D1424D800F7C6DA /* LyricsVC.swift */; };
 		F60BF8D61D1430D300F7C6DA /* MacUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */; };
 		F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F616EBB51D15221800D1A40C /* NSObject+Extension.swift */; };
-		F617FCA31D269452001A933B /* JumpOnLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F617FCA21D269452001A933B /* JumpOnLabelViewController.swift */; };
+		F617FCA31D269452001A933B /* PopoverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F617FCA21D269452001A933B /* PopoverVC.swift */; };
 		F62903F21D27ACF80025F190 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F62903F11D27ACF80025F190 /* Assets.xcassets */; };
 		F62A2B431D796C1000235878 /* ContainerSwitchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62A2B421D796C1000235878 /* ContainerSwitchable.swift */; };
 		F62A2B461D79843300235878 /* Timerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62A2B451D79843300235878 /* Timerable.swift */; };
-		F6434ED21D1A4472006FDFE2 /* LyricsSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6434ED01D1A4472006FDFE2 /* LyricsSettingViewController.swift */; };
+		F6434ED21D1A4472006FDFE2 /* LyricsSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6434ED01D1A4472006FDFE2 /* LyricsSettingVC.swift */; };
 		F64E2D8C1D2115CD002F2513 /* MResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64E2D8B1D2115CD002F2513 /* MResponse.swift */; };
-		F6624B291D437A9100D2D42E /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6624B271D437A9100D2D42E /* PreferencesWindowController.swift */; };
-		F6624B2A1D437A9100D2D42E /* PreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6624B281D437A9100D2D42E /* PreferenceViewController.swift */; };
-		F6624B2E1D437AA600D2D42E /* AppearanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6624B2D1D437AA600D2D42E /* AppearanceViewController.swift */; };
+		F65069641DE2A1C6002ECFB3 /* TimeFormattable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65069631DE2A1C6002ECFB3 /* TimeFormattable.swift */; };
+		F6624B291D437A9100D2D42E /* PreferencesWC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6624B271D437A9100D2D42E /* PreferencesWC.swift */; };
+		F6624B2A1D437A9100D2D42E /* PreferenceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6624B281D437A9100D2D42E /* PreferenceVC.swift */; };
+		F6624B2E1D437AA600D2D42E /* AppearanceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6624B2D1D437AA600D2D42E /* AppearanceVC.swift */; };
 		F668464D1D18D20E007DB6CF /* BlurBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668464C1D18D20E007DB6CF /* BlurBackground.swift */; };
 		F668464F1D18D26E007DB6CF /* BlurBackground.xib in Resources */ = {isa = PBXBuildFile; fileRef = F668464E1D18D26E007DB6CF /* BlurBackground.xib */; };
 		F672A8311D1949BC00FD518D /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F672A8301D1949BC00FD518D /* EventMonitor.swift */; };
 		F67428CE1D82F5BD001FBC56 /* Spotify.sdef in Resources */ = {isa = PBXBuildFile; fileRef = F67428CB1D82F5BD001FBC56 /* Spotify.sdef */; };
 		F67428CF1D82F5BD001FBC56 /* Spotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67428CC1D82F5BD001FBC56 /* Spotify.swift */; };
 		F67428D01D82F5BD001FBC56 /* SpotifyScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67428CD1D82F5BD001FBC56 /* SpotifyScripting.swift */; };
-		F67428D21D83DB6E001FBC56 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67428D11D83DB6E001FBC56 /* Text.swift */; };
+		F67428D21D83DB6E001FBC56 /* TextViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67428D11D83DB6E001FBC56 /* TextViewModel.swift */; };
 		F67428D61D8403B3001FBC56 /* SFRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67428D51D8403B3001FBC56 /* SFRealm.swift */; };
 		F677D5EA1D4CA1BA0057C028 /* MusiXMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F677D5E91D4CA1BA0057C028 /* MusiXMatch.swift */; };
-		F67B7F961D23A832001E7ED3 /* PlayerControllerPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = F67B7F951D23A832001E7ED3 /* PlayerControllerPanel.xib */; };
-		F67B7F981D23A845001E7ED3 /* PlayerControllerPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B7F971D23A845001E7ED3 /* PlayerControllerPanel.swift */; };
 		F67B7FA11D23D75E001E7ED3 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F67B7F9D1D23D75E001E7ED3 /* Lato-Black.ttf */; };
 		F67B7FA21D23D75E001E7ED3 /* Lato-Bol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F67B7F9E1D23D75E001E7ED3 /* Lato-Bol.ttf */; };
 		F67B7FA31D23D75E001E7ED3 /* Lato-Lig.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F67B7F9F1D23D75E001E7ED3 /* Lato-Lig.ttf */; };
@@ -76,18 +75,19 @@
 		E335D29E9F196A8F0400DD3F /* Pods-LyriKing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LyriKing.release.xcconfig"; path = "Pods/Target Support Files/Pods-LyriKing/Pods-LyriKing.release.xcconfig"; sourceTree = "<group>"; };
 		F60BF8A31D139B3E00F7C6DA /* Lyricism-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lyricism-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusiXMatchApi.swift; sourceTree = "<group>"; };
-		F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsViewController.swift; sourceTree = "<group>"; };
+		F60BF8D11D1424D800F7C6DA /* LyricsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsVC.swift; sourceTree = "<group>"; };
 		F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacUtilities.swift; sourceTree = "<group>"; };
 		F616EBB51D15221800D1A40C /* NSObject+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
-		F617FCA21D269452001A933B /* JumpOnLabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JumpOnLabelViewController.swift; sourceTree = "<group>"; };
+		F617FCA21D269452001A933B /* PopoverVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverVC.swift; sourceTree = "<group>"; };
 		F62903F11D27ACF80025F190 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F62A2B421D796C1000235878 /* ContainerSwitchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerSwitchable.swift; sourceTree = "<group>"; };
 		F62A2B451D79843300235878 /* Timerable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timerable.swift; sourceTree = "<group>"; };
-		F6434ED01D1A4472006FDFE2 /* LyricsSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsSettingViewController.swift; sourceTree = "<group>"; };
+		F6434ED01D1A4472006FDFE2 /* LyricsSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsSettingVC.swift; sourceTree = "<group>"; };
 		F64E2D8B1D2115CD002F2513 /* MResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MResponse.swift; sourceTree = "<group>"; };
-		F6624B271D437A9100D2D42E /* PreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
-		F6624B281D437A9100D2D42E /* PreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceViewController.swift; sourceTree = "<group>"; };
-		F6624B2D1D437AA600D2D42E /* AppearanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceViewController.swift; sourceTree = "<group>"; };
+		F65069631DE2A1C6002ECFB3 /* TimeFormattable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeFormattable.swift; sourceTree = "<group>"; };
+		F6624B271D437A9100D2D42E /* PreferencesWC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWC.swift; sourceTree = "<group>"; };
+		F6624B281D437A9100D2D42E /* PreferenceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceVC.swift; sourceTree = "<group>"; };
+		F6624B2D1D437AA600D2D42E /* AppearanceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceVC.swift; sourceTree = "<group>"; };
 		F668464C1D18D20E007DB6CF /* BlurBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurBackground.swift; sourceTree = "<group>"; };
 		F668464E1D18D26E007DB6CF /* BlurBackground.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlurBackground.xib; sourceTree = "<group>"; };
 		F672A8301D1949BC00FD518D /* EventMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
@@ -95,11 +95,9 @@
 		F67428CB1D82F5BD001FBC56 /* Spotify.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Spotify.sdef; sourceTree = "<group>"; };
 		F67428CC1D82F5BD001FBC56 /* Spotify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spotify.swift; sourceTree = "<group>"; };
 		F67428CD1D82F5BD001FBC56 /* SpotifyScripting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyScripting.swift; sourceTree = "<group>"; };
-		F67428D11D83DB6E001FBC56 /* Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
+		F67428D11D83DB6E001FBC56 /* TextViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewModel.swift; sourceTree = "<group>"; };
 		F67428D51D8403B3001FBC56 /* SFRealm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFRealm.swift; sourceTree = "<group>"; };
 		F677D5E91D4CA1BA0057C028 /* MusiXMatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusiXMatch.swift; sourceTree = "<group>"; };
-		F67B7F951D23A832001E7ED3 /* PlayerControllerPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerControllerPanel.xib; sourceTree = "<group>"; };
-		F67B7F971D23A845001E7ED3 /* PlayerControllerPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerControllerPanel.swift; sourceTree = "<group>"; };
 		F67B7F9D1D23D75E001E7ED3 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		F67B7F9E1D23D75E001E7ED3 /* Lato-Bol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bol.ttf"; sourceTree = "<group>"; };
 		F67B7F9F1D23D75E001E7ED3 /* Lato-Lig.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Lig.ttf"; sourceTree = "<group>"; };
@@ -162,11 +160,11 @@
 			isa = PBXGroup;
 			children = (
 				F68BC71C1D128ACE00A36247 /* ViewController.swift */,
-				F60BF8D11D1424D800F7C6DA /* LyricsViewController.swift */,
+				F60BF8D11D1424D800F7C6DA /* LyricsVC.swift */,
 				F67428D51D8403B3001FBC56 /* SFRealm.swift */,
 				F6F1C4321D882F8F0081C501 /* iTunesPresentable.swift */,
-				F67428D11D83DB6E001FBC56 /* Text.swift */,
-				F617FCA21D269452001A933B /* JumpOnLabelViewController.swift */,
+				F67428D11D83DB6E001FBC56 /* TextViewModel.swift */,
+				F617FCA21D269452001A933B /* PopoverVC.swift */,
 				F67BEBA11D7E99A8005D0B54 /* Setting */,
 			);
 			name = Controller;
@@ -200,6 +198,7 @@
 				F62A2B421D796C1000235878 /* ContainerSwitchable.swift */,
 				53FCF23E1D4078AF00028F6D /* SFPopover.swift */,
 				F62A2B451D79843300235878 /* Timerable.swift */,
+				F65069631DE2A1C6002ECFB3 /* TimeFormattable.swift */,
 			);
 			name = Protocol;
 			sourceTree = "<group>";
@@ -229,8 +228,6 @@
 			children = (
 				F6BF27B01D4E002A00AA04BB /* PopoverContentView.swift */,
 				F6A7DE421D20CACF001D5AD7 /* MarqueeView.swift */,
-				F67B7F951D23A832001E7ED3 /* PlayerControllerPanel.xib */,
-				F67B7F971D23A845001E7ED3 /* PlayerControllerPanel.swift */,
 				F668464C1D18D20E007DB6CF /* BlurBackground.swift */,
 				F668464E1D18D26E007DB6CF /* BlurBackground.xib */,
 			);
@@ -265,10 +262,10 @@
 		F67BEBA11D7E99A8005D0B54 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				F6434ED01D1A4472006FDFE2 /* LyricsSettingViewController.swift */,
-				F6624B271D437A9100D2D42E /* PreferencesWindowController.swift */,
-				F6624B281D437A9100D2D42E /* PreferenceViewController.swift */,
-				F6624B2D1D437AA600D2D42E /* AppearanceViewController.swift */,
+				F6434ED01D1A4472006FDFE2 /* LyricsSettingVC.swift */,
+				F6624B271D437A9100D2D42E /* PreferencesWC.swift */,
+				F6624B281D437A9100D2D42E /* PreferenceVC.swift */,
+				F6624B2D1D437AA600D2D42E /* AppearanceVC.swift */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -362,6 +359,7 @@
 					F68BC7161D128ACD00A36247 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 29DN3FMVP9;
+						LastSwiftMigration = 0810;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 1;
@@ -402,7 +400,6 @@
 				F67B7FA11D23D75E001E7ED3 /* Lato-Black.ttf in Resources */,
 				F67428CE1D82F5BD001FBC56 /* Spotify.sdef in Resources */,
 				F668464F1D18D26E007DB6CF /* BlurBackground.xib in Resources */,
-				F67B7F961D23A832001E7ED3 /* PlayerControllerPanel.xib in Resources */,
 				F62903F21D27ACF80025F190 /* Assets.xcassets in Resources */,
 				F68BC7241D128ACE00A36247 /* Main.storyboard in Resources */,
 				F6D339B51D22865C0066F03F /* iTunes.sdef in Resources */,
@@ -424,7 +421,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		AE34DD7C096D300F2F0C25CC /* [CP] Copy Pods Resources */ = {
@@ -478,20 +475,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6624B2E1D437AA600D2D42E /* AppearanceViewController.swift in Sources */,
-				F6434ED21D1A4472006FDFE2 /* LyricsSettingViewController.swift in Sources */,
+				F6624B2E1D437AA600D2D42E /* AppearanceVC.swift in Sources */,
+				F6434ED21D1A4472006FDFE2 /* LyricsSettingVC.swift in Sources */,
 				F67428D01D82F5BD001FBC56 /* SpotifyScripting.swift in Sources */,
 				F60BF8D61D1430D300F7C6DA /* MacUtilities.swift in Sources */,
 				F67428CF1D82F5BD001FBC56 /* Spotify.swift in Sources */,
 				F6F1C4331D882F8F0081C501 /* iTunesPresentable.swift in Sources */,
-				F60BF8D21D1424D800F7C6DA /* LyricsViewController.swift in Sources */,
+				F60BF8D21D1424D800F7C6DA /* LyricsVC.swift in Sources */,
 				F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */,
 				F696A2C11D2668FD00EBE049 /* Track.swift in Sources */,
 				F62A2B431D796C1000235878 /* ContainerSwitchable.swift in Sources */,
 				F6A7DE431D20CACF001D5AD7 /* MarqueeView.swift in Sources */,
 				53FCF23F1D4078AF00028F6D /* SFPopover.swift in Sources */,
 				F68BC71D1D128ACE00A36247 /* ViewController.swift in Sources */,
-				F6624B2A1D437A9100D2D42E /* PreferenceViewController.swift in Sources */,
+				F6624B2A1D437A9100D2D42E /* PreferenceVC.swift in Sources */,
 				F6D339B71D22865C0066F03F /* iTunesScripting.swift in Sources */,
 				F672A8311D1949BC00FD518D /* EventMonitor.swift in Sources */,
 				F60BF8B51D13A68900F7C6DA /* MusiXMatchApi.swift in Sources */,
@@ -499,16 +496,16 @@
 				F62A2B461D79843300235878 /* Timerable.swift in Sources */,
 				F64E2D8C1D2115CD002F2513 /* MResponse.swift in Sources */,
 				F68BC71B1D128ACE00A36247 /* AppDelegate.swift in Sources */,
-				F67428D21D83DB6E001FBC56 /* Text.swift in Sources */,
-				F617FCA31D269452001A933B /* JumpOnLabelViewController.swift in Sources */,
+				F65069641DE2A1C6002ECFB3 /* TimeFormattable.swift in Sources */,
+				F67428D21D83DB6E001FBC56 /* TextViewModel.swift in Sources */,
+				F617FCA31D269452001A933B /* PopoverVC.swift in Sources */,
 				F68BC71F1D128ACE00A36247 /* Document.swift in Sources */,
 				F668464D1D18D20E007DB6CF /* BlurBackground.swift in Sources */,
 				F6D339B61D22865C0066F03F /* iTunes.swift in Sources */,
 				F6BF27B11D4E002A00AA04BB /* PopoverContentView.swift in Sources */,
-				F6624B291D437A9100D2D42E /* PreferencesWindowController.swift in Sources */,
+				F6624B291D437A9100D2D42E /* PreferencesWC.swift in Sources */,
 				F69836261D7C02F30046569A /* PreferencesSetable.swift in Sources */,
 				F67428D61D8403B3001FBC56 /* SFRealm.swift in Sources */,
-				F67B7F981D23A845001E7ED3 /* PlayerControllerPanel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,6 +662,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Lyricism-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -692,6 +690,7 @@
 				PRODUCT_NAME = Lyricism;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Lyricism-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

@@ -10,12 +10,12 @@ import Cocoa
 
 protocol PopoverSizable {
     
-    func getSize(type: SFPopoverContainer.PopoverType) -> CGSize
+    func getSize(_ type: SFPopoverContainer.PopoverType) -> CGSize
 }
 
 extension PopoverSizable {
     
-    func getSize(type: SFPopoverContainer.PopoverType) -> CGSize {
+    func getSize(_ type: SFPopoverContainer.PopoverType) -> CGSize {
         
         return type.rawValue().sizeValue
     }
@@ -23,48 +23,48 @@ extension PopoverSizable {
 
 protocol Popoverable: PopoverSizable {
     
-    func show(viewController vc: NSViewController, at sender: NSView, handler:(viewController: NSViewController) -> Void)
+    func show(viewController vc: NSViewController, at sender: NSView, handler:(_ viewController: NSViewController) -> Void)
 }
 
 class SFPopover: NSPopover, Popoverable {
     
-    func viewController(type: SFPopoverContainer.PopoverType) -> NSViewController {
+    func viewController(_ type: SFPopoverContainer.PopoverType) -> NSViewController {
         
         let identifier = type.rawValue().identifierValue
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         
-        return storyboard.instantiateControllerWithIdentifier(identifier) as! NSViewController
+        return storyboard.instantiateController(withIdentifier: identifier) as! NSViewController
     }
     
-  func show(viewController vc: NSViewController, at sender: NSView, handler:(viewController: NSViewController) -> Void) {
+  func show(viewController vc: NSViewController, at sender: NSView, handler:(_ viewController: NSViewController) -> Void) {
         
         contentViewController = vc
-        contentSize = (vc is LyricsViewController) ? getSize(.lyrics) : getSize(.prompt)
+        contentSize = (vc is LyricsVC) ? getSize(.lyrics) : getSize(.prompt)
         animates = true
-        behavior = .Transient
+        behavior = .transient
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(0.1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-            self.showRelativeToRect(sender.bounds, ofView: sender, preferredEdge: .MinY)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double((Int64)(0.1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+            self.show(relativeTo: sender.bounds, of: sender, preferredEdge: .minY)
         });
         
-        handler(viewController: vc)
+        handler(vc)
     }
     
-    func show(type: SFPopoverContainer.PopoverType, at view: NSView, handler:(viewController: NSViewController) -> Void) {
+    func show(_ type: SFPopoverContainer.PopoverType, at view: NSView, handler:(_ viewController: NSViewController) -> Void) {
         
         let vc = viewController(type)
         contentViewController = vc
         contentSize = getSize(type)
         animates = true
-        behavior = .Transient
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(0.1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-            self.showRelativeToRect(view.bounds, ofView: view, preferredEdge: .MinY)
+        behavior = .transient
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double((Int64)(0.1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+            self.show(relativeTo: view.bounds, of: view, preferredEdge: .minY)
         })
         
-        handler(viewController: vc)
+        handler(vc)
     }
     
-    func close(handler: ((Void) -> Void)?) {
+    func close(_ handler: ((Void) -> Void)?) {
         
         if let h = handler {
             h()
@@ -86,8 +86,8 @@ class SFPopover: NSPopover, Popoverable {
 struct SFPopoverContainer {
     
     let popover: NSPopover
-    let lyricsViewController: LyricsViewController
-    let jumpOnLabelViewController: JumpOnLabelViewController
+    let lyricsViewController: LyricsVC
+    let popoverVC: PopoverVC
 
     enum PopoverType {
         
@@ -97,10 +97,10 @@ struct SFPopoverContainer {
             
             switch self {
             case .lyrics:
-                return (CGSizeMake(350, 350), String(LyricsViewController))
+                return (CGSize(width: 350, height: 350), String(describing: LyricsVC.self))
                 
             case .prompt:
-                return (CGSizeMake(30, 25), String(JumpOnLabelViewController))
+                return (CGSize(width: 30, height: 25), String(describing: PopoverVC.self.self))
             }
         }
     }
@@ -108,43 +108,43 @@ struct SFPopoverContainer {
 
 extension SFPopoverContainer: Popoverable {
     
-    func viewController(type: SFPopoverContainer.PopoverType) -> NSViewController {
+    func viewController(_ type: SFPopoverContainer.PopoverType) -> NSViewController {
         
         let identifier = type.rawValue().identifierValue
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         
-        return storyboard.instantiateControllerWithIdentifier(identifier) as! NSViewController
+        return storyboard.instantiateController(withIdentifier: identifier) as! NSViewController
     }
     
-    func show(viewController vc: NSViewController, at sender: NSView, handler:(viewController: NSViewController) -> Void) {
+    func show(viewController vc: NSViewController, at sender: NSView, handler:(_ viewController: NSViewController) -> Void) {
         
         popover.contentViewController = vc
-        popover.contentSize = (vc is LyricsViewController) ? getSize(.lyrics) : getSize(.prompt)
+        popover.contentSize = (vc is LyricsVC) ? getSize(.lyrics) : getSize(.prompt)
         popover.animates = true
-        popover.behavior = .Transient
+        popover.behavior = .transient
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(0.1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-            self.popover.showRelativeToRect(sender.bounds, ofView: sender, preferredEdge: .MaxY)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double((Int64)(0.1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+            self.popover.show(relativeTo: sender.bounds, of: sender, preferredEdge: .maxY)
         });
         
-        handler(viewController: vc)
+        handler(vc)
     }
     
-    func show(type: SFPopoverContainer.PopoverType, at view: NSView, handler:(viewController: NSViewController) -> Void) {
+    func show(_ type: SFPopoverContainer.PopoverType, at view: NSView, handler:(_ viewController: NSViewController) -> Void) {
         
         let vc = viewController(type)
         popover.contentViewController = vc
         popover.contentSize = getSize(type)
         popover.animates = true
-        popover.behavior = .Transient
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(0.1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-        self.popover.showRelativeToRect(view.bounds, ofView: view, preferredEdge: .MaxY)
+        popover.behavior = .transient
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double((Int64)(0.1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+        self.popover.show(relativeTo: view.bounds, of: view, preferredEdge: .maxY)
             })
         
-        handler(viewController: vc)
+        handler(vc)
     }
     
-    func close(handler: ((Void) -> Void)?) {
+    func close(_ handler: ((Void) -> Void)?) {
         
         if let h = handler {
             h()

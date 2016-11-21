@@ -9,14 +9,23 @@
 import Foundation
 import SwiftyJSON
 import RealmSwift
+import ObjectMapper
 
-class MAlbum: Object {
-  
+class Album: Object, Mappable {
+	
+	required convenience init?(map: Map) {
+		self.init()
+		
+	}
+		func mapping(map: Map) {
+		
+	}
+
   dynamic var id: Int = 0 //pk
   dynamic var name: String = ""
   dynamic var artist_id: Int = 0 //fk
   dynamic var url_str: String = ""
-  dynamic var artwork: NSData?
+  dynamic var artwork: Data?
   var tracks: RealmOptional<Int> = RealmOptional<Int>()
   
   override static func primaryKey() -> String? {
@@ -25,7 +34,7 @@ class MAlbum: Object {
   }
 }
 
-class MTrack: Object {
+class Track: Object {
   
   dynamic var id: Int = 0 //pk
   dynamic var name: String = ""
@@ -43,7 +52,7 @@ class MTrack: Object {
   }
 }
 
-class MArtist: Object {
+class Artist: Object {
   
   dynamic var id: Int = 0 //pk
   dynamic var name: String = ""
@@ -54,7 +63,7 @@ class MArtist: Object {
   }
 }
 
-class MLyric: Object {
+class Lyric: Object {
   
   dynamic var id: Int = 0 //pk
   dynamic var name: String = ""
@@ -65,31 +74,6 @@ class MLyric: Object {
     return "id"
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 class Player: NSObject {
   
@@ -102,8 +86,21 @@ class Player: NSObject {
     var info: Info!
 }
 
+struct Time {
+	
+	let allTimeString: String
+	var timeInterval: Int = 0
+	
+	init(allTimeString: String) {
+		
+		self.allTimeString = allTimeString
+		
+		timeInterval = self.convertFrom(allTimeString)
+	}
+}
+
 protocol Propertyable {
-  
+	
 }
 
 extension Propertyable {
@@ -177,7 +174,7 @@ class Info: NSObject {
       
       let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: "com.apple.iTunes"))
         
-        guard let artist = iTunesApp.track_artist, name = iTunesApp.track_name, time = iTunesApp.track_time else {
+        guard let artist = iTunesApp.track_artist, let name = iTunesApp.track_name, let time = iTunesApp.track_time else {
             
             return
         }
@@ -187,7 +184,7 @@ class Info: NSObject {
         }
     }
     
-    func getTrackPropertyAndValue(json: JSON) {
+    func getTrackPropertyAndValue(_ json: JSON) {
         
         let properties = self.propertyNames()
         for key in properties {
@@ -222,25 +219,25 @@ class Info: NSObject {
   
   func saveInRealm() {
     
-    let track = MTrack()
-    track.id = self.track_id.integerValue
+    let track = Track()
+    track.id = self.track_id.intValue
     track.name = self.track_name
-    track.lyric_id = self.lyrics_id.integerValue
-    track.album_id = self.album_id.integerValue
-    track.spotify_id = self.track_spotify_id.integerValue
-    track.artist_id = self.artist_id.integerValue
+    track.lyric_id = self.lyrics_id.intValue
+    track.album_id = self.album_id.intValue
+    track.spotify_id = self.track_spotify_id.intValue
+    track.artist_id = self.artist_id.intValue
     
-    let artist = MArtist()
-    artist.id = self.artist_id.integerValue
+    let artist = Artist()
+    artist.id = self.artist_id.intValue
     artist.name = self.artist_name
     
-    let album = MAlbum()
-    album.id = self.album_id.integerValue
+    let album = Album()
+    album.id = self.album_id.intValue
     if let url = self.album_coverart_350x350 {
       album.url_str = url
-      album.artwork = NSData(contentsOfURL: NSURL(string: url)!)
+      album.artwork = try? Data(contentsOf: URL(string: url)!)
     }
-    album.artist_id = self.artist_id.integerValue
+    album.artist_id = self.artist_id.intValue
     
     let realm = try! Realm()
     

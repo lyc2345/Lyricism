@@ -32,12 +32,12 @@ class BlurBackground: NSView {
     func setBackgroundColor() {
         
         wantsLayer = true
-        layer?.backgroundColor = NSColor(colorLiteralRed: 41.0/255.0, green: 48.0/255.0, blue: 66.0/255.0, alpha: 0.7).CGColor
+        layer?.backgroundColor = NSColor(colorLiteralRed: 41.0/255.0, green: 48.0/255.0, blue: 66.0/255.0, alpha: 0.7).cgColor
     }
     
 
-    override func drawRect(dirtyRect: NSRect) {
-        super.drawRect(dirtyRect)
+    override func draw(_ dirtyRect: NSRect) {
+        super.draw(dirtyRect)
 
         // Drawing code here.
     }

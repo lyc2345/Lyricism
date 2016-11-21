@@ -49,7 +49,7 @@ class MacUtilities: NSObject {
 
 extension NSObject {
     
-  func sd_print<T>(message: T,
+  func sd_print<T>(_ message: T,
                 file: String = #file,
                 method: String = #function,
                 line: Int = #line)
@@ -59,7 +59,7 @@ extension NSObject {
     #endif
   }
   
-  func s_print(message: String, method: String = #function) {
+  func s_print(_ message: String, method: String = #function) {
     
     #if DEBUG
       print("\(method): \(message)")

@@ -2,7 +2,7 @@ import AppKit
 import ScriptingBridge
 
 @objc public protocol SpotifyObjectProtocol: NSObjectProtocol {
-    func get() -> AnyObject!
+    //func get() -> AnyObject!
 }
 
 @objc public protocol SpotifyApplicationProtocol: SpotifyObjectProtocol {
@@ -13,9 +13,9 @@ import ScriptingBridge
 
 // MARK: SpotifyEPlS
 @objc public enum SpotifyEPlS : AEKeyword {
-    case Stopped = 0x6b505353 /* 'kPSS' */
-    case Playing = 0x6b505350 /* 'kPSP' */
-    case Paused = 0x6b505370 /* 'kPSp' */
+    case stopped = 0x6b505353 /* 'kPSS' */
+    case playing = 0x6b505350 /* 'kPSP' */
+    case paused = 0x6b505370 /* 'kPSp' */
 }
 
 // MARK: SpotifyApplication
@@ -33,11 +33,11 @@ import ScriptingBridge
     @objc optional func playpause() // Toggle play/pause.
     @objc optional func pause() // Pause playback.
     @objc optional func play() // Resume playback.
-    @objc optional func playTrack(x: String!, inContext: String!) // Start playback of a track in the given context.
-    @objc optional func setSoundVolume(soundVolume: Int) // The sound output volume (0 = minimum, 100 = maximum)
-    @objc optional func setPlayerPosition(playerPosition: Double) // The player’s position within the currently playing track in seconds.
-    @objc optional func setRepeating(repeating: Bool) // Is repeating on or off?
-    @objc optional func setShuffling(shuffling: Bool) // Is shuffling on or off?
+    @objc optional func playTrack(_ x: String!, inContext: String!) // Start playback of a track in the given context.
+    @objc optional func setSoundVolume(_ soundVolume: Int) // The sound output volume (0 = minimum, 100 = maximum)
+    @objc optional func setPlayerPosition(_ playerPosition: Double) // The player’s position within the currently playing track in seconds.
+    @objc optional func setRepeating(_ repeating: Bool) // Is repeating on or off?
+    @objc optional func setShuffling(_ shuffling: Bool) // Is shuffling on or off?
     @objc optional var name: String { get } // The name of the application.
     @objc optional var frontmost: Bool { get } // Is this the frontmost (active) application?
     @objc optional var version: String { get } // The version of the application.
@@ -60,7 +60,7 @@ extension SBApplication: SpotifyApplication {}
     @objc optional var artwork: NSImage { get } // The property is deprecated and will never be set. Use the 'artwork url' instead.
     @objc optional var albumArtist: String { get } // That album artist of the track.
     @objc optional var spotifyUrl: String { get } // The URL of the track.
-    @objc optional func setSpotifyUrl(spotifyUrl: String!) // The URL of the track.
+    @objc optional func setSpotifyUrl(_ spotifyUrl: String!) // The URL of the track.
 }
-extension SBObject: SpotifyTrack {}
+extension SBObject: SpotifyTrack { }
 

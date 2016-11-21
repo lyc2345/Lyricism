@@ -19,7 +19,7 @@ enum TString: String {
 
 class SFRealm {
   
-  class func write<T where T: Object>(t: T) {
+  class func write<T>(_ t: T) where T: Object {
     
     do {
       let realm = try Realm()
@@ -32,7 +32,7 @@ class SFRealm {
     }
   }
   
-  class func update<T where T: Object>(t: T) {
+  class func update<T>(_ t: T) where T: Object {
     
     do {
       let realm = try Realm()
@@ -45,7 +45,7 @@ class SFRealm {
     }
   }
   
-  class func create<T where T: Object>(predicate p: [String: AnyObject], t: T.Type) {
+  class func create<T>(predicate p: [String: AnyObject], t: T.Type) where T: Object {
     
     do {
       let realm = try Realm()
@@ -58,7 +58,7 @@ class SFRealm {
     }
   }
   
-  class func delete<T where T: Object>(t: T) {
+  class func delete<T>(_ t: T) where T: Object {
     
     do {
       let realm = try Realm()
@@ -71,21 +71,21 @@ class SFRealm {
     }
   }
   
-  class func queryAll<T where T: Object>(t: T.Type) -> Results<T>? {
+  class func queryAll<T>(_ t: T.Type) -> Results<T>? where T: Object {
     
     let realm = try! Realm()
     
     return realm.objects(t.self)
   }
   
-  class func query<T where T: Object>(id i: Int, t: T.Type) -> Results<T>? {
+  class func query<T>(id i: Int, t: T.Type) -> Results<T>? where T: Object {
     
     let realm = try! Realm()
     
     return realm.objects(t.self).filter("id == \(i)")
   }
   
-  class func query<T where T: Object>(name n: String, t: T.Type) -> Results<T>? {
+  class func query<T>(name n: String, t: T.Type) -> Results<T>? where T: Object {
     
     let realm = try! Realm()
     
@@ -95,7 +95,7 @@ class SFRealm {
 
   }
   
-  class func query<T where T: Object>(predict p: String, t: T.Type) -> Results<T>? {
+  class func query<T>(predict p: String, t: T.Type) -> Results<T>? where T: Object {
     
     let realm = try! Realm()
     

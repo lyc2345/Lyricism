@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ObjectMapper.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Lyricism.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -39,11 +44,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SWXMLHash.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,47 +52,47 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2670376012DBC0600772E39515EEE626</key>
+		<key>012BA4EA8981AC7CB8B0B74ABCEEF36D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>26BBED24D65B4A486BF313620DA89CE3</key>
+		<key>1B4DBD83A81C3D70509B8DAFFD2340B9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>309E79FE78B808CD1BE2ABFDB672EF93</key>
+		<key>247AA674FD95B248AC526C7B5203CD29</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
+		<key>30B8FB23D7B04F5C914D095C0E034D76</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>87C92EA4D49CF8D12A8DD3F0A7B47D54</key>
+		<key>40FA32C6B6B4075B6D0EAC10FC05B87A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A31696687E1B3D8589039C5790496A1A</key>
+		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BFAD45204D291E63E2750FB5878E7EF0</key>
+		<key>9CD09F7D60539B4320E93AEF0CD4EA33</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E063FC654A74CD02AEA9B82CEBBF5BC6</key>
+		<key>B43918AB915242B851ABEFB5D70BE0AD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F1F264E16B8A05888871B33E942BB3F3</key>
+		<key>BD06E6043D76AF60B68D60D0BDA53196</key>
 		<dict>
 			<key>primary</key>
 			<true/>

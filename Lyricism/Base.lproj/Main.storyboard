@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G1004" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Preferences-->
@@ -708,15 +709,13 @@
                                     <rect key="frame" x="1" y="1" width="220" height="238"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="2jn-Da-Bj3">
+                                        <textView importsGraphics="NO" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="2jn-Da-Bj3">
                                             <rect key="frame" x="0.0" y="0.0" width="220" height="238"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="minSize" width="220" height="238"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="220" height="238"/>
-                                            <size key="maxSize" width="463" height="10000000"/>
                                         </textView>
                                     </subviews>
                                     <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -755,10 +754,10 @@
             </objects>
             <point key="canvasLocation" x="311" y="627"/>
         </scene>
-        <!--Lyrics View Controller-->
+        <!--LyricsVC-->
         <scene sceneID="YfF-Qn-2fd">
             <objects>
-                <viewController storyboardIdentifier="LyricsViewController" showSeguePresentationStyle="single" id="hcA-47-AYn" customClass="LyricsViewController" customModule="Lyricism" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LyricsVC" showSeguePresentationStyle="single" id="hcA-47-AYn" customClass="LyricsVC" customModule="Lyricism" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" autoresizesSubviews="NO" id="Fy6-Fe-DG3">
                         <rect key="frame" x="0.0" y="0.0" width="350" height="350"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -798,7 +797,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="290" height="294"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView editable="NO" selectable="NO" drawsBackground="NO" importsGraphics="NO" richText="NO" horizontallyResizable="YES" findStyle="panel" verticallyResizable="YES" id="zlN-bT-muU">
+                                        <textView editable="NO" selectable="NO" drawsBackground="NO" importsGraphics="NO" richText="NO" horizontallyResizable="YES" findStyle="panel" id="zlN-bT-muU">
                                             <rect key="frame" x="0.0" y="0.0" width="290" height="294"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
@@ -815,8 +814,6 @@
                                                 </fragment>
                                             </attributedString>
                                             <color key="insertionPointColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="290" height="294"/>
-                                            <size key="maxSize" width="555" height="10000000"/>
                                         </textView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1009,16 +1006,16 @@
             </objects>
             <point key="canvasLocation" x="402.5" y="1310"/>
         </scene>
-        <!--Jump On Label View Controller-->
+        <!--PopoverVC-->
         <scene sceneID="gxC-He-xd6">
             <objects>
-                <viewController storyboardIdentifier="JumpOnLabelViewController" id="QHV-7c-F4q" customClass="JumpOnLabelViewController" customModule="Lyricism" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="ZRQ-yK-ZDV">
-                        <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
+                <viewController storyboardIdentifier="PopoverVC" id="QHV-7c-F4q" customClass="PopoverVC" customModule="Lyricism" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" misplaced="YES" id="ZRQ-yK-ZDV">
+                        <rect key="frame" x="0.0" y="0.0" width="177" height="30"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="501" verticalHuggingPriority="501" translatesAutoresizingMaskIntoConstraints="NO" id="WhX-q9-W5l">
-                                <rect key="frame" x="71" y="4" width="8" height="22"/>
+                                <rect key="frame" x="10" y="4" width="8" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="QYa-oH-EOM"/>
                                 </constraints>
@@ -1042,7 +1039,7 @@
                 </viewController>
                 <customObject id="Dna-bP-awk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="385" y="1259"/>
+            <point key="canvasLocation" x="375.5" y="1256"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="cIf-5e-Ez0">

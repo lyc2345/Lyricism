@@ -28,49 +28,49 @@ protocol PreferencesSetable { }
 
 extension PreferencesSetable {
   
-  func setDocker(type: Settings.Docker) {
+  func setDocker(_ type: Settings.Docker) {
     
     switch type {
     case .yes:
-      NSUserDefaults.standardUserDefaults().setBool(true, forKey: Settings.docker_setting)
-      NSApp.setActivationPolicy(.Regular)
+      UserDefaults.standard.set(true, forKey: Settings.docker_setting)
+      NSApp.setActivationPolicy(.regular)
     case .no:
-      NSUserDefaults.standardUserDefaults().setBool(false, forKey: Settings.docker_setting)
-      NSApp.setActivationPolicy(.Accessory)
+      UserDefaults.standard.set(false, forKey: Settings.docker_setting)
+      NSApp.setActivationPolicy(.accessory)
     }
   }
   
   func setDocker() {
     
-    let option = NSUserDefaults.standardUserDefaults().boolForKey(Settings.docker_setting)
+    let option = UserDefaults.standard.bool(forKey: Settings.docker_setting)
     option ? setDocker(.yes) : setDocker(.no)
   }
   
   func isDockerShown() -> Bool {
     
-    return NSUserDefaults.standardUserDefaults().boolForKey(Settings.docker_setting)
+    return UserDefaults.standard.bool(forKey: Settings.docker_setting)
   }
   
-  func setWindowsOnTop(type: Settings.WindowsOnTop) {
+  func setWindowsOnTop(_ type: Settings.WindowsOnTop) {
     switch type {
     case .yes:
-      NSUserDefaults.standardUserDefaults().setBool(true, forKey: Settings.windows_on_top_setting)
+      UserDefaults.standard.set(true, forKey: Settings.windows_on_top_setting)
       //print("bool: \(NSUserDefaults.standardUserDefaults().boolForKey(Settings.windows_on_top_setting))")
       
     case .no:
-      NSUserDefaults.standardUserDefaults().setBool(false, forKey: Settings.windows_on_top_setting)
+      UserDefaults.standard.set(false, forKey: Settings.windows_on_top_setting)
       //print("bool: \(NSUserDefaults.standardUserDefaults().boolForKey(Settings.windows_on_top_setting))")
     }
   }
   
   func setWinowsOnTop() {
     
-    let option = NSUserDefaults.standardUserDefaults().boolForKey(Settings.windows_on_top_setting)
+    let option = UserDefaults.standard.bool(forKey: Settings.windows_on_top_setting)
     option ? setWindowsOnTop(.no) : setWindowsOnTop(.yes)
   }
   
   func isWindowsOnTop() -> Bool {
     
-    return NSUserDefaults.standardUserDefaults().boolForKey(Settings.windows_on_top_setting)
+    return UserDefaults.standard.bool(forKey: Settings.windows_on_top_setting)
   }
 }

@@ -11,7 +11,6 @@ import MediaLibrary
 import ScriptingBridge
 import WebKit
 import Alamofire
-import SWXMLHash
 import SwiftyJSON
 
 class ViewController: NSViewController {
@@ -21,21 +20,15 @@ class ViewController: NSViewController {
     didSet {
       if let textView = self.scrollTextView.contentView.documentView as? NSTextView {
         
-        textView.editable = false
+        textView.isEditable = false
         textView.textStorage?.mutableString.setString("default")
       }
     }
   }
   @IBOutlet weak var imageView: NSImageView!
   
-  var url = NSURL(string: "https://www.google.com/#q=james+blunt+postcards+lyrics")
-  
   @IBOutlet weak var webView: WebView! {
-    
-    didSet {
-      
-      webView.policyDelegate = self
-    }
+    didSet { webView.policyDelegate = self }
   }
   
   override func viewDidLoad() {
@@ -53,7 +46,7 @@ class ViewController: NSViewController {
      }*/
   }
   
-  override var representedObject: AnyObject? {
+  override var representedObject: Any? {
     didSet {
       // Update the view, if already loaded.
       
@@ -79,20 +72,20 @@ class ViewController: NSViewController {
 
 extension ViewController: WebPolicyDelegate {
   
-  func webView(webView: WebView!, decidePolicyForNavigationAction actionInformation: [NSObject : AnyObject]!, request: NSURLRequest!, frame: WebFrame!, decisionListener listener: WebPolicyDecisionListener!) {
+  func webView(_ webView: WebView!, decidePolicyForNavigationAction actionInformation: [AnyHashable: Any]!, request: URLRequest!, frame: WebFrame!, decisionListener listener: WebPolicyDecisionListener!) {
     
-    if WebNavigationType.LinkClicked.rawValue == actionInformation[WebActionNavigationTypeKey] as! Int {
+    if WebNavigationType.linkClicked.rawValue == actionInformation[WebActionNavigationTypeKey] as! Int {
       listener.ignore()
       //NSWorkspace.sharedWorkspace().openURL(request.URL!)
-      webView.mainFrame.loadRequest(request)
+      webView.mainFrame.load(request)
     }
     
-    print("request url:\(request.URL!)")
+    print("request url:\(request.url!)")
     listener.use()
     
   }
   
-  func webView(webView: WebView!, decidePolicyForNewWindowAction actionInformation: [NSObject : AnyObject]!, request: NSURLRequest!, newFrameName frameName: String!, decisionListener listener: WebPolicyDecisionListener!) {
+  func webView(_ webView: WebView!, decidePolicyForNewWindowAction actionInformation: [AnyHashable: Any]!, request: URLRequest!, newFrameName frameName: String!, decisionListener listener: WebPolicyDecisionListener!) {
     
   }
 }

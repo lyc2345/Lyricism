@@ -10,25 +10,25 @@ import Cocoa
 
 protocol MusicTimerable {
   
-  var timer: NSTimer? { get set }
+  var timer: Timer? { get set }
   var trackTime: Int! { get set }
   
-  func initTimer(timeInterval: NSTimeInterval, target: AnyObject, selector: Selector, repeats: Bool)
+  func initTimer(_ timeInterval: TimeInterval, target: AnyObject, selector: Selector, repeats: Bool)
   
-  func resumeTimer(target: AnyObject, selector: Selector, repeats: Bool)
+  func resumeTimer(_ target: AnyObject, selector: Selector, repeats: Bool)
   func stopTimer()
 }
 
-extension MusicTimerable where Self: LyricsViewController {
+extension MusicTimerable where Self: LyricsVC {
   
-  func initTimer(timeInterval: NSTimeInterval, target: AnyObject, selector: Selector, repeats: Bool) {
+  func initTimer(_ timeInterval: TimeInterval, target: AnyObject, selector: Selector, repeats: Bool) {
     
-    timer =  NSTimer(timeInterval: timeInterval, target: target, selector: selector, userInfo: nil, repeats: repeats)
+    timer =  Timer(timeInterval: timeInterval, target: target, selector: selector, userInfo: nil, repeats: repeats)
     
-    NSRunLoop.mainRunLoop().addTimer(timer!, forMode: NSDefaultRunLoopMode)
+    RunLoop.main.add(timer!, forMode: RunLoopMode.defaultRunLoopMode)
   }
   
-  func updateTimer(handler: (timeString: String) -> Void) {
+  func updateTimer(_ handler: @escaping (_ timeString: String) -> Void) {
     
     if trackTime == 0 {
       self.stopTimer()
@@ -45,14 +45,14 @@ extension MusicTimerable where Self: LyricsViewController {
     
     timeString = seconds < 10 ? ("\(timeString):0\(seconds)") : ("\(timeString):\(seconds)")
     
-    dispatch_async(dispatch_get_main_queue()) {
+    DispatchQueue.main.async {
       //self.timeLabel.stringValue = timeString
-      handler(timeString: timeString)
+      handler(timeString)
     }
     //s_print("track time :\(timeString)")
   }
   
-  func resumeTimer(target: AnyObject, selector: Selector, repeats: Bool) {
+  func resumeTimer(_ target: AnyObject, selector: Selector, repeats: Bool) {
     
     trackTime - 1
     
@@ -76,7 +76,7 @@ extension MusicTimerable where Self: LyricsViewController {
 
 protocol DismissTimerable {
   
-  var dismissTimer: NSTimer! { get set }
+  var dismissTimer: Timer! { get set }
   var dismissTime: Int { get set }
 }
 
@@ -93,7 +93,7 @@ extension DismissTimerable where Self: AppDelegate {
   func timerStart() {
     
     guard let timer = dismissTimer else {
-      dismissTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(dismissTimerCountDown), userInfo: nil, repeats: true)
+      dismissTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(dismissTimerCountDown), userInfo: nil, repeats: true)
       return
     }
     timer.invalidate()

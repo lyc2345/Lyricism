@@ -58,6 +58,18 @@ SOFTWARE.
 
 
 
+## ObjectMapper
+
+The MIT License (MIT)
+Copyright (c) 2014 Hearst
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
 ## ProgressKit
 
 The MIT License (MIT)
@@ -86,27 +98,25 @@ SOFTWARE.
 
 ## ReachabilitySwift
 
-/*
-Copyright (c) 2014, Ashley Mills
-All rights reserved.
+Copyright (c) 2016 Ashley Mills
 
-Redistribution and use in source, with or without modification, is permitted provided that the following condition is met:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-1. Redistributions of source code must retain the above copyright notice, this
-list of conditions and the following disclaimer.
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
-LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE.
-*/
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
 
 
 ## Realm
@@ -294,34 +304,6 @@ TABLE OF CONTENTS
       incurred by, or claims asserted against, such Contributor by reason
       of your accepting any such warranty or additional liability.
 
-   END OF TERMS AND CONDITIONS
-
-   APPENDIX: How to apply the Apache License to your work.
-
-      To apply the Apache License to your work, attach the following
-      boilerplate notice, with the fields enclosed by brackets "{}"
-      replaced with your own identifying information. (Don't include
-      the brackets!)  The text should be enclosed in the appropriate
-      comment syntax for the file format. We also recommend that a
-      file or class name and description of purpose be included on the
-      same "printed page" as the copyright notice for easier
-      identification within third-party archives.
-
-   Copyright {yyyy} {name of copyright owner}
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-
-
 REALM COMPONENTS
 
 This software contains components with separate copyright and license terms.
@@ -332,7 +314,7 @@ For the Realm Core component
 
   Realm Core Binary License
 
-  Copyright (c) 2011-2014 Realm Inc All rights reserved
+  Copyright (c) 2011-2016 Realm Inc All rights reserved
 
   Redistribution and use in binary form, with or without modification, is
   permitted provided that the following conditions are met:
@@ -367,19 +349,22 @@ EXPORT COMPLIANCE
 
 You understand that the Software may contain cryptographic functions that may be
 subject to export restrictions, and you represent and warrant that you are not
-located in a country that is subject to United States export restriction or embargo,
-including Cuba, Iran, North Korea, Sudan, Syria or the Crimea region, and that you
-are not on the Department of Commerce list of Denied Persons, Unverified Parties,
-or affiliated with a Restricted Entity.
+(i) located in a jurisdiction that is subject to United States economic
+sanctions (“Prohibited Jurisdiction”), including Cuba, Iran, North Korea,
+Sudan, Syria or the Crimea region, (ii) a person listed on any U.S. government
+blacklist (to include the List of Specially Designated Nationals and Blocked
+Persons or the Consolidated Sanctions List administered by the U.S. Department
+of the Treasury’s Office of Foreign Assets Control, or the Denied Persons List
+or Entity List administered by the U.S. Department of Commerce)
+(“Sanctioned Person”), or (iii) controlled or 50% or more owned by a Sanctioned
+Person.
 
 You agree to comply with all export, re-export and import restrictions and
-regulations of the Department of Commerce or other agency or authority of the
-United States or other applicable countries. You also agree not to transfer, or
-authorize the transfer of, directly or indirectly, the Software to any prohibited
-country, including Cuba, Iran, North Korea, Sudan, Syria or the Crimea region,
-or to any person or organization on or affiliated with the Department of
-Commerce lists of Denied Persons, Unverified Parties or Restricted Entities, or
-otherwise in violation of any such restrictions or regulations.
+regulations of the U.S. Department of Commerce or other agency or authority of
+the United States or other applicable countries. You also agree not to transfer,
+or authorize the transfer of, directly or indirectly, of the Software to any
+Prohibited Jurisdiction, or otherwise in violation of any such restrictions or
+regulations.
 
 
 ## RealmSwift
@@ -567,34 +552,6 @@ TABLE OF CONTENTS
       incurred by, or claims asserted against, such Contributor by reason
       of your accepting any such warranty or additional liability.
 
-   END OF TERMS AND CONDITIONS
-
-   APPENDIX: How to apply the Apache License to your work.
-
-      To apply the Apache License to your work, attach the following
-      boilerplate notice, with the fields enclosed by brackets "{}"
-      replaced with your own identifying information. (Don't include
-      the brackets!)  The text should be enclosed in the appropriate
-      comment syntax for the file format. We also recommend that a
-      file or class name and description of purpose be included on the
-      same "printed page" as the copyright notice for easier
-      identification within third-party archives.
-
-   Copyright {yyyy} {name of copyright owner}
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-
-
 REALM COMPONENTS
 
 This software contains components with separate copyright and license terms.
@@ -605,7 +562,7 @@ For the Realm Core component
 
   Realm Core Binary License
 
-  Copyright (c) 2011-2014 Realm Inc All rights reserved
+  Copyright (c) 2011-2016 Realm Inc All rights reserved
 
   Redistribution and use in binary form, with or without modification, is
   permitted provided that the following conditions are met:
@@ -640,50 +597,29 @@ EXPORT COMPLIANCE
 
 You understand that the Software may contain cryptographic functions that may be
 subject to export restrictions, and you represent and warrant that you are not
-located in a country that is subject to United States export restriction or embargo,
-including Cuba, Iran, North Korea, Sudan, Syria or the Crimea region, and that you
-are not on the Department of Commerce list of Denied Persons, Unverified Parties,
-or affiliated with a Restricted Entity.
+(i) located in a jurisdiction that is subject to United States economic
+sanctions (“Prohibited Jurisdiction”), including Cuba, Iran, North Korea,
+Sudan, Syria or the Crimea region, (ii) a person listed on any U.S. government
+blacklist (to include the List of Specially Designated Nationals and Blocked
+Persons or the Consolidated Sanctions List administered by the U.S. Department
+of the Treasury’s Office of Foreign Assets Control, or the Denied Persons List
+or Entity List administered by the U.S. Department of Commerce)
+(“Sanctioned Person”), or (iii) controlled or 50% or more owned by a Sanctioned
+Person.
 
 You agree to comply with all export, re-export and import restrictions and
-regulations of the Department of Commerce or other agency or authority of the
-United States or other applicable countries. You also agree not to transfer, or
-authorize the transfer of, directly or indirectly, the Software to any prohibited
-country, including Cuba, Iran, North Korea, Sudan, Syria or the Crimea region,
-or to any person or organization on or affiliated with the Department of
-Commerce lists of Denied Persons, Unverified Parties or Restricted Entities, or
-otherwise in violation of any such restrictions or regulations.
-
-
-## SWXMLHash
-
-Copyright (c) 2014 David Mohundro
- 
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
- 
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
- 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+regulations of the U.S. Department of Commerce or other agency or authority of
+the United States or other applicable countries. You also agree not to transfer,
+or authorize the transfer of, directly or indirectly, of the Software to any
+Prohibited Jurisdiction, or otherwise in violation of any such restrictions or
+regulations.
 
 
 ## SwiftyJSON
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Ruoyu Fu
+Copyright (c) 2016 Ruoyu Fu
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

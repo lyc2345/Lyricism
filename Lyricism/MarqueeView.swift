@@ -10,15 +10,15 @@ import Cocoa
 
 class MarqueeView: NSView {
 
-    var timer: NSTimer? = nil
+    var timer: Timer? = nil
     
     var fullString: String? = ""
-    var point: CGPoint! = CGPointZero
+    var point: CGPoint! = CGPoint.zero
     var stringWidth: CGFloat!
     
-    var textAttributes: [String: AnyObject] = [NSFontAttributeName: NSFont(name: "Lato Light", size: 23.0)!, NSForegroundColorAttributeName: NSColor.whiteColor()]
+    var textAttributes: [String: AnyObject] = [NSFontAttributeName: NSFont(name: "Lato Light", size: 23.0)!, NSForegroundColorAttributeName: NSColor.white]
     // yellow color for test marquee label
-    var otherTextAttributes: [String: AnyObject] = [NSFontAttributeName: NSFont(name: "Lato Light", size: 23.0)!, NSForegroundColorAttributeName: NSColor.yellowColor()]
+    var otherTextAttributes: [String: AnyObject] = [NSFontAttributeName: NSFont(name: "Lato Light", size: 23.0)!, NSForegroundColorAttributeName: NSColor.yellow]
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -31,16 +31,16 @@ class MarqueeView: NSView {
         
     }
     
-    override func drawRect(dirtyRect: NSRect) {
-        super.drawRect(dirtyRect)
+    override func draw(_ dirtyRect: NSRect) {
+        super.draw(dirtyRect)
         
-        stringWidth = NSString(string: text).sizeWithAttributes(textAttributes).width
+        stringWidth = NSString(string: text).size(withAttributes: textAttributes).width
         // if title width smaller than self.frame. make title in the center
         if stringWidth < self.frame.width {
             timer?.invalidate()
             timer = nil
             let centerPointX = CGPoint(x: (self.frame.width - stringWidth) / 2, y: point.y)
-            NSString(string: text).drawAtPoint(centerPointX, withAttributes: textAttributes)
+            NSString(string: text).draw(at: centerPointX, withAttributes: textAttributes)
             return
         }
 
@@ -50,13 +50,13 @@ class MarqueeView: NSView {
             
             point.x += stringWidth  + 20
         }
-        NSString(string: text).drawAtPoint(point, withAttributes: textAttributes)
+        NSString(string: text).draw(at: point, withAttributes: textAttributes)
         
         if point.x + stringWidth > 0 {
             var otherPoint = point
             //otherPoint.x += dirtyRect.size.width
-            otherPoint.x += stringWidth + 20
-            NSString(string: text).drawAtPoint(otherPoint, withAttributes: textAttributes)
+            otherPoint?.x += stringWidth + 20
+            NSString(string: text).draw(at: otherPoint!, withAttributes: textAttributes)
         }
     }
     
@@ -66,11 +66,11 @@ class MarqueeView: NSView {
             //self.printLog("label.stringvalue: \(text)")
             fullString = text.copy() as? String
             point = NSZeroPoint
-            stringWidth = NSString(string: text).sizeWithAttributes(textAttributes).width
+            stringWidth = NSString(string: text).size(withAttributes: textAttributes).width
             
             if timer == nil && speed > 0 && fullString != nil {
                 
-                timer = NSTimer.scheduledTimerWithTimeInterval(speed, target: self, selector: #selector(moveText), userInfo: nil, repeats: true)
+                timer = Timer.scheduledTimer(timeInterval: speed, target: self, selector: #selector(moveText), userInfo: nil, repeats: true)
             }
         }
     }
@@ -87,23 +87,23 @@ class MarqueeView: NSView {
         }
     }*/
     
-    func moveText(t: NSTimer) {
+    func moveText(_ t: Timer) {
         
-        dispatch_async(dispatch_get_main_queue()) { 
+        DispatchQueue.main.async { 
             //self.printLog("maqueree moveText")
             self.point.x = self.point.x - 1.0
             self.needsDisplay = true
         }
     }
     
-    var speed: NSTimeInterval = 0.02 {
+    var speed: TimeInterval = 0.02 {
         
         didSet {
             
             timer?.invalidate()
             timer = nil
             if speed > 0 && fullString != nil {
-                timer = NSTimer.scheduledTimerWithTimeInterval(speed, target: self, selector: #selector(moveText), userInfo: nil, repeats: true)
+                timer = Timer.scheduledTimer(timeInterval: speed, target: self, selector: #selector(moveText), userInfo: nil, repeats: true)
             }
         }
     }
@@ -128,7 +128,7 @@ extension String {
     func copy() -> AnyObject? {
         
         if let asCopying = (self as AnyObject) as? NSCopying {
-            return asCopying.copyWithZone(nil)
+            return asCopying.copy(with: nil) as AnyObject?
         } else {
             assert(false, "This class doesn't implement NSCopying")
             return nil
