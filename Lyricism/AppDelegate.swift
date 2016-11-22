@@ -30,7 +30,7 @@ enum SBApplicationID {
   case itunes
   case spotify
   
-  func values() -> (app: String, playerstate: String, player: String) {
+  func identifier() -> (app: String, playerstate: String, player: String) {
     
     switch self {
     case .itunes: return ("com.apple.iTunes", "com.apple.iTunes.playerInfo", "com.apple.iTunes.player")

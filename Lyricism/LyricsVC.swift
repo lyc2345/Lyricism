@@ -90,69 +90,77 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
 		NotificationCenter.default.removeObserver(self)
 	}
 	
-  func showCurrentPlaying() {
-    
-    let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
-    let spotifyApp = Spotify(player: SBApplication(bundleIdentifier: SBApplicationID.spotify.values().app))
-		Debug.print("itunes is running \(iTunesApp.player?.running)")
-    Debug.print("spotify is running \(spotifyApp.player?.running)")
-    
-    guard let i = iTunesApp.player, i.running && i.playerState == .playing else {
-      
-      guard let s = spotifyApp.player, s.running else {
-        
-        // TODO: Show alert to remind user to open one of players
-        // TODO: Spotify cant detect...fuck
-        /*
-        let alert = NSAlert()
-        alert.messageText = "NOT Detect iTunes or Spotify are running"
-        alert.informativeText = "Lyricism needs you to open your iTunes or Spotify"
-        alert.alertStyle = .WarningAlertStyle
-        alert.addButtonWithTitle("iTunes")
-        alert.addButtonWithTitle("Spotify")
-        alert.addButtonWithTitle("Cancel")
-        let res = alert.runModal()
-        if res == NSAlertFirstButtonReturn {
-          iTunesApp.player?.activate()
-        } else if res == NSAlertSecondButtonReturn {
-          spotifyApp.player?.activate()
-        } else {
-          // do nothing
-        }*/
-        
-        return
-      }
-      
-      NotificationCenter.default.post(name: Notification.Name(rawValue: SBApplicationID.sourceKey), object: SBApplicationID.spotify.values().player)
-      getSpotifyPlayerPlayingInformation(spotifyApp)
-      Debug.print("spotify get current playing information:\(spotifyApp)")
-      return
-    }
-    NotificationCenter.default.post(name: Notification.Name(rawValue: SBApplicationID.sourceKey), object: SBApplicationID.itunes.values().app)
-    getiTunesPlayingInformation(iTunesApp)
-    Debug.print("itunes  get current playing information:\(iTunesApp)")
-  }
+	func iTunes(handler: (App<iTunesApplication>?) -> Void) {
+		
+		guard let itunesApp = SBApplication(bundleIdentifier: App.itunes(iTunesApplication.self).identifier().app) as? iTunesApplication else {
+			
+			return
+		}
+		handler(.itunes(itunesApp))
+	}
 	
-  func getiTunesPlayingInformation<P>(_ p: P) where P: PlayerPresentable {
-    
-    guard let artist = p.track_artist, let name = p.track_name, let time = p.track_time as? String else {
-      return
-    }
-      
-		track = EasyTrack(name: name, artist: artist, time: time)
-    configure(track: track!
-		)
-  }
-  
-  func getSpotifyPlayerPlayingInformation<P>(_ p: P) where P: PlayerPresentable {
-    
-    guard let track = track else {
-      
-      return
-    }
-    configure(track: track)
-  }
+	func spotify(handler: (App<SpotifyApplication>?) -> Void) {
+		
+		guard let spotifyApp = SBApplication(bundleIdentifier: App.spotify(SpotifyApplication.self).identifier().app) as? SpotifyApplication else {
+			
+			return
+		}
+		handler(.spotify(spotifyApp))
+	}
+	
+  func showCurrentPlaying() {
+		
+		iTunes() { (iTunesApp) in
+			
+			Debug.print("itunes is running \(iTunesApp?.spirit().running)")
+			
+			guard let i = iTunesApp?.spirit(), i.running && i.playerState == .playing else {
+				
+				return
+			}
+			NotificationCenter.default.post(name: Notification.Name(rawValue: SBApplicationID.sourceKey), object: App.itunes(iTunesApplication.self).identifier().app)
+			
+			let track = EasyTrack(name: i.currentTrack!.name!, artist: i.currentTrack!.artist!, time: i.currentTrack!.time!)
+			configure(track: track)
+			Debug.print("itunes  get current playing information:\(iTunesApp)")
 
+		}
+		
+		spotify() { (spotifyApp) in
+		
+			Debug.print("spotify is running \(spotifyApp?.spirit().running)")
+			guard let s = spotifyApp?.spirit(), s.running else {
+				
+				// TODO: Show alert to remind user to open one of players
+				// TODO: Spotify cant detect...fuck
+				/*
+				let alert = NSAlert()
+				alert.messageText = "NOT Detect iTunes or Spotify are running"
+				alert.informativeText = "Lyricism needs you to open your iTunes or Spotify"
+				alert.alertStyle = .WarningAlertStyle
+				alert.addButtonWithTitle("iTunes")
+				alert.addButtonWithTitle("Spotify")
+				alert.addButtonWithTitle("Cancel")
+				let res = alert.runModal()
+				if res == NSAlertFirstButtonReturn {
+				iTunesApp.player?.activate()
+				} else if res == NSAlertSecondButtonReturn {
+				spotifyApp.player?.activate()
+				} else {
+				// do nothing
+				}*/
+				
+				return
+			}
+			NotificationCenter.default.post(name: Notification.Name(rawValue: SBApplicationID.sourceKey), object: App.spotify(SpotifyApplication.self).identifier().app)
+			
+			let track = EasyTrack(name: s.currentTrack!.name!, artist: s.currentTrack!.artist!, time: String(describing: s.currentTrack!.duration!))
+
+			configure(track: track)
+			Debug.print("spotify get current playing information:\(spotifyApp)")
+		}
+	}
+	
   // PlayerSourceable Delegate
   func setSourceImage(_ notification: Notification) {
     
@@ -163,8 +171,8 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
     DispatchQueue.main.async { 
       
       switch source {
-      case SBApplicationID.itunes.values().app: self.sourceImageView.image = NSImage(named: "iTunes")
-      case SBApplicationID.spotify.values().app: self.sourceImageView.image = NSImage(named: "spotify")
+      case App.itunes(iTunesApplication.self).identifier().app: self.sourceImageView.image = NSImage(named: "iTunes")
+      case App.spotify(SpotifyApplication).identifier().app: self.sourceImageView.image = NSImage(named: "spotify")
       default:
         fatalError("out of SBApplicationID type")
       }
@@ -182,7 +190,10 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
 			searchLyricNArtwork(track)
 			return
 		}
-		trackTime = currentTimeFromInt(realm_track.time)
+		trackTime = currentTimeFromInt(realm_track.time) { (time) in
+			
+		}
+		
 		spinnerProgress.animate = false
 		
 		guard let realm_lyric = realm_track.lyric else {
@@ -322,41 +333,46 @@ extension LyricsVC {
     
     let time = Time(allTimeString: allTimeString)
     
-    return currentTimeFromInt(time.timeInterval)
+		return currentTimeFromInt(time.timeInterval) { (time) in
+			
+		}
   }
   
-  func currentTimeFromInt(_ time: Int) -> Int {
-    
-    let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
-    
-    guard let i = iTunesApp.player, let iplayerPos = iTunesApp.player?.playerPosition, i.running && i.playerState == .playing else {
-      
-      let spotifyApp = Spotify(player: SBApplication(bundleIdentifier: SBApplicationID.spotify.values().app))
-      
-      guard let s = spotifyApp.player, let splayerPos = spotifyApp.player?.playerPosition, s.running else {
-        
-        return time - Int(0)
-      }
-      
-      stopTimer()
-      initTimer(1.0, target: self, selector: #selector(updateTime), repeats: true)
-      
-      return time - Int(splayerPos)
-    }
-    
-    if i.playerState == iTunesEPlS.playing {
-      stopTimer()
-      initTimer(1.0, target: self, selector: #selector(updateTime), repeats: true)
-      
-    } else if i.playerState == iTunesEPlS.paused {
-      stopTimer()
-    } else if i.playerState == iTunesEPlS.stopped {
-      stopTimer()
-    } else{
-      Debug.print("Lyrics View Controller is not in the case")
-    }
-    return time - Int(iplayerPos)
-  }
+	func currentTimeFromInt(_ time: Int, completion:(Int) -> ()) -> Int {
+		
+		iTunes() { (iTunesApp) in
+			
+			guard let i = iTunesApp?.spirit(), let iplayerPos = iTunesApp?.spirit().playerPosition, i.running && i.playerState == .playing else {
+				
+				return completion(time)
+			}
+			if i.playerState == iTunesEPlS.playing {
+				stopTimer()
+				initTimer(1.0, target: self, selector: #selector(updateTime), repeats: true)
+				
+			} else if i.playerState == iTunesEPlS.paused {
+				stopTimer()
+			} else if i.playerState == iTunesEPlS.stopped {
+				stopTimer()
+			} else{
+				Debug.print("Lyrics View Controller is not in the case")
+			}
+			return completion(time - Int(iplayerPos))
+		}
+	
+		spotify() { (spotifyApp) in
+			
+			guard let s = spotifyApp?.spirit(), let splayerPos = spotifyApp?.spirit().playerPosition, s.running else {
+				
+				return completion(time)
+			}
+			stopTimer()
+			initTimer(1.0, target: self, selector: #selector(updateTime), repeats: true)
+			
+			return completion(time - Int(splayerPos))
+		}
+		return 0
+	}
 }
 
 extension LyricsVC {

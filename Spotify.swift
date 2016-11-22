@@ -1,12 +1,6 @@
 import AppKit
 import ScriptingBridge
 
-@objc public protocol SpotifyApplicationProtocol: SBObjectProtocol {
-  func activate()
-  var delegate: SBApplicationDelegate! { get set }
-  var running: Bool { @objc(isRunning) get }
-}
-
 // MARK: SpotifyEPlS
 @objc public enum SpotifyEPlS : AEKeyword {
     case stopped = 0x6b505353 /* 'kPSS' */
@@ -15,7 +9,7 @@ import ScriptingBridge
 }
 
 // MARK: SpotifyApplication
-@objc public protocol SpotifyApplication: SpotifyApplicationProtocol {
+@objc public protocol SpotifyApplication: SBApplicationProtocol {
     @objc optional var currentTrack: SpotifyTrack { get } // The current playing track.
     @objc optional var soundVolume: Int { get } // The sound output volume (0 = minimum, 100 = maximum)
     @objc optional var playerState: SpotifyEPlS { get } // Is Spotify stopped, paused, or playing?
@@ -59,4 +53,5 @@ extension SBApplication: SpotifyApplication {}
     @objc optional func setSpotifyUrl(_ spotifyUrl: String!) // The URL of the track.
 }
 extension SBObject: SpotifyTrack { }
+
 
