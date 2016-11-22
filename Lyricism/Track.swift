@@ -16,9 +16,9 @@ class Album: Object, Mappable {
 	dynamic var id: Int = 0 //pk
 	dynamic var name: String = ""
 	dynamic var url_str: String = ""
-	dynamic var artwork: Data?
-	var artist: Artist?
-	var tracks: List<Track>?
+	dynamic var artwork: Data? = nil
+	weak dynamic var artist: Artist?
+	weak var tracks: List<Track>?
 	
 	override static func primaryKey() -> String? {
 		
@@ -26,7 +26,7 @@ class Album: Object, Mappable {
 	}
 	
 	required convenience init?(map: Map) {
-		self.init(map: map)
+		self.init()
 		
 	}
 	func mapping(map: Map) {
@@ -34,7 +34,7 @@ class Album: Object, Mappable {
 			id  <- map["album_id"]
 			name <- map["album_name"]
 			url_str <- map["album_coverart_350x350"]
-			artwork = try Data(contentsOf: URL(string: url_str)!)
+			artwork = url_str != "" ? try Data(contentsOf: URL(string: url_str)!) : nil
 			
 		} catch {
 			
@@ -53,6 +53,7 @@ class Track: Object, Mappable {
   dynamic var album_id: Int = 0 //fk
   dynamic var spotify_id: Int = 0 //fk
 	weak dynamic var artist: Artist?
+	weak dynamic var lyric: Lyric?
 	
   override static func primaryKey() -> String? {
     
@@ -68,6 +69,7 @@ class Track: Object, Mappable {
 		lyric_id <- map["lyric_id"]
 		album_id <- map["album_id"]
 		spotify_id <- map["track_spotify_id"]
+		time <- map["track_length"]
 	}
 }
 
@@ -107,7 +109,7 @@ class Lyric: Object, Mappable {
 	}
 	func mapping(map: Map) {
 		id <- map["lyrics_id"]
-		name <- map["track_name"]
+		text <- map["lyrics_body"]
 	}
 }
 //

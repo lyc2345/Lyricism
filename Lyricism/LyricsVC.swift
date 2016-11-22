@@ -12,38 +12,28 @@ import AVFoundation
 import RealmSwift
 import ProgressKit
 
-protocol LyricsViewPresentable {
-  
-  var lvTime: String { get }
-  var lvArtistNTrack: (artist: String, trackName: String) { get }
-  var lvTrack: PlayerTrack { get }
+struct EasyTrack {
+	
+	typealias T = Any
+	var name: String
+	var artist: String
+	var time: T
 }
 
 class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable, PlayerSourceable {
-  
-  var preferenceWC: PreferencesWC!
 	
 	// Model
-  fileprivate var lyric: Lyric? {
-    
+  fileprivate var lyric: String? {
     didSet {
       guard let textView = scrollTextView.contentView.documentView as? NSTextView else { return }
-      textView.string = self.lyric?.text.applyLyricsFormat() ?? ""
+      textView.string = self.lyric?.applyLyricsFormat() ?? ""
     }
   }
   
   fileprivate var imageData: Data? {
-    
     didSet {
       guard let data = imageData else { return }
       imageView.image = NSImage(data: data)
-    }
-  }
-  
-  fileprivate var artistNtrack: (artist: String, trackName: String) = ("", "") {
-    
-    didSet {
-			self.trackNameArtistLabel.text = "\(artistNtrack.0) - \(artistNtrack.1)"
     }
   }
 	
@@ -69,7 +59,11 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
   var trackTime: Int!
   
   // This one just for 
-  var track: PlayerTrack?
+	var track: EasyTrack? {
+		didSet {
+			self.trackNameArtistLabel.text = "\(track?.artist ?? "") - \(track?.name ?? "")"
+		}
+	}
   
   @IBOutlet weak var isAlwaysOnTop: NSMenuItem!
   @IBOutlet var settingMenu: NSMenu!
@@ -100,8 +94,8 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
     
     let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
     let spotifyApp = Spotify(player: SBApplication(bundleIdentifier: SBApplicationID.spotify.values().app))
-		s_print("itunes is running \(iTunesApp.player?.running)")
-    s_print("spotify is running \(spotifyApp.player?.running)")
+		Debug.print("itunes is running \(iTunesApp.player?.running)")
+    Debug.print("spotify is running \(spotifyApp.player?.running)")
     
     guard let i = iTunesApp.player, i.running && i.playerState == .playing else {
       
@@ -131,12 +125,12 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
       
       NotificationCenter.default.post(name: Notification.Name(rawValue: SBApplicationID.sourceKey), object: SBApplicationID.spotify.values().player)
       getSpotifyPlayerPlayingInformation(spotifyApp)
-      s_print("spotify get current playing information:\(spotifyApp)")
+      Debug.print("spotify get current playing information:\(spotifyApp)")
       return
     }
     NotificationCenter.default.post(name: Notification.Name(rawValue: SBApplicationID.sourceKey), object: SBApplicationID.itunes.values().app)
     getiTunesPlayingInformation(iTunesApp)
-    s_print("itunes  get current playing information:\(iTunesApp)")
+    Debug.print("itunes  get current playing information:\(iTunesApp)")
   }
 	
   func getiTunesPlayingInformation<P>(_ p: P) where P: PlayerPresentable {
@@ -145,8 +139,9 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
       return
     }
       
-    let track = PlayerTrack(artist: artist, name: name, time: time)
-    configure(withPresenter: track)
+		track = EasyTrack(name: name, artist: artist, time: time)
+    configure(track: track!
+		)
   }
   
   func getSpotifyPlayerPlayingInformation<P>(_ p: P) where P: PlayerPresentable {
@@ -155,7 +150,7 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
       
       return
     }
-    configure(withPresenter: track)
+    configure(track: track)
   }
 
   // PlayerSourceable Delegate
@@ -176,84 +171,56 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
     }
   }
 	
-  func configure(withPresenter presenter: LyricsViewPresentable) {
-    print("time: \(presenter.lvTime)")
-    spinnerProgress.animate = true
-    trackTime = currentTimeFromString(presenter.lvTime)
-    artistNtrack = presenter.lvArtistNTrack
-    track = presenter.lvTrack
+	func configure(track: EasyTrack) {
+		
+		print("time: \(track.time)")
+		spinnerProgress.animate = true
+		trackTime = currentTimeFromString(track.time as? String ?? "0")
+		
+		guard let realm_track = SFRealm.query(name: track.name, t: Track.self)?.first else {
+			Debug.print("realm_track is nil")
+			searchLyricNArtwork(track)
+			return
+		}
+		trackTime = currentTimeFromInt(realm_track.time)
+		spinnerProgress.animate = false
+		
+		guard let realm_lyric = realm_track.lyric else {
+			Debug.print("lyric is nil")
+			searchLyricNArtwork(track)
+			return
+		}
+		lyric = realm_lyric.text
+		
+		
+		guard let realm_album = realm_track.album, let artwork_data = realm_album.artwork else {
+			searchLyricNArtwork(track)
+			Debug.print("realm_album is nil")
+			return
+		}
+		
+		imageData = artwork_data as Data
+	}
+	
+  func searchLyricNArtwork(_ track: EasyTrack) {
     
-    let artist = artistNtrack.artist
-    let name = artistNtrack.trackName
-    let time = presenter.lvTime
-
-    let itunes_track = PlayerTrack(artist: artist, name: name, time: time)
-    
-    guard let realm_track = SFRealm.query(name: name, t: Track.self) else {
-      s_print("realm_track is nil")
-      searchLyricNArtwork(itunes_track)
-      return
-    }
-    
-    guard let track_id = (realm_track.value(forKey: "lyric_id") as? [Int])?.first else {
-      s_print("lyric_id is nil")
-      searchLyricNArtwork(itunes_track)
-      return
-    }
-    
-    guard let realm_lyric = SFRealm.query(id: track_id, t: Lyric.self), let album_id = (realm_track.value(forKey: "album_id") as? [Int])?.first else {
-      searchLyricNArtwork(itunes_track)
-      s_print("realm_lyric or album_id is nil")
-      return
-    }
-    
-    lyric = realm_lyric.first
-    
-    guard let realm_album = SFRealm.query(id: album_id, t: Album.self), let artwork_data = (realm_album.value(forKey: "artwork") as? [Data])?.first else {
-      searchLyricNArtwork(itunes_track)
-      s_print("realm_album is nil")
-      return
-    }
-    imageData = artwork_data as Data
-    
-    guard let track_time = (realm_track.value(forKey: "time") as? [Int])?.first else {
-      
-      trackTime = currentTimeFromString(time)
-      return
-    }
-    trackTime = currentTimeFromInt(track_time)
-    spinnerProgress.animate = false
-  }
-  
-  func searchLyricNArtwork(_ presenter: LyricsViewPresentable) {
-    
-    MusiXMatchApi.searchLyrics(presenter.lvArtistNTrack.artist, trackName: presenter.lvArtistNTrack.trackName, completion: { (success, lyric) in
+    MusiXMatchApi.searchLyrics(track.artist, trackName: track.name){ (success, lyric, imageData) in
       
       DispatchQueue.main.async(execute: {
         self.spinnerProgress.animate = false
       })
 			
 			guard success == true else {
-				self.s_print("request is failured!")
+				Debug.print("request is failured!")
 				return
 			}
       
-      guard let i = info, let ly = lyric else {
-        self.s_print("info , lyric is nil")
-        return
-      }
-      
-      guard let urlString = i.album_coverart_350x350, let url = URL(string:urlString) else {
-        self.s_print("urlString, url is nil")
-        return
-      }
-      
       DispatchQueue.main.async(execute: {
-        
-        self.lyric = Lyric()
-        self.imageData = try? Data(contentsOf: url)
+				
+        self.lyric = lyric
+				self.imageData = imageData
       })
-		})
+		}
   }
   
   func createTrackingArea() {
@@ -386,7 +353,7 @@ extension LyricsVC {
     } else if i.playerState == iTunesEPlS.stopped {
       stopTimer()
     } else{
-      s_print("Lyrics View Controller is not in the case")
+      Debug.print("Lyrics View Controller is not in the case")
     }
     return time - Int(iplayerPos)
   }
@@ -397,7 +364,7 @@ extension LyricsVC {
   @IBAction func settingButtonPressed(_ sender: AnyObject) {
     
     let preferenceStoryboard = NSStoryboard(name: "Preferences", bundle: nil)
-    preferenceWC = preferenceStoryboard.instantiateController(withIdentifier: String(describing: PreferencesWC.self)) as! PreferencesWC
+    let preferenceWC = preferenceStoryboard.instantiateController(withIdentifier: String(describing: PreferencesWC.self)) as! PreferencesWC
     
     preferenceWC.showWindow(self)
   }

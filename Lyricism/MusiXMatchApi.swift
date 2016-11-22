@@ -46,7 +46,7 @@ enum MusiXMatchURL {
 
 class MusiXMatchApi {
     
-  private class func matchSongUtimatly(_ artist: String, trackName: String, completion: @escaping (_ success: Bool, _ info: Info?) -> Void) {
+	private class func matchSongUtimatly(_ artist: String, trackName: String, completion: @escaping (_ success: Bool, _ trackID: Int?) -> Void) {
     
     let parameter = ["apikey": MusiXMatchURL.Apikey, "q_track": trackName, "q_artist": artist]
     
@@ -64,11 +64,22 @@ class MusiXMatchApi {
         return completion(false, nil)
       }
 			
+			guard let stringOFJSON = json["message"]["body"]["track"].rawString(),
+				let artistInformation = Artist(JSONString: stringOFJSON),
+				let albumInformation = Album(JSONString: stringOFJSON),
+				let trackInformation = Track(JSONString: stringOFJSON) else {
+					
+					return completion(false, nil)
+			}
+			albumInformation.artist = artistInformation
+			trackInformation.album = albumInformation
+			trackInformation.artist = artistInformation
 			
-      
-      //weak var info = Player.sharedPlayer.info
-      //info?.getTrackPropertyAndValue(json)
-      return completion(true, info)
+			SFRealm.update(artistInformation)
+			SFRealm.update(albumInformation)
+			SFRealm.update(trackInformation)
+			
+      return completion(true, trackInformation.id)
     }
   }
   
@@ -97,13 +108,13 @@ class MusiXMatchApi {
 //        }
 //    }
 	
-  class func searchLyrics(_ artist: String, trackName: String, completion: @escaping (_ success: Bool, _ lyric: String?) -> Void) {
+	class func searchLyrics(_ artist: String, trackName: String, completion: @escaping (_ success: Bool, _ lyric: String?, _ data: Data?) -> Void) {
     
-    matchSongUtimatly(artist, trackName: trackName) { (success, info) in
+    matchSongUtimatly(artist, trackName: trackName) { (success, trackID) in
       
-      if success == true {
-        
-        let parameter: [String: AnyObject]? = ["apikey": MusiXMatchURL.Apikey as AnyObject,"track_id": info.track_id]
+      if let trackID = trackID, success == true {
+				#if true
+        let parameter: [String: AnyObject]? = ["apikey": MusiXMatchURL.Apikey as AnyObject,"track_id": trackID as AnyObject]
 				
 				Alamofire.request(MusiXMatchURL.track.lyrics, parameters: parameter).responseJSON() { (response) in
           
@@ -119,62 +130,27 @@ class MusiXMatchApi {
             print("json status code != 200")
             return completion(false, nil, nil)
           }
-          
-          guard let lyric = json["message"]["body"]["lyrics"]["lyrics_body"].string else {
-            
-            return
-          }
-          let lyric_id = json["message"]["body"]["lyrics"]["lyrics_id"].stringValue
-          //let l = MusiXLyric(id: NSString(string: lyric_id).integerValue, name: info.track_name, text: lyric)
 					
-					let artistInformation = Artist(JSONString: json["message"]["body"]["track"])
-					let albumInformation = Album(JSONString: json["message"]["body"]["track"])
-					let trackInformation = Track(JSONString: json["message"]["body"]["track"])
-					let lyricInformation = Lyric(JSONString: json["message"]["body"]["lyrics"])
+					guard let stringOfJSON = json["message"]["body"]["lyrics"].rawString(),
+						let lyricInformation = Lyric(JSONString: stringOfJSON) else {
+						return completion(false, nil, nil)
+					}
+					
+					guard let track = SFRealm.query(id: trackID, t: Track.self)?.first else {
+						return completion(false, nil, nil)
+					}
+					lyricInformation.name = track.name
+					SFRealm.update(lyricInformation)
+					
+					SFRealm.update {
+						
+						track.lyric = lyricInformation
+					}
 
-					
-					let art = Artist()
-					art.id = info.artist_id.intValue
-					art.name = info.artist_name
-					SFRealm.update(art)
-					
-					let a = Album()
-					a.id = info.album_id.intValue
-					a.name = info.album_name
-					a.artist = art
-					a.url_str = info.album_coverart_350x350!
-					SFRealm.update(a)
-					
-					let t = Track()
-					t.id = info.track_id.intValue
-					t.name = info.track_name
-					// TODO: edit here
-					t.time = Time(allTimeString: "2:21").timeInterval
-					//t.time = Time(allTimeString: presenter.lvTime).timeInterval
-					t.album = a
-					t.lyric_id = info.lyrics_id.intValue
-					t.album_id = info.album_id.intValue
-					t.spotify_id = info.track_spotify_id.intValue
-					t.artist = art
-					SFRealm.update(t)
-					
-					let l = Lyric()
-					l.id = info.lyrics_id.intValue
-					l.name = info.track_name
-					l.text = lyric
-					SFRealm.update(l)
-
-					return completion(true, lyric)
+					return completion(true, lyricInformation.text, track.album?.artwork)
         }
+				#endif
       }
     }
   }
-	
-//    class func searchArtwork(_ completion: (_ success: Bool, _ url: URL?) -> Void) {
-//      
-//      guard let urlString = Player.sharedPlayer.info?.album_coverart_350x350 else {
-//          return completion(false, nil)
-//      }
-//      return completion(true, URL(string: urlString))
-//    }
 }

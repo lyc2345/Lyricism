@@ -28,10 +28,24 @@ class SFRealm {
       }
     } catch let error as NSError {
       
-      print("SFRealm write error:\(error.localizedDescription)")
+      Debug.print("SFRealm write error:\(error.localizedDescription)")
     }
   }
-  
+	
+	class func update(saveHandler: @escaping () -> Void) {
+		
+		do {
+			let realm = try Realm()
+			try realm.write() {
+				saveHandler()
+				
+			}
+		} catch let error as NSError {
+			
+			Debug.print("SFRealm update error:\(error.localizedDescription)")
+		}
+	}
+	
   class func update<T>(_ t: T) where T: Object {
     
     do {
@@ -41,7 +55,7 @@ class SFRealm {
       }
     } catch let error as NSError {
       
-      print("SFRealm update error:\(error.localizedDescription)")
+      Debug.print("SFRealm update error:\(error.localizedDescription)")
     }
   }
   
@@ -54,7 +68,7 @@ class SFRealm {
       }
     } catch let error as NSError {
       
-      print("SFRealm update error:\(error.localizedDescription)")
+      Debug.print("SFRealm update error:\(error.localizedDescription)")
     }
   }
   
@@ -67,7 +81,7 @@ class SFRealm {
       }
     } catch let error as NSError {
       
-      print("SFRealm delete error:\(error.localizedDescription)")
+      Debug.print("SFRealm delete error:\(error.localizedDescription)")
     }
   }
   

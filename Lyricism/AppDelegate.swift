@@ -70,13 +70,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, DockerSettable, WindowSettab
     let config = Realm.Configuration(
       // Set the new schema version. This must be greater than the previously used
       // version (if you've never set a schema version before, the version is 0).
-      schemaVersion: 2,
+      schemaVersion:	4,
       
       // Set the block which will be called automatically when opening a Realm with
       // a schema version lower than the one set above
       migrationBlock: { migration, oldSchemaVersion in
         // We haven’t migrated anything yet, so oldSchemaVersion == 0
-        if (oldSchemaVersion < 2) {
+        if (oldSchemaVersion < 4) {
           // Nothing to do!
           // Realm will automatically detect new properties and removed properties
           // And will update the schema on disk automatically
@@ -130,7 +130,7 @@ extension AppDelegate {
     
     let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
     DistributedNotificationCenter.default().addObserver(self, selector: #selector(playerStateChanged(_:)), name: NSNotification.Name(rawValue: SBApplicationID.itunes.values().playerstate), object: nil)
-    s_print("itunes:\(iTunesApp)")
+    Debug.print("itunes:\(iTunesApp)")
     
     guard let i = iTunesApp.player else {
       
@@ -217,8 +217,6 @@ extension AppDelegate {
   
   func playerStateChanged(_ notification: Notification) {
     
-    s_print("notification:\(notification)")
-    
     guard notification.object as? String == SBApplicationID.itunes.values().player  else {
       
       guard let info = notification.userInfo, let playerState = info["Player State"] as? String, let name = info["Name"] as? String, let artist = info["Artist"] as? String, let time = info["Duration"] as? Double, notification.object as? String == SBApplicationID.spotify.values().app else {
@@ -231,7 +229,7 @@ extension AppDelegate {
       print("spotify playerState:\(spotifyApp.player!.playerState == SpotifyEPlS.playing)")
       
       if playerState == "Playing" {
-        s_print("spotify playing")
+        Debug.print("spotify playing")
         
         let milliTime = time / 1000
         let minutes = Int(milliTime / 60)
@@ -240,11 +238,11 @@ extension AppDelegate {
         playerIsPlaying(.spotify, name: name, artist: artist, time: timeString)
         
       } else if playerState == "Paused" {
-        s_print("spotify paused")
+        Debug.print("spotify paused")
         playerPaused()
         
       } else if playerState == "Stopped" {
-        s_print("spotify stopped")
+        Debug.print("spotify stopped")
         playerStop()
       }
       return
@@ -254,47 +252,47 @@ extension AppDelegate {
     
     if iTunesApp.player!.playerState == iTunesEPlS.playing {
       
-      s_print("iTunes playing")
+      Debug.print("iTunes playing")
       playerIsPlaying(.itunes, name: iTunesApp.track_name!, artist: iTunesApp.track_artist!, time: iTunesApp.track_time!)
       
     } else if iTunesApp.player!.playerState == iTunesEPlS.paused {
-      s_print("iTunes Paused")
+      Debug.print("iTunes Paused")
       playerPaused()
       
     } else if iTunesApp.player!.playerState == iTunesEPlS.stopped {
-      s_print("iTunes Stopped")
+      Debug.print("iTunes Stopped")
       playerStop()
       
     } else if iTunesApp.player!.playerState == iTunesEPlS.fastForwarding {
-      s_print("iTunes FastForwarding")
+      Debug.print("iTunes FastForwarding")
     } else if iTunesApp.player!.playerState == iTunesEPlS.rewinding {
-      s_print("iTunes Rewinding")
+      Debug.print("iTunes Rewinding")
     } else {
-      s_print("iTunes default")
+      Debug.print("iTunes default")
     }
   }
   
   func playerIsPlaying(_ source: SBApplicationID, name: String, artist: String, time: String) {
     
-    let track = PlayerTrack(artist: artist, name: name, time: time)
+    let track = EasyTrack(name: name, artist: artist, time: time)
     
     if isPlayerPaused {
       
       if lyricsPopover.isShown {
         
-        (self.lyricsPopover.contentViewController as! LyricsVC).configure(withPresenter: track)
+        (self.lyricsPopover.contentViewController as! LyricsVC).configure(track: track)
         (lyricsPopover.contentViewController as! LyricsVC).resumeTimer()
-        s_print("timer resume!")
+        Debug.print("timer resume!")
       }
       isPlayerPaused = false
-      s_print("song keep playing")
+      Debug.print("song keep playing")
     } else {
       // iTunes playing after a "Stop" or "New Song"
-      s_print("new song playing")
+      Debug.print("new song playing")
       if lyricsPopover.isShown {
         
-        (self.lyricsPopover.contentViewController as! LyricsVC).configure(withPresenter: track)
-        s_print("query Music info")
+        (self.lyricsPopover.contentViewController as! LyricsVC).configure(track: track)
+        Debug.print("query Music info")
         
       } else if !lyricsPopover.isShown {
         
@@ -316,7 +314,7 @@ extension AppDelegate {
     lyricsPopover.close()
   }
   
-  func showMusicHUD(_ source: SBApplicationID, track: PlayerTrack) {
+  func showMusicHUD(_ source: SBApplicationID, track: EasyTrack) {
     
     if popoverVC.isShown {
       popoverVC.close()
@@ -365,7 +363,7 @@ extension AppDelegate: SBApplicationDelegate {
   
   func eventDidFail(_ event: UnsafePointer<AppleEvent>, withError error: Error) -> Any? {
     
-    s_print("event:\(event) fail: \(error.localizedDescription)")
+    Debug.print("event:\(event) fail: \(error.localizedDescription)")
         
     let i = error.localizedDescription
     /*
@@ -375,12 +373,12 @@ extension AppDelegate: SBApplicationDelegate {
     let error_string = i["ErrorString"]
     let error_number = i["ErrorNumber"]
     
-    s_print("error_brief_message:\(error_brief_message)")
-    s_print("error_expected_type:\(error_expected_type)")
-    s_print("error_offending_object:\(error_offending_object)")
-    s_print("error_string:\(error_string)")
-    s_print("error_number:\(error_number)")*/
-		s_print(i)
+    Debug.print("error_brief_message:\(error_brief_message)")
+    Debug.print("error_expected_type:\(error_expected_type)")
+    Debug.print("error_offending_object:\(error_offending_object)")
+    Debug.print("error_string:\(error_string)")
+    Debug.print("error_number:\(error_number)")*/
+		Debug.print(i)
     
     return error
   }

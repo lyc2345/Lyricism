@@ -1,11 +1,7 @@
 import AppKit
 import ScriptingBridge
 
-@objc public protocol SpotifyObjectProtocol: NSObjectProtocol {
-    //func get() -> AnyObject!
-}
-
-@objc public protocol SpotifyApplicationProtocol: SpotifyObjectProtocol {
+@objc public protocol SpotifyApplicationProtocol: SBObjectProtocol {
   func activate()
   var delegate: SBApplicationDelegate! { get set }
   var running: Bool { @objc(isRunning) get }
@@ -45,7 +41,7 @@ import ScriptingBridge
 extension SBApplication: SpotifyApplication {}
 
 // MARK: SpotifyTrack
-@objc public protocol SpotifyTrack: SpotifyObjectProtocol {
+@objc public protocol SpotifyTrack: SBObjectProtocol {
     @objc optional var artist: String { get } // The artist of the track.
     @objc optional var album: String { get } // The album of the track.
     @objc optional var discNumber: Int { get } // The disc number of the track.

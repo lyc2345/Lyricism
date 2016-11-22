@@ -31,7 +31,6 @@
 		F67428D01D82F5BD001FBC56 /* SpotifyScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67428CD1D82F5BD001FBC56 /* SpotifyScripting.swift */; };
 		F67428D21D83DB6E001FBC56 /* TextViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67428D11D83DB6E001FBC56 /* TextViewModel.swift */; };
 		F67428D61D8403B3001FBC56 /* SFRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67428D51D8403B3001FBC56 /* SFRealm.swift */; };
-		F677D5EA1D4CA1BA0057C028 /* MusiXMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F677D5E91D4CA1BA0057C028 /* MusiXMatch.swift */; };
 		F67B7FA11D23D75E001E7ED3 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F67B7F9D1D23D75E001E7ED3 /* Lato-Black.ttf */; };
 		F67B7FA21D23D75E001E7ED3 /* Lato-Bol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F67B7F9E1D23D75E001E7ED3 /* Lato-Bol.ttf */; };
 		F67B7FA31D23D75E001E7ED3 /* Lato-Lig.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F67B7F9F1D23D75E001E7ED3 /* Lato-Lig.ttf */; };
@@ -102,7 +101,6 @@
 		F67428CD1D82F5BD001FBC56 /* SpotifyScripting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyScripting.swift; sourceTree = "<group>"; };
 		F67428D11D83DB6E001FBC56 /* TextViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewModel.swift; sourceTree = "<group>"; };
 		F67428D51D8403B3001FBC56 /* SFRealm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFRealm.swift; sourceTree = "<group>"; };
-		F677D5E91D4CA1BA0057C028 /* MusiXMatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusiXMatch.swift; sourceTree = "<group>"; };
 		F67B7F9D1D23D75E001E7ED3 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		F67B7F9E1D23D75E001E7ED3 /* Lato-Bol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bol.ttf"; sourceTree = "<group>"; };
 		F67B7F9F1D23D75E001E7ED3 /* Lato-Lig.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Lig.ttf"; sourceTree = "<group>"; };
@@ -251,7 +249,6 @@
 			children = (
 				F64E2D8B1D2115CD002F2513 /* MResponse.swift */,
 				F67428D11D83DB6E001FBC56 /* TextViewModel.swift */,
-				F677D5E91D4CA1BA0057C028 /* MusiXMatch.swift */,
 				F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */,
 				F696A2C01D2668FD00EBE049 /* Track.swift */,
 				F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */,
@@ -517,7 +514,6 @@
 				F6D339B71D22865C0066F03F /* iTunesScripting.swift in Sources */,
 				F672A8311D1949BC00FD518D /* EventMonitor.swift in Sources */,
 				F60BF8B51D13A68900F7C6DA /* MusiXMatchApi.swift in Sources */,
-				F677D5EA1D4CA1BA0057C028 /* MusiXMatch.swift in Sources */,
 				F62A2B461D79843300235878 /* Timerable.swift in Sources */,
 				F6D196F81DE2DC2300A7F73A /* PlaySourceable.swift in Sources */,
 				F64E2D8C1D2115CD002F2513 /* MResponse.swift in Sources */,
