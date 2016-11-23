@@ -754,10 +754,10 @@
             </objects>
             <point key="canvasLocation" x="311" y="627"/>
         </scene>
-        <!--LyricsVC-->
+        <!--LyricVC-->
         <scene sceneID="YfF-Qn-2fd">
             <objects>
-                <viewController storyboardIdentifier="LyricsVC" showSeguePresentationStyle="single" id="hcA-47-AYn" customClass="LyricsVC" customModule="Lyricism" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LyricVC" showSeguePresentationStyle="single" id="hcA-47-AYn" customClass="LyricVC" customModule="Lyricism" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" autoresizesSubviews="NO" id="Fy6-Fe-DG3">
                         <rect key="frame" x="0.0" y="0.0" width="350" height="350"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1006,10 +1006,10 @@
             </objects>
             <point key="canvasLocation" x="402.5" y="1310"/>
         </scene>
-        <!--PopoverVC-->
+        <!--HUDVC-->
         <scene sceneID="gxC-He-xd6">
             <objects>
-                <viewController storyboardIdentifier="PopoverVC" id="QHV-7c-F4q" customClass="PopoverVC" customModule="Lyricism" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HUDVC" id="QHV-7c-F4q" customClass="HUDVC" customModule="Lyricism" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" misplaced="YES" id="ZRQ-yK-ZDV">
                         <rect key="frame" x="0.0" y="0.0" width="177" height="30"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1040,19 +1040,6 @@
                 <customObject id="Dna-bP-awk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="375.5" y="1256"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="cIf-5e-Ez0">
-            <objects>
-                <viewController id="PUE-f6-9Fc" sceneMemberID="viewController">
-                    <view key="view" id="8Bc-YO-fH0">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
-                </viewController>
-                <customObject id="rSS-Sf-WVs" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="450" y="1033"/>
         </scene>
     </scenes>
     <resources>

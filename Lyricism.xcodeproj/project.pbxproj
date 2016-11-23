@@ -11,13 +11,15 @@
 		53FCF23F1D4078AF00028F6D /* SFPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FCF23E1D4078AF00028F6D /* SFPopover.swift */; };
 		F60BF8B51D13A68900F7C6DA /* MusiXMatchApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */; };
 		F60BF8D21D1424D800F7C6DA /* LyricsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8D11D1424D800F7C6DA /* LyricsVC.swift */; };
-		F60BF8D61D1430D300F7C6DA /* MacUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */; };
 		F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F616EBB51D15221800D1A40C /* NSObject+Extension.swift */; };
-		F617FCA31D269452001A933B /* PopoverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F617FCA21D269452001A933B /* PopoverVC.swift */; };
+		F617FCA31D269452001A933B /* HUDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F617FCA21D269452001A933B /* HUDVC.swift */; };
 		F62903F21D27ACF80025F190 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F62903F11D27ACF80025F190 /* Assets.xcassets */; };
 		F62A2B431D796C1000235878 /* ContainerSwitchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62A2B421D796C1000235878 /* ContainerSwitchable.swift */; };
 		F62A2B461D79843300235878 /* Timerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62A2B451D79843300235878 /* Timerable.swift */; };
-		F6434ED21D1A4472006FDFE2 /* LyricsSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6434ED01D1A4472006FDFE2 /* LyricsSettingVC.swift */; };
+		F6479A901DE56F250001E929 /* AppGettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6479A8F1DE56F250001E929 /* AppGettable.swift */; };
+		F6479A921DE56FB70001E929 /* VCGettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6479A911DE56FB70001E929 /* VCGettable.swift */; };
+		F6479A941DE577690001E929 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6479A931DE577690001E929 /* Assets.swift */; };
+		F6479A961DE57DFD0001E929 /* NSImage+StatusItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6479A951DE57DFD0001E929 /* NSImage+StatusItem.swift */; };
 		F64E2D8C1D2115CD002F2513 /* MResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64E2D8B1D2115CD002F2513 /* MResponse.swift */; };
 		F65069641DE2A1C6002ECFB3 /* TimeFormattable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65069631DE2A1C6002ECFB3 /* TimeFormattable.swift */; };
 		F6624B291D437A9100D2D42E /* PreferencesWC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6624B271D437A9100D2D42E /* PreferencesWC.swift */; };
@@ -81,13 +83,16 @@
 		F60BF8A31D139B3E00F7C6DA /* Lyricism-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lyricism-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusiXMatchApi.swift; sourceTree = "<group>"; };
 		F60BF8D11D1424D800F7C6DA /* LyricsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsVC.swift; sourceTree = "<group>"; };
-		F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacUtilities.swift; sourceTree = "<group>"; };
 		F616EBB51D15221800D1A40C /* NSObject+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
-		F617FCA21D269452001A933B /* PopoverVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverVC.swift; sourceTree = "<group>"; };
+		F617FCA21D269452001A933B /* HUDVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUDVC.swift; sourceTree = "<group>"; };
 		F62903F11D27ACF80025F190 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F62A2B421D796C1000235878 /* ContainerSwitchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerSwitchable.swift; sourceTree = "<group>"; };
 		F62A2B451D79843300235878 /* Timerable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timerable.swift; sourceTree = "<group>"; };
-		F6434ED01D1A4472006FDFE2 /* LyricsSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricsSettingVC.swift; sourceTree = "<group>"; };
+		F6479A8F1DE56F250001E929 /* AppGettable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppGettable.swift; sourceTree = "<group>"; };
+		F6479A911DE56FB70001E929 /* VCGettable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCGettable.swift; sourceTree = "<group>"; };
+		F6479A931DE577690001E929 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		F6479A951DE57DFD0001E929 /* NSImage+StatusItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+StatusItem.swift"; sourceTree = "<group>"; };
+		F6479A991DE5A6B60001E929 /* SpotifyScripting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpotifyScripting.h; path = iTunes/SpotifyScripting.h; sourceTree = "<group>"; };
 		F64E2D8B1D2115CD002F2513 /* MResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MResponse.swift; sourceTree = "<group>"; };
 		F65069631DE2A1C6002ECFB3 /* TimeFormattable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeFormattable.swift; sourceTree = "<group>"; };
 		F6624B271D437A9100D2D42E /* PreferencesWC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWC.swift; sourceTree = "<group>"; };
@@ -170,11 +175,9 @@
 		53FCF2411D40A9C800028F6D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				F6E13D371DE2D4E900857AF1 /* Debug.swift */,
 				F68BC71C1D128ACE00A36247 /* ViewController.swift */,
 				F60BF8D11D1424D800F7C6DA /* LyricsVC.swift */,
-				F6C26C7A1DE56D45001EA7C6 /* TrackInfoGettable.swift */,
-				F617FCA21D269452001A933B /* PopoverVC.swift */,
+				F617FCA21D269452001A933B /* HUDVC.swift */,
 				F67428D51D8403B3001FBC56 /* SFRealm.swift */,
 				F67BEBA11D7E99A8005D0B54 /* Setting */,
 			);
@@ -205,10 +208,11 @@
 		F62A2B441D796F8000235878 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
+				F6C26C7A1DE56D45001EA7C6 /* TrackInfoGettable.swift */,
+				F6479A8F1DE56F250001E929 /* AppGettable.swift */,
+				F6479A911DE56FB70001E929 /* VCGettable.swift */,
 				F6D196F71DE2DC2300A7F73A /* PlaySourceable.swift */,
 				F69836251D7C02F20046569A /* PreferencesSetable.swift */,
-				F62A2B421D796C1000235878 /* ContainerSwitchable.swift */,
-				53FCF23E1D4078AF00028F6D /* SFPopover.swift */,
 				F62A2B451D79843300235878 /* Timerable.swift */,
 				F6D196F91DE2DDD400A7F73A /* Dismissable.swift */,
 				F65069631DE2A1C6002ECFB3 /* TimeFormattable.swift */,
@@ -232,13 +236,33 @@
 				F67428CB1D82F5BD001FBC56 /* Spotify.sdef */,
 				F67428CC1D82F5BD001FBC56 /* Spotify.swift */,
 				F67428CD1D82F5BD001FBC56 /* SpotifyScripting.swift */,
+				F6479A991DE5A6B60001E929 /* SpotifyScripting.h */,
 			);
 			name = Spotify;
+			sourceTree = "<group>";
+		};
+		F6479A971DE59B780001E929 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				F6E13D371DE2D4E900857AF1 /* Debug.swift */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
+		F6479A981DE59BB60001E929 /* nouse */ = {
+			isa = PBXGroup;
+			children = (
+				F62A2B421D796C1000235878 /* ContainerSwitchable.swift */,
+				F616EBB51D15221800D1A40C /* NSObject+Extension.swift */,
+				F64E2D8B1D2115CD002F2513 /* MResponse.swift */,
+			);
+			name = nouse;
 			sourceTree = "<group>";
 		};
 		F67B7F991D23D6A3001E7ED3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				53FCF23E1D4078AF00028F6D /* SFPopover.swift */,
 				F6BF27B01D4E002A00AA04BB /* PopoverContentView.swift */,
 				F6A7DE421D20CACF001D5AD7 /* MarqueeView.swift */,
 				F668464C1D18D20E007DB6CF /* BlurBackground.swift */,
@@ -250,13 +274,10 @@
 		F67B7F9A1D23D6B6001E7ED3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F64E2D8B1D2115CD002F2513 /* MResponse.swift */,
 				F67428D11D83DB6E001FBC56 /* TextViewModel.swift */,
 				F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */,
 				F696A2C01D2668FD00EBE049 /* Track.swift */,
-				F60BF8D51D1430D300F7C6DA /* MacUtilities.swift */,
 				F672A8301D1949BC00FD518D /* EventMonitor.swift */,
-				F616EBB51D15221800D1A40C /* NSObject+Extension.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -275,7 +296,6 @@
 		F67BEBA11D7E99A8005D0B54 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				F6434ED01D1A4472006FDFE2 /* LyricsSettingVC.swift */,
 				F6624B271D437A9100D2D42E /* PreferencesWC.swift */,
 				F6624B281D437A9100D2D42E /* PreferenceVC.swift */,
 				F6624B2D1D437AA600D2D42E /* AppearanceVC.swift */,
@@ -311,6 +331,7 @@
 				F68BC71A1D128ACE00A36247 /* AppDelegate.swift */,
 				F6C26C791DE5423C001EA7C6 /* PracticeLand.playground */,
 				F6E13D3B1DE2D66700857AF1 /* Extension */,
+				F6479A971DE59B780001E929 /* Util */,
 				53FCF2411D40A9C800028F6D /* Controller */,
 				F6C26C7C1DE56D65001EA7C6 /* Constant */,
 				F62A2B441D796F8000235878 /* Protocol */,
@@ -328,6 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				F6F1C4321D882F8F0081C501 /* App.swift */,
+				F6479A931DE577690001E929 /* Assets.swift */,
 			);
 			name = Constant;
 			sourceTree = "<group>";
@@ -350,6 +372,8 @@
 			children = (
 				F6E13D391DE2D4FA00857AF1 /* UIFont+Lyricism.swift */,
 				F6E13D351DE2D47A00857AF1 /* String+LyricFomatter.swift */,
+				F6479A951DE57DFD0001E929 /* NSImage+StatusItem.swift */,
+				F6479A981DE59BB60001E929 /* nouse */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -509,17 +533,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6624B2E1D437AA600D2D42E /* AppearanceVC.swift in Sources */,
-				F6434ED21D1A4472006FDFE2 /* LyricsSettingVC.swift in Sources */,
 				F67428D01D82F5BD001FBC56 /* SpotifyScripting.swift in Sources */,
-				F60BF8D61D1430D300F7C6DA /* MacUtilities.swift in Sources */,
 				F67428CF1D82F5BD001FBC56 /* Spotify.swift in Sources */,
 				F6F1C4331D882F8F0081C501 /* App.swift in Sources */,
 				F60BF8D21D1424D800F7C6DA /* LyricsVC.swift in Sources */,
 				F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */,
+				F6479A941DE577690001E929 /* Assets.swift in Sources */,
 				F696A2C11D2668FD00EBE049 /* Track.swift in Sources */,
 				F62A2B431D796C1000235878 /* ContainerSwitchable.swift in Sources */,
 				F6A7DE431D20CACF001D5AD7 /* MarqueeView.swift in Sources */,
 				53FCF23F1D4078AF00028F6D /* SFPopover.swift in Sources */,
+				F6479A921DE56FB70001E929 /* VCGettable.swift in Sources */,
 				F6D196FA1DE2DDD400A7F73A /* Dismissable.swift in Sources */,
 				F68BC71D1D128ACE00A36247 /* ViewController.swift in Sources */,
 				F6E13D381DE2D4E900857AF1 /* Debug.swift in Sources */,
@@ -532,10 +556,12 @@
 				F64E2D8C1D2115CD002F2513 /* MResponse.swift in Sources */,
 				F68BC71B1D128ACE00A36247 /* AppDelegate.swift in Sources */,
 				F6C26C7B1DE56D45001EA7C6 /* TrackInfoGettable.swift in Sources */,
+				F6479A901DE56F250001E929 /* AppGettable.swift in Sources */,
 				F65069641DE2A1C6002ECFB3 /* TimeFormattable.swift in Sources */,
 				F67428D21D83DB6E001FBC56 /* TextViewModel.swift in Sources */,
+				F6479A961DE57DFD0001E929 /* NSImage+StatusItem.swift in Sources */,
 				F6E13D3A1DE2D4FA00857AF1 /* UIFont+Lyricism.swift in Sources */,
-				F617FCA31D269452001A933B /* PopoverVC.swift in Sources */,
+				F617FCA31D269452001A933B /* HUDVC.swift in Sources */,
 				F68BC71F1D128ACE00A36247 /* Document.swift in Sources */,
 				F668464D1D18D20E007DB6CF /* BlurBackground.swift in Sources */,
 				F6D339B61D22865C0066F03F /* iTunes.swift in Sources */,

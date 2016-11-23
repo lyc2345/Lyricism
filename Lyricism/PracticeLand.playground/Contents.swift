@@ -45,7 +45,21 @@ App.itunes("").identifiers().values().app
 
 let itunes = App.itunes(Identifier.itunes)
 
+protocol TypeGettable { }
 
+extension TypeGettable {
+	
+	func getType<T>(t: T.Type) -> String {
+		
+		return String(describing: t.self)
+	}
+}
+
+struct A: TypeGettable { }
+
+let a = A()
+
+a.getType(t: A.self)
 
 
 

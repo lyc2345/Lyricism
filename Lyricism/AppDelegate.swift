@@ -19,46 +19,28 @@ import AppKit
 import ScriptingBridge
 import MediaLibrary
 import RealmSwift
-
 import Fabric
 import Crashlytics
 
-func iTunes(handler: (App<iTunesApplication>?) -> Void) {
-	
-	guard let itunesApp = SBApplication(bundleIdentifier: App.itunes("").identifiers().values().app) as? iTunesApplication else {
-		
-		return
-	}
-	handler(.itunes(itunesApp))
-}
-
-func spotify(handler: (App<SpotifyApplication>?) -> Void) {
-	
-	guard let spotifyApp = SBApplication(bundleIdentifier: App.spotify("").identifiers().values().app) as? SpotifyApplication else {
-		
-		return
-	}
-	handler(.spotify(spotifyApp))
-}
-
-
 @NSApplicationMain
 // MARK: Main AppDelegate
-class AppDelegate: NSObject, NSApplicationDelegate, DockerSettable, WindowSettable, Dismissable {
+class AppDelegate: NSObject, NSApplicationDelegate, PlayerGettable, DockerSettable, WindowSettable, Dismissable {
   
   var window: NSWindow?
   
   let statusItem = NSStatusBar.system().statusItem(withLength: -2)
   
   let lyricsPopover = NSPopover()
-  let popoverVC = SFPopover()
+  let shortPopover = SFPopover()
   
   var eventMonitor: EventMonitor?
   var isPlayerPaused = false
   
   var dismissTimer: Timer!
-  var dismissTime: Int = 4;
-  
+  var dismissTime: Int = 4
+	
+	var track: EasyTrack?
+	
   // MARK: NSApplicationDelegate
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     
@@ -90,11 +72,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, DockerSettable, WindowSettab
     Realm.Configuration.defaultConfiguration = config
     // Now that we've told Realm how to handle the schema change, opening the file
     // will automatically perform the migration
-    
-    userSetting()
-    appSetting()
-		initailEventMonitor()
-
+		
+		userSetup()
+		popoverSetup()
+		eventMonitorSetup()
     iTunesSetup()
     spotifySetup()
     
@@ -127,22 +108,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, DockerSettable, WindowSettab
   }
 }
 
-extension AppDelegate {
-  
+
+private extension AppDelegate {
+
+	// MARK: Player Setting
   func iTunesSetup() {
 		
 		iTunes() { (iTunesApp) in
 			
-			guard let i = iTunesApp else {
+			guard let i = iTunesApp, i.unwrap().running else {
 				return
 			}
-			Debug.print("itunes:\(i.unwrap())")
 			DistributedNotificationCenter.default().addObserver(self, selector: #selector(playerStateChanged(_:)), name: NSNotification.Name(rawValue: i.identifiers().values().app), object: nil)
 
 			//iTunes.activate()
-			guard i.unwrap().running else {
-				return
-			}
 			i.unwrap().delegate = self
 		}
 	}
@@ -151,47 +130,39 @@ extension AppDelegate {
 		
 		spotify() { (spotifyApp) in
 			
-			guard let s = spotifyApp else {
+			guard let s = spotifyApp, s.unwrap().running else {
 				return
 			}
-			Debug.print("spotify:\(s.unwrap())")
-			
 			DistributedNotificationCenter.default().addObserver(self, selector: #selector(playerStateChanged(_:)), name: NSNotification.Name(rawValue: s.identifiers().values().playerstate), object: nil)
 			
 			//spotify.activate()
-			guard s.unwrap().running else {
-				return
-			}
 			s.unwrap().delegate = self
 		}
 	}
-}
-
-// MARK: Dock Setting
-extension AppDelegate {
+	
+	// MARK: Dock Setting
+  func popoverSetup() {
   
-  func appSetting() {
-  
-    lyricsPopover.contentViewController = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: String(describing: LyricsVC.self)) as! LyricsVC
-    popoverVC.contentViewController = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: String(describing: PopoverVC.self)) as! PopoverVC
+		lyricsPopover.contentViewController = LyricVC.instantiate(withStoryboard: "Main")
+		shortPopover.contentViewController = HUDVC.instantiate(withStoryboard: "Main") 
     
     // button image on status bar
-    if let button = statusItem.button {
-      button.target = self
-      button.action = #selector(showLyrics(_:))
-      guard NSAppearance.current().name.hasPrefix("NSAppearanceNameVibrantDark") else {
-        
-        button.image = NSImage(named: "note_dark")
-        button.alternateImage = NSImage(named: "note_light")
-        return
-      }
-      button.image = NSImage(named: "note_light")
-      button.alternateImage = NSImage(named: "note_dark")
-      
-    }
+		guard let button = statusItem.button else {
+			return
+		}
+		button.target = self
+		button.action = #selector(showLyrics(_:))
+		guard NSAppearance.current().name.hasPrefix("NSAppearanceNameVibrantDark") else {
+			
+			button.image = NSImage.noteDark
+			button.alternateImage = NSImage.noteLight
+			return
+		}
+		button.image = NSImage.noteLight
+		button.alternateImage = NSImage.noteDark
 	}
 	
-	func initailEventMonitor() {
+	func eventMonitorSetup() {
     // Detect mouse down event
     eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown]) {
       [unowned self] event in
@@ -205,7 +176,7 @@ extension AppDelegate {
     eventMonitor?.start()
   }
   
-  func userSetting() {
+  func userSetup() {
     
     isDockerShown() ? setDocker(.yes) : setDocker(.no)
   }
@@ -228,12 +199,13 @@ extension AppDelegate {
 			guard let i = iTunesApp, notification.object as? String == i.identifiers().values().player else {
 				return
 			}
-			
 			let app = i.unwrap()
+			track = EasyTrack(name: (app.currentTrack?.name)!, artist: (app.currentTrack?.artist!)!, time: (app.currentTrack?.time!)!)
+			
 			if app.playerState == iTunesEPlS.playing {
 				
 				Debug.print("iTunes playing")
-				playerIsPlaying(.itunes(""), track: EasyTrack(name: (app.currentTrack?.name)!, artist: (app.currentTrack?.artist!)!, time: (app.currentTrack?.time!)!))
+				playerIsPlaying(.itunes(""), track: track!)
 				
 			} else if app.playerState == iTunesEPlS.paused {
 				Debug.print("iTunes Paused")
@@ -255,9 +227,11 @@ extension AppDelegate {
 		spotify() { (spotifyApp) in
 			
 			guard let s = spotifyApp, let info = notification.userInfo, let playerState = info["Player State"] as? String, let name = info["Name"] as? String, let artist = info["Artist"] as? String, let time = info["Duration"] as? Double, notification.object as? String == s.identifiers().values().app else {
-				
 				return
 			}
+			track = EasyTrack(name: name, artist: artist, time: time)
+			
+			
 			let app = s.unwrap()
 			print("spotify playerState:\(app.playerState == SpotifyEPlS.playing)")
 			
@@ -268,7 +242,7 @@ extension AppDelegate {
 				let minutes = Int(milliTime / 60)
 				let seconds = Int(milliTime.truncatingRemainder(dividingBy: 60))
 				let timeString = "\(minutes):\(seconds < 10 ? "0\(seconds)" : "\(seconds)")"
-				playerIsPlaying(.spotify(""), track: EasyTrack(name: name, artist: artist, time: timeString))
+				playerIsPlaying(.spotify(""), track: track!)
 				
 			} else if playerState == "Paused" {
 				Debug.print("spotify paused")
@@ -279,71 +253,18 @@ extension AppDelegate {
 				playerStop()
 			}
 		}
-	
-//		
-//    guard notification.object as? String == SBApplicationID.itunes.values().player  else {
-//      
-//      guard let info = notification.userInfo, let playerState = info["Player State"] as? String, let name = info["Name"] as? String, let artist = info["Artist"] as? String, let time = info["Duration"] as? Double, notification.object as? String == SBApplicationID.spotify.values().app else {
-//        
-//        return
-//      }
-//      
-//      let spotifyApp = Spotify(player: SBApplication(bundleIdentifier: SBApplicationID.spotify.values().app))
-//      
-//      print("spotify playerState:\(spotifyApp.player!.playerState == SpotifyEPlS.playing)")
-//      
-//      if playerState == "Playing" {
-//        Debug.print("spotify playing")
-//        
-//        let milliTime = time / 1000
-//        let minutes = Int(milliTime / 60)
-//        let seconds = Int(milliTime.truncatingRemainder(dividingBy: 60))
-//        let timeString = "\(minutes):\(seconds < 10 ? "0\(seconds)" : "\(seconds)")"
-//        playerIsPlaying(.spotify, name: name, artist: artist, time: timeString)
-//        
-//      } else if playerState == "Paused" {
-//        Debug.print("spotify paused")
-//        playerPaused()
-//        
-//      } else if playerState == "Stopped" {
-//        Debug.print("spotify stopped")
-//        playerStop()
-//      }
-//      return
-//    }
-//    
-//    let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
-//    
-//    if iTunesApp.player!.playerState == iTunesEPlS.playing {
-//      
-//      Debug.print("iTunes playing")
-//      playerIsPlaying(.itunes, name: iTunesApp.track_name!, artist: iTunesApp.track_artist!, time: iTunesApp.track_time!)
-//      
-//    } else if iTunesApp.player!.playerState == iTunesEPlS.paused {
-//      Debug.print("iTunes Paused")
-//      playerPaused()
-//      
-//    } else if iTunesApp.player!.playerState == iTunesEPlS.stopped {
-//      Debug.print("iTunes Stopped")
-//      playerStop()
-//      
-//    } else if iTunesApp.player!.playerState == iTunesEPlS.fastForwarding {
-//      Debug.print("iTunes FastForwarding")
-//    } else if iTunesApp.player!.playerState == iTunesEPlS.rewinding {
-//      Debug.print("iTunes Rewinding")
-//    } else {
-//      Debug.print("iTunes default")
-//    }
-  }
+	}
   
 	func playerIsPlaying(_ source: App<String>, track: EasyTrack) {
-    
+		
+		let lyricsVC = lyricsPopover.contentViewController as! LyricVC
+		
     if isPlayerPaused {
       
       if lyricsPopover.isShown {
-        
-        (self.lyricsPopover.contentViewController as! LyricsVC).configure(track: track)
-        (lyricsPopover.contentViewController as! LyricsVC).resumeTimer()
+				
+        lyricsVC.configure(track: track)
+        lyricsVC.resumeTimer()
         Debug.print("timer resume!")
       }
       isPlayerPaused = false
@@ -351,9 +272,10 @@ extension AppDelegate {
     } else {
       // iTunes playing after a "Stop" or "New Song"
       Debug.print("new song playing")
+			
       if lyricsPopover.isShown {
         
-        (self.lyricsPopover.contentViewController as! LyricsVC).configure(track: track)
+        lyricsVC.configure(track: track)
         Debug.print("query Music info")
         
       } else if !lyricsPopover.isShown {
@@ -361,12 +283,11 @@ extension AppDelegate {
         showMusicHUD(source, track: track)
       }
     }
-    
   }
   
   func playerPaused() {
     
-    (lyricsPopover.contentViewController as! LyricsVC).stopTimer()
+    (lyricsPopover.contentViewController as! LyricVC).stopTimer()
     
     isPlayerPaused = true
   }
@@ -377,22 +298,24 @@ extension AppDelegate {
   }
   
   func showMusicHUD(_ source: App<String>, track: EasyTrack) {
+		
+		let popoverVC = shortPopover.contentViewController as! HUDVC
     
-    if popoverVC.isShown {
-      popoverVC.close()
+    if shortPopover.isShown {
+      shortPopover.close()
     }
-    popoverVC.show(relativeTo: statusItem.button!.frame, of: statusItem.button!, preferredEdge: .minY)
-		(popoverVC.contentViewController as! PopoverVC).trackTitle = "\(track.artist) - \(track.name)"
-    (popoverVC.contentViewController as! PopoverVC).source = source
+    shortPopover.show(relativeTo: statusItem.button!.frame, of: statusItem.button!, preferredEdge: .minY)
+		popoverVC.trackTitle = "\(track.artist) - \(track.name)"
+    popoverVC.source = source
     timerStop()
     timerStart()
   }
 
-  func dismissTimerCountDown() {
+	func dismissTimerCountDown() {
     
     if let _ = dismissTimer, dismissTime == 0 {
       timerStop()
-      popoverVC.close()
+      shortPopover.close()
       return
     }
     dismissTime -= 1
@@ -406,8 +329,8 @@ extension AppDelegate {
         
     self.timerStop()
     
-    if self.popoverVC.isShown {
-      self.popoverVC.close()
+    if self.shortPopover.isShown {
+      self.shortPopover.close()
     }
     
     if self.lyricsPopover.isShown {

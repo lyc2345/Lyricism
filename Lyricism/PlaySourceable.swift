@@ -35,7 +35,7 @@ extension PlayerSourceable where Self: NSViewController {
 		case 1:
 			return .spotify("")
 		default:
-			s_print("getPlayerSource SBApplicationID out of bounds, PlayerSourceable, Line: 33")
+			Debug.print("getPlayerSource SBApplicationID out of bounds, PlayerSourceable, Line: 33")
 			return .itunes("")
 		}
 	}

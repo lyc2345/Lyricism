@@ -42,7 +42,7 @@ class ColorBackgroundView: NSView {
 // iTunes white: NSColor(colorLiteralRed: 218.0/255.0, green: 223.0/255.0, blue: 227.0/255.0, alpha: 6.0)
 // iTunes font: NSColor(colorLiteralRed: 230.0/255.0, green: 62.0/255.0, blue: 92.0/255.0, alpha: 6.0)
 
-class PopoverVC: NSViewController {
+class HUDVC: NSViewController {
 	
   var source: App<String> = .itunes("") {
     

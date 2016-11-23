@@ -39,7 +39,7 @@ class SFPopover: NSPopover, Popoverable {
   func show(viewController vc: NSViewController, at sender: NSView, handler:(_ viewController: NSViewController) -> Void) {
         
         contentViewController = vc
-        contentSize = (vc is LyricsVC) ? getSize(.lyrics) : getSize(.prompt)
+        contentSize = (vc is LyricVC) ? getSize(.lyrics) : getSize(.prompt)
         animates = true
         behavior = .transient
         
@@ -86,8 +86,8 @@ class SFPopover: NSPopover, Popoverable {
 struct SFPopoverContainer {
     
     let popover: NSPopover
-    let lyricsViewController: LyricsVC
-    let popoverVC: PopoverVC
+    let lyricsViewController: LyricVC
+    let popoverVC: HUDVC
 
     enum PopoverType {
         
@@ -97,10 +97,10 @@ struct SFPopoverContainer {
             
             switch self {
             case .lyrics:
-                return (CGSize(width: 350, height: 350), String(describing: LyricsVC.self))
+                return (CGSize(width: 350, height: 350), String(describing: LyricVC.self))
                 
             case .prompt:
-                return (CGSize(width: 30, height: 25), String(describing: PopoverVC.self))
+                return (CGSize(width: 30, height: 25), String(describing: HUDVC.self))
             }
         }
     }
@@ -119,7 +119,7 @@ extension SFPopoverContainer: Popoverable {
     func show(viewController vc: NSViewController, at sender: NSView, handler:(_ viewController: NSViewController) -> Void) {
         
         popover.contentViewController = vc
-        popover.contentSize = (vc is LyricsVC) ? getSize(.lyrics) : getSize(.prompt)
+        popover.contentSize = (vc is LyricVC) ? getSize(.lyrics) : getSize(.prompt)
         popover.animates = true
         popover.behavior = .transient
         

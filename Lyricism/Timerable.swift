@@ -19,7 +19,7 @@ protocol MusicTimerable {
   func stopTimer()
 }
 
-extension MusicTimerable where Self: LyricsVC {
+extension MusicTimerable where Self: LyricVC {
   
   func initTimer(_ timeInterval: TimeInterval, target: AnyObject, selector: Selector, repeats: Bool) {
     

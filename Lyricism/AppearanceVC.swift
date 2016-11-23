@@ -55,7 +55,7 @@ class AppearanceViewController: NSViewController, DockerSettable, WindowSettable
 
     @IBAction func hideDock(_ sender: AnyObject) {
         
-      s_print("show:\((sender as! NSButton).state)")
+      Debug.print("show:\((sender as! NSButton).state)")
       
       setDocker(Settings.Docker(rawValue: isOnDockBtn.state)!)
     }
@@ -80,7 +80,7 @@ class AppearanceViewController: NSViewController, DockerSettable, WindowSettable
     (sender as! NSButton).selected(true)
     
     setPlayerSource((sender as! NSButton) == iTunesButton ? .itunes("") : .spotify(""))
-    s_print("source: \((sender as! NSButton) == iTunesButton ? "itunes" : "spotify")")
+    Debug.print("source: \((sender as! NSButton) == iTunesButton ? "itunes" : "spotify")")
     
     NotificationCenter.default.post(name: Notification.Name(rawValue: Identifier.sourceKey), object: nil)
   }

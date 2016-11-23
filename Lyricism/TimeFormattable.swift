@@ -66,4 +66,4 @@ extension TimeFormattable where Self: NSViewController {
 //	}
 }
 
-extension LyricsVC: TimeFormattable { }
+extension LyricVC: TimeFormattable { }

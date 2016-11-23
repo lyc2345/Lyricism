@@ -9,14 +9,6 @@
 import Cocoa
 import RealmSwift
 
-enum TString: String {
-  
-  case album = "album_id"
-  case artist = "artist_id"
-  case track = "track_id"
-  case lyric = "lyric_id"
-}
-
 class SFRealm {
   
   class func write<T>(_ t: T) where T: Object {

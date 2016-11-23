@@ -20,7 +20,7 @@ struct EasyTrack {
 	var time: T
 }
 
-class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable, PlayerSourceable {
+class LyricVC: NSViewController, PlayerGettable, MusicTimerable, DockerSettable, WindowSettable, PlayerSourceable {
 	
 	// Model
   fileprivate var lyric: String? {
@@ -59,11 +59,7 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
   var trackTime: Int!
   
   // This one just for 
-	var track: EasyTrack? {
-		didSet {
-			self.trackNameArtistLabel.text = "\(track?.artist ?? "") - \(track?.name ?? "")"
-		}
-	}
+	var track: EasyTrack?
   
   @IBOutlet weak var isAlwaysOnTop: NSMenuItem!
   @IBOutlet var settingMenu: NSMenu!
@@ -92,7 +88,7 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
 	
 	func showCurrentPlaying() {
 		
-		iTunes() { (iTunesApp) in
+		iTunes() { [unowned self] (iTunesApp) in
 			
 			Debug.print("itunes is running \(iTunesApp?.unwrap().running)")
 			guard let i = iTunesApp, i.unwrap().running && i.unwrap().playerState == .playing else {
@@ -103,12 +99,12 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
 			NotificationCenter.default.post(name: Notification.Name(rawValue: Identifier.sourceKey), object: i.identifiers().values().app)
 			
 			let track = EasyTrack(name: i.unwrap().currentTrack!.name!, artist: i.unwrap().currentTrack!.artist!, time: i.unwrap().currentTrack!.time!)
-			configure(track: track)
+			self.configure(track: track)
 			Debug.print("itunes  get current playing information:\(iTunesApp)")
 
 		}
 		
-		spotify() { (spotifyApp) in
+		spotify() { [unowned self] (spotifyApp) in
 		
 			Debug.print("spotify is running \(spotifyApp?.unwrap().running)")
 			guard let s = spotifyApp, s.unwrap().running else {
@@ -136,9 +132,11 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
 			}
 			NotificationCenter.default.post(name: Notification.Name(rawValue: Identifier.sourceKey), object: s.identifiers().values().app)
 			
-			let track = EasyTrack(name: s.unwrap().currentTrack!.name!, artist: s.unwrap().currentTrack!.artist!, time: String(describing: s.unwrap().currentTrack!.duration!))
+			guard let track = self.track else {
+				return
+			}
 
-			configure(track: track)
+			self.configure(track: track)
 			Debug.print("spotify get current playing information:\(spotifyApp)")
 		}
 	}
@@ -153,8 +151,8 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
     DispatchQueue.main.async { 
       
       switch source {
-      case App.itunes("").identifiers().values().app: self.sourceImageView.image = NSImage(named: "iTunes")
-      case App.spotify("").identifiers().values().app: self.sourceImageView.image = NSImage(named: "spotify")
+      case App.itunes("").identifiers().values().app: self.sourceImageView.image = NSImage.iTunes
+      case App.spotify("").identifiers().values().app: self.sourceImageView.image = NSImage.spotify
       default:
         fatalError("out of SBApplicationID type")
       }
@@ -163,6 +161,7 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
 	
 	func configure(track: EasyTrack) {
 		
+		self.trackNameArtistLabel.text = "\(track.artist) - \(track.name)"
 		print("time: \(track.time)")
 		spinnerProgress.animate = true
 		trackTime = currentTimeFromString(track.time as? String ?? "0")
@@ -208,7 +207,7 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
 				return
 			}
       
-      DispatchQueue.main.async(execute: {
+      DispatchQueue.main.async(execute: { [unowned self] in
 				
         self.lyric = lyric
 				self.imageData = imageData
@@ -267,7 +266,7 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
   }
 }
 
-extension LyricsVC {
+extension LyricVC {
 	
 	func showControlPanel() {
 		NSAnimationContext.runAnimationGroup({ (context) in
@@ -309,7 +308,7 @@ extension LyricsVC {
 
 }
 
-extension LyricsVC {
+extension LyricVC {
   
   func currentTimeFromString(_ allTimeString: String) -> Int {
     
@@ -357,7 +356,7 @@ extension LyricsVC {
 	}
 }
 
-extension LyricsVC {
+extension LyricVC {
   
   @IBAction func settingButtonPressed(_ sender: AnyObject) {
     
