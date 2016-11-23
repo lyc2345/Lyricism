@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import ScriptingBridge
 
 class AppearanceViewController: NSViewController, DockerSettable, WindowSettable, PlayerSourceable {
 
@@ -40,7 +41,16 @@ class AppearanceViewController: NSViewController, DockerSettable, WindowSettable
       sourceButtons = [iTunesButton, spotifyButton]
       
       clean()
-      getPlayerSource() == .itunes ? iTunesButton.selected(true) : spotifyButton.selected(true)
+			
+			switch getPlayerSource() {
+			case .itunes(nil):
+				iTunesButton.selected(true)
+			case .spotify(nil):
+				spotifyButton.selected(true)
+			default:
+				iTunesButton.selected(true)
+				Debug.print("get source error")
+			}
     }
 
     @IBAction func hideDock(_ sender: AnyObject) {
@@ -69,13 +79,13 @@ class AppearanceViewController: NSViewController, DockerSettable, WindowSettable
     
     (sender as! NSButton).selected(true)
     
-    setPlayerSource((sender as! NSButton) == iTunesButton ? .itunes : .spotify)
+    setPlayerSource((sender as! NSButton) == iTunesButton ? .itunes("") : .spotify(""))
     s_print("source: \((sender as! NSButton) == iTunesButton ? "itunes" : "spotify")")
     
-    NotificationCenter.default.post(name: Notification.Name(rawValue: SBApplicationID.sourceKey), object: nil)
+    NotificationCenter.default.post(name: Notification.Name(rawValue: Identifier.sourceKey), object: nil)
   }
   
-  func setSourceImage(_ type: SBApplicationID) { }
+  func setSourceImage(_ type: App<SBApplication>) { }
 }
 
 extension NSButton {

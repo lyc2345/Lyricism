@@ -10,29 +10,33 @@ import Cocoa
 
 protocol PlayerSourceable {
 	
-	func setPlayerSource(_ type: SBApplicationID)
-	func getPlayerSource() -> SBApplicationID
+	func setPlayerSource(_ type: App<String>)
+	func getPlayerSource() -> App<String>
 }
 
 extension PlayerSourceable where Self: NSViewController {
 	
-	func setPlayerSource(_ type: SBApplicationID) {
+	func setPlayerSource(_ type: App<String>) {
 		
 		switch type {
-		case .itunes: UserDefaults.standard.set(0, forKey: SBApplicationID.sourceKey)
+		case .itunes:
+			UserDefaults.standard.set(0, forKey: Identifier.sourceKey)
 		case .spotify:
-			UserDefaults.standard.set(1, forKey: SBApplicationID.sourceKey)
+			UserDefaults.standard.set(1, forKey: Identifier.sourceKey)
 		}
 	}
 	
-	func getPlayerSource() -> SBApplicationID {
+	func getPlayerSource() -> App<String> {
 		
-		switch UserDefaults.standard.integer(forKey: SBApplicationID.sourceKey) {
-		case 0: return SBApplicationID.itunes
-		case 1: return SBApplicationID.spotify
+		switch UserDefaults.standard.integer(forKey: Identifier.sourceKey) {
+		case 0:
+			
+			return .itunes("")
+		case 1:
+			return .spotify("")
 		default:
 			s_print("getPlayerSource SBApplicationID out of bounds, PlayerSourceable, Line: 33")
-			return SBApplicationID.itunes
+			return .itunes("")
 		}
 	}
 }

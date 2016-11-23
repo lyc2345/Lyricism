@@ -23,21 +23,24 @@ import RealmSwift
 import Fabric
 import Crashlytics
 
-enum SBApplicationID {
-  
-  static let sourceKey = "player_source"
-  
-  case itunes
-  case spotify
-  
-  func identifier() -> (app: String, playerstate: String, player: String) {
-    
-    switch self {
-    case .itunes: return ("com.apple.iTunes", "com.apple.iTunes.playerInfo", "com.apple.iTunes.player")
-    case .spotify: return ("com.spotify.client", "com.spotify.client.PlaybackStateChanged", "com.spotify.client")
-    }
-  }
+func iTunes(handler: (App<iTunesApplication>?) -> Void) {
+	
+	guard let itunesApp = SBApplication(bundleIdentifier: App.itunes("").identifiers().values().app) as? iTunesApplication else {
+		
+		return
+	}
+	handler(.itunes(itunesApp))
 }
+
+func spotify(handler: (App<SpotifyApplication>?) -> Void) {
+	
+	guard let spotifyApp = SBApplication(bundleIdentifier: App.spotify("").identifiers().values().app) as? SpotifyApplication else {
+		
+		return
+	}
+	handler(.spotify(spotifyApp))
+}
+
 
 @NSApplicationMain
 // MARK: Main AppDelegate
@@ -127,38 +130,41 @@ class AppDelegate: NSObject, NSApplicationDelegate, DockerSettable, WindowSettab
 extension AppDelegate {
   
   func iTunesSetup() {
-    
-    let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
-    DistributedNotificationCenter.default().addObserver(self, selector: #selector(playerStateChanged(_:)), name: NSNotification.Name(rawValue: SBApplicationID.itunes.values().playerstate), object: nil)
-    Debug.print("itunes:\(iTunesApp)")
-    
-    guard let i = iTunesApp.player else {
-      
-      return
-    }
-    //iTunes.activate()
-    guard i.running else {
-      return
-    }
-    i.delegate = self
-  }
+		
+		iTunes() { (iTunesApp) in
+			
+			guard let i = iTunesApp else {
+				return
+			}
+			Debug.print("itunes:\(i.unwrap())")
+			DistributedNotificationCenter.default().addObserver(self, selector: #selector(playerStateChanged(_:)), name: NSNotification.Name(rawValue: i.identifiers().values().app), object: nil)
+
+			//iTunes.activate()
+			guard i.unwrap().running else {
+				return
+			}
+			i.unwrap().delegate = self
+		}
+	}
   
   func spotifySetup() {
-    
-    let spotifyApp = Spotify(player: SBApplication(bundleIdentifier: SBApplicationID.spotify.values().app))
-    DistributedNotificationCenter.default().addObserver(self, selector: #selector(playerStateChanged(_:)), name: NSNotification.Name(rawValue: SBApplicationID.spotify.values().playerstate), object: nil)
-    sd_print("spotify:\(spotifyApp)")
-    
-    guard let s = spotifyApp.player else {
-      
-      return
-    }
-    //spotify.activate()
-    guard s.running else {
-      return
-    }
-    s.delegate = self
-  }
+		
+		spotify() { (spotifyApp) in
+			
+			guard let s = spotifyApp else {
+				return
+			}
+			Debug.print("spotify:\(s.unwrap())")
+			
+			DistributedNotificationCenter.default().addObserver(self, selector: #selector(playerStateChanged(_:)), name: NSNotification.Name(rawValue: s.identifiers().values().playerstate), object: nil)
+			
+			//spotify.activate()
+			guard s.unwrap().running else {
+				return
+			}
+			s.unwrap().delegate = self
+		}
+	}
 }
 
 // MARK: Dock Setting
@@ -216,65 +222,121 @@ extension AppDelegate {
 extension AppDelegate {
   
   func playerStateChanged(_ notification: Notification) {
-    
-    guard notification.object as? String == SBApplicationID.itunes.values().player  else {
-      
-      guard let info = notification.userInfo, let playerState = info["Player State"] as? String, let name = info["Name"] as? String, let artist = info["Artist"] as? String, let time = info["Duration"] as? Double, notification.object as? String == SBApplicationID.spotify.values().app else {
-        
-        return
-      }
-      
-      let spotifyApp = Spotify(player: SBApplication(bundleIdentifier: SBApplicationID.spotify.values().app))
-      
-      print("spotify playerState:\(spotifyApp.player!.playerState == SpotifyEPlS.playing)")
-      
-      if playerState == "Playing" {
-        Debug.print("spotify playing")
-        
-        let milliTime = time / 1000
-        let minutes = Int(milliTime / 60)
-        let seconds = Int(milliTime.truncatingRemainder(dividingBy: 60))
-        let timeString = "\(minutes):\(seconds < 10 ? "0\(seconds)" : "\(seconds)")"
-        playerIsPlaying(.spotify, name: name, artist: artist, time: timeString)
-        
-      } else if playerState == "Paused" {
-        Debug.print("spotify paused")
-        playerPaused()
-        
-      } else if playerState == "Stopped" {
-        Debug.print("spotify stopped")
-        playerStop()
-      }
-      return
-    }
-    
-    let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
-    
-    if iTunesApp.player!.playerState == iTunesEPlS.playing {
-      
-      Debug.print("iTunes playing")
-      playerIsPlaying(.itunes, name: iTunesApp.track_name!, artist: iTunesApp.track_artist!, time: iTunesApp.track_time!)
-      
-    } else if iTunesApp.player!.playerState == iTunesEPlS.paused {
-      Debug.print("iTunes Paused")
-      playerPaused()
-      
-    } else if iTunesApp.player!.playerState == iTunesEPlS.stopped {
-      Debug.print("iTunes Stopped")
-      playerStop()
-      
-    } else if iTunesApp.player!.playerState == iTunesEPlS.fastForwarding {
-      Debug.print("iTunes FastForwarding")
-    } else if iTunesApp.player!.playerState == iTunesEPlS.rewinding {
-      Debug.print("iTunes Rewinding")
-    } else {
-      Debug.print("iTunes default")
-    }
+		
+		iTunes() { (iTunesApp) in
+			
+			guard let i = iTunesApp, notification.object as? String == i.identifiers().values().player else {
+				return
+			}
+			
+			let app = i.unwrap()
+			if app.playerState == iTunesEPlS.playing {
+				
+				Debug.print("iTunes playing")
+				playerIsPlaying(.itunes(""), track: EasyTrack(name: (app.currentTrack?.name)!, artist: (app.currentTrack?.artist!)!, time: (app.currentTrack?.time!)!))
+				
+			} else if app.playerState == iTunesEPlS.paused {
+				Debug.print("iTunes Paused")
+				playerPaused()
+				
+			} else if app.playerState == iTunesEPlS.stopped {
+				Debug.print("iTunes Stopped")
+				playerStop()
+				
+			} else if app.playerState == iTunesEPlS.fastForwarding {
+				Debug.print("iTunes FastForwarding")
+			} else if app.playerState == iTunesEPlS.rewinding {
+				Debug.print("iTunes Rewinding")
+			} else {
+				Debug.print("iTunes default")
+			}
+		}
+		
+		spotify() { (spotifyApp) in
+			
+			guard let s = spotifyApp, let info = notification.userInfo, let playerState = info["Player State"] as? String, let name = info["Name"] as? String, let artist = info["Artist"] as? String, let time = info["Duration"] as? Double, notification.object as? String == s.identifiers().values().app else {
+				
+				return
+			}
+			let app = s.unwrap()
+			print("spotify playerState:\(app.playerState == SpotifyEPlS.playing)")
+			
+			if playerState == "Playing" {
+				Debug.print("spotify playing")
+				
+				let milliTime = time / 1000
+				let minutes = Int(milliTime / 60)
+				let seconds = Int(milliTime.truncatingRemainder(dividingBy: 60))
+				let timeString = "\(minutes):\(seconds < 10 ? "0\(seconds)" : "\(seconds)")"
+				playerIsPlaying(.spotify(""), track: EasyTrack(name: name, artist: artist, time: timeString))
+				
+			} else if playerState == "Paused" {
+				Debug.print("spotify paused")
+				playerPaused()
+				
+			} else if playerState == "Stopped" {
+				Debug.print("spotify stopped")
+				playerStop()
+			}
+		}
+	
+//		
+//    guard notification.object as? String == SBApplicationID.itunes.values().player  else {
+//      
+//      guard let info = notification.userInfo, let playerState = info["Player State"] as? String, let name = info["Name"] as? String, let artist = info["Artist"] as? String, let time = info["Duration"] as? Double, notification.object as? String == SBApplicationID.spotify.values().app else {
+//        
+//        return
+//      }
+//      
+//      let spotifyApp = Spotify(player: SBApplication(bundleIdentifier: SBApplicationID.spotify.values().app))
+//      
+//      print("spotify playerState:\(spotifyApp.player!.playerState == SpotifyEPlS.playing)")
+//      
+//      if playerState == "Playing" {
+//        Debug.print("spotify playing")
+//        
+//        let milliTime = time / 1000
+//        let minutes = Int(milliTime / 60)
+//        let seconds = Int(milliTime.truncatingRemainder(dividingBy: 60))
+//        let timeString = "\(minutes):\(seconds < 10 ? "0\(seconds)" : "\(seconds)")"
+//        playerIsPlaying(.spotify, name: name, artist: artist, time: timeString)
+//        
+//      } else if playerState == "Paused" {
+//        Debug.print("spotify paused")
+//        playerPaused()
+//        
+//      } else if playerState == "Stopped" {
+//        Debug.print("spotify stopped")
+//        playerStop()
+//      }
+//      return
+//    }
+//    
+//    let iTunesApp = iTunes(player: SBApplication(bundleIdentifier: SBApplicationID.itunes.values().app))
+//    
+//    if iTunesApp.player!.playerState == iTunesEPlS.playing {
+//      
+//      Debug.print("iTunes playing")
+//      playerIsPlaying(.itunes, name: iTunesApp.track_name!, artist: iTunesApp.track_artist!, time: iTunesApp.track_time!)
+//      
+//    } else if iTunesApp.player!.playerState == iTunesEPlS.paused {
+//      Debug.print("iTunes Paused")
+//      playerPaused()
+//      
+//    } else if iTunesApp.player!.playerState == iTunesEPlS.stopped {
+//      Debug.print("iTunes Stopped")
+//      playerStop()
+//      
+//    } else if iTunesApp.player!.playerState == iTunesEPlS.fastForwarding {
+//      Debug.print("iTunes FastForwarding")
+//    } else if iTunesApp.player!.playerState == iTunesEPlS.rewinding {
+//      Debug.print("iTunes Rewinding")
+//    } else {
+//      Debug.print("iTunes default")
+//    }
   }
   
-  func playerIsPlaying(_ source: SBApplicationID, name: String, artist: String, time: String) {
-    
-    let track = EasyTrack(name: name, artist: artist, time: time)
+	func playerIsPlaying(_ source: App<String>, track: EasyTrack) {
     
     if isPlayerPaused {
       
@@ -314,7 +376,7 @@ extension AppDelegate {
     lyricsPopover.close()
   }
   
-  func showMusicHUD(_ source: SBApplicationID, track: EasyTrack) {
+  func showMusicHUD(_ source: App<String>, track: EasyTrack) {
     
     if popoverVC.isShown {
       popoverVC.close()

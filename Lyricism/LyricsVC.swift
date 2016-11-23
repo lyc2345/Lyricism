@@ -76,7 +76,7 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
     view.addSubview(traigleView!)
     createTrackingArea()
     
-    NotificationCenter.default.addObserver(self, selector: #selector(setSourceImage(_:)), name: NSNotification.Name(rawValue: SBApplicationID.sourceKey), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(setSourceImage(_:)), name: NSNotification.Name(rawValue: Identifier.sourceKey), object: nil)
   }
 
   override func viewWillAppear() {
@@ -90,37 +90,19 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
 		NotificationCenter.default.removeObserver(self)
 	}
 	
-	func iTunes(handler: (App<iTunesApplication>?) -> Void) {
-		
-		guard let itunesApp = SBApplication(bundleIdentifier: App.itunes(iTunesApplication.self).identifier().app) as? iTunesApplication else {
-			
-			return
-		}
-		handler(.itunes(itunesApp))
-	}
-	
-	func spotify(handler: (App<SpotifyApplication>?) -> Void) {
-		
-		guard let spotifyApp = SBApplication(bundleIdentifier: App.spotify(SpotifyApplication.self).identifier().app) as? SpotifyApplication else {
-			
-			return
-		}
-		handler(.spotify(spotifyApp))
-	}
-	
-  func showCurrentPlaying() {
+	func showCurrentPlaying() {
 		
 		iTunes() { (iTunesApp) in
 			
-			Debug.print("itunes is running \(iTunesApp?.spirit().running)")
-			
-			guard let i = iTunesApp?.spirit(), i.running && i.playerState == .playing else {
+			Debug.print("itunes is running \(iTunesApp?.unwrap().running)")
+			guard let i = iTunesApp, i.unwrap().running && i.unwrap().playerState == .playing else {
 				
 				return
 			}
-			NotificationCenter.default.post(name: Notification.Name(rawValue: SBApplicationID.sourceKey), object: App.itunes(iTunesApplication.self).identifier().app)
 			
-			let track = EasyTrack(name: i.currentTrack!.name!, artist: i.currentTrack!.artist!, time: i.currentTrack!.time!)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: Identifier.sourceKey), object: i.identifiers().values().app)
+			
+			let track = EasyTrack(name: i.unwrap().currentTrack!.name!, artist: i.unwrap().currentTrack!.artist!, time: i.unwrap().currentTrack!.time!)
 			configure(track: track)
 			Debug.print("itunes  get current playing information:\(iTunesApp)")
 
@@ -128,8 +110,8 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
 		
 		spotify() { (spotifyApp) in
 		
-			Debug.print("spotify is running \(spotifyApp?.spirit().running)")
-			guard let s = spotifyApp?.spirit(), s.running else {
+			Debug.print("spotify is running \(spotifyApp?.unwrap().running)")
+			guard let s = spotifyApp, s.unwrap().running else {
 				
 				// TODO: Show alert to remind user to open one of players
 				// TODO: Spotify cant detect...fuck
@@ -152,9 +134,9 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
 				
 				return
 			}
-			NotificationCenter.default.post(name: Notification.Name(rawValue: SBApplicationID.sourceKey), object: App.spotify(SpotifyApplication.self).identifier().app)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: Identifier.sourceKey), object: s.identifiers().values().app)
 			
-			let track = EasyTrack(name: s.currentTrack!.name!, artist: s.currentTrack!.artist!, time: String(describing: s.currentTrack!.duration!))
+			let track = EasyTrack(name: s.unwrap().currentTrack!.name!, artist: s.unwrap().currentTrack!.artist!, time: String(describing: s.unwrap().currentTrack!.duration!))
 
 			configure(track: track)
 			Debug.print("spotify get current playing information:\(spotifyApp)")
@@ -171,8 +153,8 @@ class LyricsVC: NSViewController, MusicTimerable, DockerSettable, WindowSettable
     DispatchQueue.main.async { 
       
       switch source {
-      case App.itunes(iTunesApplication.self).identifier().app: self.sourceImageView.image = NSImage(named: "iTunes")
-      case App.spotify(SpotifyApplication).identifier().app: self.sourceImageView.image = NSImage(named: "spotify")
+      case App.itunes("").identifiers().values().app: self.sourceImageView.image = NSImage(named: "iTunes")
+      case App.spotify("").identifiers().values().app: self.sourceImageView.image = NSImage(named: "spotify")
       default:
         fatalError("out of SBApplicationID type")
       }
@@ -342,7 +324,7 @@ extension LyricsVC {
 		
 		iTunes() { (iTunesApp) in
 			
-			guard let i = iTunesApp?.spirit(), let iplayerPos = iTunesApp?.spirit().playerPosition, i.running && i.playerState == .playing else {
+			guard let i = iTunesApp?.unwrap(), let iplayerPos = iTunesApp?.unwrap().playerPosition, i.running && i.playerState == .playing else {
 				
 				return completion(time)
 			}
@@ -362,7 +344,7 @@ extension LyricsVC {
 	
 		spotify() { (spotifyApp) in
 			
-			guard let s = spotifyApp?.spirit(), let splayerPos = spotifyApp?.spirit().playerPosition, s.running else {
+			guard let s = spotifyApp?.unwrap(), let splayerPos = spotifyApp?.unwrap().playerPosition, s.running else {
 				
 				return completion(time)
 			}

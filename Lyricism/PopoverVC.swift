@@ -43,8 +43,8 @@ class ColorBackgroundView: NSView {
 // iTunes font: NSColor(colorLiteralRed: 230.0/255.0, green: 62.0/255.0, blue: 92.0/255.0, alpha: 6.0)
 
 class PopoverVC: NSViewController {
-  
-  var source: SBApplicationID = .itunes {
+	
+  var source: App<String> = .itunes("") {
     
     didSet {
       
