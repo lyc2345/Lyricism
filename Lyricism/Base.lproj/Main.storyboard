@@ -1001,8 +1001,8 @@
         <!--Storyboard Reference-->
         <scene sceneID="fDZ-Zp-HHw">
             <objects>
-                <controllerPlaceholder id="BJ7-WS-0S3" sceneMemberID="viewController"/>
                 <customObject id="LWl-DT-RXh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <controllerPlaceholder id="BJ7-WS-0S3" sceneMemberID="viewController"/>
             </objects>
             <point key="canvasLocation" x="402.5" y="1310"/>
         </scene>
@@ -1041,11 +1041,160 @@
             </objects>
             <point key="canvasLocation" x="375.5" y="1256"/>
         </scene>
+        <!--Window Controller-->
+        <scene sceneID="A0J-oc-Kgz">
+            <objects>
+                <windowController storyboardIdentifier="SetPlayerSourceWC" id="K4v-bV-NAq" customClass="SetPlayerSourceWC" customModule="Lyricism" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="AFv-WK-Sum">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="-1626" y="133" width="480" height="270"/>
+                        <rect key="screenRect" x="-1920" y="-180" width="1920" height="1057"/>
+                    </window>
+                    <connections>
+                        <segue destination="6ir-Ik-uxW" kind="relationship" relationship="window.shadowedContentViewController" id="8cp-T5-5uu"/>
+                    </connections>
+                </windowController>
+                <customObject id="TAQ-6d-0rJ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-547" y="1571"/>
+        </scene>
+        <!--GuideVC-->
+        <scene sceneID="CvJ-YB-40s">
+            <objects>
+                <viewController storyboardIdentifier="GuideVC" id="6ir-Ik-uxW" customClass="GuideVC" customModule="Lyricism" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="ndZ-ZM-ghQ">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="EJ5-cx-kld">
+                                <rect key="frame" x="88" y="113" width="304" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="qyw-fF-y1P"/>
+                                    <constraint firstAttribute="height" constant="45" id="w8n-zd-1cK"/>
+                                </constraints>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="This App could find you a lyric with your playing music in iTunes or Spotify" id="hFK-uy-Z8R">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bin-XU-JFz">
+                                <rect key="frame" x="203" y="65" width="75" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="YMV-Yu-NFo"/>
+                                    <constraint firstAttribute="width" constant="75" id="ouK-2d-C5K"/>
+                                </constraints>
+                                <buttonCell key="cell" type="smallSquare" title="Next -&gt;" bezelStyle="smallSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BZa-VT-tgY">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <segue destination="s9a-xd-AAk" kind="sheet" id="gJg-Su-CAN"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NEE-ab-tpC">
+                                <rect key="frame" x="176" y="183" width="129" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Welcome to Lyricism" id="cF6-kH-MqU">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Bin-XU-JFz" firstAttribute="centerX" secondItem="ndZ-ZM-ghQ" secondAttribute="centerX" id="0md-Cv-l37"/>
+                            <constraint firstItem="EJ5-cx-kld" firstAttribute="centerX" secondItem="ndZ-ZM-ghQ" secondAttribute="centerX" id="E0s-Z2-4If"/>
+                            <constraint firstItem="NEE-ab-tpC" firstAttribute="centerX" secondItem="EJ5-cx-kld" secondAttribute="centerX" id="EM8-YO-jbf"/>
+                            <constraint firstItem="EJ5-cx-kld" firstAttribute="top" secondItem="NEE-ab-tpC" secondAttribute="bottom" constant="25" id="G6v-R5-o2t"/>
+                            <constraint firstItem="Bin-XU-JFz" firstAttribute="centerY" secondItem="ndZ-ZM-ghQ" secondAttribute="centerY" multiplier="1.4" id="auo-so-qcV"/>
+                            <constraint firstItem="EJ5-cx-kld" firstAttribute="centerY" secondItem="ndZ-ZM-ghQ" secondAttribute="centerY" id="fZr-yD-mhJ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="Zg4-s1-ZR7" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4" y="1551"/>
+        </scene>
+        <!--Welcome to Lyricism-->
+        <scene sceneID="aVl-RZ-EN0">
+            <objects>
+                <viewController title="Welcome to Lyricism" storyboardIdentifier="SetPlayerSourceVC" id="s9a-xd-AAk" customClass="SetPlayerSourceVC" customModule="Lyricism" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="0zh-CQ-YUj">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BJe-sD-UPj">
+                                <rect key="frame" x="105" y="104" width="60" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="DIe-wV-eJb"/>
+                                    <constraint firstAttribute="height" constant="60" identifier="I" id="OoR-FS-AcA"/>
+                                </constraints>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="iTunes" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="N08-wE-sGx">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="chooseiTunes:" target="s9a-xd-AAk" id="Tem-XJ-v73"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xEZ-qN-fkl">
+                                <rect key="frame" x="285" y="104" width="60" height="62"/>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="spotify" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ubL-fm-jzn">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="chooseSpotify:" target="s9a-xd-AAk" id="AtZ-Ve-x5b"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Ph-uY-TCF">
+                                <rect key="frame" x="119" y="195" width="213" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Set up your most use music player" id="zTm-Mg-r0e">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KO8-xP-C0U">
+                                <rect key="frame" x="181" y="42" width="89" height="32"/>
+                                <buttonCell key="cell" type="push" title="Confirm" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Efp-JH-40R">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="confirm:" target="s9a-xd-AAk" id="cUj-TK-ND3"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="xEZ-qN-fkl" firstAttribute="top" secondItem="8Ph-uY-TCF" secondAttribute="bottom" constant="30" id="7lv-CQ-lMS"/>
+                            <constraint firstItem="xEZ-qN-fkl" firstAttribute="width" secondItem="BJe-sD-UPj" secondAttribute="width" id="AcT-YA-Jb6"/>
+                            <constraint firstItem="BJe-sD-UPj" firstAttribute="centerX" secondItem="0zh-CQ-YUj" secondAttribute="centerX" multiplier="0.6" id="Ay9-ek-rtn"/>
+                            <constraint firstItem="KO8-xP-C0U" firstAttribute="top" secondItem="BJe-sD-UPj" secondAttribute="bottom" constant="35" id="RaU-bv-aW4"/>
+                            <constraint firstItem="xEZ-qN-fkl" firstAttribute="centerY" secondItem="BJe-sD-UPj" secondAttribute="centerY" id="Shh-30-ZHJ"/>
+                            <constraint firstItem="BJe-sD-UPj" firstAttribute="centerY" secondItem="0zh-CQ-YUj" secondAttribute="centerY" multiplier="1.1" id="TzQ-3z-IHb"/>
+                            <constraint firstItem="xEZ-qN-fkl" firstAttribute="height" secondItem="BJe-sD-UPj" secondAttribute="height" id="c66-yH-Wg9"/>
+                            <constraint firstItem="KO8-xP-C0U" firstAttribute="centerX" secondItem="0zh-CQ-YUj" secondAttribute="centerX" id="q3P-hQ-S4n"/>
+                            <constraint firstItem="8Ph-uY-TCF" firstAttribute="centerX" secondItem="0zh-CQ-YUj" secondAttribute="centerX" id="r5g-32-bql"/>
+                            <constraint firstItem="xEZ-qN-fkl" firstAttribute="centerX" secondItem="0zh-CQ-YUj" secondAttribute="centerX" multiplier="1.4" id="uuM-PI-f3m"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="iTunesBtn" destination="BJe-sD-UPj" id="isU-E8-CxD"/>
+                        <outlet property="spotifyBtn" destination="xEZ-qN-fkl" id="Qm9-OZ-Qjq"/>
+                    </connections>
+                </viewController>
+                <customObject id="mJ6-TM-nnt" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4" y="1948"/>
+        </scene>
     </scenes>
     <resources>
         <image name="avatar" width="890" height="890"/>
         <image name="iTunes" width="944" height="944"/>
         <image name="pin" width="30" height="30"/>
         <image name="setting_light" width="30" height="30"/>
+        <image name="spotify" width="934" height="940"/>
     </resources>
 </document>

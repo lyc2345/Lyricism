@@ -34,5 +34,19 @@ extension VCGettable where Self: NSViewController {
 	}
 }
 
+extension VCGettable where Self: NSWindowController {
+	
+	static func instantiate() -> Self {
+		let storyboard = NSStoryboard(name: self.classIdentifier, bundle: nil)
+		return storyboard.instantiateController(withIdentifier: self.classIdentifier) as! Self
+	}
+	
+	static func instantiate(withStoryboard storyboard: String) -> Self {
+		let storyboard = NSStoryboard(name: storyboard, bundle: nil)
+		return storyboard.instantiateController(withIdentifier: self.classIdentifier) as! Self
+	}
+}
+
 extension NSViewController: VCGettable { }
 
+extension NSWindowController: VCGettable { }
