@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class SetPlayerSourceVC: NSViewController, PlayerGettable {
+class SetPlayerSourceVC: NSViewController {
 	
 	@IBOutlet weak var iTunesBtn: NSButton!
 	@IBOutlet weak var spotifyBtn: NSButton!
@@ -43,6 +43,8 @@ class SetPlayerSourceVC: NSViewController, PlayerGettable {
 	@IBAction func confirm(_ sender: Any) {
 		
 		guard let s = source, let appDelegate = NSApplication.shared().delegate as? AppDelegate else {
+			// TODO: Alert to notify user to choose source
+			
 			return
 		}
 		

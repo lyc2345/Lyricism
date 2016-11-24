@@ -9,10 +9,18 @@
 import Cocoa
 
 class GuideVC: NSViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do view setup here.
-    }
-    
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		// Do view setup here.
+	}
+	
+	override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+		
+		if let sourceVC = segue.destinationController as? SetPlayerSourceVC, segue.identifier == String(describing: SetPlayerSourceVC.self) {
+			
+			self.addChildViewController(sourceVC)
+		}
+	}
+	
 }

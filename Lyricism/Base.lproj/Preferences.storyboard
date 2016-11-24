@@ -45,10 +45,10 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="334"/>
         </scene>
-        <!--Appearance View Controller-->
+        <!--AppearanceVC-->
         <scene sceneID="dxB-2p-Jgm">
             <objects>
-                <viewController storyboardIdentifier="AppearanceViewController" id="SJS-Tt-bdV" customClass="AppearanceViewController" customModule="Lyricism" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AppearanceVC" id="SJS-Tt-bdV" customClass="AppearanceVC" customModule="Lyricism" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="kP0-aM-TwG">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -111,7 +111,6 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="sourceButtonsPressed:" target="SJS-Tt-bdV" id="QTX-67-jNe"/>
-                                    <binding destination="23R-dY-5Kk" name="image" keyPath="values" id="dwg-gu-GkR"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ipl-ab-lkH">
@@ -137,7 +136,7 @@
                 <customObject id="gp3-ik-RmY" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="23R-dY-5Kk"/>
             </objects>
-            <point key="canvasLocation" x="-367" y="730"/>
+            <point key="canvasLocation" x="-15" y="718"/>
         </scene>
         <!--PreferenceVC-->
         <scene sceneID="GDC-2q-TNS">

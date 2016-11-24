@@ -1080,17 +1080,16 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bin-XU-JFz">
-                                <rect key="frame" x="203" y="65" width="75" height="32"/>
+                                <rect key="frame" x="202" y="65" width="78" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="YMV-Yu-NFo"/>
-                                    <constraint firstAttribute="width" constant="75" id="ouK-2d-C5K"/>
                                 </constraints>
-                                <buttonCell key="cell" type="smallSquare" title="Next -&gt;" bezelStyle="smallSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BZa-VT-tgY">
+                                <buttonCell key="cell" type="smallSquare" title="Set Up Now" bezelStyle="smallSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BZa-VT-tgY">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <segue destination="s9a-xd-AAk" kind="sheet" id="gJg-Su-CAN"/>
+                                    <segue destination="s9a-xd-AAk" kind="sheet" identifier="SetPlayerSourceVC" id="gJg-Su-CAN"/>
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NEE-ab-tpC">

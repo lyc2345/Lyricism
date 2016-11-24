@@ -8,8 +8,9 @@
 
 import Cocoa
 import ScriptingBridge
+import SwiftyUserDefaults
 
-class AppearanceViewController: NSViewController, DockerSettable, WindowSettable, PlayerSourceable {
+class AppearanceVC: NSViewController, DockerSettable, WindowSettable, PlayerSourceable {
 
     /*
     @IBOutlet weak var scrollView: NSScrollView! {
@@ -81,8 +82,8 @@ class AppearanceViewController: NSViewController, DockerSettable, WindowSettable
     
     setPlayerSource((sender as! NSButton) == iTunesButton ? .itunes("") : .spotify(""))
     Debug.print("source: \((sender as! NSButton) == iTunesButton ? "itunes" : "spotify")")
-    
-    NotificationCenter.default.post(name: Notification.Name(rawValue: Identifier.sourceKey), object: nil)
+	
+    NotificationCenter.default.post(name: Notification.Name(rawValue: DefaultsKeys.playerSource._key), object: nil)
   }
   
   func setSourceImage(_ type: App<SBApplication>) { }

@@ -11,8 +11,6 @@ import ScriptingBridge
 
 enum Identifier {
 	
-	static let sourceKey = "player_source"
-	
 	case itunes
 	case spotify
 	

@@ -11,14 +11,7 @@ import ScriptingBridge
 import AVFoundation
 import RealmSwift
 import ProgressKit
-
-struct EasyTrack {
-	
-	typealias T = Any
-	var name: String
-	var artist: String
-	var time: T
-}
+import SwiftyUserDefaults
 
 class LyricVC: NSViewController, PlayerGettable, MusicTimerable, DockerSettable, WindowSettable, PlayerSourceable {
 	
@@ -59,11 +52,19 @@ class LyricVC: NSViewController, PlayerGettable, MusicTimerable, DockerSettable,
   var trackTime: Int!
   
   // This one just for 
-	var track: EasyTrack?
+	var track: EasyTrack? {
+		
+		guard let appDelegate = NSApplication.shared().delegate as? AppDelegate, let t = appDelegate.track else {
+			return nil
+		}
+		return t
+	}
   
   @IBOutlet weak var isAlwaysOnTop: NSMenuItem!
   @IBOutlet var settingMenu: NSMenu!
   fileprivate var trackingArea: NSTrackingArea!
+	
+	var preferencesWC: PreferencesWC?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -72,7 +73,7 @@ class LyricVC: NSViewController, PlayerGettable, MusicTimerable, DockerSettable,
     view.addSubview(traigleView!)
     createTrackingArea()
     
-    NotificationCenter.default.addObserver(self, selector: #selector(setSourceImage(_:)), name: NSNotification.Name(rawValue: Identifier.sourceKey), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(setSourceImage(_:)), name: NSNotification.Name(rawValue: DefaultsKeys.playerSource._key), object: nil)
   }
 
   override func viewWillAppear() {
@@ -88,56 +89,65 @@ class LyricVC: NSViewController, PlayerGettable, MusicTimerable, DockerSettable,
 	
 	func showCurrentPlaying() {
 		
-		iTunes() { [unowned self] (iTunesApp) in
-			
-			Debug.print("itunes is running \(iTunesApp?.unwrap().running)")
-			guard let i = iTunesApp, i.unwrap().running && i.unwrap().playerState == .playing else {
-				
-				return
-			}
-			
-			NotificationCenter.default.post(name: Notification.Name(rawValue: Identifier.sourceKey), object: i.identifiers().values().app)
-			
-			let track = EasyTrack(name: i.unwrap().currentTrack!.name!, artist: i.unwrap().currentTrack!.artist!, time: i.unwrap().currentTrack!.time!)
-			self.configure(track: track)
-			Debug.print("itunes  get current playing information:\(iTunesApp)")
-
+		guard let source = Defaults[.playerSource] else {
+			return
 		}
 		
-		spotify() { [unowned self] (spotifyApp) in
-		
-			Debug.print("spotify is running \(spotifyApp?.unwrap().running)")
-			guard let s = spotifyApp, s.unwrap().running else {
-				
-				// TODO: Show alert to remind user to open one of players
-				// TODO: Spotify cant detect...fuck
-				/*
-				let alert = NSAlert()
-				alert.messageText = "NOT Detect iTunes or Spotify are running"
-				alert.informativeText = "Lyricism needs you to open your iTunes or Spotify"
-				alert.alertStyle = .WarningAlertStyle
-				alert.addButtonWithTitle("iTunes")
-				alert.addButtonWithTitle("Spotify")
-				alert.addButtonWithTitle("Cancel")
-				let res = alert.runModal()
-				if res == NSAlertFirstButtonReturn {
-				iTunesApp.player?.activate()
-				} else if res == NSAlertSecondButtonReturn {
-				spotifyApp.player?.activate()
-				} else {
-				// do nothing
-				}*/
-				
-				return
-			}
-			NotificationCenter.default.post(name: Notification.Name(rawValue: Identifier.sourceKey), object: s.identifiers().values().app)
+		switch source {
+		case 0:
 			
-			guard let track = self.track else {
-				return
+			iTunes() { [unowned self] (iTunesApp) in
+				
+				Debug.print("itunes is running \(iTunesApp?.unwrap().running)")
+				guard let i = iTunesApp, i.unwrap().running && i.unwrap().playerState == .playing else {
+					return
+				}
+				
+				NotificationCenter.default.post(name: Notification.Name(rawValue: DefaultsKeys.playerSource._key), object: i.identifiers().values().app)
+				
+				let track = EasyTrack(name: i.unwrap().currentTrack!.name!, artist: i.unwrap().currentTrack!.artist!, time: i.unwrap().currentTrack!.time!)
+				self.configure(track: track)
+				Debug.print("itunes  get current playing information:\(iTunesApp)")
+				
 			}
-
-			self.configure(track: track)
-			Debug.print("spotify get current playing information:\(spotifyApp)")
+		case 1:
+			
+			spotify() { [unowned self] (spotifyApp) in
+				
+				Debug.print("spotify is running \(spotifyApp?.unwrap().running)")
+				guard let s = spotifyApp, s.unwrap().running else {
+					return
+				}
+				NotificationCenter.default.post(name: Notification.Name(rawValue: DefaultsKeys.playerSource._key), object: s.identifiers().values().app)
+				
+				guard let track = self.track else {
+					return
+				}
+				
+				self.configure(track: track)
+				Debug.print("spotify get current playing information:\(spotifyApp)")
+			}
+		default:
+			
+			// TODO: Show alert to remind user to open one of players
+			// TODO: Spotify cant detect...fuck
+			/*
+			let alert = NSAlert()
+			alert.messageText = "NOT Detect iTunes or Spotify are running"
+			alert.informativeText = "Lyricism needs you to open your iTunes or Spotify"
+			alert.alertStyle = .WarningAlertStyle
+			alert.addButtonWithTitle("iTunes")
+			alert.addButtonWithTitle("Spotify")
+			alert.addButtonWithTitle("Cancel")
+			let res = alert.runModal()
+			if res == NSAlertFirstButtonReturn {
+			iTunesApp.player?.activate()
+			} else if res == NSAlertSecondButtonReturn {
+			spotifyApp.player?.activate()
+			} else {
+			// do nothing
+			}*/
+			Debug.print("error")
 		}
 	}
 	
@@ -237,7 +247,6 @@ class LyricVC: NSViewController, PlayerGettable, MusicTimerable, DockerSettable,
     let button = sender as! NSButton
     let _ = CGPoint(x: button.frame.origin.x, y: button.frame.origin.y)
     settingMenu.popUp(positioning: nil, at: NSEvent.mouseLocation(), in: nil)
-    
   }
   
   // TODO: Rubbish needs to restructure
@@ -359,11 +368,10 @@ extension LyricVC {
 extension LyricVC {
   
   @IBAction func settingButtonPressed(_ sender: AnyObject) {
-    
-    let preferenceStoryboard = NSStoryboard(name: "Preferences", bundle: nil)
-    let preferenceWC = preferenceStoryboard.instantiateController(withIdentifier: String(describing: PreferencesWC.self)) as! PreferencesWC
-    
-    preferenceWC.showWindow(self)
+		
+		preferencesWC = PreferencesWC.instantiate(withStoryboard: "Preferences")
+		preferencesWC?.window?.center()
+    preferencesWC?.showWindow(self)
   }
   
   @IBAction func quitButtonPressed(_ sender: AnyObject) {

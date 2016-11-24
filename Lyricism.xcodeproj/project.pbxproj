@@ -25,10 +25,12 @@
 		F6624B291D437A9100D2D42E /* PreferencesWC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6624B271D437A9100D2D42E /* PreferencesWC.swift */; };
 		F6624B2A1D437A9100D2D42E /* PreferenceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6624B281D437A9100D2D42E /* PreferenceVC.swift */; };
 		F6624B2E1D437AA600D2D42E /* AppearanceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6624B2D1D437AA600D2D42E /* AppearanceVC.swift */; };
+		F663BB491DE6ECA200A90958 /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F663BB481DE6ECA200A90958 /* UserDefaultsKey.swift */; };
 		F664DD7B1DE6842E0094F5FA /* SetPlayerSourceWC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F664DD7A1DE6842E0094F5FA /* SetPlayerSourceWC.swift */; };
 		F664DD7D1DE6845A0094F5FA /* SetPlayerSourceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F664DD7C1DE6845A0094F5FA /* SetPlayerSourceVC.swift */; };
 		F664DD801DE68B2D0094F5FA /* GuideVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F664DD7E1DE68B2D0094F5FA /* GuideVC.swift */; };
 		F664DD831DE6BCC10094F5FA /* SFButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F664DD821DE6BCC10094F5FA /* SFButtonView.swift */; };
+		F664DD851DE6E2900094F5FA /* EasyTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F664DD841DE6E2900094F5FA /* EasyTrack.swift */; };
 		F668464D1D18D20E007DB6CF /* BlurBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668464C1D18D20E007DB6CF /* BlurBackground.swift */; };
 		F668464F1D18D26E007DB6CF /* BlurBackground.xib in Resources */ = {isa = PBXBuildFile; fileRef = F668464E1D18D26E007DB6CF /* BlurBackground.xib */; };
 		F672A8311D1949BC00FD518D /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F672A8301D1949BC00FD518D /* EventMonitor.swift */; };
@@ -102,10 +104,12 @@
 		F6624B271D437A9100D2D42E /* PreferencesWC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWC.swift; sourceTree = "<group>"; };
 		F6624B281D437A9100D2D42E /* PreferenceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceVC.swift; sourceTree = "<group>"; };
 		F6624B2D1D437AA600D2D42E /* AppearanceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceVC.swift; sourceTree = "<group>"; };
+		F663BB481DE6ECA200A90958 /* UserDefaultsKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		F664DD7A1DE6842E0094F5FA /* SetPlayerSourceWC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPlayerSourceWC.swift; sourceTree = "<group>"; };
 		F664DD7C1DE6845A0094F5FA /* SetPlayerSourceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPlayerSourceVC.swift; sourceTree = "<group>"; };
 		F664DD7E1DE68B2D0094F5FA /* GuideVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideVC.swift; sourceTree = "<group>"; };
 		F664DD821DE6BCC10094F5FA /* SFButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFButtonView.swift; sourceTree = "<group>"; };
+		F664DD841DE6E2900094F5FA /* EasyTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyTrack.swift; sourceTree = "<group>"; };
 		F668464C1D18D20E007DB6CF /* BlurBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurBackground.swift; sourceTree = "<group>"; };
 		F668464E1D18D26E007DB6CF /* BlurBackground.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlurBackground.xib; sourceTree = "<group>"; };
 		F672A8301D1949BC00FD518D /* EventMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
@@ -289,6 +293,7 @@
 				F67428D11D83DB6E001FBC56 /* TextViewModel.swift */,
 				F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */,
 				F696A2C01D2668FD00EBE049 /* Track.swift */,
+				F664DD841DE6E2900094F5FA /* EasyTrack.swift */,
 				F672A8301D1949BC00FD518D /* EventMonitor.swift */,
 			);
 			name = Model;
@@ -362,6 +367,7 @@
 			children = (
 				F6F1C4321D882F8F0081C501 /* App.swift */,
 				F6479A931DE577690001E929 /* Assets.swift */,
+				F663BB481DE6ECA200A90958 /* UserDefaultsKey.swift */,
 			);
 			name = Constant;
 			sourceTree = "<group>";
@@ -548,6 +554,7 @@
 				F67428D01D82F5BD001FBC56 /* SpotifyScripting.swift in Sources */,
 				F67428CF1D82F5BD001FBC56 /* Spotify.swift in Sources */,
 				F6F1C4331D882F8F0081C501 /* App.swift in Sources */,
+				F664DD851DE6E2900094F5FA /* EasyTrack.swift in Sources */,
 				F60BF8D21D1424D800F7C6DA /* LyricsVC.swift in Sources */,
 				F664DD7D1DE6845A0094F5FA /* SetPlayerSourceVC.swift in Sources */,
 				F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */,
@@ -575,6 +582,7 @@
 				F65069641DE2A1C6002ECFB3 /* TimeFormattable.swift in Sources */,
 				F664DD831DE6BCC10094F5FA /* SFButtonView.swift in Sources */,
 				F67428D21D83DB6E001FBC56 /* TextViewModel.swift in Sources */,
+				F663BB491DE6ECA200A90958 /* UserDefaultsKey.swift in Sources */,
 				F6479A961DE57DFD0001E929 /* NSImage+StatusItem.swift in Sources */,
 				F6E13D3A1DE2D4FA00857AF1 /* UIFont+Lyricism.swift in Sources */,
 				F617FCA31D269452001A933B /* HUDVC.swift in Sources */,

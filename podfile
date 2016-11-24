@@ -28,7 +28,8 @@ target 'Lyricism' do
 	pod 'ObjectMapper', '~> 2.2'
 	#pod 'Alert', :git => 'https://github.com/lyc2345/alert.git'
 	pod 'Then', '~> 2.1'
-
+	pod 'SwiftyUserDefaults'
+	
 end
 
 

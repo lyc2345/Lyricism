@@ -7,11 +7,9 @@
 //
 
 import Cocoa
+import SwiftyUserDefaults
 
 struct Settings {
-  
-  static let docker_setting = "show_dock_option"
-  static let windows_on_top_setting = "is_always_on_top"
   
   enum Docker: Int {
     case no = 0
@@ -32,23 +30,25 @@ extension DockerSettable {
     
     switch type {
     case .yes:
-      UserDefaults.standard.set(true, forKey: Settings.docker_setting)
+			
+			Defaults[.isDockShow] = true
+			
       NSApp.setActivationPolicy(.regular)
     case .no:
-      UserDefaults.standard.set(false, forKey: Settings.docker_setting)
+      Defaults[.isDockShow] = false
       NSApp.setActivationPolicy(.accessory)
     }
   }
   
   func setDocker() {
     
-    let option = UserDefaults.standard.bool(forKey: Settings.docker_setting)
+    let option = Defaults[.isDockShow]
     option ? setDocker(.yes) : setDocker(.no)
   }
   
   func isDockerShown() -> Bool {
-    
-    return UserDefaults.standard.bool(forKey: Settings.docker_setting)
+		
+		return Defaults[.isDockShow]
   }
 }
 
@@ -59,23 +59,21 @@ extension WindowSettable {
 	func setWindowsOnTop(_ type: Settings.WindowsOnTop) {
 		switch type {
 		case .yes:
-			UserDefaults.standard.set(true, forKey: Settings.windows_on_top_setting)
-			//print("bool: \(NSUserDefaults.standardUserDefaults().boolForKey(Settings.windows_on_top_setting))")
+			Defaults[.isAlwaysTop] = true
 			
 		case .no:
-			UserDefaults.standard.set(false, forKey: Settings.windows_on_top_setting)
-			//print("bool: \(NSUserDefaults.standardUserDefaults().boolForKey(Settings.windows_on_top_setting))")
+			Defaults[.isAlwaysTop] = false
 		}
 	}
 	
 	func setWinowsOnTop() {
 		
-		let option = UserDefaults.standard.bool(forKey: Settings.windows_on_top_setting)
+		let option = Defaults[.isAlwaysTop]
 		option ? setWindowsOnTop(.no) : setWindowsOnTop(.yes)
 	}
 	
 	func isWindowsOnTop() -> Bool {
 		
-		return UserDefaults.standard.bool(forKey: Settings.windows_on_top_setting)
+		return Defaults[.isAlwaysTop]
 	}
 }

@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import SwiftyUserDefaults
 
 protocol PlayerSourceable {
 	
@@ -20,17 +21,21 @@ extension PlayerSourceable where Self: NSViewController {
 		
 		switch type {
 		case .itunes:
-			UserDefaults.standard.set(0, forKey: Identifier.sourceKey)
+			Defaults[.playerSource] = 0
+			
 		case .spotify:
-			UserDefaults.standard.set(1, forKey: Identifier.sourceKey)
+			Defaults[.playerSource] = 1
 		}
 	}
 	
 	func getPlayerSource() -> App<String> {
 		
-		switch UserDefaults.standard.integer(forKey: Identifier.sourceKey) {
+		guard let source = Defaults[.playerSource] else {
+			return .itunes("")
+		}
+		
+		switch source {
 		case 0:
-			
 			return .itunes("")
 		case 1:
 			return .spotify("")

@@ -21,6 +21,7 @@ import MediaLibrary
 import RealmSwift
 import Fabric
 import Crashlytics
+import SwiftyUserDefaults
 
 @NSApplicationMain
 // MARK: Main AppDelegate
@@ -40,6 +41,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, PlayerGettable, DockerSettab
   var dismissTime: Int = 4
 	
 	var track: EasyTrack?
+	
+	var playerSourceWC: SetPlayerSourceWC?
 	
   // MARK: NSApplicationDelegate
   func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -76,10 +79,25 @@ class AppDelegate: NSObject, NSApplicationDelegate, PlayerGettable, DockerSettab
 		userSetup()
 		popoverSetup()
 		eventMonitorSetup()
-    iTunesSetup()
-    spotifySetup()
-    
-    guard UserDefaults.standard.bool(forKey: "tutorial_keep_remind") == false else {
+		
+		playerSourceWC = SetPlayerSourceWC.instantiate(withStoryboard:"Main")
+		playerSourceWC?.window?.center()
+		playerSourceWC?.window?.styleMask = .titled
+		playerSourceWC?.showWindow(self)
+		
+		if let source = Defaults[.playerSource] {
+			switch source {
+			case 0:
+				iTunesSetup()
+			case 1:
+				spotifySetup()
+			default:
+				// TODO: ALert
+				print("alert")
+			}
+		}
+		
+		guard Defaults[.isTutorialShow] == false else {
       
       showTutorial()
       return
@@ -103,24 +121,23 @@ class AppDelegate: NSObject, NSApplicationDelegate, PlayerGettable, DockerSettab
     
     if res == NSAlertFirstButtonReturn {
     } else {
-      UserDefaults.standard.set(false, forKey: "tutorial_keep_remind")
+			Defaults[.isTutorialShow] = false
     }
   }
 }
 
-
-private extension AppDelegate {
+extension AppDelegate {
 
 	// MARK: Player Setting
   func iTunesSetup() {
 		
 		iTunes() { (iTunesApp) in
 			
-			guard let i = iTunesApp, i.unwrap().running else {
+			guard let i = iTunesApp else {
 				return
 			}
 			DistributedNotificationCenter.default().addObserver(self, selector: #selector(playerStateChanged(_:)), name: NSNotification.Name(rawValue: i.identifiers().values().app), object: nil)
-
+			Defaults[.playerSource] = 0
 			//iTunes.activate()
 			i.unwrap().delegate = self
 		}
@@ -130,11 +147,11 @@ private extension AppDelegate {
 		
 		spotify() { (spotifyApp) in
 			
-			guard let s = spotifyApp, s.unwrap().running else {
+			guard let s = spotifyApp else {
 				return
 			}
 			DistributedNotificationCenter.default().addObserver(self, selector: #selector(playerStateChanged(_:)), name: NSNotification.Name(rawValue: s.identifiers().values().playerstate), object: nil)
-			
+			Defaults[.playerSource] = 1
 			//spotify.activate()
 			s.unwrap().delegate = self
 		}

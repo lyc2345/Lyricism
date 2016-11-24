@@ -14,7 +14,7 @@ class PreferenceVC: NSViewController, ContainerSwitchable {
     
     var containerViewController: NSViewController!
     
-    var appearanceViewController: AppearanceViewController?
+    var appearanceViewController: AppearanceVC?
     
     var tTarget: NSViewController { return self }
     var tContainerView: NSView { return containerView }
@@ -34,9 +34,9 @@ class PreferenceVC: NSViewController, ContainerSwitchable {
         
         switch prefer {
         case .appearance:
-            newViewController = preferenceStoryboard.instantiateController(withIdentifier: String(describing: AppearanceViewController.self)) as? AppearanceViewController
+            newViewController = preferenceStoryboard.instantiateController(withIdentifier: String(describing: AppearanceVC.self)) as? AppearanceVC
         case .other:
-            newViewController = preferenceStoryboard.instantiateController(withIdentifier: String(describing: AppearanceViewController.self)) as? AppearanceViewController
+            newViewController = preferenceStoryboard.instantiateController(withIdentifier: String(describing: AppearanceVC.self)) as? AppearanceVC
         }
         
         cycleFromViewController(currentViewController, toViewController: newViewController)
