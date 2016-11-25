@@ -19,13 +19,7 @@ extension PlayerSourceable where Self: NSViewController {
 	
 	func setPlayerSource(_ type: App<String>) {
 		
-		switch type {
-		case .itunes:
-			Defaults[.playerSource] = 0
-			
-		case .spotify:
-			Defaults[.playerSource] = 1
-		}
+		Defaults[.playerSource] = type.source().value()
 	}
 	
 	func getPlayerSource() -> App<String> {
@@ -35,9 +29,9 @@ extension PlayerSourceable where Self: NSViewController {
 		}
 		
 		switch source {
-		case 0:
+		case Identifier.itunes.value():
 			return .itunes("")
-		case 1:
+		case Identifier.spotify.value():
 			return .spotify("")
 		default:
 			Debug.print("getPlayerSource SBApplicationID out of bounds, PlayerSourceable, Line: 33")

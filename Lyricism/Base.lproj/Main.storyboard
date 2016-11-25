@@ -1080,7 +1080,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bin-XU-JFz">
-                                <rect key="frame" x="202" y="65" width="78" height="32"/>
+                                <rect key="frame" x="201" y="65" width="78" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="YMV-Yu-NFo"/>
                                 </constraints>
@@ -1124,12 +1124,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BJe-sD-UPj">
-                                <rect key="frame" x="105" y="104" width="60" height="62"/>
+                                <rect key="frame" x="105" y="105" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="DIe-wV-eJb"/>
                                     <constraint firstAttribute="height" constant="60" identifier="I" id="OoR-FS-AcA"/>
                                 </constraints>
-                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="iTunes" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="N08-wE-sGx">
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="iTunes" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="N08-wE-sGx">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1138,8 +1138,8 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xEZ-qN-fkl">
-                                <rect key="frame" x="285" y="104" width="60" height="62"/>
-                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="spotify" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ubL-fm-jzn">
+                                <rect key="frame" x="285" y="105" width="60" height="60"/>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="spotify" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="ubL-fm-jzn">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>

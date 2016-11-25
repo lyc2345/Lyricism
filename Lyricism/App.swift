@@ -21,6 +21,14 @@ enum Identifier {
 		case .spotify: return ("com.spotify.client", "com.spotify.client.PlaybackStateChanged", "com.spotify.client")
 		}
 	}
+	
+	func value() -> Int {
+		
+		switch self {
+		case .itunes: return 0
+		case .spotify: return 1
+		}
+	}
 }
 
 enum App<T> {
@@ -39,6 +47,14 @@ extension App {
 	}
 	
 	func identifiers() -> Identifier {
+		
+		switch self {
+		case .itunes: return Identifier.itunes
+		case .spotify: return Identifier.spotify
+		}
+	}
+	
+	func source() -> Identifier {
 		
 		switch self {
 		case .itunes: return Identifier.itunes

@@ -44,7 +44,6 @@ class SetPlayerSourceVC: NSViewController {
 		
 		guard let s = source, let appDelegate = NSApplication.shared().delegate as? AppDelegate else {
 			// TODO: Alert to notify user to choose source
-			
 			return
 		}
 		

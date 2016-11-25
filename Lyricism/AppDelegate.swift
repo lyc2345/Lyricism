@@ -93,7 +93,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, PlayerGettable, DockerSettab
 				spotifySetup()
 			default:
 				// TODO: ALert
-				print("alert")
+				playerSourceWC = SetPlayerSourceWC.instantiate(withStoryboard:"Main")
+				playerSourceWC?.window?.center()
+				playerSourceWC?.window?.styleMask = .titled
+				playerSourceWC?.showWindow(self)
 			}
 		}
 		
@@ -136,8 +139,7 @@ extension AppDelegate {
 			guard let i = iTunesApp else {
 				return
 			}
-			DistributedNotificationCenter.default().addObserver(self, selector: #selector(playerStateChanged(_:)), name: NSNotification.Name(rawValue: i.identifiers().values().app), object: nil)
-			Defaults[.playerSource] = 0
+			DistributedNotificationCenter.default().addObserver(self, selector: #selector(playerStateChanged(_:)), name: NSNotification.Name(rawValue: i.identifiers().values().playerstate), object: nil)
 			//iTunes.activate()
 			i.unwrap().delegate = self
 		}
@@ -151,7 +153,6 @@ extension AppDelegate {
 				return
 			}
 			DistributedNotificationCenter.default().addObserver(self, selector: #selector(playerStateChanged(_:)), name: NSNotification.Name(rawValue: s.identifiers().values().playerstate), object: nil)
-			Defaults[.playerSource] = 1
 			//spotify.activate()
 			s.unwrap().delegate = self
 		}
@@ -246,8 +247,6 @@ extension AppDelegate {
 			guard let s = spotifyApp, let info = notification.userInfo, let playerState = info["Player State"] as? String, let name = info["Name"] as? String, let artist = info["Artist"] as? String, let time = info["Duration"] as? Double, notification.object as? String == s.identifiers().values().app else {
 				return
 			}
-			track = EasyTrack(name: name, artist: artist, time: time)
-			
 			
 			let app = s.unwrap()
 			print("spotify playerState:\(app.playerState == SpotifyEPlS.playing)")
@@ -259,6 +258,7 @@ extension AppDelegate {
 				let minutes = Int(milliTime / 60)
 				let seconds = Int(milliTime.truncatingRemainder(dividingBy: 60))
 				let timeString = "\(minutes):\(seconds < 10 ? "0\(seconds)" : "\(seconds)")"
+				track = EasyTrack(name: name, artist: artist, time: timeString)
 				playerIsPlaying(.spotify(""), track: track!)
 				
 			} else if playerState == "Paused" {

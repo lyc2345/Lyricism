@@ -10,8 +10,7 @@ import Foundation
 
 struct EasyTrack {
 	
-	typealias T = Any
 	var name: String
 	var artist: String
-	var time: T
+	var time: String
 }

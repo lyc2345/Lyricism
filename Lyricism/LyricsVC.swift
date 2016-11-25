@@ -13,7 +13,7 @@ import RealmSwift
 import ProgressKit
 import SwiftyUserDefaults
 
-class LyricVC: NSViewController, PlayerGettable, MusicTimerable, DockerSettable, WindowSettable, PlayerSourceable {
+class LyricVC: NSViewController, PlayerGettable, MusicTimerable, DockerSettable, WindowSettable {
 	
 	// Model
   fileprivate var lyric: String? {
@@ -51,7 +51,7 @@ class LyricVC: NSViewController, PlayerGettable, MusicTimerable, DockerSettable,
   var timer: Timer?
   var trackTime: Int!
   
-  // This one just for 
+  // This one just for
 	var track: EasyTrack? {
 		
 		guard let appDelegate = NSApplication.shared().delegate as? AppDelegate, let t = appDelegate.track else {
@@ -63,8 +63,8 @@ class LyricVC: NSViewController, PlayerGettable, MusicTimerable, DockerSettable,
   @IBOutlet weak var isAlwaysOnTop: NSMenuItem!
   @IBOutlet var settingMenu: NSMenu!
   fileprivate var trackingArea: NSTrackingArea!
-	
-	var preferencesWC: PreferencesWC?
+
+	fileprivate var preferencesWC: PreferencesWC?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -77,7 +77,6 @@ class LyricVC: NSViewController, PlayerGettable, MusicTimerable, DockerSettable,
   }
 
   override func viewWillAppear() {
-    
     super.viewWillAppear()
    
     showCurrentPlaying()
@@ -92,9 +91,8 @@ class LyricVC: NSViewController, PlayerGettable, MusicTimerable, DockerSettable,
 		guard let source = Defaults[.playerSource] else {
 			return
 		}
-		
 		switch source {
-		case 0:
+		case Identifier.itunes.value():
 			
 			iTunes() { [unowned self] (iTunesApp) in
 				
@@ -110,7 +108,7 @@ class LyricVC: NSViewController, PlayerGettable, MusicTimerable, DockerSettable,
 				Debug.print("itunes  get current playing information:\(iTunesApp)")
 				
 			}
-		case 1:
+		case Identifier.spotify.value():
 			
 			spotify() { [unowned self] (spotifyApp) in
 				
@@ -174,34 +172,33 @@ class LyricVC: NSViewController, PlayerGettable, MusicTimerable, DockerSettable,
 		self.trackNameArtistLabel.text = "\(track.artist) - \(track.name)"
 		print("time: \(track.time)")
 		spinnerProgress.animate = true
-		trackTime = currentTimeFromString(track.time as? String ?? "0")
-		
-		guard let realm_track = SFRealm.query(name: track.name, t: Track.self)?.first else {
-			Debug.print("realm_track is nil")
-			searchLyricNArtwork(track)
-			return
-		}
-		trackTime = currentTimeFromInt(realm_track.time) { (time) in
+		currentTime(time: track.time) { [unowned self] (timeInteger) in
 			
+			self.trackTime = timeInteger
+			guard let realm_track = SFRealm.query(name: track.name, t: Track.self)?.first else {
+				Debug.print("realm_track is nil")
+				self.searchLyricNArtwork(track)
+				return
+			}
+			
+			self.spinnerProgress.animate = false
+			
+			guard let realm_lyric = realm_track.lyric else {
+				Debug.print("lyric is nil")
+				self.searchLyricNArtwork(track)
+				return
+			}
+			self.lyric = realm_lyric.text
+			
+			
+			guard let realm_album = realm_track.album, let artwork_data = realm_album.artwork else {
+				self.searchLyricNArtwork(track)
+				Debug.print("realm_album is nil")
+				return
+			}
+			
+			self.imageData = artwork_data as Data
 		}
-		
-		spinnerProgress.animate = false
-		
-		guard let realm_lyric = realm_track.lyric else {
-			Debug.print("lyric is nil")
-			searchLyricNArtwork(track)
-			return
-		}
-		lyric = realm_lyric.text
-		
-		
-		guard let realm_album = realm_track.album, let artwork_data = realm_album.artwork else {
-			searchLyricNArtwork(track)
-			Debug.print("realm_album is nil")
-			return
-		}
-		
-		imageData = artwork_data as Data
 	}
 	
   func searchLyricNArtwork(_ track: EasyTrack) {
@@ -259,18 +256,17 @@ class LyricVC: NSViewController, PlayerGettable, MusicTimerable, DockerSettable,
     setWindowsOnTop(isWindowsOnTop() ? .yes : .no)
   }
   
-  func updateTime() {
+  @objc fileprivate func updateTime() {
     updateTimer() { (timeString) in
-      self.timeLabel.stringValue = timeString
+      self.timeLabel.stringValue = "-" + timeString
     }
   }
   
   func resumeTimer() {
-    
     resumeTimer(self, selector: #selector(updateTime), repeats: true)
   }
   
-  func terminateApp() {
+  fileprivate func terminateApp() {
     NSApplication.shared().terminate(self)
   }
 }
@@ -278,7 +274,7 @@ class LyricVC: NSViewController, PlayerGettable, MusicTimerable, DockerSettable,
 extension LyricVC {
 	
 	func showControlPanel() {
-		NSAnimationContext.runAnimationGroup({ (context) in
+		NSAnimationContext.runAnimationGroup({ [unowned self] (context) in
 			self.controlPanel.isHidden = true
 		}) {
 			self.controlPanel.isHidden = false
@@ -286,7 +282,7 @@ extension LyricVC {
 	}
 	
 	func hideControlPanel() {
-		NSAnimationContext.runAnimationGroup({ (context) in
+		NSAnimationContext.runAnimationGroup({ [unowned self] (context) in
 			self.controlPanel.isHidden = false
 		}) {
 			self.controlPanel.isHidden = true
@@ -318,50 +314,48 @@ extension LyricVC {
 }
 
 extension LyricVC {
-  
-  func currentTimeFromString(_ allTimeString: String) -> Int {
-    
-    let time = Time(allTimeString: allTimeString)
-    
-		return currentTimeFromInt(time.timeInterval) { (time) in
-			
-		}
-  }
-  
-	func currentTimeFromInt(_ time: Int, completion:(Int) -> ()) -> Int {
+	
+	func currentTime(time: String, completion: (Int) -> Void) {
 		
-		iTunes() { (iTunesApp) in
+		guard let source = Defaults[.playerSource] else {
+			completion(0)
+			return
+		}
+		let timeInteger = Time.integerFrom(string: time)
+		
+		switch source {
+		case Identifier.itunes.value():
 			
-			guard let i = iTunesApp?.unwrap(), let iplayerPos = iTunesApp?.unwrap().playerPosition, i.running && i.playerState == .playing else {
+			iTunes() { (iTunesApp) in
 				
-				return completion(time)
+				guard let i = iTunesApp?.unwrap(), let playerPos = iTunesApp?.unwrap().playerPosition, i.running && i.playerState == .playing else {
+					return completion(timeInteger)
+				}
+				if i.playerState == iTunesEPlS.playing {
+					stopTimer()
+					initTimer(1.0, target: self, selector: #selector(updateTime), repeats: true)
+				} else {
+					// include iTunesEPlS.paused, iTunesEPlS.stopped
+					stopTimer()
+					//Debug.print("Lyrics View Controller is not in the case")
+				}
+				completion(timeInteger - Int(playerPos))
 			}
-			if i.playerState == iTunesEPlS.playing {
+		case Identifier.spotify.value():
+			
+			spotify() { (spotifyApp) in
+				
+				guard let s = spotifyApp?.unwrap(), let playerPos = spotifyApp?.unwrap().playerPosition, s.running else {
+					return completion(timeInteger)
+				}
 				stopTimer()
 				initTimer(1.0, target: self, selector: #selector(updateTime), repeats: true)
 				
-			} else if i.playerState == iTunesEPlS.paused {
-				stopTimer()
-			} else if i.playerState == iTunesEPlS.stopped {
-				stopTimer()
-			} else{
-				Debug.print("Lyrics View Controller is not in the case")
+				completion(timeInteger - Int(playerPos))
 			}
-			return completion(time - Int(iplayerPos))
+		default:
+			completion(0)
 		}
-	
-		spotify() { (spotifyApp) in
-			
-			guard let s = spotifyApp?.unwrap(), let splayerPos = spotifyApp?.unwrap().playerPosition, s.running else {
-				
-				return completion(time)
-			}
-			stopTimer()
-			initTimer(1.0, target: self, selector: #selector(updateTime), repeats: true)
-			
-			return completion(time - Int(splayerPos))
-		}
-		return 0
 	}
 }
 

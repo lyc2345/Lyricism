@@ -135,6 +135,13 @@ struct Time {
 		
 		timeInterval = self.convertFrom(allTimeString)
 	}
+	
+	static func integerFrom(string timeString: String) -> Int {
+		let s = String(timeString.characters.dropFirst(2)).copy() as! NSString
+		let m = String(timeString.characters.dropLast(3)).replacingOccurrences(of: "-", with: "").copy() as! NSString
+		
+		return Int(m.intValue * 60 + s.intValue) - Int(0)
+	}
 }
 
 protocol Propertyable {

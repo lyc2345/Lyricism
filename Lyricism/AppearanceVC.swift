@@ -28,10 +28,9 @@ class AppearanceVC: NSViewController, DockerSettable, WindowSettable, PlayerSour
   var sourceButtons: [NSButton]!
   
   @IBOutlet weak var iTunesButton: NSButton!
-  
   @IBOutlet weak var spotifyButton: NSButton!
-  
-  var delegate: PlayerSourceable?
+	
+	var source: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +48,7 @@ class AppearanceVC: NSViewController, DockerSettable, WindowSettable, PlayerSour
 			case .spotify(nil):
 				spotifyButton.selected(true)
 			default:
-				iTunesButton.selected(true)
+				clean()
 				Debug.print("get source error")
 			}
     }
@@ -69,24 +68,42 @@ class AppearanceVC: NSViewController, DockerSettable, WindowSettable, PlayerSour
   func clean() {
     
     for button in sourceButtons {
-      
       button.selected(false)
     }
   }
+	
+	
   
   @IBAction func sourceButtonsPressed(_ sender: AnyObject) {
     
     clean()
     
     (sender as! NSButton).selected(true)
-    
-    setPlayerSource((sender as! NSButton) == iTunesButton ? .itunes("") : .spotify(""))
+		
+		source = ((sender as! NSButton) == iTunesButton) ? Identifier.itunes.value() : Identifier.spotify.value()
+		
     Debug.print("source: \((sender as! NSButton) == iTunesButton ? "itunes" : "spotify")")
-	
-    NotificationCenter.default.post(name: Notification.Name(rawValue: DefaultsKeys.playerSource._key), object: nil)
   }
   
   func setSourceImage(_ type: App<SBApplication>) { }
+	
+	override func viewWillDisappear() {
+		super.viewWillDisappear()
+		
+		guard let source = source else {
+			return
+		}
+		switch source {
+		case Identifier.itunes.value():
+			setPlayerSource(.itunes(""))
+		case Identifier.spotify.value():
+			setPlayerSource(.spotify(""))
+		default:
+			Debug.print("source is other number")
+		}
+		
+		NotificationCenter.default.post(name: Notification.Name(rawValue: DefaultsKeys.playerSource._key), object: nil)
+	}
 }
 
 extension NSButton {
