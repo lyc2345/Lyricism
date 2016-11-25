@@ -102,7 +102,7 @@ class AppearanceVC: NSViewController, DockerSettable, WindowSettable, PlayerSour
 			Debug.print("source is other number")
 		}
 		
-		NotificationCenter.default.post(name: Notification.Name(rawValue: DefaultsKeys.playerSource._key), object: nil)
+		NotificationCenter.default.post(name: Notification.Name(rawValue: DefaultsKeys.playerSource._key), object: source)
 	}
 }
 

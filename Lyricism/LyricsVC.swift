@@ -91,6 +91,8 @@ class LyricVC: NSViewController, PlayerGettable, MusicTimerable, DockerSettable,
 		guard let source = Defaults[.playerSource] else {
 			return
 		}
+		NotificationCenter.default.post(name: Notification.Name(rawValue: DefaultsKeys.playerSource._key), object: source)
+		
 		switch source {
 		case Identifier.itunes.value():
 			
@@ -100,8 +102,6 @@ class LyricVC: NSViewController, PlayerGettable, MusicTimerable, DockerSettable,
 				guard let i = iTunesApp, i.unwrap().running && i.unwrap().playerState == .playing else {
 					return
 				}
-				
-				NotificationCenter.default.post(name: Notification.Name(rawValue: DefaultsKeys.playerSource._key), object: i.identifiers().values().app)
 				
 				let track = EasyTrack(name: i.unwrap().currentTrack!.name!, artist: i.unwrap().currentTrack!.artist!, time: i.unwrap().currentTrack!.time!)
 				self.configure(track: track)
@@ -116,8 +116,6 @@ class LyricVC: NSViewController, PlayerGettable, MusicTimerable, DockerSettable,
 				guard let s = spotifyApp, s.unwrap().running else {
 					return
 				}
-				NotificationCenter.default.post(name: Notification.Name(rawValue: DefaultsKeys.playerSource._key), object: s.identifiers().values().app)
-				
 				guard let track = self.track else {
 					return
 				}
@@ -152,15 +150,15 @@ class LyricVC: NSViewController, PlayerGettable, MusicTimerable, DockerSettable,
   // PlayerSourceable Delegate
   func setSourceImage(_ notification: Notification) {
     
-    guard let source = notification.object as? String else {
+    guard let source = notification.object as? Int else {
       
       return
     }
     DispatchQueue.main.async { 
       
       switch source {
-      case App.itunes("").identifiers().values().app: self.sourceImageView.image = NSImage.iTunes
-      case App.spotify("").identifiers().values().app: self.sourceImageView.image = NSImage.spotify
+      case Identifier.itunes.value(): self.sourceImageView.image = NSImage.iTunes
+      case Identifier.spotify.value(): self.sourceImageView.image = NSImage.spotify
       default:
         fatalError("out of SBApplicationID type")
       }
