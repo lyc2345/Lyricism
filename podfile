@@ -29,6 +29,7 @@ target 'Lyricism' do
 	#pod 'Alert', :git => 'https://github.com/lyc2345/alert.git'
 	pod 'Then', '~> 2.1'
 	pod 'SwiftyUserDefaults'
+	pod 'Kanna', '~> 2.0.0'
 	
 end
 

@@ -50,6 +50,8 @@
 		F696A2C11D2668FD00EBE049 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = F696A2C01D2668FD00EBE049 /* Track.swift */; };
 		F69836261D7C02F30046569A /* PreferencesSetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69836251D7C02F20046569A /* PreferencesSetable.swift */; };
 		F6A7DE431D20CACF001D5AD7 /* MarqueeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A7DE421D20CACF001D5AD7 /* MarqueeView.swift */; };
+		F6AA6F7A1DED7C2300042D94 /* GeniusLyric.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA6F791DED7C2300042D94 /* GeniusLyric.swift */; };
+		F6AA6F7C1DED825C00042D94 /* LyricCrawler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA6F7B1DED825C00042D94 /* LyricCrawler.swift */; };
 		F6BF27B11D4E002A00AA04BB /* PopoverContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BF27B01D4E002A00AA04BB /* PopoverContentView.swift */; };
 		F6C26C7B1DE56D45001EA7C6 /* TrackInfoGettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C26C7A1DE56D45001EA7C6 /* TrackInfoGettable.swift */; };
 		F6D0C00F1D87079D001474D8 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6D0C0111D87079D001474D8 /* Preferences.storyboard */; };
@@ -133,6 +135,8 @@
 		F696A2C01D2668FD00EBE049 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		F69836251D7C02F20046569A /* PreferencesSetable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesSetable.swift; sourceTree = "<group>"; };
 		F6A7DE421D20CACF001D5AD7 /* MarqueeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarqueeView.swift; sourceTree = "<group>"; };
+		F6AA6F791DED7C2300042D94 /* GeniusLyric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeniusLyric.swift; sourceTree = "<group>"; };
+		F6AA6F7B1DED825C00042D94 /* LyricCrawler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricCrawler.swift; sourceTree = "<group>"; };
 		F6BF27B01D4E002A00AA04BB /* PopoverContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverContentView.swift; sourceTree = "<group>"; };
 		F6C26C791DE5423C001EA7C6 /* PracticeLand.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = PracticeLand.playground; sourceTree = "<group>"; };
 		F6C26C7A1DE56D45001EA7C6 /* TrackInfoGettable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackInfoGettable.swift; sourceTree = "<group>"; };
@@ -223,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				F6C26C7A1DE56D45001EA7C6 /* TrackInfoGettable.swift */,
+				F6AA6F7B1DED825C00042D94 /* LyricCrawler.swift */,
 				F6479A8F1DE56F250001E929 /* AppGettable.swift */,
 				F6479A911DE56FB70001E929 /* VCGettable.swift */,
 				F6D196F71DE2DC2300A7F73A /* PlaySourceable.swift */,
@@ -292,6 +297,7 @@
 			children = (
 				F67428D11D83DB6E001FBC56 /* TextViewModel.swift */,
 				F60BF8B41D13A68900F7C6DA /* MusiXMatchApi.swift */,
+				F6AA6F791DED7C2300042D94 /* GeniusLyric.swift */,
 				F696A2C01D2668FD00EBE049 /* Track.swift */,
 				F664DD841DE6E2900094F5FA /* EasyTrack.swift */,
 				F672A8301D1949BC00FD518D /* EventMonitor.swift */,
@@ -557,6 +563,7 @@
 				F664DD851DE6E2900094F5FA /* EasyTrack.swift in Sources */,
 				F60BF8D21D1424D800F7C6DA /* LyricsVC.swift in Sources */,
 				F664DD7D1DE6845A0094F5FA /* SetPlayerSourceVC.swift in Sources */,
+				F6AA6F7A1DED7C2300042D94 /* GeniusLyric.swift in Sources */,
 				F616EBB61D15221800D1A40C /* NSObject+Extension.swift in Sources */,
 				F6479A941DE577690001E929 /* Assets.swift in Sources */,
 				F696A2C11D2668FD00EBE049 /* Track.swift in Sources */,
@@ -575,6 +582,7 @@
 				F6D196F81DE2DC2300A7F73A /* PlaySourceable.swift in Sources */,
 				F664DD801DE68B2D0094F5FA /* GuideVC.swift in Sources */,
 				F64E2D8C1D2115CD002F2513 /* MResponse.swift in Sources */,
+				F6AA6F7C1DED825C00042D94 /* LyricCrawler.swift in Sources */,
 				F68BC71B1D128ACE00A36247 /* AppDelegate.swift in Sources */,
 				F6C26C7B1DE56D45001EA7C6 /* TrackInfoGettable.swift in Sources */,
 				F664DD7B1DE6842E0094F5FA /* SetPlayerSourceWC.swift in Sources */,
