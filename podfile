@@ -22,7 +22,7 @@ target 'Lyricism' do
   
   # Fabric
   pod 'Fabric'
-  pod 'Crashlytics'
+  pod 'Crashlytics', '~>  3.8'
   #pod 'Optimizely-iOS-SDK'
   #pod 'Appsee'
 	pod 'ObjectMapper', '~> 2.2'
