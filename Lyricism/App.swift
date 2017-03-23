@@ -41,8 +41,10 @@ extension App {
 	
 	func unwrap() -> T {
 		switch self {
-		case .itunes(let t): return t
-		case .spotify(let t): return t
+		case .itunes(let t):
+			return t
+		case .spotify(let t):
+			return t
 		}
 	}
 	

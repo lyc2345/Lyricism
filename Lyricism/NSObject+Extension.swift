@@ -35,18 +35,18 @@ class iOSXFoundation {
         
         let propertyNames: [String] = getClassPropertyNames(classObject)
         var count: UInt32 = 0
-        let properties = class_copyPropertyList(classObject, &count)
+        _ = class_copyPropertyList(classObject, &count)
         
         //weak var player: Player? = Player.sharedPlayer
-        
-        for name in propertyNames {
+        /*
+        for _ in propertyNames {
             
-            //let cname = name.cStringUsingEncoding(NSUTF8StringEncoding)
-//            if let value = player!.value(forKey: name) {
-//                
-//                //print("property name: \(name), value:\(value)")
-//            }
-        }
+            let cname = name.cStringUsingEncoding(NSUTF8StringEncoding)
+            if let value = player!.value(forKey: name) {
+                
+                //print("property name: \(name), value:\(value)")
+            }
+        }*/
     }
     
 }
@@ -83,7 +83,7 @@ extension NSObject {
         let propertiesName: [String] = myClass.propertyNames()
         
         
-        for (_, name) in propertiesName.enumerated() {
+        for (_, _) in propertiesName.enumerated() {
             
             //s_print("property name: \(name), value:\(myClass.valueForKey(name))")
         }

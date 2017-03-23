@@ -54,7 +54,7 @@ extension MusicTimerable where Self: LyricVC {
   
   func resumeTimer(_ target: AnyObject, selector: Selector, repeats: Bool) {
     
-    trackTime - 1
+    _ = trackTime - 1
     
     if timer != nil {
       timer!.invalidate()

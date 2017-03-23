@@ -19,8 +19,8 @@ import AppKit
 import ScriptingBridge
 import MediaLibrary
 import RealmSwift
-import Fabric
-import Crashlytics
+//import Fabric
+//import Crashlytics
 import SwiftyUserDefaults
 
 @NSApplicationMain
@@ -50,7 +50,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, PlayerGettable, DockerSettab
     // [Crashlytics Crash] Warning: NSApplicationCrashOnExceptions is not set. This will result in poor top-level uncaught exception reporting.
     // https://docs.fabric.io/apple/crashlytics/os-x.html
     UserDefaults.standard.register(defaults: ["NSApplicationCrashOnExceptions": true])
-    Fabric.with([Crashlytics.self, Answers.self])
+    //Fabric.with([Crashlytics.self, Answers.self])
 
     // Realm Migration
     print("realm path: \(Realm.Configuration.defaultConfiguration.fileURL)")
@@ -80,40 +80,42 @@ class AppDelegate: NSObject, NSApplicationDelegate, PlayerGettable, DockerSettab
 		popoverSetup()
 		eventMonitorSetup()
 		
-		playerSourceWC = SetPlayerSourceWC.instantiate(withStoryboard:"Main")
-		playerSourceWC?.window?.center()
-		playerSourceWC?.window?.styleMask = .titled
-		playerSourceWC?.showWindow(self)
-		
-		if let source = Defaults[.playerSource] {
-			switch source {
-			case 0:
-				iTunesSetup()
-			case 1:
-				spotifySetup()
-			default:
-				// TODO: ALert
-				playerSourceWC = SetPlayerSourceWC.instantiate(withStoryboard:"Main")
-				playerSourceWC?.window?.center()
-				playerSourceWC?.window?.styleMask = .titled
-				playerSourceWC?.showWindow(self)
+		DispatchQueue.main.async { [weak self] in
+			self?.playerSourceWC = SetPlayerSourceWC.instantiate(withStoryboard:"Main")
+			self?.playerSourceWC?.window?.center()
+			self?.playerSourceWC?.window?.styleMask = .titled
+			self?.playerSourceWC?.showWindow(self)
+			
+			if let source = Defaults[.playerSource] {
+				switch source {
+				case 0:
+					self?.iTunesSetup()
+				case 1:
+					self?.spotifySetup()
+				default:
+					// TODO: ALert
+					self?.playerSourceWC = SetPlayerSourceWC.instantiate(withStoryboard:"Main")
+					self?.playerSourceWC?.window?.center()
+					self?.playerSourceWC?.window?.styleMask = .titled
+					self?.playerSourceWC?.showWindow(self)
+				}
 			}
 		}
 		
-		guard Defaults[.isTutorialShow] == false else {
-      
-      showTutorial()
-      return
-    }
+		showTutorial()
   }
-  
+	
   func applicationWillTerminate(_ aNotification: Notification) {
     
     DistributedNotificationCenter.default().removeObserver(self)
   }
   
   func showTutorial() {
-    
+		
+		guard Defaults[.isTutorialShow] == false else {
+			return
+		}
+		
     let alert = NSAlert()
     alert.messageText = "Tutorial"
     alert.informativeText = "Lyricism is a lyrics plugin with Your iTunes or Spotify. \n\nPlay, Lyric and Sing!"
